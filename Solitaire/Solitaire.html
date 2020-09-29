@@ -1,0 +1,320 @@
+<html>
+	<head>
+		<title>	Solitaire </title>
+		<script data-require="jquery" data-semver="2.1.4" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	</head>
+	
+	<style>
+		body
+		{	background-color : #0a4;
+			margin: 20px;
+			text-align: center;
+		}
+		h3{
+			color : yellow
+		}
+		
+		#tray
+		{
+			border: 1px solid black;
+			width:	700px;
+			height:	200px;
+			padding: 15px;
+			display : block;
+		}
+		#deck
+		{
+			position : absolute;
+			top : 100px;
+			left : 1000px;
+			height:	200px;
+			float: left;
+		}
+		#board
+		{
+			margin : 20px;
+			height:	200px;
+		}
+		.cardHolder
+		{ 
+			position: relative;
+			background-color:  #091;
+			border: 1px solid black;
+			width:	150px;
+			height:	180px;
+			margin: 10px;
+			float: left;
+		}
+		.cardImage
+		{ 
+			position: absolute;
+			left:0%;
+			border: 1px solid black;
+			width:	150px;
+			height:	180px;
+			float: left;
+		}
+		#deckBack
+		{
+			cursor:pointer;
+		}
+		.revealedCard{
+			cursor:pointer;
+		}
+		
+	</style>
+	
+	<body>
+		<h1>Solitaire!</h1>
+		
+		<div id="tray">
+			<div id="tray0" class="cardHolder"></div>
+			<div id="tray1" class="cardHolder"></div>
+			<div id="tray2" class="cardHolder"></div>
+			<div id="tray3" class="cardHolder"></div>
+		</div>
+		
+		<div id="deck">
+			<div id="deckBack" class="cardHolder"></div>
+			<div id="deckCard" class="cardHolder"></div>
+		</div>
+		
+		<div id="board">
+			<div id="board0" class="cardHolder"></div>
+			<div id="board1" class="cardHolder"></div>
+			<div id="board2" class="cardHolder"></div>
+			<div id="board3" class="cardHolder"></div>
+			<div id="board4" class="cardHolder"></div>
+			<div id="board5" class="cardHolder"></div>
+			<div id="board6" class="cardHolder"></div>
+		</div>
+		
+	</body>
+	
+	<script>
+	
+		var gameOver = false;
+		var backImg = "back.PNG";
+		var reshowImg = "reshow.PNG";
+		
+		var suits = ["s", "d", "c", "h"];
+		var values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+		
+		class Card 
+		{
+			constructor(suit,value,position) 
+			{
+				this.suit = suit;
+				this.value = value;
+				this.position = position;
+				this.revealed = false;
+				this.imageSrc = suit+value+".PNG";
+			}
+			
+		}	
+		
+		function makeCardImage(src)
+		{
+			var image = $("<img>");
+			image.addClass("cardImage");
+			image.addClass("revealedCard");
+			image.attr("src",src);
+			return image;
+		}
+		
+		function makeBackImage()
+		{
+			var image = $("<img>");
+			image.addClass("cardImage");
+			image.attr("src","images/"+backImg);
+			return image;
+		}
+		
+		function makeReshowImage()
+		{
+			var image = $("<img>");
+			image.addClass("cardImage");
+			image.attr("src","images/"+reshowImg);
+			
+			image.css("height", "80px");
+			image.css("width", "80px");
+			image.css("top", "50px");
+			image.css("left", "35px");
+			image.css("border", "none");
+					
+			return image;
+		}
+		
+		function getDeck()
+		{
+			var deck = new Array();
+
+			for(var i = 0; i < suits.length; i++)
+			{
+				for(var x = 0; x < values.length; x++)
+				{
+					var card = new Card(suits[i],values[x],"");
+					deck.push(card);
+				}
+			}
+			// for 1000 turns
+			// switch the values of two random cards
+			for (var i = 0; i < 100; i++)
+			{
+				var location1 = Math.floor((Math.random() * deck.length));
+				var location2 = Math.floor((Math.random() * deck.length));
+				
+				var tmp = deck[location1];
+				deck[location1] = deck[location2];
+				deck[location2] = tmp;
+			}
+			
+			return deck;
+		}
+		
+		var deck = getDeck();
+		
+		var tray = new Array(4);
+		for (var i = 0; i <= 4; i++) 
+			tray[i] = new Array(13); 
+			
+		var board = new Array();
+		for (var i = 0; i <= 7; i++) 
+		{ 
+			board[i] = new Array(); 
+			for (var j = 0; j <= i; j++) 
+			{
+				var card = deck.pop();	
+				if(i==j)
+				{
+					card.position="board:"+(i).toString()+":"+(j).toString();
+					card.revealed - true;
+					var image = makeCardImage("images/"+card.imageSrc);
+					image.css("top", (j * 25).toString()+"px");
+					$("#board"+i).append(image);
+				}
+				else
+				{
+					var image = makeBackImage();
+					image.css("top", (j * 25).toString()+"px");
+					$("#board"+i).append(image);
+				}
+				board[i][j] = card;
+			} 
+		} 
+		
+		var image = makeBackImage()
+		$("#deckBack").append(image);
+
+		deckCurr = 0;
+		
+		var cardSelected = false;
+		var selectedCard = deck[0];
+		
+		//Select Card from the deck
+		function deSelectCard()
+		{
+			if(!cardSelected)
+				return;
+			debugger;
+			
+			var cardPos = selectedCard.position.split(":");
+			if(cardPos[0] == "deck")
+			{
+				selectedCardImage = $('#deckCard');
+			}
+			else
+			{
+				selectedCardImage = $($($("#board").children()[parseInt(cardPos[1])]).children()[parseInt(cardPos[2])]);
+			}
+			selectedCardImage.css("border", "none");
+			selectedCardImage.css("left", "0px");
+			cardSelected = false;
+			selectedCard = deck[0];
+		}
+		
+		//Take card out of the deck
+		$('#deckBack').click(function()
+		{
+			deSelectCard();
+			
+			if(deckCurr == deck.length)
+			{					
+				var image = makeBackImage()
+				$('#deckCard').empty();
+				$("#deckBack").append(image);
+				deckCurr = 0;
+			}
+			else
+			{
+				if(deckCurr == deck.length-1)
+				{
+					var image = makeReshowImage();
+					$('#deckBack').empty();
+					$("#deckBack").append(image);
+					
+				}
+				var card = deck[deckCurr];
+				deck[deckCurr-1] = false;
+				card.revealed = true;
+				card.position = "deck:"+(deckCurr).toString();
+				var image = makeCardImage("images/"+card.imageSrc);
+				image.css("top", (0 * 25).toString()+"px");
+				$('#deckCard').append(image);
+				deckCurr += 1;
+			}
+			
+			
+			return;
+		});
+		
+		
+		$('#deckCard').click(function()
+		{
+			if($(this).children().length == 0)
+			{
+				deSelectCard();
+				return;
+			}
+			if(!cardSelected)
+			{
+				$(this).css("border", "4px solid #FFA500");
+				$(this).css("left", "-2px");
+				var card = deck[deckCurr-1];
+				selectedCard = card;
+				cardSelected = true;
+			}
+			else
+				deSelectCard();
+			
+			return;
+		});
+		
+		//Select Card from the board
+		$('.revealedCard').click(function()
+		{
+			var boardIndex1 = parseInt($(this).parent()[0].id.slice(-1));
+			var boardIndex2 = $(this).parent().parent().children().index($(this).parent())
+			
+			
+			if(!cardSelected)
+			{
+				selectedCard = board[boardIndex1][boardIndex2];
+				$(this).css("border", "4px solid #FFA500");
+				$(this).css("left", "-2px");
+				cardSelected = true;
+			}
+			else
+			{
+				// Check Card move
+				
+				deSelectCard();
+			}
+			return;
+		});
+			
+	</script>
+	
+	
+</html>
