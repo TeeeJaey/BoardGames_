@@ -1,7 +1,7 @@
 $(document).ready(function()
 {
-	var boardImgNmbr = Math.floor(Math.random() * 3).toString();
-	var boardImgPath = "images/board" + Math.floor(Math.random() * 3).toString() +".JPG";
+	var boardImgNmbr = 0;
+	var boardImgPath = "images/board" + boardImgNmbr +".JPG";
 	$(".board").attr("src",boardImgPath);
 	
 	var gameStarted = false;
@@ -14,62 +14,191 @@ $(document).ready(function()
 	
 	$("#theDice").css("display","none");
 	
-	
 	class Cell 
 	{
-		constructor(position,topVal,leftVal,snake,ladder)  
+		constructor(position,topVal,leftVal,snakeLadder)  
 		{
 			this.position = position; 
 			this.topVal = topVal;
 			this.leftVal = leftVal;
-			this.snake = snake;
-			this.ladder = ladder;
+			this.snakeOrLadder = snakeLadder;
 		}
 	}
 	
+	class SnakeLadder 
+	{
+		constructor(startPos,endPos)  
+		{
+			this.startPos = startPos; 
+			this.endPos = endPos;
+		}
+	}
+
 	class Player 
 	{
-		constructor(color,position,topVal,leftVal) 
+		constructor(color,position,topVal,leftVal,started) 
 		{
 			this.color = color;
 			this.position = position;
 			this.topVal = topVal;
 			this.leftVal = leftVal;
+			this.started = started;
 		}
 	}
-	
-	var spaceMoveValues = [];
 
-	var t = 540;
-	var l = -50;
-	var d = 59;
-	spaceMoveValues.push(new Cell(0, t, l, false, false));
-	var dirleft = false;
-	var i = 1;
-	while(i<=100)
-	{	
-		
-		t = 540 - ((Math.ceil(i/10)-1) * d);
 
-		if( ((i-1)/10) == (Math.round(i/10)) && (i!=1) )
-			dirleft = !dirleft;
-		else
-		{
-			if(dirleft)
-				l = l - d;
-			else
-				l = l + d;
-		}
-		
-		spaceMoveValues.push(new Cell(i, t, l, false, false));
-		i += 1;
-	}
-	
-	var players = [];
-		
-	$("#start").click(function()
+	var board = [];
+	function setupBoard()
 	{
-		gameStarted = true;
+		var t = 540;
+		var l = -50;
+		var d = 59;
+		board.push(new Cell(0, t, l, null));
+		var dirleft = false;
+		var i = 1;
+		while(i<=100)
+		{	
+			
+			t = 540 - ((Math.ceil(i/10)-1) * d);
+	
+			if( ((i-1)/10) == (Math.round(i/10)) && (i!=1) )
+				dirleft = !dirleft;
+			else
+			{
+				if(dirleft)
+					l = l - d;
+				else
+					l = l + d;
+			}
+			
+			board.push(new Cell(i, t, l, null));
+			i += 1;
+		}
+
+		switch(boardImgNmbr)
+		{
+			case 0:
+			{
+				board[3].snakeOrLadder = new SnakeLadder(3, 20);
+				board[6].snakeOrLadder = new SnakeLadder(6, 14);
+				board[8].snakeOrLadder = new SnakeLadder(8, 4);
+				board[11].snakeOrLadder = new SnakeLadder(11, 28);
+				board[15].snakeOrLadder = new SnakeLadder(15, 34);
+				board[17].snakeOrLadder = new SnakeLadder(17, 74);
+				board[18].snakeOrLadder = new SnakeLadder(18, 1);
+				board[22].snakeOrLadder = new SnakeLadder(22, 37);
+				board[26].snakeOrLadder = new SnakeLadder(26, 10);
+				board[39].snakeOrLadder = new SnakeLadder(39, 5);
+				board[49].snakeOrLadder = new SnakeLadder(49, 67);
+				board[51].snakeOrLadder = new SnakeLadder(51, 6);
+				board[54].snakeOrLadder = new SnakeLadder(54, 36);
+				board[56].snakeOrLadder = new SnakeLadder(56, 1);
+				board[60].snakeOrLadder = new SnakeLadder(60, 23);
+				board[61].snakeOrLadder = new SnakeLadder(61, 78);
+				board[75].snakeOrLadder = new SnakeLadder(75, 28);
+				board[81].snakeOrLadder = new SnakeLadder(81, 98);
+				board[83].snakeOrLadder = new SnakeLadder(83, 45);
+				board[85].snakeOrLadder = new SnakeLadder(85, 59);
+				board[88].snakeOrLadder = new SnakeLadder(88, 91);
+				board[90].snakeOrLadder = new SnakeLadder(90, 48);
+				board[92].snakeOrLadder = new SnakeLadder(92, 25);
+				board[97].snakeOrLadder = new SnakeLadder(97, 87);
+				board[99].snakeOrLadder = new SnakeLadder(99, 63);
+				break;
+			}
+			case 1:
+			{
+				board[3].snakeOrLadder = new SnakeLadder(3, 20);
+				board[6].snakeOrLadder = new SnakeLadder(6, 14);
+				board[8].snakeOrLadder = new SnakeLadder(8, 4);
+				board[11].snakeOrLadder = new SnakeLadder(11, 28);
+				board[15].snakeOrLadder = new SnakeLadder(15, 34);
+				board[17].snakeOrLadder = new SnakeLadder(17, 74);
+				board[18].snakeOrLadder = new SnakeLadder(18, 1);
+				board[22].snakeOrLadder = new SnakeLadder(22, 37);
+				board[26].snakeOrLadder = new SnakeLadder(26, 10);
+				board[39].snakeOrLadder = new SnakeLadder(39, 5);
+				board[49].snakeOrLadder = new SnakeLadder(49, 67);
+				board[51].snakeOrLadder = new SnakeLadder(51, 6);
+				board[54].snakeOrLadder = new SnakeLadder(54, 36);
+				board[56].snakeOrLadder = new SnakeLadder(56, 1);
+				board[60].snakeOrLadder = new SnakeLadder(60, 23);
+				board[61].snakeOrLadder = new SnakeLadder(61, 78);
+				board[75].snakeOrLadder = new SnakeLadder(75, 28);
+				board[81].snakeOrLadder = new SnakeLadder(81, 98);
+				board[83].snakeOrLadder = new SnakeLadder(83, 45);
+				board[85].snakeOrLadder = new SnakeLadder(85, 59);
+				board[88].snakeOrLadder = new SnakeLadder(88, 91);
+				board[90].snakeOrLadder = new SnakeLadder(90, 48);
+				board[92].snakeOrLadder = new SnakeLadder(92, 25);
+				board[97].snakeOrLadder = new SnakeLadder(97, 87);
+				board[99].snakeOrLadder = new SnakeLadder(99, 63);
+				break;
+			}
+			case 2:
+			{
+				board[3].snakeOrLadder = new SnakeLadder(3, 20);
+				board[6].snakeOrLadder = new SnakeLadder(6, 14);
+				board[8].snakeOrLadder = new SnakeLadder(8, 4);
+				board[11].snakeOrLadder = new SnakeLadder(11, 28);
+				board[15].snakeOrLadder = new SnakeLadder(15, 34);
+				board[17].snakeOrLadder = new SnakeLadder(17, 74);
+				board[18].snakeOrLadder = new SnakeLadder(18, 1);
+				board[22].snakeOrLadder = new SnakeLadder(22, 37);
+				board[26].snakeOrLadder = new SnakeLadder(26, 10);
+				board[39].snakeOrLadder = new SnakeLadder(39, 5);
+				board[49].snakeOrLadder = new SnakeLadder(49, 67);
+				board[51].snakeOrLadder = new SnakeLadder(51, 6);
+				board[54].snakeOrLadder = new SnakeLadder(54, 36);
+				board[56].snakeOrLadder = new SnakeLadder(56, 1);
+				board[60].snakeOrLadder = new SnakeLadder(60, 23);
+				board[61].snakeOrLadder = new SnakeLadder(61, 78);
+				board[75].snakeOrLadder = new SnakeLadder(75, 28);
+				board[81].snakeOrLadder = new SnakeLadder(81, 98);
+				board[83].snakeOrLadder = new SnakeLadder(83, 45);
+				board[85].snakeOrLadder = new SnakeLadder(85, 59);
+				board[88].snakeOrLadder = new SnakeLadder(88, 91);
+				board[90].snakeOrLadder = new SnakeLadder(90, 48);
+				board[92].snakeOrLadder = new SnakeLadder(92, 25);
+				board[97].snakeOrLadder = new SnakeLadder(97, 87);
+				board[99].snakeOrLadder = new SnakeLadder(99, 63);
+				break;	
+			}
+			case 3:
+			{
+				board[3].snakeOrLadder = new SnakeLadder(3, 20);
+				board[6].snakeOrLadder = new SnakeLadder(6, 14);
+				board[8].snakeOrLadder = new SnakeLadder(8, 4);
+				board[11].snakeOrLadder = new SnakeLadder(11, 28);
+				board[15].snakeOrLadder = new SnakeLadder(15, 34);
+				board[17].snakeOrLadder = new SnakeLadder(17, 74);
+				board[18].snakeOrLadder = new SnakeLadder(18, 1);
+				board[22].snakeOrLadder = new SnakeLadder(22, 37);
+				board[26].snakeOrLadder = new SnakeLadder(26, 10);
+				board[39].snakeOrLadder = new SnakeLadder(39, 5);
+				board[49].snakeOrLadder = new SnakeLadder(49, 67);
+				board[51].snakeOrLadder = new SnakeLadder(51, 6);
+				board[54].snakeOrLadder = new SnakeLadder(54, 36);
+				board[56].snakeOrLadder = new SnakeLadder(56, 1);
+				board[60].snakeOrLadder = new SnakeLadder(60, 23);
+				board[61].snakeOrLadder = new SnakeLadder(61, 78);
+				board[75].snakeOrLadder = new SnakeLadder(75, 28);
+				board[81].snakeOrLadder = new SnakeLadder(81, 98);
+				board[83].snakeOrLadder = new SnakeLadder(83, 45);
+				board[85].snakeOrLadder = new SnakeLadder(85, 59);
+				board[88].snakeOrLadder = new SnakeLadder(88, 91);
+				board[90].snakeOrLadder = new SnakeLadder(90, 48);
+				board[92].snakeOrLadder = new SnakeLadder(92, 25);
+				board[97].snakeOrLadder = new SnakeLadder(97, 87);
+				board[99].snakeOrLadder = new SnakeLadder(99, 63);
+				break;	
+			}
+		}
+	}
+
+	var players = [];
+	function setupPlayers()
+	{
 		nmbrOfPlayers = $("input[name='nmbrOfPlayers']:checked").val();
 		$("#controls").css("display","none");
 		$("#theDice").css("display","");
@@ -86,11 +215,33 @@ $(document).ready(function()
 				color = "Blue";
 			if(i == 3)
 				color = "Yellow";
-			players.push(new Player(color,0,540,-50));
+			players.push(new Player(color,0,540,-50,false));
 			i+=1;
 		}
+		if(nmbrOfPlayers < 4)
+			$("#YellowCoin").remove();
+		if(nmbrOfPlayers < 3)
+			$("#BlueCoin").remove();
+
 		$("#instruct").css("color",players[currPlayer].color);
 		$("#instruct").text(players[currPlayer].color + " Play");
+	}
+
+	$(".boardSelector").click(function()
+	{
+		$(".boardSelected").removeClass("boardSelected");
+		$(this).addClass("boardSelected");
+		boardImgNmbr = this.id.split("_")[1];
+		boardImgPath = "images/board" + boardImgNmbr +".JPG";
+		$(".board").attr("src",boardImgPath);
+	});
+
+		
+	$("#start").click(function()
+	{
+		setupBoard();
+		setupPlayers();
+		gameStarted = true;
 	});
 	
 	function rollDice()
@@ -124,29 +275,44 @@ $(document).ready(function()
 		
 		isAnimationOn = true;
 		cnt = 0;
-		var diceRollAnim = setInterval(function()
+		var moveCoinAnim = setInterval(function()
 		{
 			if(cnt==diceVal)
 			{
-				clearInterval(diceRollAnim);
-				isAnimationOn = false;
+				clearInterval(moveCoinAnim);
+				checkSnakeOrLadder(currCoin);
+				checkSnakeOrLadder(currCoin);
 				if(diceVal != 6)
 					changePlayer();
+				isAnimationOn = false;
 				return;
 			}
 			cnt+=1;
 			players[currPlayer].position = players[currPlayer].position + 1;
 
-			players[currPlayer].topVal = spaceMoveValues[players[currPlayer].position].topVal;
+			players[currPlayer].topVal = board[players[currPlayer].position].topVal;
 			currCoin.animate({"top":(players[currPlayer].topVal).toString()+"px"},200);
 
-			players[currPlayer].leftVal = spaceMoveValues[players[currPlayer].position].leftVal;
+			players[currPlayer].leftVal = board[players[currPlayer].position].leftVal;
 			currCoin.animate({"left":(players[currPlayer].leftVal).toString()+"px"},200);
 
 		},200);
 	}
 	
+	function checkSnakeOrLadder(currCoin)
+	{
+		if(board[players[currPlayer].position].snakeOrLadder == null)
+			return;
 	
+		var snakeOrLadder = board[players[currPlayer].position].snakeOrLadder;
+		players[currPlayer].position = snakeOrLadder.endPos;
+
+		players[currPlayer].topVal = board[players[currPlayer].position].topVal;
+		players[currPlayer].leftVal = board[players[currPlayer].position].leftVal;
+		currCoin.animate({"top":(players[currPlayer].topVal).toString()+"px" , "left":(players[currPlayer].leftVal).toString()+"px"},700);
+
+	}
+
 	function changePlayer()
 	{
 		
@@ -175,9 +341,17 @@ $(document).ready(function()
 		
 		var currCoin = $("#"+players[currPlayer].color+"Coin");
 		
-		moveCoin(currCoin);
-		
-		
+		if(players[currPlayer].started)
+			moveCoin(currCoin);
+		else
+		{
+			if(diceVal == 6)
+				players[currPlayer].started = true;
+			else
+				changePlayer();
+			isAnimationOn = false;
+		}
+		return;
 	}
 	
 	$(".dice").click(function()

@@ -6,6 +6,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script type="text/javascript" src="snakeLadderScript.js"></script>
 		
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link type="text/css" rel="stylesheet" href="snakeLadderStyle.css">
 	</head>
 	
@@ -21,11 +22,30 @@
 		<h3 id="instruct">Red play</h3>
 		
 		<div id="controls"> Number Of Players
-		  <input type="radio" class="radio" name="nmbrOfPlayers" value="2" checked> 2 
-		  <input type="radio" class="radio" name="nmbrOfPlayers" value="3"> 3
-		  <input type="radio" class="radio" name="nmbrOfPlayers" value="4"> 4
-		  <br>
-		  <button id="start"> Start game </button>
+			<input type="radio" class="radio" name="nmbrOfPlayers" value="2" checked> 2 
+			<input type="radio" class="radio" name="nmbrOfPlayers" value="3"> 3
+			<input type="radio" class="radio" name="nmbrOfPlayers" value="4"> 4
+			<hr>
+			<div class="dropdown">
+				Choose a Board
+				<i class="fa fa-angle-down" style="font-size: 36px;"></i>
+				<div class="dropdown-content">
+					<div class="boardSelector boardSelected" style = "float:left"  id="board_0"> 
+						<img class = "dropdownImages" src="images/board0.JPG">
+					</div>
+					<div class="boardSelector" style = "float:right" id="board_1"> 
+						<img class = "dropdownImages" src="images/board1.JPG">
+					</div>
+					<div class="boardSelector" style = "float:left"  id="board_2"> 
+						<img class = "dropdownImages" src="images/board2.JPG" >
+					</div>
+					<div class="boardSelector" style = "float:right" id="board_3"> 
+						<img class = "dropdownImages" src="images/board3.JPG">
+					</div>
+				</div>
+			</div>
+			<hr>
+		  	<button id="start"> Start game </button>
 		</div>
 		
 		<div id="theDice">
