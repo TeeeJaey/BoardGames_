@@ -50,7 +50,7 @@ $(document).ready(function()
 	var board = [];
 	function setupBoard()
 	{
-		var t = 540;
+		var t = 535;
 		var l = -50;
 		var d = 59;
 		board.push(new Cell(0, t, l, null));
@@ -59,7 +59,7 @@ $(document).ready(function()
 		while(i<=100)
 		{	
 			
-			t = 540 - ((Math.ceil(i/10)-1) * d);
+			t = 535 - ((Math.ceil(i/10)-1) * d);
 	
 			if( ((i-1)/10) == (Math.round(i/10)) && (i!=1) )
 				dirleft = !dirleft;
@@ -108,89 +108,63 @@ $(document).ready(function()
 			}
 			case 1:
 			{
-				board[3].snakeOrLadder = new SnakeLadder(3, 20);
-				board[6].snakeOrLadder = new SnakeLadder(6, 14);
-				board[8].snakeOrLadder = new SnakeLadder(8, 4);
-				board[11].snakeOrLadder = new SnakeLadder(11, 28);
-				board[15].snakeOrLadder = new SnakeLadder(15, 34);
-				board[17].snakeOrLadder = new SnakeLadder(17, 74);
-				board[18].snakeOrLadder = new SnakeLadder(18, 1);
-				board[22].snakeOrLadder = new SnakeLadder(22, 37);
-				board[26].snakeOrLadder = new SnakeLadder(26, 10);
-				board[39].snakeOrLadder = new SnakeLadder(39, 5);
-				board[49].snakeOrLadder = new SnakeLadder(49, 67);
-				board[51].snakeOrLadder = new SnakeLadder(51, 6);
-				board[54].snakeOrLadder = new SnakeLadder(54, 36);
-				board[56].snakeOrLadder = new SnakeLadder(56, 1);
-				board[60].snakeOrLadder = new SnakeLadder(60, 23);
-				board[61].snakeOrLadder = new SnakeLadder(61, 78);
-				board[75].snakeOrLadder = new SnakeLadder(75, 28);
-				board[81].snakeOrLadder = new SnakeLadder(81, 98);
-				board[83].snakeOrLadder = new SnakeLadder(83, 45);
-				board[85].snakeOrLadder = new SnakeLadder(85, 59);
-				board[88].snakeOrLadder = new SnakeLadder(88, 91);
-				board[90].snakeOrLadder = new SnakeLadder(90, 48);
-				board[92].snakeOrLadder = new SnakeLadder(92, 25);
-				board[97].snakeOrLadder = new SnakeLadder(97, 87);
-				board[99].snakeOrLadder = new SnakeLadder(99, 63);
+				board[1].snakeOrLadder = new SnakeLadder(1, 38);
+				board[4].snakeOrLadder = new SnakeLadder(4, 14);
+				board[9].snakeOrLadder = new SnakeLadder(9, 31);
+				board[17].snakeOrLadder = new SnakeLadder(17, 7);
+				board[21].snakeOrLadder = new SnakeLadder(21, 42);
+				board[28].snakeOrLadder = new SnakeLadder(28, 84);
+				board[51].snakeOrLadder = new SnakeLadder(51, 67);
+				board[54].snakeOrLadder = new SnakeLadder(54, 34);
+				board[62].snakeOrLadder = new SnakeLadder(62, 19);
+				board[64].snakeOrLadder = new SnakeLadder(64, 60);
+				board[72].snakeOrLadder = new SnakeLadder(72, 91);
+				board[80].snakeOrLadder = new SnakeLadder(80, 99);
+				board[87].snakeOrLadder = new SnakeLadder(87, 36);
+				board[93].snakeOrLadder = new SnakeLadder(93, 73);
+				board[95].snakeOrLadder = new SnakeLadder(95, 75);
+				board[98].snakeOrLadder = new SnakeLadder(98, 79);
 				break;
 			}
 			case 2:
 			{
-				board[3].snakeOrLadder = new SnakeLadder(3, 20);
-				board[6].snakeOrLadder = new SnakeLadder(6, 14);
-				board[8].snakeOrLadder = new SnakeLadder(8, 4);
-				board[11].snakeOrLadder = new SnakeLadder(11, 28);
-				board[15].snakeOrLadder = new SnakeLadder(15, 34);
-				board[17].snakeOrLadder = new SnakeLadder(17, 74);
-				board[18].snakeOrLadder = new SnakeLadder(18, 1);
-				board[22].snakeOrLadder = new SnakeLadder(22, 37);
-				board[26].snakeOrLadder = new SnakeLadder(26, 10);
-				board[39].snakeOrLadder = new SnakeLadder(39, 5);
-				board[49].snakeOrLadder = new SnakeLadder(49, 67);
-				board[51].snakeOrLadder = new SnakeLadder(51, 6);
-				board[54].snakeOrLadder = new SnakeLadder(54, 36);
-				board[56].snakeOrLadder = new SnakeLadder(56, 1);
-				board[60].snakeOrLadder = new SnakeLadder(60, 23);
-				board[61].snakeOrLadder = new SnakeLadder(61, 78);
-				board[75].snakeOrLadder = new SnakeLadder(75, 28);
-				board[81].snakeOrLadder = new SnakeLadder(81, 98);
-				board[83].snakeOrLadder = new SnakeLadder(83, 45);
-				board[85].snakeOrLadder = new SnakeLadder(85, 59);
-				board[88].snakeOrLadder = new SnakeLadder(88, 91);
-				board[90].snakeOrLadder = new SnakeLadder(90, 48);
-				board[92].snakeOrLadder = new SnakeLadder(92, 25);
-				board[97].snakeOrLadder = new SnakeLadder(97, 87);
-				board[99].snakeOrLadder = new SnakeLadder(99, 63);
+				board[2].snakeOrLadder = new SnakeLadder(2, 38);
+				board[7].snakeOrLadder = new SnakeLadder(7, 14);
+				board[8].snakeOrLadder = new SnakeLadder(8, 31);
+				board[15].snakeOrLadder = new SnakeLadder(15, 26);
+				board[16].snakeOrLadder = new SnakeLadder(16, 6);
+				board[21].snakeOrLadder = new SnakeLadder(21, 42);
+				board[28].snakeOrLadder = new SnakeLadder(28, 84);
+				board[36].snakeOrLadder = new SnakeLadder(36, 44);
+				board[39].snakeOrLadder = new SnakeLadder(46, 25);
+				board[49].snakeOrLadder = new SnakeLadder(49, 11);
+				board[51].snakeOrLadder = new SnakeLadder(51, 67);
+				board[62].snakeOrLadder = new SnakeLadder(62, 19);
+				board[64].snakeOrLadder = new SnakeLadder(64, 60);
+				board[71].snakeOrLadder = new SnakeLadder(71, 91);
+				board[74].snakeOrLadder = new SnakeLadder(74, 53);
+				board[78].snakeOrLadder = new SnakeLadder(78, 98);
+				board[87].snakeOrLadder = new SnakeLadder(87, 94);
+				board[89].snakeOrLadder = new SnakeLadder(89, 68);
+				board[92].snakeOrLadder = new SnakeLadder(92, 88);
+				board[95].snakeOrLadder = new SnakeLadder(95, 75);
+				board[99].snakeOrLadder = new SnakeLadder(99, 80);
 				break;	
 			}
 			case 3:
 			{
-				board[3].snakeOrLadder = new SnakeLadder(3, 20);
-				board[6].snakeOrLadder = new SnakeLadder(6, 14);
-				board[8].snakeOrLadder = new SnakeLadder(8, 4);
-				board[11].snakeOrLadder = new SnakeLadder(11, 28);
-				board[15].snakeOrLadder = new SnakeLadder(15, 34);
-				board[17].snakeOrLadder = new SnakeLadder(17, 74);
-				board[18].snakeOrLadder = new SnakeLadder(18, 1);
-				board[22].snakeOrLadder = new SnakeLadder(22, 37);
-				board[26].snakeOrLadder = new SnakeLadder(26, 10);
-				board[39].snakeOrLadder = new SnakeLadder(39, 5);
-				board[49].snakeOrLadder = new SnakeLadder(49, 67);
-				board[51].snakeOrLadder = new SnakeLadder(51, 6);
-				board[54].snakeOrLadder = new SnakeLadder(54, 36);
-				board[56].snakeOrLadder = new SnakeLadder(56, 1);
-				board[60].snakeOrLadder = new SnakeLadder(60, 23);
-				board[61].snakeOrLadder = new SnakeLadder(61, 78);
-				board[75].snakeOrLadder = new SnakeLadder(75, 28);
-				board[81].snakeOrLadder = new SnakeLadder(81, 98);
-				board[83].snakeOrLadder = new SnakeLadder(83, 45);
-				board[85].snakeOrLadder = new SnakeLadder(85, 59);
-				board[88].snakeOrLadder = new SnakeLadder(88, 91);
-				board[90].snakeOrLadder = new SnakeLadder(90, 48);
-				board[92].snakeOrLadder = new SnakeLadder(92, 25);
-				board[97].snakeOrLadder = new SnakeLadder(97, 87);
-				board[99].snakeOrLadder = new SnakeLadder(99, 63);
+				board[4].snakeOrLadder = new SnakeLadder(4, 14);
+				board[9].snakeOrLadder = new SnakeLadder(9, 31);
+				board[17].snakeOrLadder = new SnakeLadder(17, 7);
+				board[20].snakeOrLadder = new SnakeLadder(20, 38);
+				board[28].snakeOrLadder = new SnakeLadder(28, 84);
+				board[40].snakeOrLadder = new SnakeLadder(40, 59);
+				board[51].snakeOrLadder = new SnakeLadder(51, 67);
+				board[63].snakeOrLadder = new SnakeLadder(63, 81);
+				board[64].snakeOrLadder = new SnakeLadder(64, 60);
+				board[89].snakeOrLadder = new SnakeLadder(89, 26);
+				board[95].snakeOrLadder = new SnakeLadder(95, 75);
+				board[99].snakeOrLadder = new SnakeLadder(99, 78);
 				break;	
 			}
 		}
@@ -231,7 +205,7 @@ $(document).ready(function()
 	{
 		$(".boardSelected").removeClass("boardSelected");
 		$(this).addClass("boardSelected");
-		boardImgNmbr = this.id.split("_")[1];
+		boardImgNmbr = parseInt(this.id.split("_")[1]);
 		boardImgPath = "images/board" + boardImgNmbr +".JPG";
 		$(".board").attr("src",boardImgPath);
 	});
@@ -270,6 +244,7 @@ $(document).ready(function()
 		if(players[currPlayer].position + diceVal > 100)
 		{
 			changePlayer();
+			isAnimationOn = false;
 			return;
 		}
 		
