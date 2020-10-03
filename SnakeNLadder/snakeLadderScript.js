@@ -4,7 +4,6 @@ $(document).ready(function()
 	var boardImgPath = "images/board" + Math.floor(Math.random() * 3).toString() +".JPG";
 	$(".board").attr("src",boardImgPath);
 	
-	var moveLen = 59;
 	var gameStarted = false;
 	var isAnimationOn = false;
 	var gameOver = false;
@@ -16,7 +15,19 @@ $(document).ready(function()
 	$("#theDice").css("display","none");
 	
 	
-	class Coin 
+	class Cell 
+	{
+		constructor(position,topVal,leftVal,snake,ladder)  
+		{
+			this.position = position; 
+			this.topVal = topVal;
+			this.leftVal = leftVal;
+			this.snake = snake;
+			this.ladder = ladder;
+		}
+	}
+	
+	class Player 
 	{
 		constructor(color,position,topVal,leftVal) 
 		{
@@ -26,6 +37,34 @@ $(document).ready(function()
 			this.leftVal = leftVal;
 		}
 	}
+	
+	var spaceMoveValues = [];
+
+	var t = 540;
+	var l = -50;
+	var d = 59;
+	spaceMoveValues.push(new Cell(0, t, l, false, false));
+	var dirleft = false;
+	var i = 1;
+	while(i<=100)
+	{	
+		
+		t = 540 - ((Math.ceil(i/10)-1) * d);
+
+		if( ((i-1)/10) == (Math.round(i/10)) && (i!=1) )
+			dirleft = !dirleft;
+		else
+		{
+			if(dirleft)
+				l = l - d;
+			else
+				l = l + d;
+		}
+		
+		spaceMoveValues.push(new Cell(i, t, l, false, false));
+		i += 1;
+	}
+	
 	var players = [];
 		
 	$("#start").click(function()
@@ -47,7 +86,7 @@ $(document).ready(function()
 				color = "Blue";
 			if(i == 3)
 				color = "Yellow";
-			players.push(new Coin(color,0,540,-50));
+			players.push(new Player(color,0,540,-50));
 			i+=1;
 		}
 		$("#instruct").css("color",players[currPlayer].color);
@@ -63,7 +102,6 @@ $(document).ready(function()
 			if(cnt==5)
 			{
 				clearInterval(diceRollAnim);
-				isAnimationOn = false;
 				play();
 				return;
 			}
@@ -78,20 +116,32 @@ $(document).ready(function()
 	
 	function moveCoin(currCoin)
 	{
+		if(players[currPlayer].position + diceVal > 100)
+		{
+			changePlayer();
+			return;
+		}
+		
 		isAnimationOn = true;
-		var cnt=0;	
+		cnt = 0;
 		var diceRollAnim = setInterval(function()
 		{
 			if(cnt==diceVal)
 			{
 				clearInterval(diceRollAnim);
 				isAnimationOn = false;
-				changePlayer();
+				if(diceVal != 6)
+					changePlayer();
 				return;
 			}
 			cnt+=1;
-			players[currPlayer].leftVal = moveLen + players[currPlayer].leftVal;
-			currCoin.css("left",(players[currPlayer].leftVal).toString()+"px");
+			players[currPlayer].position = players[currPlayer].position + 1;
+
+			players[currPlayer].topVal = spaceMoveValues[players[currPlayer].position].topVal;
+			currCoin.animate({"top":(players[currPlayer].topVal).toString()+"px"},200);
+
+			players[currPlayer].leftVal = spaceMoveValues[players[currPlayer].position].leftVal;
+			currCoin.animate({"left":(players[currPlayer].leftVal).toString()+"px"},200);
 
 		},200);
 	}
@@ -99,6 +149,15 @@ $(document).ready(function()
 	
 	function changePlayer()
 	{
+		
+		if(players[currPlayer].position == 100)
+		{
+			gameOver = true;
+			$("#instruct").css("color",players[currPlayer].color);
+			$("#instruct").text(players[currPlayer].color + " WINS !!!");
+			return;
+		}
+
 		currPlayer+=1;
 		if(currPlayer == nmbrOfPlayers)
 			currPlayer=0;
@@ -123,8 +182,13 @@ $(document).ready(function()
 	
 	$(".dice").click(function()
 	{
+		if(!gameStarted)
+			return;
+		if(gameOver)
+			return;
 		if(isAnimationOn)
 			return;
+			
 		rollDice();
 	});
 	
