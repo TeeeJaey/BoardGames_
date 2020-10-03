@@ -249,29 +249,27 @@ $(document).ready(function()
 		}
 		
 		isAnimationOn = true;
-		cnt = 0;
-		var moveCoinAnim = setInterval(function()
+		cnt = 1;
+		while(cnt<=diceVal)
 		{
-			if(cnt==diceVal)
-			{
-				clearInterval(moveCoinAnim);
-				checkSnakeOrLadder(currCoin);
-				checkSnakeOrLadder(currCoin);
-				if(diceVal != 6)
-					changePlayer();
-				isAnimationOn = false;
-				return;
-			}
 			cnt+=1;
 			players[currPlayer].position = players[currPlayer].position + 1;
 
 			players[currPlayer].topVal = board[players[currPlayer].position].topVal;
-			currCoin.animate({"top":(players[currPlayer].topVal).toString()+"px"},200);
-
 			players[currPlayer].leftVal = board[players[currPlayer].position].leftVal;
-			currCoin.animate({"left":(players[currPlayer].leftVal).toString()+"px"},200);
-
-		},200);
+			currCoin.animate(
+			{
+				"top":(players[currPlayer].topVal).toString()+"px",
+				"left":(players[currPlayer].leftVal).toString()+"px"
+			},300);
+		}
+		
+		checkSnakeOrLadder(currCoin);
+		checkSnakeOrLadder(currCoin);
+		if(diceVal != 6)
+			changePlayer();
+		isAnimationOn = false;
+		return;
 	}
 	
 	function checkSnakeOrLadder(currCoin)
