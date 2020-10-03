@@ -2,6 +2,6 @@
 Set of Board / Card games made in HTML / JavaScript
 
 Games
-- Minesweeper 100% :heavy_check_mark:
-- Snake & Ladder 80% :black_nib:
-- Solitaire 50% :black_nib:
+- Minesweeper :heavy_check_mark: 100% 
+- Snake & Ladder :black_nib: 80%
+- Solitaire :black_nib: 50% 
