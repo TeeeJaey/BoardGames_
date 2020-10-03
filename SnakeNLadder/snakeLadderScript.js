@@ -4,6 +4,10 @@ $(document).ready(function()
 	var boardImgPath = "images/board" + boardImgNmbr +".JPG";
 	$(".board").attr("src",boardImgPath);
 	
+	$("#startcontrols").css("display","");
+	$("#gameControls").css("display","none");
+	$("#endControls").css("display","none");
+	
 	var gameStarted = false;
 	var isAnimationOn = false;
 	var gameOver = false;
@@ -12,7 +16,6 @@ $(document).ready(function()
 	var currPlayer = 0;
 	var diceVal = 0;
 	
-	$("#theDice").css("display","none");
 	
 	class Cell 
 	{
@@ -174,8 +177,6 @@ $(document).ready(function()
 	function setupPlayers()
 	{
 		nmbrOfPlayers = $("input[name='nmbrOfPlayers']:checked").val();
-		$("#controls").css("display","none");
-		$("#theDice").css("display","");
 		
 		var i = 0;
 		var color = "Red";
@@ -215,6 +216,9 @@ $(document).ready(function()
 	{
 		setupBoard();
 		setupPlayers();
+		$("#startcontrols").css("display","none");
+		$("#gameControls").css("display","");
+		$("#endControls").css("display","none");
 		gameStarted = true;
 	});
 	
@@ -249,9 +253,20 @@ $(document).ready(function()
 		}
 		
 		isAnimationOn = true;
-		cnt = 1;
-		while(cnt<=diceVal)
+		cnt = 0;
+		
+		var coinMoveAnim = setInterval(function()
 		{
+			if(cnt == diceVal)
+			{
+				clearInterval(coinMoveAnim);
+				checkSnakeOrLadder(currCoin);
+				checkSnakeOrLadder(currCoin);
+				if(diceVal != 6)
+					changePlayer();
+				isAnimationOn = false;
+				return;
+			}
 			cnt+=1;
 			players[currPlayer].position = players[currPlayer].position + 1;
 
@@ -262,14 +277,9 @@ $(document).ready(function()
 				"top":(players[currPlayer].topVal).toString()+"px",
 				"left":(players[currPlayer].leftVal).toString()+"px"
 			},300);
-		}
+
+		},300);
 		
-		checkSnakeOrLadder(currCoin);
-		checkSnakeOrLadder(currCoin);
-		if(diceVal != 6)
-			changePlayer();
-		isAnimationOn = false;
-		return;
 	}
 	
 	function checkSnakeOrLadder(currCoin)
@@ -292,8 +302,14 @@ $(document).ready(function()
 		if(players[currPlayer].position == 100)
 		{
 			gameOver = true;
-			$("#instruct").css("color",players[currPlayer].color);
-			$("#instruct").text(players[currPlayer].color + " WINS !!!");
+			$("#endInstruct").css("color",players[currPlayer].color);
+			$("#endInstruct").text(players[currPlayer].color + " WINS !!!");
+			
+			
+			$("#startcontrols").css("display","none");
+			$("#gameControls").css("display","none");
+			$("#endControls").css("display","");
+			
 			return;
 		}
 

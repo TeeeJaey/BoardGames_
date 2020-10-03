@@ -19,39 +19,55 @@
 			<img src="images/blue.PNG" id="BlueCoin" class="coin" >
 			<img src="images/yellow.PNG" id="YellowCoin" class="coin" >
 		</div>
-		<h3 id="instruct">Red play</h3>
 		
-		<div id="controls"> Number Of Players
-			<input type="radio" class="radio" name="nmbrOfPlayers" value="2" checked> 2 
-			<input type="radio" class="radio" name="nmbrOfPlayers" value="3"> 3
-			<input type="radio" class="radio" name="nmbrOfPlayers" value="4"> 4
-			<hr>
-			<div class="dropdown">
-				Choose a Board
-				<i class="fa fa-angle-down" style="font-size: 36px;"></i>
-				<div class="dropdown-content">
-					<div class="boardSelector boardSelected" style = "float:left"  id="board_0"> 
-						<img class = "dropdownImages" src="images/board0.JPG">
-					</div>
-					<div class="boardSelector" style = "float:right" id="board_1"> 
-						<img class = "dropdownImages" src="images/board1.JPG">
-					</div>
-					<div class="boardSelector" style = "float:left"  id="board_2"> 
-						<img class = "dropdownImages" src="images/board2.JPG" >
-					</div>
-					<div class="boardSelector" style = "float:right" id="board_3"> 
-						<img class = "dropdownImages" src="images/board3.JPG">
+		<div id="allControls">
+			
+			<div id="startcontrols"> Number Of Players
+				<input type="radio" class="radio" name="nmbrOfPlayers" value="2" checked> 2 
+				<input type="radio" class="radio" name="nmbrOfPlayers" value="3"> 3
+				<input type="radio" class="radio" name="nmbrOfPlayers" value="4"> 4
+				<hr>
+				<div class="dropdown">
+					Choose a Board
+					<i class="fa fa-angle-down" style="font-size: 36px;"></i>
+					<div class="dropdown-content">
+						<div class="boardSelector boardSelected" style = "float:left"  id="board_0"> 
+							<img class = "dropdownImages" src="images/board0.JPG">
+						</div>
+						<div class="boardSelector" style = "float:right" id="board_1"> 
+							<img class = "dropdownImages" src="images/board1.JPG">
+						</div>
+						<div class="boardSelector" style = "float:left"  id="board_2"> 
+							<img class = "dropdownImages" src="images/board2.JPG" >
+						</div>
+						<div class="boardSelector" style = "float:right" id="board_3"> 
+							<img class = "dropdownImages" src="images/board3.JPG">
+						</div>
 					</div>
 				</div>
+				<hr>
+				<button id="start"> Start game </button>
 			</div>
-			<hr>
-		  	<button id="start"> Start game </button>
+			
+			<div id="gameControls">
+				<h3 id="instruct">Red play</h3>
+				<hr>
+				<br>
+				<div id="theDice">
+					<img src="images/dice1.PNG" class="dice" >
+				</div>
+			</div>
+
+
+			<div id="endControls">
+				<h3 id="endInstruct">Red Wins !!!</h3>
+				<hr>
+				<br>
+				<button id="restart" onclick="document.location.reload(true)"> Play again </button>
+			</div>
+
 		</div>
-		
-		<div id="theDice">
-			<img src="images/dice1.PNG" class="dice" >
-		</div>
-		
+			
 	</body>
 	
 </html>
