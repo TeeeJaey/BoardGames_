@@ -1,0 +1,13 @@
+body
+{
+    background-color: black;
+    background-image: "images/boardGames.jpg";
+}
+
+.backgroundImage
+{
+    position:fixed; 
+    margin-top:-20px;
+    z-index: -5;
+    width:100%
+}
