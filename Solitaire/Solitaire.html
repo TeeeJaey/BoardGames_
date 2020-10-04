@@ -1,16 +1,41 @@
 <html>
 	<head>
 		<title>	Solitaire </title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		
 		<script data-require="jquery" data-semver="2.1.4" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-		
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 		<script type="text/javascript" src="solitaireScript.js"></script>
-		
 		<link type="text/css" rel="stylesheet" href="solitaireStyle.css">
 	</head> 
 	
 	<body>
-		<h1>Solitaire!</h1>
+		
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid" >
+			  <div class="navbar-header" >
+				<a class="navbar-brand" style="font-size: 22px;" href="../BoardGames.html">Board Games</a>
+				<i class="fa fa-angle-right navbar-brand"  style="font-size: 22px;"></i>
+				<a class="navbar-brand" style="font-size: 22px;" href="Solitaire.html">Solitaire</a>
+			  </div>
+
+			  <ul class="nav navbar-nav navbar-right"   >
+				<li class="dropdown">
+				  <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size: 22px;" > Choose Game
+				  <span class="caret"></span></a>
+				  <ul class="dropdown-menu">
+					<li><a href="../Minesweeper/Minesweeper.html" style="font-size: 22px;" >Minesweeper</a></li>
+					<li><a href="../SnakeNLadder/SnakeLadder.html" style="font-size: 22px;">Snake & Ladder</a></li>
+					<li><a href="../Solitaire/Solitaire.html" style="font-size: 22px;">Solitaire</a></li>
+				  </ul>
+				</li>
+			  </ul>
+			</div>
+		  </nav>  
 		
 		<div id="tray">
 			<div id="tray0" class="cardHolder"></div>

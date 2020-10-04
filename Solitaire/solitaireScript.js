@@ -151,6 +151,7 @@ $(document).ready(function()
 			$('#deckCard').empty();
 			$("#deckBack").append(image);
 			deckCurr = 0;
+			deck[deckCurr-1].revealed = false;
 		}
 		else
 		{
@@ -162,7 +163,8 @@ $(document).ready(function()
 				
 			}
 			var card = deck[deckCurr];
-			deck[deckCurr-1] = false;
+			if(deckCurr>0)	
+				deck[deckCurr-1].revealed = false;
 			card.revealed = true;
 			card.position = "deck:"+(deckCurr).toString();
 			var image = makeCardImage("images/"+card.imageSrc);
