@@ -1,0 +1,260 @@
+<html>
+	<head>
+		<title>	Business </title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		
+		<script data-require="jquery" data-semver="2.1.4" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+		<script type="text/javascript" src="BusinessScript.js"></script>
+		<link type="text/css" rel="stylesheet" href="BusinessStyle.css">
+	</head>
+	
+	<body>
+		
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid" >
+			  <div class="navbar-header" >
+				<a class="navbar-brand" style="font-size: 22px;" href="../BoardGames.html">Board Games</a>
+				<i class="fa fa-angle-right navbar-brand"  style="font-size: 22px;"></i>
+				<a class="navbar-brand" style="font-size: 22px;" href="Business.html">Business</a>
+			  </div>
+
+			  <ul class="nav navbar-nav navbar-right"   >
+				<li class="dropdown">
+				  <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size: 22px;" > Choose Game
+				  <span class="caret"></span></a>
+				  <ul class="dropdown-menu">
+					<li><a href="../Minesweeper/Minesweeper.html" style="font-size: 22px;" >MineSweeper</a></li>
+					<li><a href="../SnakeNLadder/SnakeLadder.html" style="font-size: 22px;">Snake & Ladder</a></li>
+					<li><a href="../Solitaire/Solitaire.html" style="font-size: 22px;">Solitaire</a></li>
+					<li><a href="../Connect4/Connect4.html" style="font-size: 22px;">Connect 4</a></li>
+					<li><a href="../Business/Business.html" style="font-size: 22px;">Business</a></li>
+				  </ul>
+				</li>
+			  </ul>
+			</div>
+		  </nav>  
+
+		<div id="theBoard">
+			<img src="images/board.PNG" class="board" >
+			<img src="images/red.PNG" id="RedCoin" class="coin" >
+			<img src="images/green.PNG" id="GreenCoin" class="coin" >
+			<img src="images/blue.PNG" id="BlueCoin" class="coin" >
+			<img src="images/yellow.PNG" id="YellowCoin" class="coin" >
+		</div>
+		
+		<div id="allControls">
+			
+			<div id="startcontrols"> Number Of Players
+				<br>
+
+				<div class="btn-group btn-group-toggle" data-toggle="buttons">
+					<label class="btn btn-info active">
+					<input type="radio" name="nmbrOfPlayers" autocomplete="off" value="2" checked > 2
+					</label>
+				 
+					<label class="btn btn-info">
+					<input type="radio" name="nmbrOfPlayers" value="3" autocomplete="off"> 3
+					</label>
+				 
+					<label class="btn btn-info">
+					<input type="radio" name="nmbrOfPlayers" value="4" autocomplete="off"> 4
+					</label>
+				 </div>
+
+				<hr>
+
+				<button id="start" class="btn btn-default" > Start game </button>
+			</div>
+			
+
+			<div id="gameControls">
+
+				<div class="playerData currChanceData" id="RedData"  >
+                    <img src="images/red.PNG" id="RedDataCoin" class="dataCoin" >
+                    <img src="images/bldgs/red.png"  class="cityIcon" >
+                    <div class="cityValue" id="RedCity" > 0 </div>
+                    <img src="images/bldgs/red0.png"  class="houseIcon" >
+                    <div class="houseValue" id="RedHouse" > 0 </div>
+                    <img src="images/bldgs/redH.png"  class="hotelIcon" >
+                    <div class="hotelValue" id="RedHotel" > 0 </div>
+                    <img src="images/money.png"  class="moneyIcon" >
+					<div class="moneyValue" id="RedMoney" > &#x20b9; 10000</div>
+					<div class="currentChance">
+						<button id="btnWork" class="btn btn-primary" > Work </button>
+						<button id="btnDone" class="btn btn-primary" > Done </button>
+					</div>
+                </div>
+
+				<div class="playerData" id="GreenData" >
+                    <img src="images/green.PNG" id="GreenDataCoin" class="dataCoin" >
+                    <img src="images/bldgs/green.png"  class="cityIcon" >
+                    <div class="cityValue" id="GreenCity" > 0 </div>
+                    <img src="images/bldgs/green0.png"  class="houseIcon" >
+                    <div class="houseValue" id="GreenHouse" > 0 </div>
+                    <img src="images/bldgs/greenH.png"  class="hotelIcon" >
+                    <div class="hotelValue" id="GreenHotel" > 0 </div>
+                    <img src="images/money.png"  class="moneyIcon" >
+                    <div class="moneyValue" id="GreenMoney" > &#x20b9; 10000</div>
+
+                </div>
+
+				<div class="playerData" id="BlueData" >
+                    <img src="images/blue.PNG" id="BlueDataCoin" class="dataCoin" >
+                    <img src="images/bldgs/blue.png"  class="cityIcon" >
+                    <div class="cityValue" id="BlueCity" > 0 </div>
+                    <img src="images/bldgs/blue0.png"  class="houseIcon" >
+                    <div class="houseValue" id="BlueHouse" > 0 </div>
+                    <img src="images/bldgs/blueH.png"  class="hotelIcon" >
+                    <div class="hotelValue" id="BlueHotel" > 0 </div>
+                    <img src="images/money.png"  class="moneyIcon" >
+                    <div class="moneyValue" id="BlueMoney" > &#x20b9; 10000</div>
+
+                </div>
+
+				<div class="playerData" id="YellowData" >
+                    <img src="images/yellow.PNG" id="YellowDataCoin" class="dataCoin" >
+                    <img src="images/bldgs/yellow.png"  class="cityIcon" >
+                    <div class="cityValue" id="YellowCity" > 0 </div>
+                    <img src="images/bldgs/yellow0.png"  class="houseIcon" >
+                    <div class="houseValue" id="YellowHouse" > 0 </div>
+                    <img src="images/bldgs/yellowH.png"  class="hotelIcon" >
+                    <div class="hotelValue" id="YellowHotel" > 0 </div>
+                    <img src="images/money.png"  class="moneyIcon" >
+                    <div class="moneyValue" id="YellowMoney" > &#x20b9; 10000</div>
+                </div>
+                
+                <hr>
+                
+				<div id="diceContainer">
+					<img src="images/dice/dice1.PNG" class="dice" id="dice1" >
+					<img src="images/dice/dice6.PNG" class="dice" id="dice2" >
+                </div>
+                
+			</div>
+
+
+			<div id="endControls">
+				<h3 id="endInstruct">Red Wins !!!</h3>
+				<hr>
+				<br>
+				<button id="restart" class="btn btn-secondary" onclick="document.location.reload(true)"> Play again </button>
+			</div>
+
+		</div>
+            
+        
+        <button id="btnRules"  class="btn btn-danger" > ?</button>
+		<div id="allRules">
+            <div id="labelRules" class="row"> 
+                <div class="col-xs-10"> Rules </div>
+                <div class="col-xs-2" > <i  class="fa fa-times" id="closeRules" > </i> </div>
+            </div>   
+            <div id="rulesContainer">
+                <img class="imgRule" src="images/rules/rule1.PNG">
+                <img class="imgRule" src="images/rules/rule2.PNG">
+                <img class="imgRule" src="images/rules/rule3.PNG">
+                <img class="imgRule" src="images/rules/rule4.PNG">
+                <img class="imgRule" src="images/rules/rule5.PNG">
+                <img class="imgRule" src="images/rules/rule6.PNG">
+                <img class="imgRule" src="images/rules/rule7.PNG">
+                <img class="imgRule" src="images/rules/rule8.PNG">
+                <img class="imgRule" src="images/rules/rule9.PNG">
+                <img class="imgRule" src="images/rules/rule10.PNG">
+                <img class="imgRule" src="images/rules/rule11.PNG">
+                <img class="imgRule" src="images/rules/rule12.PNG">
+            </div>
+		</div>
+
+        <button id="btnTrade"  class="btn btn-danger" > Trade </button>
+		<div id="TradeTray">
+            <div id="labelRules" class="row"> 
+                <div class="col-xs-6" > 
+					<div class="btn-group btn-group-toggle" data-toggle="buttons">
+						<label class="btn btn-info tradeBtns redTradeSelector active">
+							<input type="radio" name="tradeLeftSide" value="0" autocomplete="off" checked > 
+							<img src="images/red.PNG" id="RedCoin" class="tradeCoin" >
+						</label>
+						<label class="btn btn-info tradeBtns greenTradeSelector">
+							<input type="radio" name="tradeLeftSide" value="1" autocomplete="off"> 
+							<img src="images/green.PNG" id="GreenCoin" class="tradeCoin" >
+						</label>
+						<label class="btn btn-info tradeBtns blueTradeSelector">
+							<input type="radio" name="tradeLeftSide" value="2" autocomplete="off"> 
+							<img src="images/blue.PNG" id="BlueCoin" class="tradeCoin" >
+						</label>
+						<label class="btn btn-info tradeBtns yellowTradeSelector">
+							<input type="radio" name="tradeLeftSide" value="3" autocomplete="off"> 
+							<img src="images/yellow.PNG" id="YellowCoin" class="tradeCoin" >
+						</label>
+					</div>
+					<div id="tradeLeftContainer">
+						<img class="imgRule" src="images/rules/rule1.PNG">
+						<img class="imgRule" src="images/rules/rule2.PNG">
+						<img class="imgRule" src="images/rules/rule3.PNG">
+						<img class="imgRule" src="images/rules/rule4.PNG">
+						<img class="imgRule" src="images/rules/rule5.PNG">
+						<img class="imgRule" src="images/rules/rule6.PNG">
+						<img class="imgRule" src="images/rules/rule7.PNG">
+						<img class="imgRule" src="images/rules/rule8.PNG">
+						<img class="imgRule" src="images/rules/rule9.PNG">
+						<img class="imgRule" src="images/rules/rule10.PNG">
+						<img class="imgRule" src="images/rules/rule11.PNG">
+						<img class="imgRule" src="images/rules/rule12.PNG">
+					</div>
+				</div>
+				
+                <div class="col-xs-6"> 
+					<div class="btn-group btn-group-toggle" data-toggle="buttons">
+						<label class="btn btn-info tradeBtns redTradeSelector active">
+							<input type="radio" name="tradeRightSide" value="0" autocomplete="off"checked > 
+							<img src="images/red.PNG" id="RedCoin" class="tradeCoin" >
+						</label>
+						<label class="btn btn-info tradeBtns greenTradeSelector">
+							<input type="radio" name="tradeRightSide" value="1" autocomplete="off"> 
+							<img src="images/green.PNG" id="GreenCoin" class="tradeCoin" >
+						</label>
+						<label class="btn btn-info tradeBtns blueTradeSelector">
+							<input type="radio" name="tradeRightSide" value="2" autocomplete="off"> 
+							<img src="images/blue.PNG" id="BlueCoin" class="tradeCoin" >
+						</label>
+						<label class="btn btn-info tradeBtns yellowTradeSelector">
+							<input type="radio" name="tradeRightSide" value="3" autocomplete="off"> 
+							<img src="images/yellow.PNG" id="YellowCoin" class="tradeCoin" >
+						</label>
+					</div>
+					<div id="tradeRightContainer">
+						<img class="imgRule" src="images/rules/rule1.PNG">
+						<img class="imgRule" src="images/rules/rule2.PNG">
+						<img class="imgRule" src="images/rules/rule3.PNG">
+						<img class="imgRule" src="images/rules/rule4.PNG">
+						<img class="imgRule" src="images/rules/rule5.PNG">
+						<img class="imgRule" src="images/rules/rule6.PNG">
+						<img class="imgRule" src="images/rules/rule7.PNG">
+						<img class="imgRule" src="images/rules/rule8.PNG">
+						<img class="imgRule" src="images/rules/rule9.PNG">
+						<img class="imgRule" src="images/rules/rule10.PNG">
+						<img class="imgRule" src="images/rules/rule11.PNG">
+						<img class="imgRule" src="images/rules/rule12.PNG">
+					</div>
+				</div>
+            </div>   
+            
+			<div class="row"> 
+				<div class="col-xs-6"> 
+					<button id="confirmTrade"  class="btn btn-success" > Confirm  </button>
+				</div>
+					<div class="col-xs-6"> 
+					<button id="closeTrade"  class="btn btn-danger" > Cancel  </button>
+				</div>
+			</div>
+		</div>
+        
+		
+	</body>
+	
+</html>

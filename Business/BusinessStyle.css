@@ -1,0 +1,258 @@
+body
+{	background-color : #fff5d7;
+	text-align:center;
+}
+.board ,#theBoard
+{
+	width : 600px;
+	height : 600px;
+}
+
+#theBoard
+{
+	position : relative;
+	left :10%;
+}
+.coin 
+{
+	position: absolute;
+	top: 520px;
+	left: 530px;
+	width : 30px;
+	height : 45px;
+} 
+
+#restart, #start 
+{
+	width:	150px;
+	height: 70px;
+	font-size: 20px;
+}
+
+.btn-info
+{
+	background-color: #f9c5bd;
+	color : black;
+	margin : 10px;
+	font-size: 22px;
+	padding:10px 40px;
+}
+
+#allControls
+{
+	background-color : #ff5e6c;
+	font-size: 22px;
+	position : absolute;
+	top: 65px;
+	left : 55%;
+	width:	500px;
+	padding:20px;
+    margin: 10px 0px;
+}
+
+#diceContainer
+{
+    width:60%;
+    margin: auto;
+    cursor: pointer;
+}
+
+
+.playerData
+{
+    color : black;
+	background-color : #fff5d7;
+	height : 100px;
+    font-size: 26px;
+    margin: 15px;
+    position: relative;
+}
+.dataCoin
+{
+	width : 40px;
+    height : 60px;
+    position: absolute;
+    top: 20px;
+    left: 10px;
+}
+.cityIcon
+{
+	width : 40px;
+    height : 40px;
+    position: absolute;
+    top: 0px;
+    left: 60px;
+}
+.houseIcon
+{
+	width : 40px;
+    height : 40px;
+    position: absolute;
+    top: 0px;
+    left: 144px;
+}
+.hotelIcon
+{
+	width : 40px;
+    height : 40px;
+    position: absolute;
+    top: 0px;
+    left: 220px;
+}
+.moneyIcon
+{
+	width : 40px;
+    height : 40px;
+    position: absolute;
+    top: 50px;
+    left: 60px;
+}
+
+.cityValue
+{
+    position: absolute;
+    top: 5px;
+    left: 115px;
+}
+.houseValue
+{
+    position: absolute;
+    top: 5px;
+    left: 200px;
+}
+.hotelValue
+{
+    position: absolute;
+    top: 5px;
+    left: 260px;
+}
+.moneyValue
+{
+    position: absolute;
+    top: 55px;
+    left: 110px;
+}
+.currChanceData
+{
+	border: 2px solid Black;
+	background-color: White;
+}
+.currentChance
+{
+	height: 100%;
+    position: absolute;
+    left: 320px;
+}
+#btnWork, #btnDone
+{
+	margin-top:10px;
+	padding: 5px 25px;
+}
+
+#theDice, .dice
+{
+	margin:auto;
+	width : 100px;
+    height : 100px;
+}
+
+
+#btnRules
+{
+	font-size: 30px;
+	position : absolute;
+	top: 50px;
+	right : 0%;
+	width: 100px;
+    border-radius: 10%;
+}
+#allRules
+{
+    color:white;
+	background-color : red;
+	font-size: 30px;
+	position : fixed;
+	top: 100px;
+	right : -500px;
+	width:	500px;
+	height:	500px;
+    padding:20px;
+	margin:auto;
+	z-index: 100;
+}
+#rulesContainer
+{
+	background-color : #fff5d7;
+	height:	410px;
+    margin:auto;
+    overflow-y:scroll;
+}
+.imgRule
+{
+    width:90%;
+    margin: 10px 0px;
+}
+#closeRules 
+{
+    cursor: pointer;
+}
+
+
+#btnTrade
+{
+	font-size: 30px;
+	position : absolute;
+	top: 300px;
+	right : 0%;
+	width: 130px;
+    border-radius: 10%;
+}
+
+#TradeTray
+{
+    color:white;
+	background-color : #008080;
+	font-size: 30px;
+	position : fixed;
+	top: 90px;
+	right : -650px;
+	width:	650px;
+	height:	580px;
+    padding:20px;
+	margin:auto;
+}
+
+.tradeCoin 
+{
+	width : 20px;
+	height : 30px;
+} 
+.tradeBtns
+{
+	padding: 10px 20px;
+}
+
+#tradeLeftContainer, #tradeRightContainer
+{
+	background-color : #fff5d7;
+	height:	390px;
+    margin:auto;
+    overflow-y:scroll;
+}
+
+#confirmTrade, #closeTrade
+{
+	width: 90%;
+	padding: 10px ;
+	margin-top: 10%;
+}
+
+@media (max-width: 1200px) {
+
+	#allControls
+	{
+		position : absolute;
+		top: 750px;
+		left : 10%;
+	}
+  }
