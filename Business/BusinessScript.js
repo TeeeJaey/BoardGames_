@@ -263,7 +263,8 @@ $(document).ready(function()
 					
 		board[9] = new Cell(cellName="Vadodara",colorGroup=2,position=9,topVal=520,leftVal=107,isUtility=false,isCity=true,
 					price=120,cardImage=cardImgLocation + "8.PNG" , rent=8, mortgagePrice=60,constructionPrice=50, houseRent=[0,40,100,300,450], hotelRent=600);
-					
+				
+		// --		
 		board[10] = new Cell(cellName="Jail",colorGroup=0,position=10,topVal=520,leftVal=38,isUtility=false,isCity=false);
 
 		board[11] = new Cell(cellName="Ludhiana",colorGroup=3,position=11,topVal=445,leftVal=38,isUtility=false,isCity=true,
@@ -271,8 +272,7 @@ $(document).ready(function()
 		
 		board[12] = new Cell(cellName="Electric Company",colorGroup=0,position=12,topVal=400,leftVal=38,isUtility=true,isCity=false,
 					price=150,cardImage=cardImgLocation + "12.PNG" , rent=40, mortgagePrice=75);
-		
-		// --		
+			
 		board[13] = new Cell(cellName="Patna",colorGroup=3,position=13,topVal=360,leftVal=38,isUtility=false,isCity=true,
 					price=140,cardImage=cardImgLocation + "13.PNG" , rent=10, mortgagePrice=70,constructionPrice=100, houseRent=[0,50,150,450,625], hotelRent=750);
 		
@@ -293,6 +293,7 @@ $(document).ready(function()
 		board[19] = new Cell(cellName="Kochi",colorGroup=4,position=19,topVal=90,leftVal=38,isUtility=false,isCity=true,
 				price=200,cardImage=cardImgLocation + "19.PNG" , rent=16, mortgagePrice=100,constructionPrice=100, houseRent=[0,80,220,600,800], hotelRent=1000);
 		
+		// --	
 		board[20] = new Cell(cellName="Free Parking",colorGroup=0,position=20,topVal=15,leftVal=38,isUtility=false,isCity=false);
 
 		board[21] = new Cell(cellName="Lucknow",colorGroup=5,position=21,topVal=15,leftVal=107,isUtility=false,isCity=true,
@@ -321,6 +322,7 @@ $(document).ready(function()
 		board[29] = new Cell(cellName="Ahmedabad",colorGroup=6,position=29,topVal=15,leftVal=460,isUtility=false,isCity=true,
 				price=280,cardImage=cardImgLocation + "29.PNG" , rent=24, mortgagePrice=140,constructionPrice=150, houseRent=[0,120,360,850,1025], hotelRent=1200);
 
+		// --	
 		board[30] = new Cell(cellName="Go to Jail",colorGroup=0,position=30,topVal=15,leftVal=530,isUtility=false,isCity=false);
 		
 		board[31] = new Cell(cellName="Kolkata",colorGroup=7,position=31,topVal=90,leftVal=530,isUtility=false,isCity=true,
@@ -348,6 +350,7 @@ $(document).ready(function()
 			price=400,cardImage=cardImgLocation + "39.PNG" , rent=50, mortgagePrice=200,constructionPrice=200, houseRent=[0,200,600,1400,1700], hotelRent=2000);
 
 
+		return;
 	}
 
 	setupBoard();
@@ -371,9 +374,7 @@ $(document).ready(function()
                 color = "Yellow";
             
             var properties = []; 
-
             players.push(new Player(color,0,520,530,1000,properties));
-            
 			i+=1;
 		}
 
@@ -385,13 +386,15 @@ $(document).ready(function()
 			$("#YellowData").remove();
 			$(".yellowTradeSelector").remove();
         }
-        if(nmbrOfPlayers < 3)
+
+		if(nmbrOfPlayers < 3)
 		{
             $("#BlueCoin").remove();
 			$("#BlueData").remove();
 			$(".blueTradeSelector").remove();
-			
-        }
+		}
+		
+		return;
 	}
 
 	//#endregion "Setup"

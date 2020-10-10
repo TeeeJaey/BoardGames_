@@ -14,15 +14,11 @@ body
 	left :10%;
 }
 
-/*
-	top: 520px;
-	left: 530px;
-*/
 .coin 
 {
 	position: absolute;
-	top: 400px;
-	left: 38px;
+	top: 520px;
+	left: 530px;
 	width : 30px;
 	height : 45px;
 } 
