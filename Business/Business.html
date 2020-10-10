@@ -5,9 +5,10 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		
-		<script data-require="jquery" data-semver="2.1.4" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 		<script type="text/javascript" src="BusinessScript.js"></script>
 		<link type="text/css" rel="stylesheet" href="BusinessStyle.css">
@@ -83,7 +84,7 @@
                     <img src="images/bldgs/redH.png"  class="hotelIcon" >
                     <div class="hotelValue" id="RedHotel" > 0 </div>
                     <img src="images/money.png"  class="moneyIcon" >
-					<div class="moneyValue" id="RedMoney" > &#x20b9; 10000</div>
+					<div class="moneyValue" id="RedMoney" > &#x20b9; 1000</div>
 					<div class="currentChance">
 						<button id="btnWork" class="btn btn-primary" > Work </button>
 						<button id="btnDone" class="btn btn-primary" > Done </button>
@@ -99,7 +100,7 @@
                     <img src="images/bldgs/greenH.png"  class="hotelIcon" >
                     <div class="hotelValue" id="GreenHotel" > 0 </div>
                     <img src="images/money.png"  class="moneyIcon" >
-                    <div class="moneyValue" id="GreenMoney" > &#x20b9; 10000</div>
+                    <div class="moneyValue" id="GreenMoney" > &#x20b9; 1000</div>
 
                 </div>
 
@@ -112,7 +113,7 @@
                     <img src="images/bldgs/blueH.png"  class="hotelIcon" >
                     <div class="hotelValue" id="BlueHotel" > 0 </div>
                     <img src="images/money.png"  class="moneyIcon" >
-                    <div class="moneyValue" id="BlueMoney" > &#x20b9; 10000</div>
+                    <div class="moneyValue" id="BlueMoney" > &#x20b9; 1000</div>
 
                 </div>
 
@@ -125,7 +126,7 @@
                     <img src="images/bldgs/yellowH.png"  class="hotelIcon" >
                     <div class="hotelValue" id="YellowHotel" > 0 </div>
                     <img src="images/money.png"  class="moneyIcon" >
-                    <div class="moneyValue" id="YellowMoney" > &#x20b9; 10000</div>
+                    <div class="moneyValue" id="YellowMoney" > &#x20b9; 1000</div>
                 </div>
                 
                 <hr>
@@ -148,11 +149,11 @@
 		</div>
             
         
-        <button id="btnRules"  class="btn btn-danger" > ?</button>
+        <button id="btnRules"  class="btn btn-danger" > Rules? </button>
 		<div id="allRules">
             <div id="labelRules" class="row"> 
                 <div class="col-xs-10"> Rules </div>
-                <div class="col-xs-2" > <i  class="fa fa-times" id="closeRules" > </i> </div>
+                <div class="col-xs-2" > <i  class="fa fa-times closeBox" id="closeRules" > </i> </div>
             </div>   
             <div id="rulesContainer">
                 <img class="imgRule" src="images/rules/rule1.PNG">
@@ -170,29 +171,39 @@
             </div>
 		</div>
 
-        <button id="btnTrade"  class="btn btn-danger" > Trade </button>
+		<button id="btnLogs"  class="btn btn-danger" > Logs <i class="fa fa-book" ></i> </button>
+		<div id="allLogs">
+            <div id="labelLogs" class="row"> 
+                <div class="col-xs-10"> Logs </div>
+                <div class="col-xs-2" > <i  class="fa fa-times closeBox" id="closeLogs" > </i> </div>
+            </div>   
+            <div id="logsContainer">
+            </div>
+		</div>
+
+        <button id="btnTrade"  class="btn btn-danger" > Trade <i class="fa fa-exchange" ></i> </button>
 		<div id="TradeTray">
-            <div id="labelRules" class="row"> 
+            <div class="row"> 
                 <div class="col-xs-6" > 
 					<div class="btn-group btn-group-toggle" data-toggle="buttons">
 						<label class="btn btn-info tradeBtns redTradeSelector active">
-							<input type="radio" name="tradeLeftSide" value="0" autocomplete="off" checked > 
+							<input type="radio" name="tradeLeftPlayerSelector" value="0" autocomplete="off" checked > 
 							<img src="images/red.PNG" id="RedCoin" class="tradeCoin" >
 						</label>
 						<label class="btn btn-info tradeBtns greenTradeSelector">
-							<input type="radio" name="tradeLeftSide" value="1" autocomplete="off"> 
+							<input type="radio" name="tradeLeftPlayerSelector" value="1" autocomplete="off"> 
 							<img src="images/green.PNG" id="GreenCoin" class="tradeCoin" >
 						</label>
 						<label class="btn btn-info tradeBtns blueTradeSelector">
-							<input type="radio" name="tradeLeftSide" value="2" autocomplete="off"> 
+							<input type="radio" name="tradeLeftPlayerSelector" value="2" autocomplete="off"> 
 							<img src="images/blue.PNG" id="BlueCoin" class="tradeCoin" >
 						</label>
 						<label class="btn btn-info tradeBtns yellowTradeSelector">
-							<input type="radio" name="tradeLeftSide" value="3" autocomplete="off"> 
+							<input type="radio" name="tradeLeftPlayerSelector" value="3" autocomplete="off"> 
 							<img src="images/yellow.PNG" id="YellowCoin" class="tradeCoin" >
 						</label>
 					</div>
-					<div id="tradeLeftContainer">
+					<div id="tradeLeftPropertyContainer">
 						<img class="imgRule" src="images/rules/rule1.PNG">
 						<img class="imgRule" src="images/rules/rule2.PNG">
 						<img class="imgRule" src="images/rules/rule3.PNG">
@@ -205,29 +216,36 @@
 						<img class="imgRule" src="images/rules/rule10.PNG">
 						<img class="imgRule" src="images/rules/rule11.PNG">
 						<img class="imgRule" src="images/rules/rule12.PNG">
+					</div>
+
+					<div class="d-flex justify-content-center my-4" >
+						<span class="font-weight-bold text-primary ml-2" id="tradeLeftAmountLabel" style="color: rgb(55, 255, 55);"></span>
+						<div class="w-75">
+							<input type="range" class="custom-range" id="tradeLeftAmountSlider" >
+						</div>
 					</div>
 				</div>
 				
                 <div class="col-xs-6"> 
 					<div class="btn-group btn-group-toggle" data-toggle="buttons">
 						<label class="btn btn-info tradeBtns redTradeSelector active">
-							<input type="radio" name="tradeRightSide" value="0" autocomplete="off"checked > 
+							<input type="radio" name="tradeRightPlayerSelector" value="0" autocomplete="off"checked > 
 							<img src="images/red.PNG" id="RedCoin" class="tradeCoin" >
 						</label>
 						<label class="btn btn-info tradeBtns greenTradeSelector">
-							<input type="radio" name="tradeRightSide" value="1" autocomplete="off"> 
+							<input type="radio" name="tradeRightPlayerSelector" value="1" autocomplete="off"> 
 							<img src="images/green.PNG" id="GreenCoin" class="tradeCoin" >
 						</label>
 						<label class="btn btn-info tradeBtns blueTradeSelector">
-							<input type="radio" name="tradeRightSide" value="2" autocomplete="off"> 
+							<input type="radio" name="tradeRightPlayerSelector" value="2" autocomplete="off"> 
 							<img src="images/blue.PNG" id="BlueCoin" class="tradeCoin" >
 						</label>
 						<label class="btn btn-info tradeBtns yellowTradeSelector">
-							<input type="radio" name="tradeRightSide" value="3" autocomplete="off"> 
+							<input type="radio" name="tradeRightPlayerSelector" value="3" autocomplete="off"> 
 							<img src="images/yellow.PNG" id="YellowCoin" class="tradeCoin" >
 						</label>
 					</div>
-					<div id="tradeRightContainer">
+					<div id="tradeRightPropertyContainer">
 						<img class="imgRule" src="images/rules/rule1.PNG">
 						<img class="imgRule" src="images/rules/rule2.PNG">
 						<img class="imgRule" src="images/rules/rule3.PNG">
@@ -240,6 +258,13 @@
 						<img class="imgRule" src="images/rules/rule10.PNG">
 						<img class="imgRule" src="images/rules/rule11.PNG">
 						<img class="imgRule" src="images/rules/rule12.PNG">
+					</div>
+
+					<div class="d-flex justify-content-center my-4" >
+						<span class="font-weight-bold text-primary ml-2" id="tradeRightAmountLabel" style="color: rgb(55, 255, 55);"></span>
+						<div class="w-75">
+							<input type="range" class="custom-range" id="tradeRightAmountSlider" >
+						</div>
 					</div>
 				</div>
             </div>   
