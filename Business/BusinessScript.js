@@ -34,7 +34,7 @@ $(document).ready(function()
 	class Cell 
 	{
         constructor(cellName,colorGroup,position,topVal,leftVal,isUtility,isCity,
-            price,cardImage,rent,constructionPrice,mortgagePrice,houseRent,hotelRent)  
+            price,cardImage,rent,constructionPrice,mortgagePrice,houseRent,hotelRent,bldgTopVal,bldgLeftVal)  
 		{
             this.cellName = cellName;
 			this.colorGroup = colorGroup;
@@ -65,7 +65,10 @@ $(document).ready(function()
                 this.houses = 0;                // 0 - number of houses
 
                 this.hotelRent = hotelRent;
-                this.hotel = false;             // currentstatus of hotel
+				this.hotel = false;             // currentstatus of hotel
+				
+				this.bldgTopVal = bldgTopVal;
+				this.bldgLeftVal = bldgLeftVal;
             }
 		}
 	}
@@ -241,12 +244,12 @@ $(document).ready(function()
 		board[0] = new Cell(cellName="Go",colorGroup=0,position=0,topVal=520,leftVal=530,isUtility=false,isCity=false);
 		
 		board[1] = new Cell(cellName="Guwahati",colorGroup=1,position=1,topVal=520,leftVal=460,isUtility=false,isCity=true,
-					price=60,cardImage=cardImgLocation + "1.PNG" , rent=2, mortgagePrice=30, constructionPrice=50, houseRent=[0,10,30,90,160], hotelRent=250);
+					price=60,cardImage=cardImgLocation + "1.PNG" , rent=2, mortgagePrice=30, constructionPrice=50, houseRent=[0,10,30,90,160], hotelRent=250,bldgTopVal=490,bldgLeftVal=462);
 
 		board[2] = new Cell(cellName="Chest",colorGroup=0,position=2,topVal=520,leftVal=415,isUtility=false,isCity=false);
 
 		board[3] = new Cell(cellName="Bhubaneshwar",colorGroup=1,position=3,topVal=520,leftVal=370,isUtility=false,isCity=true,
-					price=60,cardImage=cardImgLocation + "3.PNG" , rent=4, mortgagePrice=30,constructionPrice=50, houseRent=[0,20,60,180,320], hotelRent=450);
+					price=60,cardImage=cardImgLocation + "3.PNG" , rent=4, mortgagePrice=30,constructionPrice=50, houseRent=[0,20,60,180,320], hotelRent=450,bldgTopVal=490,bldgLeftVal=373);
 
 		board[4] = new Cell(cellName="Income Tax",colorGroup=0,position=4,topVal=520,leftVal=325,isUtility=false,isCity=false);
 
@@ -254,87 +257,87 @@ $(document).ready(function()
 					price=200,cardImage=cardImgLocation + "5.PNG" , rent=25, mortgagePrice=100);
 
 		board[6] = new Cell(cellName="Panaji",colorGroup=2,position=6,topVal=520,leftVal=240,isUtility=false,isCity=true,
-					price=100,cardImage=cardImgLocation + "6.PNG" , rent=6, mortgagePrice=50,constructionPrice=50, houseRent=[0,30,90,270,400], hotelRent=550);
+					price=100,cardImage=cardImgLocation + "6.PNG" , rent=6, mortgagePrice=50,constructionPrice=50, houseRent=[0,30,90,270,400], hotelRent=550,bldgTopVal=490,bldgLeftVal=241);
 
 		board[7] = new Cell(cellName="Chance",colorGroup=0,position=7,topVal=520,leftVal=195,isUtility=false,isCity=false);
 		
 		board[8] = new Cell(cellName="Agra",colorGroup=2,position=8,topVal=520,leftVal=150,isUtility=false,isCity=true,
-					price=100,cardImage=cardImgLocation + "8.PNG" , rent=6, mortgagePrice=50,constructionPrice=50, houseRent=[0,30,90,270,400], hotelRent=550);
+					price=100,cardImage=cardImgLocation + "8.PNG" , rent=6, mortgagePrice=50,constructionPrice=50, houseRent=[0,30,90,270,400], hotelRent=550, bldgTopVal=490,bldgLeftVal=152);
 					
 		board[9] = new Cell(cellName="Vadodara",colorGroup=2,position=9,topVal=520,leftVal=107,isUtility=false,isCity=true,
-					price=120,cardImage=cardImgLocation + "8.PNG" , rent=8, mortgagePrice=60,constructionPrice=50, houseRent=[0,40,100,300,450], hotelRent=600);
+					price=120,cardImage=cardImgLocation + "8.PNG" , rent=8, mortgagePrice=60,constructionPrice=50, houseRent=[0,40,100,300,450], hotelRent=600, bldgTopVal=490,bldgLeftVal=108);
 				
 		// --		
 		board[10] = new Cell(cellName="Jail",colorGroup=0,position=10,topVal=520,leftVal=38,isUtility=false,isCity=false);
 
 		board[11] = new Cell(cellName="Ludhiana",colorGroup=3,position=11,topVal=445,leftVal=38,isUtility=false,isCity=true,
-					price=140,cardImage=cardImgLocation + "11.PNG" , rent=10, mortgagePrice=70,constructionPrice=100, houseRent=[0,50,150,450,625], hotelRent=750);
+					price=140,cardImage=cardImgLocation + "11.PNG" , rent=10, mortgagePrice=70,constructionPrice=100, houseRent=[0,50,150,450,625], hotelRent=750, bldgTopVal=460,bldgLeftVal=73);
 		
 		board[12] = new Cell(cellName="Electric Company",colorGroup=0,position=12,topVal=400,leftVal=38,isUtility=true,isCity=false,
 					price=150,cardImage=cardImgLocation + "12.PNG" , rent=40, mortgagePrice=75);
 			
 		board[13] = new Cell(cellName="Patna",colorGroup=3,position=13,topVal=360,leftVal=38,isUtility=false,isCity=true,
-					price=140,cardImage=cardImgLocation + "13.PNG" , rent=10, mortgagePrice=70,constructionPrice=100, houseRent=[0,50,150,450,625], hotelRent=750);
+					price=140,cardImage=cardImgLocation + "13.PNG" , rent=10, mortgagePrice=70,constructionPrice=100, houseRent=[0,50,150,450,625], hotelRent=750, bldgTopVal=370,bldgLeftVal=73);
 		
 		board[14] = new Cell(cellName="Bhopal",colorGroup=3,position=14,topVal=315,leftVal=38,isUtility=false,isCity=true,
-				price=160,cardImage=cardImgLocation + "13.PNG" , rent=12, mortgagePrice=80,constructionPrice=100, houseRent=[0,60,180,500,700], hotelRent=900);
+				price=160,cardImage=cardImgLocation + "13.PNG" , rent=12, mortgagePrice=80,constructionPrice=100, houseRent=[0,60,180,500,700], hotelRent=900, bldgTopVal=325,bldgLeftVal=73);
 		
 		board[15] = new Cell(cellName="Howrah Station",colorGroup=0,position=15,topVal=270,leftVal=38,isUtility=true,isCity=false,
 				price=200,cardImage=cardImgLocation + "15.PNG" , rent=25, mortgagePrice=100);
 
 		board[16] = new Cell(cellName="Indore",colorGroup=4,position=16,topVal=225,leftVal=38,isUtility=false,isCity=true,
-				price=160,cardImage=cardImgLocation + "16.PNG" , rent=12, mortgagePrice=80,constructionPrice=100, houseRent=[0,60,180,500,700], hotelRent=900);
+				price=160,cardImage=cardImgLocation + "16.PNG" , rent=12, mortgagePrice=80,constructionPrice=100, houseRent=[0,60,180,500,700], hotelRent=900, bldgTopVal=235,bldgLeftVal=73);
 	
 		board[17] = new Cell(cellName="Chest",colorGroup=0,position=17,topVal=180,leftVal=38,isUtility=false,isCity=false);
 
 		board[18] = new Cell(cellName="Nagpur",colorGroup=4,position=18,topVal=135,leftVal=38,isUtility=false,isCity=true,
-				price=180,cardImage=cardImgLocation + "18.PNG" , rent=14, mortgagePrice=90,constructionPrice=100, houseRent=[0,70,200,550,750], hotelRent=950);
+				price=180,cardImage=cardImgLocation + "18.PNG" , rent=14, mortgagePrice=90,constructionPrice=100, houseRent=[0,70,200,550,750], hotelRent=950, bldgTopVal=150,bldgLeftVal=73);
 		
 		board[19] = new Cell(cellName="Kochi",colorGroup=4,position=19,topVal=90,leftVal=38,isUtility=false,isCity=true,
-				price=200,cardImage=cardImgLocation + "19.PNG" , rent=16, mortgagePrice=100,constructionPrice=100, houseRent=[0,80,220,600,800], hotelRent=1000);
+				price=200,cardImage=cardImgLocation + "19.PNG" , rent=16, mortgagePrice=100,constructionPrice=100, houseRent=[0,80,220,600,800], hotelRent=1000, bldgTopVal=105,bldgLeftVal=73);
 		
 		// --	
 		board[20] = new Cell(cellName="Free Parking",colorGroup=0,position=20,topVal=15,leftVal=38,isUtility=false,isCity=false);
 
 		board[21] = new Cell(cellName="Lucknow",colorGroup=5,position=21,topVal=15,leftVal=107,isUtility=false,isCity=true,
-				price=220,cardImage=cardImgLocation + "21.PNG" , rent=18, mortgagePrice=110,constructionPrice=150, houseRent=[0,90,220,600,800], hotelRent=1050);
+				price=220,cardImage=cardImgLocation + "21.PNG" , rent=18, mortgagePrice=110,constructionPrice=150, houseRent=[0,90,220,600,800], hotelRent=1050, bldgTopVal=70,bldgLeftVal=108);
 
 		board[22] = new Cell(cellName="Chance",colorGroup=0,position=22,topVal=15,leftVal=150,isUtility=false,isCity=false);
 
 		board[23] = new Cell(cellName="Chandigarh",colorGroup=5,position=23,topVal=15,leftVal=195,isUtility=false,isCity=true,
-				price=220,cardImage=cardImgLocation + "23.PNG" , rent=18, mortgagePrice=110,constructionPrice=150, houseRent=[0,90,220,600,800], hotelRent=1050);
+				price=220,cardImage=cardImgLocation + "23.PNG" , rent=18, mortgagePrice=110,constructionPrice=150, houseRent=[0,90,220,600,800], hotelRent=1050, bldgTopVal=70,bldgLeftVal=196);
 
 		board[24] = new Cell(cellName="Jaipur",colorGroup=5,position=24,topVal=15,leftVal=240,isUtility=false,isCity=true,
-				price=240,cardImage=cardImgLocation + "23.PNG" , rent=20, mortgagePrice=120,constructionPrice=150, houseRent=[0,100,300,750,925], hotelRent=1100);
+				price=240,cardImage=cardImgLocation + "23.PNG" , rent=20, mortgagePrice=120,constructionPrice=150, houseRent=[0,100,300,750,925], hotelRent=1100, bldgTopVal=70,bldgLeftVal=241);
 
 		board[25] = new Cell(cellName="New Delhi Station",colorGroup=0,position=25,topVal=15,leftVal=283,isUtility=true,isCity=false,
 				price=200,cardImage=cardImgLocation + "25.PNG" , rent=25, mortgagePrice=100);
 
 		board[26] = new Cell(cellName="Pune",colorGroup=6,position=26,topVal=15,leftVal=325,isUtility=false,isCity=true,
-				price=260,cardImage=cardImgLocation + "26.PNG" , rent=22, mortgagePrice=130,constructionPrice=150, houseRent=[0,110,330,800,975], hotelRent=1150);
+				price=260,cardImage=cardImgLocation + "26.PNG" , rent=22, mortgagePrice=130,constructionPrice=150, houseRent=[0,110,330,800,975], hotelRent=1150, bldgTopVal=70,bldgLeftVal=328);
 
 		board[27] = new Cell(cellName="Hyderabad",colorGroup=6,position=27,topVal=15,leftVal=370,isUtility=false,isCity=true,
-				price=260,cardImage=cardImgLocation + "27.PNG" , rent=22, mortgagePrice=130,constructionPrice=150, houseRent=[0,110,330,800,975], hotelRent=1150);
+				price=260,cardImage=cardImgLocation + "27.PNG" , rent=22, mortgagePrice=130,constructionPrice=150, houseRent=[0,110,330,800,975], hotelRent=1150, bldgTopVal=70,bldgLeftVal=373);
 
 		board[28] = new Cell(cellName="Water Works",colorGroup=0,position=12,topVal=15,leftVal=415,isUtility=true,isCity=false,
 				price=150,cardImage=cardImgLocation + "28.PNG" , rent=40, mortgagePrice=75);
 	
 		board[29] = new Cell(cellName="Ahmedabad",colorGroup=6,position=29,topVal=15,leftVal=460,isUtility=false,isCity=true,
-				price=280,cardImage=cardImgLocation + "29.PNG" , rent=24, mortgagePrice=140,constructionPrice=150, houseRent=[0,120,360,850,1025], hotelRent=1200);
+				price=280,cardImage=cardImgLocation + "29.PNG" , rent=24, mortgagePrice=140,constructionPrice=150, houseRent=[0,120,360,850,1025], hotelRent=1200, bldgTopVal=70,bldgLeftVal=462);
 
 		// --	
 		board[30] = new Cell(cellName="Go to Jail",colorGroup=0,position=30,topVal=15,leftVal=530,isUtility=false,isCity=false);
 		
 		board[31] = new Cell(cellName="Kolkata",colorGroup=7,position=31,topVal=90,leftVal=530,isUtility=false,isCity=true,
-				price=300,cardImage=cardImgLocation + "31.PNG" , rent=26, mortgagePrice=150,constructionPrice=200, houseRent=[0,130,390,900,1100], hotelRent=1275);
+				price=300,cardImage=cardImgLocation + "31.PNG" , rent=26, mortgagePrice=150,constructionPrice=200, houseRent=[0,130,390,900,1100], hotelRent=1275, bldgTopVal=105,bldgLeftVal=495);
 		
 		board[32] = new Cell(cellName="Chennai",colorGroup=7,position=32,topVal=135,leftVal=530,isUtility=false,isCity=true,
-				price=300,cardImage=cardImgLocation + "32.PNG" , rent=26, mortgagePrice=150,constructionPrice=200, houseRent=[0,130,390,900,1100], hotelRent=1275);
+				price=300,cardImage=cardImgLocation + "32.PNG" , rent=26, mortgagePrice=150,constructionPrice=200, houseRent=[0,130,390,900,1100], hotelRent=1275, bldgTopVal=150,bldgLeftVal=495);
 
 		board[33] = new Cell(cellName="Chest",colorGroup=0,position=33,topVal=180,leftVal=530,isUtility=false,isCity=false);
 
 		board[34] = new Cell(cellName="Bengaluru",colorGroup=7,position=34,topVal=225,leftVal=530,isUtility=false,isCity=true,
-				price=320,cardImage=cardImgLocation + "34.PNG" , rent=28, mortgagePrice=160,constructionPrice=200, houseRent=[0,150,450,1000,1100], hotelRent=1400);
+				price=320,cardImage=cardImgLocation + "34.PNG" , rent=28, mortgagePrice=160,constructionPrice=200, houseRent=[0,150,450,1000,1100], hotelRent=1400, bldgTopVal=235,bldgLeftVal=495);
 
 		board[35] = new Cell(cellName="Chhatrapati Shivaji Terminus",colorGroup=0,position=35,topVal=270,leftVal=530,isUtility=true,isCity=false,
 			price=200,cardImage=cardImgLocation + "35.PNG" , rent=25, mortgagePrice=100);
@@ -342,12 +345,12 @@ $(document).ready(function()
 		board[36] = new Cell(cellName="Chance",colorGroup=0,position=36,topVal=315,leftVal=530,isUtility=false,isCity=false);
 		
 		board[37] = new Cell(cellName="Delhi",colorGroup=8,position=37,topVal=360,leftVal=530,isUtility=false,isCity=true,
-			price=350,cardImage=cardImgLocation + "37.PNG" , rent=35, mortgagePrice=175,constructionPrice=200, houseRent=[0,175,500,1100,1300], hotelRent=1500);
+			price=350,cardImage=cardImgLocation + "37.PNG" , rent=35, mortgagePrice=175,constructionPrice=200, houseRent=[0,175,500,1100,1300], hotelRent=1500, bldgTopVal=370,bldgLeftVal=495);
 
 		board[38] = new Cell(cellName="Super Tax",colorGroup=0,position=4,topVal=400,leftVal=530,isUtility=false,isCity=false);
 
 		board[39] = new Cell(cellName="Mumbai",colorGroup=8,position=39,topVal=445,leftVal=530,isUtility=false,isCity=true,
-			price=400,cardImage=cardImgLocation + "39.PNG" , rent=50, mortgagePrice=200,constructionPrice=200, houseRent=[0,200,600,1400,1700], hotelRent=2000);
+			price=400,cardImage=cardImgLocation + "39.PNG" , rent=50, mortgagePrice=200,constructionPrice=200, houseRent=[0,200,600,1400,1700], hotelRent=2000, bldgTopVal=460,bldgLeftVal=495);
 
 
 		return;
