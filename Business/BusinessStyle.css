@@ -23,6 +23,43 @@ body
 	height : 45px;
 } 
 
+ 
+.swal2-popup {
+  font-size: 1.6rem !important;
+}
+
+.bldgCoin
+{
+	width : 30px;
+    height : 30px;
+	position: absolute;
+	top: 460px;
+	left: 495px;
+	z-index: 2;
+}
+
+#btnMenu
+{
+	font-size: 26px;
+	width : 200px;
+	position : absolute;
+	top: 50px;
+	right : 0%;
+}
+
+#menu
+{
+	width : 200px;
+	position : absolute;
+	top: 100px;
+	right : 0%;
+}
+.menuBtns
+{
+	width : 200px;
+	font-size: 26px;
+}
+
 #restart, #start 
 {
 	width:	150px;
@@ -138,7 +175,7 @@ body
 	border: 2px solid Black;
 	background-color: White;
 }
-.currentChance
+.currentChanceBtns
 {
 	height: 100%;
     position: absolute;
@@ -158,14 +195,6 @@ body
 }
 
 
-#btnRules
-{
-	font-size: 30px;
-	position : absolute;
-	top: 50px;
-	right : 0%;
-    border-radius: 10%;
-}
 #allRules
 {
     color:white;
@@ -232,12 +261,12 @@ body
 }
 .logItem
 {
-	width:90%;
 	margin : auto;
 	margin-top : 10px;
 	font-size:15px;
 	padding:5px;
-	background-color: rgb(136, 123, 94);
+	background-color: white;
+	color : black;
 }
 .logCoin
 {

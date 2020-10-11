@@ -5,21 +5,30 @@ $(document).ready(function()
 	//#region "Variables"
 
 	var gameStarted = false;
+	var diceRolled = false;
 	var isChanceOn = false;
 	var gameOver = false;
 	
-	var nmbrOfPlayers = 2;
-	var currPlayer = 0;
     var diceVal1 = 0;
     var diceVal2 = 0;
     var diceValTotal = diceVal1 + diceVal2;
 	var rupeeSym = "&#x20b9;";
+	var consecutiveDoubles = 0;
 	
+	var currPlayer = 0;
+	var board = [];
+	var nmbrOfPlayers = 2;
+	var players = [];
+	var logs = [];
+	var propertyColorGroups = [[],[1,3],[6,8,9],[11,13,14],[16,18,19],[21,23,24],[26,27,29],[31,32,34],[37,39]];
+
 	//#endregion "Variables"
 	
 
 	//#region "Init displays for different objects"
-
+	
+	
+	$("#menu").css("display","none");
     $(".coin").css("display","none");
 	$("#startcontrols").css("display","");
 	$("#gameControls").css("display","none");
@@ -30,6 +39,19 @@ $(document).ready(function()
 	//#endregion "Init displays for different objects"
 
 	//#region "DTO Classes"
+
+	class Game 
+	{
+		constructor()
+		{
+			this.nmbrOfPlayers = nmbrOfPlayers;
+			this.currPlayer = currPlayer;
+			this.players = players;
+			this.board = board;
+			this.logs = logs;
+		}
+	
+	}
 
 	class Cell 
 	{
@@ -52,14 +74,13 @@ $(document).ready(function()
                 this.cardImage = cardImage;
                 this.owner = -1;
                 this.rent = rent;
-                this.currRent = 0;
+                this.isMortaged = false;        
                 this.mortgagePrice = mortgagePrice;
 			}
 			
             if(isCity)
             {
                 this.constructionPrice = constructionPrice;
-                this.isMortaged = false;        
 
                 this.houseRent = houseRent;     // [price1,price2,prcie3,price4]
                 this.houses = 0;                // 0 - number of houses
@@ -71,19 +92,182 @@ $(document).ready(function()
 				this.bldgLeftVal = bldgLeftVal;
             }
 		}
+
+		getCurrentRent()
+		{
+			var rent = 0;
+			if(this.isUtility)
+			{
+				if(this.owner > -1)
+				{
+					if(this.isMortaged)
+					{
+						return rent;
+					}
+					else
+					{
+						if(this.position == 5 || this.position == 15 || this.position == 25 || this.position == 35)
+						{
+							var stations = [5,15,25,35];
+							rent = this.rent / 2;
+							var i = 0;
+							while(i < 4)
+							{
+								if(players[this.owner].properties.includes(stations[i]))
+									rent = rent + rent;
+								i += 1;
+							}
+
+							return rent;
+						}
+
+						if(this.position == 12 || this.position == 28)
+						{
+							if(players[this.owner].properties.includes(12) && players[this.owner].properties.includes(28))
+							{
+								rent = 10 * diceValTotal;
+							}
+							else
+							{
+								rent = 4 * diceValTotal;
+							}
+							return rent;
+						}
+					}
+				}
+				return rent;
+			}
+
+			else if(this.isCity)
+			{
+				if(this.owner > -1)
+				{
+					if(this.isMortaged)
+					{
+						rent = 0;
+						return rent;
+					}
+					else
+					{
+						players[this.owner].refreshCityGroups();
+
+						if(this.hotel)
+						{	
+							rent = this.hotelRent;
+							return rent;
+						}
+						else if(this.houses > 0)
+						{
+							rent = this.houseRent[this.houses];
+							return rent;
+						}
+						else
+						{
+							if(players[this.owner].cityGroups.includes(this.colorGroup))
+							{
+								rent = this.rent * 2;
+							}
+							else
+							{
+								rent = this.rent;
+							}
+							return rent;
+						}5
+					}
+				}
+				return rent;
+			}
+		}
+
+		
+		getBldg()
+		{
+			var bldgCoin = null;
+			if(this.isUtility)
+			{
+				if(this.owner > -1)
+				{
+					bldgCoin = makeBldgCoin(this.owner,"0");
+				}
+			}
+			if(this.isCity)
+			{
+				if(this.owner > -1)
+				{
+					if(this.isMortaged)
+					{
+						bldgCoin = makeBldgCoin(this.owner,"M");
+						return bldgCoin;
+					}
+					else if(board[i].hotel)
+					{
+						bldgCoin = makeBldgCoin(this.owner,"H");
+						return bldgCoin;
+					}
+					else
+					{
+						bldgCoin = makeBldgCoin(this.owner, this.houses);
+						return bldgCoin;
+					}
+				}
+			}
+			return bldgCoin;
+		}
+		
+		showBldg()
+		{
+			if(this.isCity || this.isUtility)
+			{
+				if(board[i].owner > -1)
+				{
+					var bldgCoin = getBldg();
+					$(bldgCoin).css("top",this.bldgTopVal.toString()+"px");
+					$(bldgCoin).css("left",this.bldgLeftVal.toString()+"px");
+				}
+			}
+		}
+
 	}
 	
 	class Player 
 	{
-		constructor(color,position,topVal,leftVal,money,properties) 
+		constructor(color) 
 		{
 			this.color = color;
-			this.position = position;
-			this.topVal = topVal;
-			this.leftVal = leftVal;
-			this.money = money;
-			this.properties = properties; // [0,3,7 .. ]
+			this.position = 0;
+			this.topVal = 520;
+			this.leftVal = 530;
+			this.money = 1000;
+			this.properties = []; // [0,3,7 .. ]
+			this.cityGroups = []; // [1,3,7 .. ]
+			this.inJail = false;
 		}
+
+		refreshCityGroups()
+		{
+			this.cityGroups = [];
+
+			var i = 1;
+			while(i < propertyColorGroups.length)
+			{
+				var j = 0;
+				var containsGroup = true;
+				while(j < propertyColorGroups[i].length)
+				{
+					if(!this.properties.includes(propertyColorGroups[i][j]))
+					{
+						containsGroup = false;
+					}
+					j += 1;
+				}
+				if(containsGroup)
+					this.cityGroups.push(i);
+				i += 1;
+			}
+
+			return;
+		}
+
 	}
 	
 	class Log 
@@ -96,13 +280,27 @@ $(document).ready(function()
 			this.reason = reason;
 			this.property = property;
 		}
+
+		displayLog()
+		{
+			var logDiv = generateLogs(this);
+
+			Swal.fire({
+				title: logDiv.outerHTML,
+				icon: 'info',
+				confirmButtonColor: '#3085d6',
+				confirmButtonText: 'OK',
+				allowOutsideClick: false
+			});
+			return;
+		}
 	}
 
 
 	//#endregion "DTO Classes"
 
 
-	//#region "Rules"
+	//#region "Menu"
 
 	$("#btnRules").click(function()
 	{
@@ -112,8 +310,104 @@ $(document).ready(function()
 	$("#closeRules").click(function()
 	{
         $("#allRules").animate({"right":"-500px"});
+	});
+	
+	$("#btnMenu").click(function()
+	{
+        $("#menu").toggle();
     });
-	//#endregion "Rules"
+	
+	$("#saveGame").click(function()
+	{
+		var savedGame = new Game();
+		var gameJSON = JSON.stringify(savedGame,null,4);
+		var a = document.createElement("a");
+		var file = new Blob([gameJSON],{type:"application/json"});
+		a.href = URL.createObjectURL(file);
+		a.download = "save.json";
+		a.click();
+		URL.revokeObjectURL(a.href)
+	});
+
+	var loadedGameFile = null;
+	document.getElementById('loadGameFile').addEventListener('change', handleFileSelect, false);
+	function handleFileSelect(evt) {
+		loadedGameFile = evt.target.files[0];
+	}
+	
+	$("#loadGameSubmit").click(function()
+	{
+		var fr = new FileReader();
+		var f = loadedGameFile;
+		// Closure to capture the file information.
+		fr.onload = (function (theFile) {
+			return function (e) {
+				try 
+				{
+					var loadedGame = JSON.parse(e.target.result);
+					if(loadedGame != null)
+					{
+						board = loadedGame.board;
+						currPlayer = loadedGame.currPlayer;
+						logs = loadedGame.logs;
+						nmbrOfPlayers = loadedGame.nmbrOfPlayers;
+						players = loadedGame.players;
+						console.log('Loaded game = ', loadedGame);
+
+						
+						$(".coin").css("display","");
+		
+						if(nmbrOfPlayers < 4)
+						{
+							$("#YellowCoin").remove();
+							$("#YellowData").remove();
+							$(".yellowTradeSelector").remove();
+						}
+				
+						if(nmbrOfPlayers < 3)
+						{
+							$("#BlueCoin").remove();
+							$("#BlueData").remove();
+							$(".blueTradeSelector").remove();
+						}
+						
+						setupTrade();
+				
+						$("#startcontrols").css("display","none");
+						$("#gameControls").css("display","");
+						$("#endControls").css("display","none");
+						$("#btnTrade").css("display","");
+						$("#btnLogs").css("display","");
+				
+						gameStarted = true;
+
+						refreshBoardUI();
+
+						Swal.fire(
+							"Game Loaded Success",'',
+							'success'
+						)
+						
+					}
+
+				}
+				catch (ex) 
+				{
+					console.log('Error load json : ' , ex);	
+					Swal.fire(
+						"Game Load failed!",'',
+						'error'
+					)
+					return false;
+				}
+			}
+		})(f);
+		fr.readAsText(f);
+
+
+	});
+
+	//#endregion "Menu"
 
 	//#region "Trade"
 
@@ -154,26 +448,27 @@ $(document).ready(function()
 
 	$("#confirmTrade").click(function()
 	{
-		var confirmation = false;
-
-		swal({
-			closeOnClickOutside: false,
+		Swal.fire({
 			title: "Are you sure?",
 			text: "Just Confirming this trade operation",
-			icon: "warning",
-			buttons: ["Cancel","Confirm"],
-		})
-		.then((Confirm) => {
-			if (Confirm) {
-				swal("Trade complete!", {
-					icon: "success",
-				});
-			
-				$("#TradeTray").animate({"right":"-650px"});
-				//perfornmTrade();
-			} 
-		});
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, Confirm!',
+			allowOutsideClick: false
+		}).then((result) => 
+		{
+			if (result.isConfirmed) 
+			{
+				Swal.fire(
+				"Trade complete!",'',
+				'success'
+				)
 
+				$("#TradeTray").animate({"right":"-650px"});
+			}
+		})
 	});
 
 	//#endregion "Trade"
@@ -194,16 +489,17 @@ $(document).ready(function()
 	function makeLogCoin(playerNumber)
 	{
 		var logCoinImage = document.createElement('img');
-		var color = "red";
+		var color = "bank";
 		switch(playerNumber)
 		{
 			case 0: color = "red"; break;
 			case 1: color = "green"; break;
 			case 2: color = "blue"; break;
 			case 3: color = "yellow"; break;
+			default: color = "bank"; break;
 		}
-
 		logCoinImage.src="images/"+color+".PNG";
+
 		$(logCoinImage).addClass("logCoin");
 		return logCoinImage;
 	}
@@ -216,27 +512,43 @@ $(document).ready(function()
 		var giverCoin = makeLogCoin(log.sender);
 		var takerCoin = makeLogCoin(log.reciever);
 
-		var reasonText = ""; 
-		if(log.reason == "rent")
+		var reasonText = log.reason; 
+		switch(log.reason) 
 		{
-			reasonText = "as rent for <b>"+log.property+"</b>"
-		}
-		$(logItem).addClass("logItem").html(giverCoin.outerHTML + " Paid <b>" + rupeeSym + log.amount.toString() + "</b> "+reasonText+" to " +takerCoin.outerHTML);
+			case "rent":
+				reasonText = "(Rent for <b>"+log.property+"</b>)";
+				break;
 
+			case "trade":
+				reasonText = "(as part of Trade)";
+				break;
+
+			case "buy":
+				reasonText = "(as purchase of <b>"+log.property+"</b>)";
+				break;
+
+			case "bldg":
+				reasonText = "(as building on <b>"+log.property+"</b>)";
+				break;
+
+			case "jail":
+				reasonText = "(as Jail charges)";
+				break;
+
+			default:
+				reasonText = "("+log.reason+")"; 
+				break;
+		}
+
+		$(logItem).addClass("logItem").html(giverCoin.outerHTML + " Paid <b>" + rupeeSym + log.amount.toString() + "</b> "+reasonText+" to " +takerCoin.outerHTML);
 		$("#logsContainer").prepend(logItem);
+		return logItem;
 	}
 	
-	//log generator
-	var log = new Log(2,1,300,"rent","Bhubaneshwar");
-	generateLogs(log);
-	logs = [];
-	logs.push(log);
-
 	//#endregion "Logs"
 
 	//#region "Setup"
 
-	var board = [];
 	function setupBoard()
 	{
 		var cardImgLocation = "images/properies/";
@@ -358,7 +670,6 @@ $(document).ready(function()
 
 	setupBoard();
 	
-	var players = [];
 	function setupPlayers()
 	{
 		nmbrOfPlayers = $("input[name='nmbrOfPlayers']:checked").val();
@@ -376,8 +687,7 @@ $(document).ready(function()
 			if(i == 3)
                 color = "Yellow";
             
-            var properties = []; 
-            players.push(new Player(color,0,520,530,1000,properties));
+            players.push(new Player(color));
 			i+=1;
 		}
 
@@ -401,8 +711,74 @@ $(document).ready(function()
 	}
 
 	//#endregion "Setup"
+	
+	
+	
+	function makeBldgCoin(playerNumber,bldgStr)
+	{
+		var BldgCoin = document.createElement('img');
+		var color = "bank";
+		switch(playerNumber)
+		{
+			case 0: color = "red"; break;
+			case 1: color = "green"; break;
+			case 2: color = "blue"; break;
+			case 3: color = "yellow"; break;
+			default: color = "bank"; break;
+		}
+		BldgCoin.src="images/bldgs/"+color+bldgStr+".PNG";
+
+		return BldgCoin;
+	}
+
+
+	//#region "Game Functions"
+
+	$("#start").click(function()
+	{
+		setupPlayers();
+		setupTrade();
+
+		$("#startcontrols").css("display","none");
+		$("#gameControls").css("display","");
+		$("#endControls").css("display","none");
+		$("#btnTrade").css("display","");
+		$("#btnLogs").css("display","");
+
+		gameStarted = true;
+	});
+
+	
+	$("#diceContainer").click(function()
+	{
+		/*
+		var logItem = new Log(2,-1,300,"rent",board[35].cellName);
+		var logDiv = generateLogs(logItem);
 		
-	//#region "Functions"
+		Swal.fire({
+			title: logDiv.outerHTML,
+			icon: 'info',
+			confirmButtonColor: '#3085d6',
+			confirmButtonText: 'OK',
+			allowOutsideClick: false
+		});
+		logs.push(logItem);
+
+		*/
+
+		if(!gameStarted)
+			return;
+		if(gameOver)
+			return;	
+		if(diceRolled)
+			return;
+		if(isChanceOn)
+			return;
+
+		diceRolled = true;
+		rollDice();
+	});
+
 
 	function rollDice()
 	{
@@ -426,9 +802,81 @@ $(document).ready(function()
 
 		},200);
 	}
-    	
-	function moveCoin(currCoin)
+	
+	
+    
+	function play()
+	{
+        $('#dice1').attr("src","images/dice/dice"+diceVal1.toString()+".PNG");
+        $('#dice2').attr("src","images/dice/dice"+diceVal2.toString()+".PNG");
+		
+		
+		var currCoin = $("#"+players[currPlayer].color+"Coin");
+		if(players[currPlayer].inJail && (diceVal1 != diceVal2) ) // show jail popup
+		{
+			var jailQstn = document.createElement('div');
+			$(jailQstn).addClass("logItem").html("Pay "+rupeeSym+"100 OR wait till you roll a double?");
+		
+			Swal.fire({
+				title: "You are in Jail!",
+				text: jailQstn.innerHTML,
+				imageUrl: "images/"+players[currPlayer].color+"Jail.PNG",
+				imageWidth: 200,
+				imageHeight: 200,
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: "Pay "+rupeeSym+"100",
+				cancelButtonText: "Wait",
+				allowOutsideClick: false
+			}).then((result) => 
+			{
+				if (result.isConfirmed) 
+				{
+					Swal.fire(
+					'',"Paid "+rupeeSym+"100 to get out of Jail",
+					'success'
+					)
+					
+					players[currPlayer].inJail = false;
+					moveCoin(currCoin);
+				}
+			})
+
+		} 
+		else
+		{	
+			players[currPlayer].inJail = false;
+			moveCoin(currCoin);
+		}
+
+		if(diceVal1 == diceVal2)
+		{
+			consecutiveDoubles += 1;
+			if(consecutiveDoubles < 3)
+				diceRolled = false;
+			else
+			{
+				moveBackWithoutGO(10);
+						
+				Swal.fire({
+					title: "Going to Jail for OverSpeeding!",
+					imageUrl: "images/"+players[currPlayer].color+"Jail.PNG",
+					imageWidth: 200,
+					imageHeight: 200,
+					confirmButtonColor: '#3085d6',
+					confirmButtonText: 'OK',
+					allowOutsideClick: false
+				})
+				consecutiveDoubles = 0;
+			}
+		}
+		return;
+	}
+	
+	function moveCoin()
 	{ 
+		var currCoin = $("#"+players[currPlayer].color+"Coin");
 		isChanceOn = true;
 		cnt = 0;
 		
@@ -437,10 +885,8 @@ $(document).ready(function()
 			if(cnt == diceValTotal)
 			{
 				clearInterval(coinMoveAnim);
-				checkCell(currCoin);
-				if(diceVal1 != diceVal2)
-					changePlayer();
-                isChanceOn = false;
+				checkCell();
+				isChanceOn = false;
 				return;
 			}
 			cnt+=1;
@@ -456,59 +902,175 @@ $(document).ready(function()
 
 		},300);
 		
-    }
-    
-	function play()
+	}
+
+	function moveBackWithoutGO(endPos)
 	{
-        $('#dice1').attr("src","images/dice/dice"+diceVal1.toString()+".PNG");
-        $('#dice2').attr("src","images/dice/dice"+diceVal2.toString()+".PNG");
-		
+		var currCoin = $("#"+players[currPlayer].color+"Coin");
+
+		var coinMoveAnim = setInterval(function()
+		{
+			if(players[currPlayer].position == endPos)
+			{
+				clearInterval(coinMoveAnim);
+				checkCell()
+				return;
+			}
+			
+			if(players[currPlayer].position > 30 && endPos < 30)
+				players[currPlayer].position = 30;
+			else if(players[currPlayer].position > 20 && endPos < 20)
+				players[currPlayer].position = 20;
+			else if(players[currPlayer].position > 10 && endPos < 10)
+				players[currPlayer].position = 10;
+			else
+				players[currPlayer].position = endPos;
+
+			players[currPlayer].topVal = board[players[currPlayer].position].topVal;
+			players[currPlayer].leftVal = board[players[currPlayer].position].leftVal;
+			currCoin.animate(
+			{
+				"top":(players[currPlayer].topVal).toString()+"px",
+				"left":(players[currPlayer].leftVal).toString()+"px"
+			},300);
+
+		},300);
+
+	}
+
+	
+	function moveAheadWithGO(endPos)
+	{
+		var currCoin = $("#"+players[currPlayer].color+"Coin");
+
+		var coinMoveAnim = setInterval(function()
+		{
+			if(players[currPlayer].position == endPos)
+			{
+				clearInterval(coinMoveAnim);
+				checkCell()
+				return;
+			}
+			
+			if(endPos > players[currPlayer].position)
+			{
+					
+				if(players[currPlayer].position < 10 && endPos >= 10)
+					players[currPlayer].position = 10;
+				else if(players[currPlayer].position < 20 && endPos >= 20)
+					players[currPlayer].position = 20;
+				else if(players[currPlayer].position < 30 && endPos >= 30)
+					players[currPlayer].position = 30;
+				else
+					players[currPlayer].position = endPos;
+
+			}
+			else if(endPos < players[currPlayer].position)
+			{
+			
+				if(players[currPlayer].position > 0)
+					players[currPlayer].position = 10;
+
+				if(players[currPlayer].position >= 10)
+					players[currPlayer].position = 20;
+
+				else if(players[currPlayer].position >= 20)
+					players[currPlayer].position = 30;
+					
+				else if(players[currPlayer].position >= 30)
+					players[currPlayer].position = 0;
+
+			}
+			
+			players[currPlayer].topVal = board[players[currPlayer].position].topVal;
+			players[currPlayer].leftVal = board[players[currPlayer].position].leftVal;
+			currCoin.animate(
+			{
+				"top":(players[currPlayer].topVal).toString()+"px",
+				"left":(players[currPlayer].leftVal).toString()+"px"
+			},300);
+
+		},300);
+
+	}
+
+
+	function checkCell()
+	{
 		
 		var currCoin = $("#"+players[currPlayer].color+"Coin");
-		
-		if(players[currPlayer].position != 10) // in jail
-			moveCoin(currCoin);
-		else
+
+		switch(players[currPlayer].position)
 		{
-			if(diceVal == 6)
-				players[currPlayer].started = true;
-			else
-				changePlayer();
-			isAnimationOn = false;
+			case 10:
+			{
+				players[currPlayer].inJail = true;
+				break;
+			}
+			case 30:
+			{
+				moveBackWithoutGO(10);
+				break;
+			}
+			default:
+				return;
 		}
+
 		return;
 	}
-    
-	//#endregion "Functions"
 
 
 
-	$("#start").click(function()
+	function changePlayer()
 	{
-		setupPlayers();
-		setupTrade();
+		
+		$("#"+players[currPlayer].color+"Data").removeClass("currChanceData");
 
-		$("#startcontrols").css("display","none");
-		$("#gameControls").css("display","");
-		$("#endControls").css("display","none");
-		$("#btnTrade").css("display","");
-		$("#btnLogs").css("display","");
+		currPlayer+=1;
+		if(currPlayer == nmbrOfPlayers)
+			currPlayer=0;
+		
+		$("#"+players[currPlayer].color+"Data").addClass("currChanceData");
+		
+		$(".currentChanceBtns").appendTo("#"+players[currPlayer].color+"Data");
+		consecutiveDoubles = 0;
+	}
 
-		gameStarted = true;
-	});
 
-    
-	$("#diceContainer").click(function()
-	{
-		if(!gameStarted)
-			return;
-		if(gameOver)
-			return;
+	$("#btnDone").click(function()
+    {
 		if(isChanceOn)
 			return;
-			
-		rollDice();
+		if(diceRolled)
+		{
+			changePlayer();
+			diceRolled = false;
+		}
 	});
+	
+
+		
+	function refreshBoardUI()
+	{
+		var i = 0;
+		while(i<nmbrOfPlayers)
+		{
+			$("#"+players[i].color+"Coin").css("top",(players[currPlayer].topVal).toString()+"px");
+			$("#"+players[i].color+"Coin").css("left",(players[currPlayer].leftVal).toString()+"px");
+			i += 1;
+		}
+
+		i = 0;
+		while(i<40)
+		{
+			debugger;
+			board[i].showBldg();
+			i += 1;
+		}
+	}
+
+
+	//#endregion "Functions"
 
 
 

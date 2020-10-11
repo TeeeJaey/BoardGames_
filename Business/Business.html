@@ -5,10 +5,14 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
 		<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 		<script type="text/javascript" src="BusinessScript.js"></script>
 		<link type="text/css" rel="stylesheet" href="BusinessStyle.css">
@@ -38,7 +42,7 @@
 				</li>
 			  </ul>
 			</div>
-		  </nav>  
+		</nav>  
 
 		<div id="theBoard">
 			<img src="images/board.PNG" class="board" >
@@ -46,6 +50,9 @@
 			<img src="images/green.PNG" id="GreenCoin" class="coin" >
 			<img src="images/blue.PNG" id="BlueCoin" class="coin" >
 			<img src="images/yellow.PNG" id="YellowCoin" class="coin" >
+
+			<img src="images/bldgs/blueH.png" id="bldg0" class="bldgCoin" >
+
 		</div>
 		
 		<div id="allControls">
@@ -77,7 +84,7 @@
 
 				<div class="playerData currChanceData" id="RedData"  >
                     <img src="images/red.PNG" id="RedDataCoin" class="dataCoin" >
-                    <img src="images/bldgs/red.png"  class="cityIcon" >
+                    <img src="images/city.png"  class="cityIcon" >
                     <div class="cityValue" id="RedCity" > 0 </div>
                     <img src="images/bldgs/red0.png"  class="houseIcon" >
                     <div class="houseValue" id="RedHouse" > 0 </div>
@@ -85,7 +92,7 @@
                     <div class="hotelValue" id="RedHotel" > 0 </div>
                     <img src="images/money.png"  class="moneyIcon" >
 					<div class="moneyValue" id="RedMoney" > &#x20b9; 1000</div>
-					<div class="currentChance">
+					<div class="currentChanceBtns">
 						<button id="btnWork" class="btn btn-primary" > Work </button>
 						<button id="btnDone" class="btn btn-primary" > Done </button>
 					</div>
@@ -93,7 +100,7 @@
 
 				<div class="playerData" id="GreenData" >
                     <img src="images/green.PNG" id="GreenDataCoin" class="dataCoin" >
-                    <img src="images/bldgs/green.png"  class="cityIcon" >
+                    <img src="images/city.png"  class="cityIcon" >
                     <div class="cityValue" id="GreenCity" > 0 </div>
                     <img src="images/bldgs/green0.png"  class="houseIcon" >
                     <div class="houseValue" id="GreenHouse" > 0 </div>
@@ -106,7 +113,7 @@
 
 				<div class="playerData" id="BlueData" >
                     <img src="images/blue.PNG" id="BlueDataCoin" class="dataCoin" >
-                    <img src="images/bldgs/blue.png"  class="cityIcon" >
+                    <img src="images/city.png"  class="cityIcon" >
                     <div class="cityValue" id="BlueCity" > 0 </div>
                     <img src="images/bldgs/blue0.png"  class="houseIcon" >
                     <div class="houseValue" id="BlueHouse" > 0 </div>
@@ -119,7 +126,7 @@
 
 				<div class="playerData" id="YellowData" >
                     <img src="images/yellow.PNG" id="YellowDataCoin" class="dataCoin" >
-                    <img src="images/bldgs/yellow.png"  class="cityIcon" >
+                    <img src="images/city.png"  class="cityIcon" >
                     <div class="cityValue" id="YellowCity" > 0 </div>
                     <img src="images/bldgs/yellow0.png"  class="houseIcon" >
                     <div class="houseValue" id="YellowHouse" > 0 </div>
@@ -148,8 +155,20 @@
 
 		</div>
             
-        
-        <button id="btnRules"  class="btn btn-danger" > Rules? </button>
+		<button id="btnMenu"  class="btn btn-danger" > Menu <i class="fa fa-bars" ></i> </button>
+		
+        <div id="menu" >
+			<button id="btnRules"  class="btn btn-danger menuBtns" > Rules ? </button>
+			<button id="saveGame"  class="btn btn-danger menuBtns" > Save game <i class="fa fa-download" ></i> </button>
+			<a href="#loadGameDiv" rel="modal:open"><button id="loadGame"  class="btn btn-danger menuBtns" >Load game <i class="fa fa-upload" ></i></button></a>
+		</div>
+		<div id="loadGameDiv" class="modal" style= " height: 250px; padding:30px; ">
+			<h2 style="width:100%;text-align:center;">Load Game</h2>
+			<input type="file" id= "loadGameFile" style="margin-top:30px;width:80%">
+			<a href="#" rel="modal:close"><button  class="btn btn-danger "  style="margin-top:30px; width:200px" >Close</button></a>
+			<a href="#" id="loadGameSubmit" rel="modal:close"><button  class="btn btn-Success "  style="margin-top:30px; width:200px" >Load Game</button></a>
+		</div>
+
 		<div id="allRules">
             <div id="labelRules" class="row"> 
                 <div class="col-xs-10"> Rules </div>
@@ -278,7 +297,7 @@
 				</div>
 			</div>
 		</div>
-        
+
 		
 	</body>
 	
