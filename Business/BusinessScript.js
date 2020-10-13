@@ -140,7 +140,7 @@ $(document).ready(function()
 					$(".blueTradeSelector").remove();
 				}
 				
-				//refreshBoardUI();
+				refreshGameUI();
 				
 				return true;
 			}
@@ -298,7 +298,7 @@ $(document).ready(function()
 						bldgCoin = makeBldgCoin(this.owner,"M");
 						return bldgCoin;
 					}
-					else if(board[i].hotel)
+					else if(this.hotel)
 					{
 						bldgCoin = makeBldgCoin(this.owner,"H");
 						return bldgCoin;
@@ -317,11 +317,13 @@ $(document).ready(function()
 		{
 			if(this.isCity || this.isUtility)
 			{
-				if(board[i].owner > -1)
+				if(this.owner > -1)
 				{
-					var bldgCoin = getBldg();
+					var bldgCoin = this.getBldg();
 					$(bldgCoin).css("top",this.bldgTopVal.toString()+"px");
 					$(bldgCoin).css("left",this.bldgLeftVal.toString()+"px");
+
+					$("#theBoard").append(bldgCoin);
 				}
 			}
 		}
@@ -376,7 +378,10 @@ $(document).ready(function()
 			this.money = 1000;
 			this.properties = []; // [0,3,7 .. ]
 			this.cityGroups = []; // [1,3,7 .. ]
+			this.houseCount = 0;
+			this.hotelCount = 0;
 			this.inJail = false;
+
 		}
 
 		refreshCityGroups()
@@ -437,8 +442,8 @@ $(document).ready(function()
 			var giverCoin = makeLogCoin(this.sender);
 			var takerCoin = makeLogCoin(this.reciever);
 	
-			var reasonText = log.reason; 
-			switch(log.reason) 
+			var reasonText = this.reason; 
+			switch(this.reason) 
 			{
 				case "rent":
 					reasonText = "(Rent for <b>"+this.property+"</b>)";
@@ -472,19 +477,17 @@ $(document).ready(function()
 		prependLogDiv(logDiv)
 		{
 			$("#logsContainer").prepend(logDiv);
+			return;
 		}
 
 
 		displayLog(logDiv)
 		{
-			var logDiv = generateLogDiv();
-
 			Swal.fire({
 				title: logDiv.outerHTML,
 				icon: 'info',
 				confirmButtonColor: '#3085d6',
-				confirmButtonText: 'OK',
-				allowOutsideClick: false
+				confirmButtonText: 'OK'
 			});
 			return;
 		}
@@ -717,46 +720,6 @@ $(document).ready(function()
 		return logCoinImage;
 	}
 
-	function generateLogs(log)
-	{
-	
-		var logItem = document.createElement('div');
-		
-		var giverCoin = makeLogCoin(log.sender);
-		var takerCoin = makeLogCoin(log.reciever);
-
-		var reasonText = log.reason; 
-		switch(log.reason) 
-		{
-			case "rent":
-				reasonText = "(Rent for <b>"+log.property+"</b>)";
-				break;
-
-			case "trade":
-				reasonText = "(as part of Trade)";
-				break;
-
-			case "buy":
-				reasonText = "(as purchase of <b>"+log.property+"</b>)";
-				break;
-
-			case "bldg":
-				reasonText = "(as building on <b>"+log.property+"</b>)";
-				break;
-
-			case "jail":
-				reasonText = "(as Jail charges)";
-				break;
-
-			default:
-				reasonText = "("+log.reason+")"; 
-				break;
-		}
-
-		$(logItem).addClass("logItem").html(giverCoin.outerHTML + " Paid <b>" + rupeeSym + log.amount.toString() + "</b> "+reasonText+" to " +takerCoin.outerHTML);
-		$("#logsContainer").prepend(logItem);
-		return logItem;
-	}
 	
 	//#endregion "Logs"
 
@@ -927,23 +890,25 @@ $(document).ready(function()
 	
 	
 	
+	//#region "Building"
+	
 	function makeBldgCoin(playerNumber,bldgStr)
 	{
 		var BldgCoin = document.createElement('img');
-		var color = "bank";
+		$(BldgCoin).addClass("bldgCoin");
 		switch(playerNumber)
 		{
 			case 0: color = "red"; break;
 			case 1: color = "green"; break;
 			case 2: color = "blue"; break;
 			case 3: color = "yellow"; break;
-			default: color = "bank"; break;
 		}
 		BldgCoin.src="images/bldgs/"+color+bldgStr+".PNG";
 
 		return BldgCoin;
 	}
 
+	//#endregion "Building"
 
 	//#region "Game Functions"
 
@@ -969,19 +934,13 @@ $(document).ready(function()
 	$("#diceContainer").click(function()
 	{
 		/*
-		var logItem = new Log(2,-1,300,"rent",board[35].cellName);
-		var logDiv = generateLogs(logItem);
-		
-		Swal.fire({
-			title: logDiv.outerHTML,
-			icon: 'info',
-			confirmButtonColor: '#3085d6',
-			confirmButtonText: 'OK',
-			allowOutsideClick: false
-		});
+		var logItem = new Log(2,1,300,"rent",board[12].cellName);
+		var logDiv = logItem.generateLogDiv();
+		logItem.displayLog(logDiv);
+		logItem.prependLogDiv(logDiv);
 		logs.push(logItem);
+		5*/
 
-		*/
 
 		if(!gameStarted)
 			return;
@@ -1067,7 +1026,7 @@ $(document).ready(function()
 			moveCoin(currCoin);
 		}
 
-		if(diceVal1 == diceVal2)
+		if(diceVal1 == diceVal2 && !players[currPlayer].inJail)
 		{
 			consecutiveDoubles += 1;
 			if(consecutiveDoubles < 3)
@@ -1216,23 +1175,40 @@ $(document).ready(function()
 	{
 		
 		var currCoin = $("#"+players[currPlayer].color+"Coin");
+		var cell = board[players[currPlayer].position];
 
-		switch(players[currPlayer].position)
+		var cellRent = cell.getCurrentRent(); 
+		if(cellRent != undefined)
+		{		
+			if(cellRent > 0)
+			{
+				if(cell.owner != currPlayer)
+				{
+					var log = new Log(currPlayer,cell.owner,cellRent,"rent",cell.cellName);
+					var logDiv = log.generateLogDiv();
+					log.displayLog(logDiv);
+					log.prependLogDiv(logDiv);
+					//performTransaction(log);
+				}
+			}
+		}
+		else
 		{
-			case 10:
+			if(cell.position == 10 || cell.position == 30)
 			{
 				players[currPlayer].inJail = true;
-				break;
+				Swal.fire({
+					title: "In Jail!",
+					imageUrl: "images/"+players[currPlayer].color+"Jail.PNG",
+					imageWidth: 200,
+					imageHeight: 200,
+					confirmButtonColor: '#3085d6',
+					confirmButtonText: 'OK',
+					allowOutsideClick: false
+				});
 			}
-			case 30:
-			{
-				moveBackWithoutGO(10);
-				break;
-			}
-			default:
-				return;
 		}
-
+		refreshGameUI();
 		return;
 	}
 
@@ -1267,25 +1243,31 @@ $(document).ready(function()
 	
 
 		
-	function refreshBoardUI()
+	function refreshGameUI()
 	{
+
 		var i = 0;
 		while(i<nmbrOfPlayers)
 		{
-			$("#"+players[i].color+"Coin").css("top",(players[currPlayer].topVal).toString()+"px");
-			$("#"+players[i].color+"Coin").css("left",(players[currPlayer].leftVal).toString()+"px");
+			$("#"+players[i].color+"Coin").css("top",(players[i].topVal).toString()+"px");
+			$("#"+players[i].color+"Coin").css("left",(players[i].leftVal).toString()+"px");
+
+			$("#"+players[i].color+"CityValue")[0].innerHTML = players[i].properties.length;
+			$("#"+players[i].color+"HouseValue")[0].innerHTML = players[i].houseCount;
+			$("#"+players[i].color+"HotelValue")[0].innerHTML = players[i].hotelCount;
+			$("#"+players[i].color+"MoneyValue")[0].innerHTML = players[i].money;
 			i += 1;
 		}
 
 		i = 0;
 		while(i<40)
 		{
-			debugger;
 			board[i].showBldg();
 			i += 1;
 		}
+		
 	}
-
+	
 
 	//#endregion "Functions"
 
