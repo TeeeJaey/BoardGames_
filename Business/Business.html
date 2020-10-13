@@ -5,9 +5,6 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
 		<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -160,14 +157,28 @@
         <div id="menu" >
 			<button id="btnRules"  class="btn btn-danger menuBtns" > Rules ? </button>
 			<button id="saveGame"  class="btn btn-danger menuBtns" > Save game <i class="fa fa-download" ></i> </button>
-			<a href="#loadGameDiv" rel="modal:open"><button id="loadGame"  class="btn btn-danger menuBtns" >Load game <i class="fa fa-upload" ></i></button></a>
+			<button id="loadGame"  class="btn btn-danger menuBtns" > Load game <i class="fa fa-upload" ></i></button>
 		</div>
-		<div id="loadGameDiv" class="modal" style= " height: 250px; padding:30px; ">
-			<h2 style="width:100%;text-align:center;">Load Game</h2>
-			<input type="file" id= "loadGameFile" style="margin-top:30px;width:80%">
-			<a href="#" rel="modal:close"><button  class="btn btn-danger "  style="margin-top:30px; width:200px" >Close</button></a>
-			<a href="#" id="loadGameSubmit" rel="modal:close"><button  class="btn btn-Success "  style="margin-top:30px; width:200px" >Load Game</button></a>
+
+		<!-- Load game Modal -->
+		<div class="modal fade" id="loadGameDiv" tabindex="-1" role="dialog"  aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" >Load Game</h3>
+				</div>
+				<div class="modal-body">
+					<input type="file" id= "loadGameFile" class="btn" accept="application/JSON" >
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal" style="width:150px">Cancel</button>
+					<button type="button" class="btn btn-success" id="loadGameSubmit" style="width:150px">Load Game</button>
+				</div>
+			</div>
+			</div>
 		</div>
+
+
 
 		<div id="allRules">
             <div id="labelRules" class="row"> 

@@ -42,15 +42,114 @@ $(document).ready(function()
 
 	class Game 
 	{
-		constructor()
+		getCurrentGame()
 		{
 			this.nmbrOfPlayers = nmbrOfPlayers;
 			this.currPlayer = currPlayer;
 			this.players = players;
 			this.board = board;
 			this.logs = logs;
+			return this;
 		}
+
+		setCurrentGame()
+		{
+			nmbrOfPlayers = this.nmbrOfPlayers;
+			currPlayer = this.currPlayer;
+			players = this.players;
+			board = this.board;
+			logs = this.logs;
+			return;
+		}
+
+		saveGame()
+		{
+			this.nmbrOfPlayers = nmbrOfPlayers;
+			this.currPlayer = currPlayer;
+			this.players = players;
+			this.board = board;
+			this.logs = logs;
+
+			var gameJSON = JSON.stringify(this,null,4);
+			var a = document.createElement("a");
+			var file = new Blob([gameJSON],{type:"application/json"});
+			a.href = URL.createObjectURL(file);
+			
+			var dd = new Date();
+			var ss = '' + dd.getFullYear() + (dd.getMonth()+1) + dd.getDate() + dd.getHours()+ dd.getMinutes()+ dd.getSeconds();
 	
+			a.download = "saveGame_" + ss + ".json";
+			a.click();
+			URL.revokeObjectURL(a.href);
+			return;
+		}
+		
+		loadGame(loadedGame)
+		{
+
+			var currentGame = this.getCurrentGame();
+
+			try
+			{
+				nmbrOfPlayers = loadedGame.nmbrOfPlayers;
+				currPlayer = loadedGame.currPlayer;
+
+				player = [];
+				var i = 0;
+				while(i< nmbrOfPlayers)
+				{
+					var player = new Player();
+					player.loadGame_Player(loadedGame.players[i]);
+					players.push(player);
+					i += 1;
+				}
+
+				board = [];
+				var i = 0;
+				while(i < 40)
+				{
+					var boardCell = new Cell();
+					boardCell.loadGame_boardCell(loadedGame.board[i]);
+					board.push(boardCell);
+					i += 1;
+				}
+
+				logs = [];
+				var i = 0;
+				while(i < logs.length)
+				{
+					var log = new Log();
+					log.loadGame_Log(loadedGame.logs[i]);
+					logs.push(log);
+					i += 1;
+				}
+
+				$(".coin").css("display","");
+			
+				if(nmbrOfPlayers < 4)
+				{
+					$("#YellowCoin").remove();
+					$("#YellowData").remove();
+					$(".yellowTradeSelector").remove();
+				}
+		
+				if(nmbrOfPlayers < 3)
+				{
+					$("#BlueCoin").remove();
+					$("#BlueData").remove();
+					$(".blueTradeSelector").remove();
+				}
+				
+				//refreshBoardUI();
+				
+				return true;
+			}
+			catch(e)
+			{
+				currentGame.setCurrentGame();
+				return false;
+			}
+		}
 	}
 
 	class Cell 
@@ -227,6 +326,43 @@ $(document).ready(function()
 			}
 		}
 
+		loadGame_boardCell(loadedCellObj)
+		{
+			
+            this.cellName = loadedCellObj.cellName;
+			this.colorGroup = loadedCellObj.colorGroup;
+			this.position = loadedCellObj.position; 
+			this.topVal = loadedCellObj.topVal;
+            this.leftVal = loadedCellObj.leftVal;
+            
+            this.isUtility = loadedCellObj.isUtility;
+            this.isCity = loadedCellObj.isCity;
+
+
+            if(loadedCellObj.isCity || loadedCellObj.isUtility)
+            {
+                this.price = loadedCellObj.price;
+                this.cardImage = loadedCellObj.cardImage;
+                this.owner = loadedCellObj.owner;
+                this.rent = loadedCellObj.rent;
+                this.isMortaged = loadedCellObj.isMortaged;        
+                this.mortgagePrice = loadedCellObj.mortgagePrice;
+			}
+			
+            if(loadedCellObj.isCity)
+            {
+                this.constructionPrice = loadedCellObj.constructionPrice;
+
+                this.houseRent = loadedCellObj.houseRent;     // [price1,price2,prcie3,price4]
+                this.houses = loadedCellObj.houses;                // 0 - number of houses
+
+                this.hotelRent = loadedCellObj.hotelRent;
+				this.hotel = loadedCellObj.hotel;             // currentstatus of hotel
+				
+				this.bldgTopVal = loadedCellObj.bldgTopVal;
+				this.bldgLeftVal = loadedCellObj.bldgLeftVal;
+            }
+		}
 	}
 	
 	class Player 
@@ -268,6 +404,18 @@ $(document).ready(function()
 			return;
 		}
 
+		loadGame_Player(loadedPlayerObj)
+		{
+			this.color = loadedPlayerObj.color;
+			this.position = loadedPlayerObj.position;
+			this.topVal = loadedPlayerObj.topVal;
+			this.leftVal = loadedPlayerObj.leftVal;
+			this.money = loadedPlayerObj.money;
+			this.properties = loadedPlayerObj.properties;
+			this.cityGroups = loadedPlayerObj.cityGroups;
+			this.inJail = loadedPlayerObj.inJail;
+			return;
+		}
 	}
 	
 	class Log 
@@ -281,9 +429,55 @@ $(document).ready(function()
 			this.property = property;
 		}
 
-		displayLog()
+		generateLogDiv()
 		{
-			var logDiv = generateLogs(this);
+		
+			var logDiv = document.createElement('div');
+			
+			var giverCoin = makeLogCoin(this.sender);
+			var takerCoin = makeLogCoin(this.reciever);
+	
+			var reasonText = log.reason; 
+			switch(log.reason) 
+			{
+				case "rent":
+					reasonText = "(Rent for <b>"+this.property+"</b>)";
+					break;
+	
+				case "trade":
+					reasonText = "(as part of Trade)";
+					break;
+	
+				case "buy":
+					reasonText = "(as purchase of <b>"+this.property+"</b>)";
+					break;
+	
+				case "bldg":
+					reasonText = "(as building on <b>"+this.property+"</b>)";
+					break;
+	
+				case "jail":
+					reasonText = "(as Jail charges)";
+					break;
+	
+				default:
+					reasonText = "("+this.reason+")"; 
+					break;
+			}
+	
+			$(logDiv).addClass("logItem").html(giverCoin.outerHTML + " Paid <b>" + rupeeSym + this.amount.toString() + "</b> "+reasonText+" to " +takerCoin.outerHTML);
+			return logDiv;
+		}
+		
+		prependLogDiv(logDiv)
+		{
+			$("#logsContainer").prepend(logDiv);
+		}
+
+
+		displayLog(logDiv)
+		{
+			var logDiv = generateLogDiv();
 
 			Swal.fire({
 				title: logDiv.outerHTML,
@@ -292,6 +486,17 @@ $(document).ready(function()
 				confirmButtonText: 'OK',
 				allowOutsideClick: false
 			});
+			return;
+		}
+
+		
+		loadGame_Log(loadedLogObj)
+		{
+			this.sender = loadedLogObj.sender;
+			this.reciever = loadedLogObj.reciever;
+			this.amount = loadedLogObj.amount;
+			this.reason = loadedLogObj.reason;
+			this.property = loadedLogObj.property;
 			return;
 		}
 	}
@@ -319,14 +524,8 @@ $(document).ready(function()
 	
 	$("#saveGame").click(function()
 	{
-		var savedGame = new Game();
-		var gameJSON = JSON.stringify(savedGame,null,4);
-		var a = document.createElement("a");
-		var file = new Blob([gameJSON],{type:"application/json"});
-		a.href = URL.createObjectURL(file);
-		a.download = "save.json";
-		a.click();
-		URL.revokeObjectURL(a.href)
+		var game = new Game();
+		game.saveGame();
 	});
 
 	var loadedGameFile = null;
@@ -334,7 +533,16 @@ $(document).ready(function()
 	function handleFileSelect(evt) {
 		loadedGameFile = evt.target.files[0];
 	}
-	
+
+	$("#loadGame").click(function()
+	{
+		$('#loadGameDiv').modal({
+			backdrop: 'static',
+			keyboard: false
+		});
+	});
+
+
 	$("#loadGameSubmit").click(function()
 	{
 		var fr = new FileReader();
@@ -347,58 +555,52 @@ $(document).ready(function()
 					var loadedGame = JSON.parse(e.target.result);
 					if(loadedGame != null)
 					{
-						board = loadedGame.board;
-						currPlayer = loadedGame.currPlayer;
-						logs = loadedGame.logs;
-						nmbrOfPlayers = loadedGame.nmbrOfPlayers;
-						players = loadedGame.players;
-						console.log('Loaded game = ', loadedGame);
+						var newGame = new Game();
+						var gameLoaded = newGame.loadGame(loadedGame);
 
-						
-						$(".coin").css("display","");
-		
-						if(nmbrOfPlayers < 4)
+						if(gameLoaded)
 						{
-							$("#YellowCoin").remove();
-							$("#YellowData").remove();
-							$(".yellowTradeSelector").remove();
+							console.log('Loaded game = ', loadedGame);
+							setupTrade();
+							startGame();
+
+							$("#loadGameDiv").modal('hide');
+	
+							Swal.fire(
+								"Game Loaded Success",'',
+								'success'
+							);
+							
+							
 						}
-				
-						if(nmbrOfPlayers < 3)
+						else
 						{
-							$("#BlueCoin").remove();
-							$("#BlueData").remove();
-							$(".blueTradeSelector").remove();
+							console.log('Error loading game');	
+							Swal.fire(
+								"Game Load failed!",'',
+								'error'
+							);
+
 						}
-						
-						setupTrade();
-				
-						$("#startcontrols").css("display","none");
-						$("#gameControls").css("display","");
-						$("#endControls").css("display","none");
-						$("#btnTrade").css("display","");
-						$("#btnLogs").css("display","");
-				
-						gameStarted = true;
 
-						refreshBoardUI();
-
-						Swal.fire(
-							"Game Loaded Success",'',
-							'success'
-						)
-						
 					}
-
+					else
+					{
+						console.log('Error parsing json');	
+						Swal.fire(
+							"Game Load failed!",'',
+							'error'
+						);
+					}
+					
 				}
 				catch (ex) 
 				{
-					console.log('Error load json : ' , ex);	
+					console.log('Error loading json : ' , ex);	
 					Swal.fire(
 						"Game Load failed!",'',
 						'error'
-					)
-					return false;
+					);
 				}
 			}
 		})(f);
@@ -414,7 +616,18 @@ $(document).ready(function()
 	function setupTrade()
 	{
 		var tradeLeftPlayerSelectorVal = $("input[name='tradeLeftPlayerSelector']:checked").val();
+		if(!tradeLeftPlayerSelectorVal)
+		{
+			$("input[name='tradeLeftPlayerSelector']")[0].checked = true;
+			tradeLeftPlayerSelectorVal = 0;
+		}
+
 		var tradeRightPlayerSelectorVal = $("input[name='tradeRightPlayerSelector']:checked").val();
+		if(!tradeRightPlayerSelectorVal)
+		{
+			$("input[name='tradeRightPlayerSelector']")[0].checked = true;
+			tradeRightPlayerSelectorVal = 0;
+		}
 
 		$('#tradeLeftAmountSlider')[0].min = 0;
 		$('#tradeRightAmountSlider')[0].min  = 0;
@@ -738,7 +951,12 @@ $(document).ready(function()
 	{
 		setupPlayers();
 		setupTrade();
+		startGame();
+	});
 
+	function startGame()
+	{
+		
 		$("#startcontrols").css("display","none");
 		$("#gameControls").css("display","");
 		$("#endControls").css("display","none");
@@ -746,9 +964,8 @@ $(document).ready(function()
 		$("#btnLogs").css("display","");
 
 		gameStarted = true;
-	});
+	}
 
-	
 	$("#diceContainer").click(function()
 	{
 		/*
