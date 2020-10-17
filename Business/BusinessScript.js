@@ -174,7 +174,10 @@ $(document).ready(function()
                 this.owner = -1;
                 this.rent = rent;
                 this.isMortaged = false;        
-                this.mortgagePrice = mortgagePrice;
+				this.mortgagePrice = mortgagePrice;
+				
+				this.bldgTopVal = bldgTopVal;
+				this.bldgLeftVal = bldgLeftVal;
 			}
 			
             if(isCity)
@@ -187,8 +190,6 @@ $(document).ready(function()
                 this.hotelRent = hotelRent;
 				this.hotel = false;             // currentstatus of hotel
 				
-				this.bldgTopVal = bldgTopVal;
-				this.bldgLeftVal = bldgLeftVal;
             }
 		}
 
@@ -758,7 +759,7 @@ $(document).ready(function()
 		board[4] = new Cell(cellName="Income Tax",colorGroup=0,position=4,topVal=520,leftVal=325,isUtility=false,isCity=false);
 
 		board[5] = new Cell(cellName="Chennai Railway Station",colorGroup=0,position=5,topVal=520,leftVal=283,isUtility=true,isCity=false,
-					price=200,cardImage=cardImgLocation + "5.PNG" , rent=25, mortgagePrice=100);
+					price=200,cardImage=cardImgLocation + "5.PNG" , rent=25, mortgagePrice=100,bldgTopVal=490,bldgLeftVal=285);
 
 		board[6] = new Cell(cellName="Panaji",colorGroup=2,position=6,topVal=520,leftVal=240,isUtility=false,isCity=true,
 					price=100,cardImage=cardImgLocation + "6.PNG" , rent=6, mortgagePrice=50,constructionPrice=50, houseRent=[0,30,90,270,400], hotelRent=550,bldgTopVal=490,bldgLeftVal=241);
@@ -778,7 +779,7 @@ $(document).ready(function()
 					price=140,cardImage=cardImgLocation + "11.PNG" , rent=10, mortgagePrice=70,constructionPrice=100, houseRent=[0,50,150,450,625], hotelRent=750, bldgTopVal=460,bldgLeftVal=73);
 		
 		board[12] = new Cell(cellName="Electric Company",colorGroup=0,position=12,topVal=400,leftVal=38,isUtility=true,isCity=false,
-					price=150,cardImage=cardImgLocation + "12.PNG" , rent=40, mortgagePrice=75);
+					price=150,cardImage=cardImgLocation + "12.PNG" , rent=40, mortgagePrice=75, bldgTopVal=418,bldgLeftVal=73);
 			
 		board[13] = new Cell(cellName="Patna",colorGroup=3,position=13,topVal=360,leftVal=38,isUtility=false,isCity=true,
 					price=140,cardImage=cardImgLocation + "13.PNG" , rent=10, mortgagePrice=70,constructionPrice=100, houseRent=[0,50,150,450,625], hotelRent=750, bldgTopVal=370,bldgLeftVal=73);
@@ -787,7 +788,7 @@ $(document).ready(function()
 				price=160,cardImage=cardImgLocation + "13.PNG" , rent=12, mortgagePrice=80,constructionPrice=100, houseRent=[0,60,180,500,700], hotelRent=900, bldgTopVal=325,bldgLeftVal=73);
 		
 		board[15] = new Cell(cellName="Howrah Station",colorGroup=0,position=15,topVal=270,leftVal=38,isUtility=true,isCity=false,
-				price=200,cardImage=cardImgLocation + "15.PNG" , rent=25, mortgagePrice=100);
+				price=200,cardImage=cardImgLocation + "15.PNG" , rent=25, mortgagePrice=100, bldgTopVal=280,bldgLeftVal=73);
 
 		board[16] = new Cell(cellName="Indore",colorGroup=4,position=16,topVal=225,leftVal=38,isUtility=false,isCity=true,
 				price=160,cardImage=cardImgLocation + "16.PNG" , rent=12, mortgagePrice=80,constructionPrice=100, houseRent=[0,60,180,500,700], hotelRent=900, bldgTopVal=235,bldgLeftVal=73);
@@ -815,7 +816,7 @@ $(document).ready(function()
 				price=240,cardImage=cardImgLocation + "23.PNG" , rent=20, mortgagePrice=120,constructionPrice=150, houseRent=[0,100,300,750,925], hotelRent=1100, bldgTopVal=70,bldgLeftVal=241);
 
 		board[25] = new Cell(cellName="New Delhi Station",colorGroup=0,position=25,topVal=15,leftVal=283,isUtility=true,isCity=false,
-				price=200,cardImage=cardImgLocation + "25.PNG" , rent=25, mortgagePrice=100);
+				price=200,cardImage=cardImgLocation + "25.PNG" , rent=25, mortgagePrice=100,bldgTopVal=70,bldgLeftVal=285);
 
 		board[26] = new Cell(cellName="Pune",colorGroup=6,position=26,topVal=15,leftVal=325,isUtility=false,isCity=true,
 				price=260,cardImage=cardImgLocation + "26.PNG" , rent=22, mortgagePrice=130,constructionPrice=150, houseRent=[0,110,330,800,975], hotelRent=1150, bldgTopVal=70,bldgLeftVal=328);
@@ -824,7 +825,7 @@ $(document).ready(function()
 				price=260,cardImage=cardImgLocation + "27.PNG" , rent=22, mortgagePrice=130,constructionPrice=150, houseRent=[0,110,330,800,975], hotelRent=1150, bldgTopVal=70,bldgLeftVal=373);
 
 		board[28] = new Cell(cellName="Water Works",colorGroup=0,position=12,topVal=15,leftVal=415,isUtility=true,isCity=false,
-				price=150,cardImage=cardImgLocation + "28.PNG" , rent=40, mortgagePrice=75);
+				price=150,cardImage=cardImgLocation + "28.PNG" , rent=40, mortgagePrice=75, bldgTopVal=70,bldgLeftVal=418); 
 	
 		board[29] = new Cell(cellName="Ahmedabad",colorGroup=6,position=29,topVal=15,leftVal=460,isUtility=false,isCity=true,
 				price=280,cardImage=cardImgLocation + "29.PNG" , rent=24, mortgagePrice=140,constructionPrice=150, houseRent=[0,120,360,850,1025], hotelRent=1200, bldgTopVal=70,bldgLeftVal=462);
@@ -844,7 +845,7 @@ $(document).ready(function()
 				price=320,cardImage=cardImgLocation + "34.PNG" , rent=28, mortgagePrice=160,constructionPrice=200, houseRent=[0,150,450,1000,1100], hotelRent=1400, bldgTopVal=235,bldgLeftVal=495);
 
 		board[35] = new Cell(cellName="Chhatrapati Shivaji Terminus",colorGroup=0,position=35,topVal=270,leftVal=530,isUtility=true,isCity=false,
-			price=200,cardImage=cardImgLocation + "35.PNG" , rent=25, mortgagePrice=100);
+			price=200,cardImage=cardImgLocation + "35.PNG" , rent=25, mortgagePrice=100, bldgTopVal=280,bldgLeftVal=495);
 
 		board[36] = new Cell(cellName="Chance",colorGroup=0,position=36,topVal=315,leftVal=530,isUtility=false,isCity=false);
 		
@@ -1203,7 +1204,7 @@ $(document).ready(function()
 		var currCoin = $("#"+players[currPlayer].color+"Coin");
 		var cell = board[players[currPlayer].position];
 		var cellRent = cell.getCurrentRent(); 
-		
+
 		if(cellRent != undefined)
 		{		
 			if(cellRent > 0)
@@ -1286,6 +1287,30 @@ $(document).ready(function()
 		}
 	});
 	
+
+	$("#btnBuyProperty").click(function()
+    {
+		var cell = board[players[currPlayer].position];
+		
+		cell.owner = currPlayer;
+		
+		$("#PropertySaleModal").modal('hide');
+
+		var log = new Log(currPlayer,-1,cell.price,"buy",cell.cellName);
+		var logDiv = log.generateLogDiv();
+		log.prependLogDiv(logDiv);
+		performTransaction(log);
+
+		players[currPlayer].properties.push(cell.position);
+		players[currPlayer].refreshCityGroups();
+
+		Swal.fire(
+			'',"Bought " + cell.cellName + " for " +rupeeSym+ " " + cell.price,
+			'success'
+		);
+
+		refreshGameUI();
+	});
 
 		
 	function refreshGameUI()
