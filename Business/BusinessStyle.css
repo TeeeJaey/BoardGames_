@@ -297,6 +297,7 @@ body
 	height:	580px;
     padding:20px;
 	margin:auto;
+	z-index: 25;
 }
 
 .tradeCoin 
@@ -315,6 +316,18 @@ body
 	height:	350px;
     margin:auto;
     overflow-y:scroll;
+}
+
+.imageLeftPropertyTrade, .imageRightPropertyTrade
+{
+	width:80%; 
+	cursor:pointer;
+	margin:10px;
+}
+.tradeImageSelected
+{
+	opacity:25%;
+    border: 5px solid black;
 }
 
 #confirmTrade, #closeTrade

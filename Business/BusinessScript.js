@@ -162,8 +162,8 @@ $(document).ready(function()
 			this.topVal = 0;
             this.leftVal = 0;
             
-            this.isUtility = isUtility;
-            this.isCity = isCity;
+            this.isUtility = false;
+            this.isCity = false;
 
 			this.cardImage = "images/properties/" + pos.toString() + ".PNG";
 			this.owner = -1;
@@ -383,7 +383,7 @@ $(document).ready(function()
 		refreshCityGroups()
 		{
 			this.cityGroups = [];
-
+			this.properties.sort();
 			var i = 1;
 			while(i < propertyColorGroups.length)
 			{
@@ -611,37 +611,99 @@ $(document).ready(function()
 	//#endregion "Menu"
 
 	//#region "Trade"
-
-	function setupTrade()
+	function addTradeCardImage(cardNumber, left)
 	{
-		var tradeLeftPlayerSelectorVal = $("input[name='tradeLeftPlayerSelector']:checked").val();
-		if(!tradeLeftPlayerSelectorVal)
+		var Image = document.createElement('img');
+		Image.src = "images/properties/" + cardNumber + ".PNG";
+		Image.id = "tradecard"+cardNumber.toString();
+
+		if(left)
 		{
-			$("input[name='tradeLeftPlayerSelector']")[0].checked = true;
-			tradeLeftPlayerSelectorVal = 0;
+			$(Image).addClass("imageLeftPropertyTrade");
+			$("#tradeLeftPropertyContainer").append(Image);
 		}
-
-		var tradeRightPlayerSelectorVal = $("input[name='tradeRightPlayerSelector']:checked").val();
-		if(!tradeRightPlayerSelectorVal)
+		else
 		{
-			$("input[name='tradeRightPlayerSelector']")[0].checked = true;
-			tradeRightPlayerSelectorVal = 0;
+			$(Image).addClass("imageRightPropertyTrade");
+			$("#tradeRightPropertyContainer").append(Image);
 		}
-
-		$('#tradeLeftAmountSlider')[0].min = 0;
-		$('#tradeRightAmountSlider')[0].min  = 0;
-		$('#tradeLeftAmountSlider')[0].value = 0;
-		$('#tradeRightAmountSlider')[0].value  = 0;
-		$('#tradeLeftAmountSlider')[0].max = players[tradeLeftPlayerSelectorVal].money;
-		$('#tradeRightAmountSlider')[0].max = players[tradeRightPlayerSelectorVal].money;
-
-		$('#tradeLeftAmountLabel').html(rupeeSym + $('#tradeLeftAmountSlider').val());
-		$('#tradeRightAmountLabel').html(rupeeSym + $('#tradeRightAmountSlider').val());
+		return Image;
 	}
+
+	function refreshTradeCards(left)
+	{
+		if(left)
+		{
+			var leftPlayer = $("input[name='tradeLeftPlayerSelector']:checked").val();
+			$("#tradeLeftPropertyContainer").empty();
+
+			var i = 0;
+			while(i < players[leftPlayer].properties.length)
+			{	
+				var cardNumber = players[leftPlayer].properties[i]; 
+				if(board[cardNumber].isCity || board[cardNumber].isUtility)
+				{	
+					if(!board[cardNumber].isMortaged && !board[cardNumber].hotel && board[cardNumber].houses == 0 )
+					{
+						addTradeCardImage(cardNumber, left);
+					}
+				}
+				i+=1;
+			}
+		}
+		else
+		{
+			var rightPlayer = $("input[name='tradeRightPlayerSelector']:checked").val();
+			$("#tradeRightPropertyContainer").empty();
+			
+			var i = 0;
+			while(i < players[rightPlayer].properties.length)
+			{	
+				var cardNumber = players[rightPlayer].properties[i]; 
+				if(board[cardNumber].isCity || board[cardNumber].isUtility)
+				{	
+					if(!board[cardNumber].isMortaged && !board[cardNumber].hotel && board[cardNumber].houses == 0 )
+					{
+						addTradeCardImage(cardNumber, left);
+					}
+				}
+				i+=1;
+			}
+		}
+		
+
+		return;
+	}
+	
+	$(document).on('click', ".imageLeftPropertyTrade", function()
+	{
+        if($(this).hasClass("tradeImageSelected"))
+			$(this).removeClass("tradeImageSelected");
+		else
+			$(this).addClass("tradeImageSelected");
+    });
+	$(document).on('click', ".imageRightPropertyTrade", function()
+	{
+        if($(this).hasClass("tradeImageSelected"))
+			$(this).removeClass("tradeImageSelected");
+		else
+			$(this).addClass("tradeImageSelected");
+    });
+
+
+	$('input[name=tradeLeftPlayerSelector]').change(function() {
+		refreshTradeCards(true);
+	});
+	$('input[name=tradeRightPlayerSelector]').change(function() {
+		refreshTradeCards(false);
+	});
 
 	$("#btnTrade").click(function()
 	{
 		$("#TradeTray").animate({"right":"0%"});
+		setupTrade();
+		refreshTradeCards(true);
+		refreshTradeCards(false);
     });
 	$("#closeTrade").click(function()
 	{
@@ -657,32 +719,120 @@ $(document).ready(function()
 		$('#tradeRightAmountLabel').html(rupeeSym + $('#tradeRightAmountSlider').val());
 	});
 
+	function performTrade()
+	{
+		var tradeSuccess = true;
+		var leftPlayer = $("input[name='tradeLeftPlayerSelector']:checked").val();
+		var rightPlayer = $("input[name='tradeRightPlayerSelector']:checked").val();
+
+		var leftCardList = $(".imageLeftPropertyTrade.tradeImageSelected");
+		var rightCardList = $(".imageRightPropertyTrade.tradeImageSelected");
+		
+		//$(".imageLeftPropertyTrade.tradeImageSelected")[0].id.split('tradecard')[1]
+		var leftAmount = parseInt($('#tradeLeftAmountSlider').val()); 
+		var rightAmount = parseInt($('#tradeRightAmountSlider').val());
+
+		if(leftAmount > rightAmount)
+		{
+			var log = new Log(leftPlayer,rightPlayer,leftAmount-rightAmount,"trade");
+			var logDiv = log.generateLogDiv();
+			log.prependLogDiv(logDiv);
+			performTransaction(log);
+		}
+		else if(rightAmount > leftAmount)
+		{
+			var log = new Log(rightPlayer,leftPlayer,rightAmount-leftAmount,"trade");
+			var logDiv = log.generateLogDiv();
+			log.prependLogDiv(logDiv);
+			performTransaction(log);
+		}
+
+		var i = 0;
+		while(i<leftCardList.length)
+		{
+			var property = parseInt(leftCardList[0].id.split('tradecard')[1]);
+			var propertyIndex = players[leftPlayer].properties.lastIndexOf(property)
+			if(propertyIndex != -1)
+			{
+				players[leftPlayer].properties.splice(propertyIndex, 1);
+				players[rightPlayer].properties.push(property);
+
+				players[leftPlayer].refreshCityGroups();
+				players[rightPlayer].refreshCityGroups();
+			}
+			else
+				tradeSuccess = false;
+
+			i+=1;
+		}
+
+		i = 0;
+		while(i<rightCardList.length)
+		{
+			var property = parseInt(rightCardList[0].id.split('tradecard')[1]);
+			var propertyIndex = players[rightPlayer].properties.lastIndexOf(property)
+			if(propertyIndex != -1)
+			{
+				players[rightPlayer].properties.splice(propertyIndex, 1);
+				players[leftPlayer].properties.push(property);
+
+				players[leftPlayer].refreshCityGroups();
+				players[rightPlayer].refreshCityGroups();
+			}
+			else
+				tradeSuccess = false;
+
+			i+=1;
+		}
+
+		return tradeSuccess;
+	}
 
 	$("#confirmTrade").click(function()
 	{
-		Swal.fire({
-			title: "Are you sure?",
-			text: "Just Confirming this trade operation",
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Yes, Confirm!',
-			allowOutsideClick: false
-		}).then((result) => 
+		if($("input[name='tradeLeftPlayerSelector']:checked").val() == $("input[name='tradeRightPlayerSelector']:checked").val())
 		{
-			if (result.isConfirmed) 
+			Swal.fire(
+				"Trade Fail!",'Same player selected',
+				'error'
+			);
+		}
+		else
+		{
+			Swal.fire({
+				title: "Are you sure?",
+				text: "Just Confirming this trade operation",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Yes, Confirm!',
+				allowOutsideClick: false
+			}).then((result) => 
 			{
-				Swal.fire(
-				"Trade complete!",'',
-				'success'
-				)
-
-				$("#TradeTray").animate({"right":"-650px"});
-			}
-		})
+				if (result.isConfirmed) 
+				{
+					if(performTrade())
+					{
+						Swal.fire(
+							"Trade complete!",'',
+							'success'
+						);
+						refreshGameUI();
+					}
+					else
+					{
+						Swal.fire(
+							"Trade Fail!",'',
+							'error'
+						);
+					}
+					$("#TradeTray").animate({"right":"-650px"});
+				}
+			})
+		}
 	});
-
+	
 	//#endregion "Trade"
 	
 	
@@ -1168,8 +1318,39 @@ $(document).ready(function()
 		return;
 	}
 
+	function setupTrade()
+	{
+		
+		var tradeLeftPlayerSelectorVal = $("input[name='tradeLeftPlayerSelector']:checked").val();
+		if(!tradeLeftPlayerSelectorVal)
+		{
+			$("input[name='tradeLeftPlayerSelector']")[0].checked = true;
+			tradeLeftPlayerSelectorVal = 0;
+		}
+
+		var tradeRightPlayerSelectorVal = $("input[name='tradeRightPlayerSelector']:checked").val();
+		if(!tradeRightPlayerSelectorVal)
+		{
+			$("input[name='tradeRightPlayerSelector']")[0].checked = true;
+			tradeRightPlayerSelectorVal = 0;
+		}
+
+		$('#tradeLeftAmountSlider')[0].min = 0;
+		$('#tradeRightAmountSlider')[0].min  = 0;
+
+		$('#tradeLeftAmountSlider')[0].value = 0;
+		$('#tradeRightAmountSlider')[0].value  = 0;
+
+		$('#tradeLeftAmountSlider')[0].max = players[tradeLeftPlayerSelectorVal].money;
+		$('#tradeRightAmountSlider')[0].max = players[tradeRightPlayerSelectorVal].money;
+
+		$('#tradeLeftAmountLabel').html(rupeeSym + $('#tradeLeftAmountSlider').val());
+		$('#tradeRightAmountLabel').html(rupeeSym + $('#tradeRightAmountSlider').val());
+		
+		return;
+	}
+
 	//#endregion "Setup"
-	
 	
 	
 	//#region "Building"
