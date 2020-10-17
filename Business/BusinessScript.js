@@ -539,7 +539,7 @@ $(document).ready(function()
 
 	$("#loadGame").click(function()
 	{
-		$('#loadGameDiv').modal({
+		$('#loadGameModal').modal({
 			backdrop: 'static',
 			keyboard: false
 		});
@@ -567,7 +567,7 @@ $(document).ready(function()
 							setupTrade();
 							startGame();
 
-							$("#loadGameDiv").modal('hide');
+							$("#loadGameModal").modal('hide');
 	
 							Swal.fire(
 								"Game Loaded Success",'',
@@ -720,7 +720,23 @@ $(document).ready(function()
 		return logCoinImage;
 	}
 
-	
+	function performTransaction(log)
+	{
+		if(log.sender > -1 && log.reciever > -1)
+		{
+			players[log.sender].money -= log.amount;
+			players[log.reciever].money += log.amount;	
+		}
+		else
+		{
+			if(log.reciever == -1)
+				players[log.sender].money -= log.amount;
+			else
+			{
+				players[log.reciever].money += log.amount;
+			}
+		}
+	}
 	//#endregion "Logs"
 
 	//#region "Setup"
@@ -1009,14 +1025,22 @@ $(document).ready(function()
 			{
 				if (result.isConfirmed) 
 				{
+					var log = new Log(currPlayer,-1,100,"jail");
+					var logDiv = log.generateLogDiv();
+					log.prependLogDiv(logDiv);
+					performTransaction(log);
+					refreshGameUI();
+					
 					Swal.fire(
 					'',"Paid "+rupeeSym+"100 to get out of Jail",
 					'success'
 					)
-					
+
 					players[currPlayer].inJail = false;
 					moveCoin(currCoin);
 				}
+				else
+					isChanceOn = false;
 			})
 
 		} 
@@ -1055,7 +1079,6 @@ $(document).ready(function()
 		var currCoin = $("#"+players[currPlayer].color+"Coin");
 		isChanceOn = true;
 		cnt = 0;
-		
 		var coinMoveAnim = setInterval(function()
 		{
 			if(cnt == diceValTotal)
@@ -1067,7 +1090,10 @@ $(document).ready(function()
 			}
 			cnt+=1;
 			players[currPlayer].position = players[currPlayer].position + 1;
-
+			
+			if(players[currPlayer].position == 40)
+				players[currPlayer].position = 0;
+			
 			players[currPlayer].topVal = board[players[currPlayer].position].topVal;
 			players[currPlayer].leftVal = board[players[currPlayer].position].leftVal;
 			currCoin.animate(
@@ -1108,9 +1134,9 @@ $(document).ready(function()
 			{
 				"top":(players[currPlayer].topVal).toString()+"px",
 				"left":(players[currPlayer].leftVal).toString()+"px"
-			},300);
+			},500);
 
-		},300);
+		},500);
 
 	}
 
@@ -1176,8 +1202,8 @@ $(document).ready(function()
 		
 		var currCoin = $("#"+players[currPlayer].color+"Coin");
 		var cell = board[players[currPlayer].position];
-
 		var cellRent = cell.getCurrentRent(); 
+		
 		if(cellRent != undefined)
 		{		
 			if(cellRent > 0)
@@ -1188,13 +1214,29 @@ $(document).ready(function()
 					var logDiv = log.generateLogDiv();
 					log.displayLog(logDiv);
 					log.prependLogDiv(logDiv);
-					//performTransaction(log);
+					performTransaction(log);
 				}
 			}
+			else
+			{
+				// Show Sale form
+				$("#imagePropertySale").attr("src","images/properties/"+cell.position.toString()+".PNG");
+
+				if(players[currPlayer].money < cell.price)
+					$("#btnBuyProperty").prop('disabled', true); 
+				
+				$("#pursePropertySale")[0].innerHTML = " " + rupeeSym + " " + players[currPlayer].money;
+				$('#PropertySaleModal').modal({
+					backdrop: 'static',
+					keyboard: false
+				});
+
+			}
+
 		}
 		else
 		{
-			if(cell.position == 10 || cell.position == 30)
+			if(cell.position == 10)
 			{
 				players[currPlayer].inJail = true;
 				Swal.fire({
@@ -1207,6 +1249,9 @@ $(document).ready(function()
 					allowOutsideClick: false
 				});
 			}
+			if(cell.position == 30)
+				moveBackWithoutGO(10);
+
 		}
 		refreshGameUI();
 		return;
@@ -1255,7 +1300,13 @@ $(document).ready(function()
 			$("#"+players[i].color+"CityValue")[0].innerHTML = players[i].properties.length;
 			$("#"+players[i].color+"HouseValue")[0].innerHTML = players[i].houseCount;
 			$("#"+players[i].color+"HotelValue")[0].innerHTML = players[i].hotelCount;
-			$("#"+players[i].color+"MoneyValue")[0].innerHTML = players[i].money;
+			$("#"+players[i].color+"MoneyValue")[0].innerHTML = rupeeSym + " " + players[i].money;
+			
+			if(players[i].money < 1)
+				$("#"+players[i].color+"MoneyValue").css("color","red");
+			else
+				$("#"+players[i].color+"MoneyValue").css("color","black");
+
 			i += 1;
 		}
 

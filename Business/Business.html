@@ -4,13 +4,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		
 
 		<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
+		
 		<script type="text/javascript" src="BusinessScript.js"></script>
 		<link type="text/css" rel="stylesheet" href="BusinessStyle.css">
 	</head>
@@ -160,8 +159,8 @@
 		</div>
 
 		<!-- Load game Modal -->
-		<div class="modal fade" id="loadGameDiv" tabindex="-1" role="dialog"  aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal fade " style="margin-top: 200px" id="loadGameModal" tabindex="-1" role="dialog"  aria-hidden="true">
+			<div class="modal-dialog " role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h3 class="modal-title" >Load Game</h3>
@@ -177,7 +176,27 @@
 			</div>
 		</div>
 
+		<!-- Property Sale modal -->
+		<div class="modal fade " style="margin-top: 100px" id="PropertySaleModal" tabindex="-1" role="dialog"  aria-hidden="true">
+			<div class="modal-dialog " role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">Property Sale</h3>
+				</div>
 
+				<div class="modal-body">
+					<img style="height: 50%;float:left"  id="imagePropertySale" src="images/properties/1.png" >
+					<h3> <i class="fa fa-shopping-bag"></i> <span id="pursePropertySale" > 0 </span> </h3>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success" style="width:50%; height: 50px; font-size: 25px;" id="btnBuyProperty" style="width:150px">Buy</button>
+					<hr>
+					<button type="button" class="btn btn-danger" style="width:50%; height: 50px; font-size: 25px;" id="btnAuction" style="width:150px">Auction</button>
+				</div>
+			</div>
+			</div>
+		</div>
 
 		<div id="allRules">
             <div id="labelRules" class="row"> 

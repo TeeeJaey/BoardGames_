@@ -115,11 +115,11 @@ body
 }
 .cityIcon
 {
-	width : 40px;
+	width : 50px;
     height : 40px;
     position: absolute;
     top: 0px;
-    left: 60px;
+    left: 55px;
 }
 .houseIcon
 {
