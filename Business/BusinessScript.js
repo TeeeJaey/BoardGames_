@@ -435,8 +435,8 @@ $(document).ready(function()
 		
 			var logDiv = document.createElement('div');
 			
-			var giverCoin = makeLogCoin(this.sender);
-			var takerCoin = makeLogCoin(this.reciever);
+			var giverCoin = makeLogCoin(parseInt(this.sender));
+			var takerCoin = makeLogCoin(parseInt(this.reciever));
 	
 			var reasonText = this.reason; 
 			switch(this.reason) 
@@ -756,7 +756,9 @@ $(document).ready(function()
 			{
 				players[leftPlayer].properties.splice(propertyIndex, 1);
 				players[rightPlayer].properties.push(property);
-
+				
+				board[property].owner = rightPlayer;
+				
 				players[leftPlayer].refreshCityGroups();
 				players[rightPlayer].refreshCityGroups();
 			}
@@ -775,6 +777,8 @@ $(document).ready(function()
 			{
 				players[rightPlayer].properties.splice(propertyIndex, 1);
 				players[leftPlayer].properties.push(property);
+
+				board[property].owner = leftPlayer;
 
 				players[leftPlayer].refreshCityGroups();
 				players[rightPlayer].refreshCityGroups();
@@ -1359,7 +1363,7 @@ $(document).ready(function()
 	{
 		var BldgCoin = document.createElement('img');
 		$(BldgCoin).addClass("bldgCoin");
-		switch(playerNumber)
+		switch(parseInt(playerNumber))
 		{
 			case 0: color = "red"; break;
 			case 1: color = "green"; break;
@@ -1781,6 +1785,8 @@ $(document).ready(function()
 
 			i += 1;
 		}
+		
+		document.querySelectorAll('.bldgCoin').forEach(e => e.remove());
 
 		i = 0;
 		while(i<40)
