@@ -75,8 +75,8 @@ $(document).ready(function()
 			var file = new Blob([gameJSON],{type:"application/json"});
 			a.href = URL.createObjectURL(file);
 			
-			var dd = new Date();
-			var ss = '' + dd.getFullYear() + (dd.getMonth()+1) + dd.getDate() + dd.getHours()+ dd.getMinutes()+ dd.getSeconds();
+			var d = new Date();
+			var ss = d.YYYYMMDDHHMMSS();
 	
 			a.download = "saveGame_" + ss + ".json";
 			a.click();
@@ -94,7 +94,7 @@ $(document).ready(function()
 				nmbrOfPlayers = loadedGame.nmbrOfPlayers;
 				currPlayer = loadedGame.currPlayer;
 
-				player = [];
+				players = [];
 				var i = 0;
 				while(i< nmbrOfPlayers)
 				{
@@ -108,7 +108,7 @@ $(document).ready(function()
 				var i = 0;
 				while(i < 40)
 				{
-					var boardCell = new Cell();
+					var boardCell = new Cell(i);
 					boardCell.loadGame_boardCell(loadedGame.board[i]);
 					board.push(boardCell);
 					i += 1;
@@ -473,6 +473,7 @@ $(document).ready(function()
 		prependLogDiv(logDiv)
 		{
 			$("#logsContainer").prepend(logDiv);
+			logs.push(this);
 			return;
 		}
 
@@ -519,8 +520,30 @@ $(document).ready(function()
 	$("#btnMenu").click(function()
 	{
         $("#menu").toggle();
-    });
+	});
 	
+	//#region "Get Current Date"
+	Date.prototype.YYYYMMDDHHMMSS = function () 
+	{
+        var yyyy = this.getFullYear().toString();
+        var MM = pad(this.getMonth() + 1,2);
+        var dd = pad(this.getDate(), 2);
+        var hh = pad(this.getHours(), 2);
+        var mm = pad(this.getMinutes(), 2)
+        var ss = pad(this.getSeconds(), 2)
+
+        return yyyy + MM + dd+  hh + mm + ss;
+    };
+	function pad(number, length) 
+	{
+        var str = '' + number;
+        while (str.length < length) {
+            str = '0' + str;
+        }
+        return str;
+	}
+	//#endregion "Get Current Date"
+
 	$("#saveGame").click(function()
 	{
 		var game = new Game();
