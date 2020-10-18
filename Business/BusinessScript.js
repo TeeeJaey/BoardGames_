@@ -74,7 +74,7 @@ $(document).ready(function()
 			var a = document.createElement("a");
 			var file = new Blob([gameJSON],{type:"application/json"});
 			a.href = URL.createObjectURL(file);
-			
+
 			var d = new Date();
 			var ss = d.YYYYMMDDHHMMSS();
 	
@@ -91,14 +91,14 @@ $(document).ready(function()
 
 			try
 			{
-				nmbrOfPlayers = loadedGame.nmbrOfPlayers;
-				currPlayer = loadedGame.currPlayer;
+				nmbrOfPlayers = parseInt(loadedGame.nmbrOfPlayers);
+				currPlayer = parseInt(loadedGame.currPlayer);
 
 				players = [];
 				var i = 0;
 				while(i< nmbrOfPlayers)
 				{
-					var player = new Player();
+					var player = new Player(loadedGame.players[i].color);
 					player.loadGame_Player(loadedGame.players[i]);
 					players.push(player);
 					i += 1;
@@ -116,7 +116,7 @@ $(document).ready(function()
 
 				logs = [];
 				var i = 0;
-				while(i < logs.length)
+				while(i < loadedGame.logs.length)
 				{
 					var log = new Log();
 					log.loadGame_Log(loadedGame.logs[i]);
@@ -146,6 +146,7 @@ $(document).ready(function()
 			}
 			catch(e)
 			{
+				console.log("Exception" , e);
 				currentGame.setCurrentGame();
 				return false;
 			}
@@ -280,6 +281,98 @@ $(document).ready(function()
 			}
 		}
 
+		isBuildable()
+		{
+			
+			if(!this.isCity)
+				return false;
+			
+			if(this.owner<0)
+				return false;
+			
+			if(!players[this.owner].cityGroups.includes(this.colorGroup))
+				return false;
+			
+			if(this.hotel)
+				return false;
+			
+			if(this.isMortaged)
+				return false;
+	
+			var i = 0;
+			while(i < propertyColorGroups[this.colorGroup].length)
+			{
+				var cardNumber = propertyColorGroups[this.colorGroup][i];
+				if(board[cardNumber].isMortaged)
+					return false;
+
+				if(board[cardNumber].houses < this.houses)
+					return false;
+
+				i += 1;
+			}
+
+			return true;
+		}
+		
+		isSellable()
+		{
+			if(!this.isCity)
+				return false;
+				
+			if(this.owner<0)
+				return false;
+		
+			if(this.hotel)
+				return true;
+			
+			if(this.isMortaged)
+				return false;
+	
+			if(this.houses == 0)
+				return false;
+
+			var i = 0;
+			while(i < propertyColorGroups[this.colorGroup].length)
+			{
+				var cardNumber = propertyColorGroups[this.colorGroup][i];
+				if(board[cardNumber].houses > this.houses)
+					return false;
+				
+				i += 1;
+			}
+
+			return true;
+		}
+
+		isTradeble()
+		{
+			if(this.isCity || this.isUtility)
+			{	
+				if(!this.isMortaged && !this.hotel && this.houses == 0 )
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+		 
+		makeBldgCoin(playerNumber,bldgStr)
+		{
+			var BldgCoin = document.createElement('img');
+			$(BldgCoin).addClass("bldgCoin");
+			var color = "";
+			switch(parseInt(playerNumber))
+			{
+				case 0: color = "red"; break;
+				case 1: color = "green"; break;
+				case 2: color = "blue"; break;
+				case 3: color = "yellow"; break;
+			}
+			BldgCoin.src="images/bldgs/"+color+bldgStr+".PNG";
+	
+			return BldgCoin;
+		}
 		
 		getBldg()
 		{
@@ -288,7 +381,7 @@ $(document).ready(function()
 			{
 				if(this.owner > -1)
 				{
-					bldgCoin = makeBldgCoin(this.owner,"0");
+					bldgCoin = this.makeBldgCoin(this.owner,"0");
 				}
 			}
 			if(this.isCity)
@@ -297,17 +390,17 @@ $(document).ready(function()
 				{
 					if(this.isMortaged)
 					{
-						bldgCoin = makeBldgCoin(this.owner,"M");
+						bldgCoin = this.makeBldgCoin(this.owner,"M");
 						return bldgCoin;
 					}
 					else if(this.hotel)
 					{
-						bldgCoin = makeBldgCoin(this.owner,"H");
+						bldgCoin = this.makeBldgCoin(this.owner,"H");
 						return bldgCoin;
 					}
 					else
 					{
-						bldgCoin = makeBldgCoin(this.owner, this.houses);
+						bldgCoin = this.makeBldgCoin(this.owner, this.houses);
 						return bldgCoin;
 					}
 				}
@@ -361,6 +454,7 @@ $(document).ready(function()
 			this.bldgTopVal = loadedCellObj.bldgTopVal;
 			this.bldgLeftVal = loadedCellObj.bldgLeftVal;
 		}
+		
 	}
 	
 	class Player 
@@ -408,10 +502,10 @@ $(document).ready(function()
 		loadGame_Player(loadedPlayerObj)
 		{
 			this.color = loadedPlayerObj.color;
-			this.position = loadedPlayerObj.position;
-			this.topVal = loadedPlayerObj.topVal;
-			this.leftVal = loadedPlayerObj.leftVal;
-			this.money = loadedPlayerObj.money;
+			this.position = parseInt(loadedPlayerObj.position);
+			this.topVal = parseInt(loadedPlayerObj.topVal);
+			this.leftVal = parseInt(loadedPlayerObj.leftVal);
+			this.money = parseInt(loadedPlayerObj.money);
 			this.properties = loadedPlayerObj.properties;
 			this.cityGroups = loadedPlayerObj.cityGroups;
 			this.inJail = loadedPlayerObj.inJail;
@@ -432,7 +526,6 @@ $(document).ready(function()
 
 		generateLogDiv()
 		{
-		
 			var logDiv = document.createElement('div');
 			
 			var giverCoin = makeLogCoin(parseInt(this.sender));
@@ -664,13 +757,8 @@ $(document).ready(function()
 			while(i < players[leftPlayer].properties.length)
 			{	
 				var cardNumber = players[leftPlayer].properties[i]; 
-				if(board[cardNumber].isCity || board[cardNumber].isUtility)
-				{	
-					if(!board[cardNumber].isMortaged && !board[cardNumber].hotel && board[cardNumber].houses == 0 )
-					{
-						addTradeCardImage(cardNumber, left);
-					}
-				}
+				if(board[cardNumber].isTradeble())
+					addTradeCardImage(cardNumber, left);
 				i+=1;
 			}
 		}
@@ -683,13 +771,8 @@ $(document).ready(function()
 			while(i < players[rightPlayer].properties.length)
 			{	
 				var cardNumber = players[rightPlayer].properties[i]; 
-				if(board[cardNumber].isCity || board[cardNumber].isUtility)
-				{	
-					if(!board[cardNumber].isMortaged && !board[cardNumber].hotel && board[cardNumber].houses == 0 )
-					{
-						addTradeCardImage(cardNumber, left);
-					}
-				}
+				if(board[cardNumber].isTradeble())
+					addTradeCardImage(cardNumber, left);
 				i+=1;
 			}
 		}
@@ -1379,26 +1462,6 @@ $(document).ready(function()
 
 	//#endregion "Setup"
 	
-	
-	//#region "Building"
-	
-	function makeBldgCoin(playerNumber,bldgStr)
-	{
-		var BldgCoin = document.createElement('img');
-		$(BldgCoin).addClass("bldgCoin");
-		switch(parseInt(playerNumber))
-		{
-			case 0: color = "red"; break;
-			case 1: color = "green"; break;
-			case 2: color = "blue"; break;
-			case 3: color = "yellow"; break;
-		}
-		BldgCoin.src="images/bldgs/"+color+bldgStr+".PNG";
-
-		return BldgCoin;
-	}
-
-	//#endregion "Building"
 
 	//#region "Game Functions"
 
@@ -1815,6 +1878,8 @@ $(document).ready(function()
 		while(i<40)
 		{
 			board[i].showBldg();
+			board[i].isSellable();
+			board[i].isBuildable();
 			i += 1;
 		}
 		
