@@ -212,6 +212,32 @@
 			</div>
 		</div>
 
+		<!-- Property Auction modal -->
+		<div class="modal fade" style="margin-top: 100px" id="PropertyAuctionModal" tabindex="-1" role="dialog"  aria-hidden="true">
+			<div class="modal-dialog" >
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-title">Property Auction</h3>
+					</div>
+					<div class="modal-body">
+						<img style="width: 45%;float:left"  id="imagePropertyAuction" src="images/properties/1.png" >
+						<img style="width: 85px; margin-left:20px; float:left; display: none;"  id="imagePropertyAuction" src="images/red.png" >
+						<h3> <i class="fa fa-gavel"></i> <span id="currentBid" > 0 </span> </h3>
+					</div>
+					<div class="modal-footer">	
+						<div style="width:45%; margin:15px 25px; float:left;  font-size:25px;" class="d-flex justify-content-center my-4" >
+							<span class="font-weight-bold" id="auctionBidLabel" style="color: black;margin-right:110px;">0</span>
+							<input type="range" class="custom-range" id="auctionBidSlider" >
+						</div>
+						<img style="width: 85px; margin-left:20px; float:left"  id="imagePropertyAuction" src="images/blue.png" >
+						<button type="button" class="btn btn-success" style="width:25%; height: 45px; font-size: 22px;" id="btnBuyProperty" style="width:150px">Bid</button>
+						<hr>
+						<button type="button" class="btn btn-danger" style="width:25%; height: 45px; font-size: 22px;" id="btnAuction" style="width:150px">Fold</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div id="allRules">
             <div id="labelRules" class="row"> 
                 <div class="col-xs-10"> Rules </div>

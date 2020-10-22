@@ -181,13 +181,6 @@ function moveBackWithoutGO(endPos)
 
 }
 
-Number.prototype.between = function(a, b) 
-{
-	var min = Math.min(a, b);
-	var max = Math.max(a, b);
-	return this >= min && this <= max;
-};
-
 function moveAheadWithGO(endPos)
 {
 	var currCoin = $("#"+players[currPlayer].color+"Coin");
@@ -264,6 +257,8 @@ function checkCell()
 
 			if(players[currPlayer].money < cell.price)
 				$("#btnBuyProperty").prop('disabled', true); 
+			else	
+				$("#btnBuyProperty").prop('disabled', false); 
 			
 			$("#pursePropertySale")[0].innerHTML = " " + rupeeSym + " " + players[currPlayer].money;
 			$('#PropertySaleModal').modal({
@@ -444,5 +439,29 @@ $(document).ready(function()
 		refreshGameUI();
 	});
 
+
+	$("#btnAuction").click(function()
+    {
+		var cell = board[players[currPlayer].position];
+		cell.owner = currPlayer;
+		
+		$("#PropertySaleModal").modal('hide');
+		$("#PropertyAuctionModal").modal('hide');
+
+		var log = new Log(currPlayer,-1,cell.price,"buy",cell.cellName);
+		var logDiv = log.generateLogDiv();
+		log.prependLogDiv(logDiv);
+		log.performTransaction();
+
+		players[currPlayer].properties.push(cell.position);
+		players[currPlayer].refreshCityGroups();
+
+		Swal.fire(
+			'',"Bought " + cell.cellName + " for " +rupeeSym+ " " + cell.price,
+			'success'
+		);
+
+		refreshGameUI();
+	});
 
 });
