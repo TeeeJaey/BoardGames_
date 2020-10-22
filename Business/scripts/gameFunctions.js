@@ -119,7 +119,6 @@ function moveCoin()
 { 
 	var currCoin = $("#"+players[currPlayer].color+"Coin");
 	isChanceOn = true;
-	players[currPlayer].position = 17 - diceValTotal;
 	cnt = 0;
 	var coinMoveAnim = setInterval(function()
 	{
@@ -182,6 +181,12 @@ function moveBackWithoutGO(endPos)
 
 }
 
+Number.prototype.between = function(a, b) 
+{
+	var min = Math.min(a, b);
+	var max = Math.max(a, b);
+	return this >= min && this <= max;
+};
 
 function moveAheadWithGO(endPos)
 {
@@ -198,32 +203,25 @@ function moveAheadWithGO(endPos)
 		
 		if(endPos > players[currPlayer].position)
 		{
-				
-			if(players[currPlayer].position < 10 && endPos >= 10)
-				players[currPlayer].position = 10;
-			else if(players[currPlayer].position < 20 && endPos >= 20)
-				players[currPlayer].position = 20;
-			else if(players[currPlayer].position < 30 && endPos >= 30)
+			if(players[currPlayer].position < 30 && endPos > 30)
 				players[currPlayer].position = 30;
+			else if(players[currPlayer].position < 20 && endPos > 20)
+				players[currPlayer].position = 20;
+			else if(players[currPlayer].position < 10 && endPos > 10)
+				players[currPlayer].position = 10;
 			else
 				players[currPlayer].position = endPos;
-
 		}
 		else if(endPos < players[currPlayer].position)
 		{
-		
-			if(players[currPlayer].position > 0)
+			if(players[currPlayer].position < 10)
 				players[currPlayer].position = 10;
-
-			if(players[currPlayer].position >= 10)
+			else if(players[currPlayer].position < 20)
 				players[currPlayer].position = 20;
-
-			else if(players[currPlayer].position >= 20)
+			else if(players[currPlayer].position < 30)
 				players[currPlayer].position = 30;
-				
-			else if(players[currPlayer].position >= 30)
+			else if(players[currPlayer].position < 40)
 				players[currPlayer].position = 0;
-
 		}
 		
 		players[currPlayer].topVal = board[players[currPlayer].position].topVal;
@@ -232,9 +230,9 @@ function moveAheadWithGO(endPos)
 		{
 			"top":(players[currPlayer].topVal).toString()+"px",
 			"left":(players[currPlayer].leftVal).toString()+"px"
-		},300);
+		},500);
 
-	},300);
+	},500);
 
 }
 
@@ -381,7 +379,6 @@ $(document).ready(function()
 
 
 	setupBoard();
-
 	//#region "Game Functions"
 
 	$("#start").click(function()

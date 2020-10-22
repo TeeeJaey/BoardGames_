@@ -462,7 +462,6 @@ function setupTrade()
 	return;
 }
 
-
 function setupChanceChest()
 {
 	var i = 0;
@@ -495,7 +494,7 @@ function setupChanceChest()
 	chests[6].message = "Income Tax refund" ;
 	chests[6].amount = 50;
 
-	chests[8].message = "Travel to Go</b>" ;
+	chests[8].message = "Travel to Go" ;
 	chests[8].moveAheadto = 0;
 
 	chests[10].message = "Recieved interest of shares" ;
@@ -507,7 +506,6 @@ function setupChanceChest()
 	// Chests --- Odd
 
 	chests[3].message = "Go to Jail" ;
-	chests[3].moveBackto = 10;
 
 	chests[5].message = "School & medical fees" ;
 	chests[5].amount = 40;
@@ -537,10 +535,8 @@ function setupChanceChest()
 	chances[8].amount = 300;
 
 	chances[10].message = "Go to Jail";
-	chances[10].moveBackto = 10;
 
 	chances[12].message = "Go back 3 spaces";
-	chances[12].moveBackto = -3;
 
 	// Chances --- Odd
 
@@ -554,7 +550,6 @@ function setupChanceChest()
 	chances[7].amount = 200;
 
 	chances[9].message = "Travel ahead to Guwahati";
-	chances[9].moveAheadto = 1;
 
 	chances[11].message = "Best performance in Exports" ;
 	chances[11].amount = 300;

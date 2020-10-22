@@ -63,11 +63,18 @@ class Log
 		}
 
 		$(logDiv).addClass("logItem").html(giverCoin.outerHTML + " Paid <b>" + rupeeSym + this.amount.toString() + "</b> "+reasonText+" to " +takerCoin.outerHTML);
+		
+		this.logDiv = logDiv;
+		
 		return logDiv;
 	}
 	
 	prependLogDiv(logDiv)
 	{
+		if(logDiv == undefined)
+		{
+			logDiv = this.logDiv;
+		}
 		$("#logsContainer").prepend(logDiv);
 		logs.push(this);
 		return;
@@ -76,6 +83,11 @@ class Log
 
 	displayLog(logDiv)
 	{
+		if(logDiv == undefined)
+		{
+			logDiv = this.logDiv;
+		}
+		
 		Swal.fire({
 			title: logDiv.outerHTML,
 			icon: 'info',
