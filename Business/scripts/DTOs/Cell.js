@@ -171,11 +171,23 @@ class Cell
 		return true;
 	}
 
+	isMortgageable()
+	{
+		if(this.isCity || this.isUtility)
+		{	
+			if(!this.isMortaged && !this.hotel && this.houses == 0)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 	isTradeble()
 	{
 		if(this.isCity || this.isUtility)
 		{	
-			if(!this.isMortaged && !this.hotel && this.houses == 0 )
+			if( !this.hotel && this.houses == 0 )
 			{
 				return true;
 			}

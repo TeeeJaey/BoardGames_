@@ -440,28 +440,4 @@ $(document).ready(function()
 	});
 
 
-	$("#btnAuction").click(function()
-    {
-		var cell = board[players[currPlayer].position];
-		cell.owner = currPlayer;
-		
-		$("#PropertySaleModal").modal('hide');
-		$("#PropertyAuctionModal").modal('hide');
-
-		var log = new Log(currPlayer,-1,cell.price,"buy",cell.cellName);
-		var logDiv = log.generateLogDiv();
-		log.prependLogDiv(logDiv);
-		log.performTransaction();
-
-		players[currPlayer].properties.push(cell.position);
-		players[currPlayer].refreshCityGroups();
-
-		Swal.fire(
-			'',"Bought " + cell.cellName + " for " +rupeeSym+ " " + cell.price,
-			'success'
-		);
-
-		refreshGameUI();
-	});
-
 });

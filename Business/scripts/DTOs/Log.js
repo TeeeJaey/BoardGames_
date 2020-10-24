@@ -49,6 +49,10 @@ class Log
 				reasonText = "(as purchase of <b>"+this.property+"</b>)";
 				break;
 
+			case "auction":
+				reasonText = "(won in auction <b>"+this.property+"</b>)";
+				break;
+
 			case "bldg":
 				reasonText = "(as building on <b>"+this.property+"</b>)";
 				break;
@@ -87,7 +91,7 @@ class Log
 		{
 			logDiv = this.logDiv;
 		}
-		
+
 		Swal.fire({
 			title: logDiv.outerHTML,
 			icon: 'info',
