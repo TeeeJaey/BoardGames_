@@ -70,15 +70,13 @@ function performTrade()
 	if(leftAmount > rightAmount)
 	{
 		var log = new Log(leftPlayer,rightPlayer,leftAmount-rightAmount,"trade");
-		var logDiv = log.generateLogDiv();
-		log.prependLogDiv(logDiv);
+		log.prependLogDiv();
 		log.performTransaction();
 	}
 	else if(rightAmount > leftAmount)
 	{
 		var log = new Log(rightPlayer,leftPlayer,rightAmount-leftAmount,"trade");
-		var logDiv = log.generateLogDiv();
-		log.prependLogDiv(logDiv);
+		log.prependLogDiv();
 		log.performTransaction();
 	}
 

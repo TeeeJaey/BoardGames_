@@ -8,6 +8,7 @@ class Log
 		this.amount = amount;
 		this.reason = reason;
 		this.property = property;
+		this.logDiv = this.generateLogDiv();
 	}
 
 	makeLogCoin(playerNumber)
@@ -68,39 +69,26 @@ class Log
 
 		$(logDiv).addClass("logItem").html(giverCoin.outerHTML + " Paid <b>" + rupeeSym + this.amount.toString() + "</b> "+reasonText+" to " +takerCoin.outerHTML);
 		
-		this.logDiv = logDiv;
-		
 		return logDiv;
 	}
 	
-	prependLogDiv(logDiv)
+	prependLogDiv()
 	{
-		if(logDiv == undefined)
-		{
-			logDiv = this.logDiv;
-		}
-		$("#logsContainer").prepend(logDiv);
+		$("#logsContainer").prepend(this.logDiv);
 		logs.push(this);
 		return;
 	}
 
-
-	displayLog(logDiv)
+	displayLog()
 	{
-		if(logDiv == undefined)
-		{
-			logDiv = this.logDiv;
-		}
-
 		Swal.fire({
-			title: logDiv.outerHTML,
+			title: this.logDiv.outerHTML,
 			icon: 'info',
 			confirmButtonColor: '#3085d6',
 			confirmButtonText: 'OK'
 		});
 		return;
 	}
-
 
 	performTransaction()
 	{
@@ -127,9 +115,9 @@ class Log
 		this.amount = loadedLogObj.amount;
 		this.reason = loadedLogObj.reason;
 		this.property = loadedLogObj.property;
+		this.property = this.generateLogDiv();
 
-		var logDiv = this.generateLogDiv();
-		this.prependLogDiv(logDiv);
+		this.prependLogDiv();
 		
 		return;
 	}

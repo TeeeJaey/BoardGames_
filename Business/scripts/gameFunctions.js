@@ -67,8 +67,7 @@ function play()
 			if (result.isConfirmed) 
 			{
 				var log = new Log(currPlayer,-1,100,"jail");
-				var logDiv = log.generateLogDiv();
-				log.prependLogDiv(logDiv);
+				log.prependLogDiv();
 				log.performTransaction();
 				refreshGameUI();
 				
@@ -133,8 +132,14 @@ function moveCoin()
 		players[currPlayer].position = players[currPlayer].position + 1;
 		
 		if(players[currPlayer].position == 40)
+		{
 			players[currPlayer].position = 0;
-		
+			
+			var log = new Log(-1,currPlayer,200,"as salary");
+			log.prependLogDiv();
+			log.performTransaction();
+		}
+
 		players[currPlayer].topVal = board[players[currPlayer].position].topVal;
 		players[currPlayer].leftVal = board[players[currPlayer].position].leftVal;
 		currCoin.animate(
@@ -244,10 +249,9 @@ function checkCell()
 			if(cell.owner != currPlayer)
 			{
 				var log = new Log(currPlayer,cell.owner,cellRent,"rent",cell.cellName);
-				var logDiv = log.generateLogDiv();
-				log.displayLog(logDiv);
-				log.prependLogDiv(logDiv);
+				log.prependLogDiv();
 				log.performTransaction();
+				log.displayLog();
 			}
 		}
 		else
@@ -424,8 +428,7 @@ $(document).ready(function()
 		$("#PropertySaleModal").modal('hide');
 
 		var log = new Log(currPlayer,-1,cell.price,"buy",cell.cellName);
-		var logDiv = log.generateLogDiv();
-		log.prependLogDiv(logDiv);
+		log.prependLogDiv();
 		log.performTransaction();
 
 		players[currPlayer].properties.push(cell.position);

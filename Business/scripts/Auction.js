@@ -96,8 +96,7 @@ class Auction
     finishAuction(winner,winAmt)
     {
         var log = new Log(winner,-1,winAmt,"auction",this.auctionProperty.cellName);
-		var logDiv = log.generateLogDiv();
-		log.prependLogDiv(logDiv);
+		log.prependLogDiv();
 		log.performTransaction();
 
         this.auctionProperty.owner = winner;
