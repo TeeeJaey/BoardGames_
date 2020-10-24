@@ -252,7 +252,7 @@ function checkCell()
 		}
 		else
 		{
-			// Show Sale form
+			// Show Sale Modal
 			$("#imagePropertySale").attr("src",cell.cardImage);
 
 			if(players[currPlayer].money < cell.price)

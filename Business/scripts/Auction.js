@@ -5,31 +5,26 @@ class Auction
     constructor()
     {
         this.auctionProperty = null;        
-        this.auctionPlayers = [];        //  array of acutal player# [1,3]      players unfolded
-        this.currentBidAmt = 0;          //  numberic                           current highest bid amount 
-        this.currentBidPlayer = -1;      //  this.auctionPlayers[iterator]      current highest bidder
-        this.currentPlayer = 0;          //  this.auctionPlayers[iterator]      current chance to bid
+        this.auctionPlayers = [];        //  array of acutal player# [1,3]              players unfolded
+        this.currentBidAmt = 0;          //  numberic                                   current highest bid amount 
+        this.currentBidPlayer = -1;      //  value  this.auctionPlayers[iterator]       current highest bidder
+        this.currentPlayer = 0;          //  iterator this.auctionPlayers[iterator]     current chance to bid
     }
     
     startAuction(auctionProperty)
     {
         this.auctionProperty = auctionProperty;
         this.currentBidAmt = 0;
-        this.auctionPlayers = [currPlayer];
+        this.auctionPlayers = [0,1];
         this.currentBidPlayer = -1;
         this.currentPlayer = currPlayer;
 
-        var i = currPlayer + 1;
-        while(true)
-        {
-            if(i >= parseInt(nmbrOfPlayers))
-                i = 0;
-            if(i==currPlayer)
-                break;
-            this.auctionPlayers.push(i);
-            i+=1;
-        } 
-
+        if(parseInt(nmbrOfPlayers) == 3)
+            this.auctionPlayers = [0,1,2];
+        if(parseInt(nmbrOfPlayers) == 4)
+            this.auctionPlayers = [0,1,2,3];
+            
+        $("#imagePropertyAuction").attr("src",auctionProperty.cardImage);
         $("#PropertySaleModal").modal('hide');
 
         $('#PropertyAuctionModal').modal({
@@ -45,9 +40,9 @@ class Auction
         if(bid)
         {   // BID
             this.currentBidAmt = parseInt($('#auctionBidSlider')[0].value);
-            this.currentBidPlayer = this.currentPlayer;
+            this.currentBidPlayer = this.auctionPlayers[this.currentPlayer];
             
-            this.currentPlayer = this.currentPlayer + 1;
+            this.currentPlayer += 1;
             if(this.currentPlayer == this.auctionPlayers.length)
                 this.currentPlayer = 0;
                 
@@ -72,10 +67,11 @@ class Auction
     {
         if(this.currentBidPlayer > -1 && this.currentBidAmt > 0)
         {
-            var playerNumber =  parseInt(this.auctionPlayers[this.currentBidPlayer]);
-            $("#imageHighestBidder")[0].src = "images/"+players[playerNumber].color+".PNG";
+            $("#imageHighestBidder")[0].src = "images/"+players[this.currentBidPlayer].color+".PNG";
             $('#imageHighestBidder').css("display","");
         }
+        else
+            $('#imageHighestBidder').css("display","none");
         
         $('#currentBidAmt').html(rupeeSym + this.currentBidAmt.toString());
 
@@ -104,10 +100,11 @@ class Auction
 		log.prependLogDiv(logDiv);
 		log.performTransaction();
 
+        this.auctionProperty.owner = winner;
 		players[winner].properties.push(this.auctionProperty.position);
         players[winner].refreshCityGroups();
-        
         $("#PropertyAuctionModal").modal('hide');
+        refreshGameUI();
 
 		Swal.fire(
 			'',"Won in Auction " + this.auctionProperty.cellName + " for " +rupeeSym+ " " + winAmt,
