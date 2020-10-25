@@ -14,7 +14,7 @@ class Cell
 
 		this.cardImage = "images/properties/" + pos.toString() + ".PNG";
 		this.owner = -1;
-		this.isMortaged = false;    
+		this.isMortgaged = false;    
 		this.houses = 0;          
 		this.hotel = false;  
 
@@ -28,7 +28,7 @@ class Cell
 		{
 			if(this.owner > -1)
 			{
-				if(this.isMortaged)
+				if(this.isMortgaged)
 				{
 					return rent;
 				}
@@ -70,7 +70,7 @@ class Cell
 		{
 			if(this.owner > -1)
 			{
-				if(this.isMortaged)
+				if(this.isMortgaged)
 				{
 					rent = 0;
 					return rent;
@@ -122,14 +122,14 @@ class Cell
 		if(this.hotel)
 			return false;
 		
-		if(this.isMortaged)
+		if(this.isMortgaged)
 			return false;
 
 		var i = 0;
 		while(i < propertyColorGroups[this.colorGroup].length)
 		{
 			var cardNumber = propertyColorGroups[this.colorGroup][i];
-			if(board[cardNumber].isMortaged)
+			if(board[cardNumber].isMortgaged)
 				return false;
 
 			if(board[cardNumber].houses < this.houses)
@@ -152,7 +152,7 @@ class Cell
 		if(this.hotel)
 			return true;
 		
-		if(this.isMortaged)
+		if(this.isMortgaged)
 			return false;
 
 		if(this.houses == 0)
@@ -173,14 +173,27 @@ class Cell
 
 	isMortgageable()
 	{
-		if(this.isCity || this.isUtility)
-		{	
-			if(!this.isMortaged && !this.hotel && this.houses == 0)
-			{
-				return true;
-			}
+		if(!this.isCity && !this.isUtility)
+			return false;
+		if(this.isMortgaged)
+			return false;
+		if(this.hotel)
+			return false;
+		if(this.houses > 0)
+			return false;
+		
+		if(!players[this.owner].cityGroups.includes(this.colorGroup))
+			return true;
+		
+		var i = 0;
+		while(i < propertyColorGroups[this.colorGroup].length)
+		{
+			var cardNmbr = propertyColorGroups[this.colorGroup][i]
+			if(board[cardNmbr].houses > 0)
+				return false;
+			i += 1;
 		}
-		return false;
+		return true;
 	}
 
 	isTradeble()
@@ -219,14 +232,23 @@ class Cell
 		{
 			if(this.owner > -1)
 			{
-				bldgCoin = this.makeBldgCoin(this.owner,"0");
+				if(this.isMortgaged)
+				{
+					bldgCoin = this.makeBldgCoin(this.owner,"M");
+					return bldgCoin;
+				}
+				else
+				{
+					bldgCoin = this.makeBldgCoin(this.owner,"0");
+					return bldgCoin;
+				}
 			}
 		}
 		if(this.isCity)
 		{
 			if(this.owner > -1)
 			{
-				if(this.isMortaged)
+				if(this.isMortgaged)
 				{
 					bldgCoin = this.makeBldgCoin(this.owner,"M");
 					return bldgCoin;
@@ -278,7 +300,7 @@ class Cell
 		this.cardImage = loadedCellObj.cardImage;
 		this.owner = loadedCellObj.owner;
 		this.rent = loadedCellObj.rent;
-		this.isMortaged = loadedCellObj.isMortaged;        
+		this.isMortgaged = loadedCellObj.isMortgaged;        
 		this.mortgagePrice = loadedCellObj.mortgagePrice;
 
 		this.constructionPrice = loadedCellObj.constructionPrice;

@@ -363,8 +363,6 @@ function refreshGameUI()
 	while(i<40)
 	{
 		board[i].showBldg();
-		board[i].isSellable();
-		board[i].isBuildable();
 		i += 1;
 	}
 	

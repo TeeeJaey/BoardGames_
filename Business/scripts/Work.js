@@ -296,11 +296,10 @@ class Work
         this.changeAmt = changeAmount;
         $("#workChangeAmount").html(rupeeSym+this.changeAmt.toString());
 
+        $("#btnWorkConfirm").prop('disabled', false); 
         if(changeAmount < 0)
         {
             $("#workChangeAmount").css("color","red");
-            $("#btnWorkConfirm").prop('disabled', false); 
-
             if(players[this.worker].money + changeAmount < 0)
             {
                 $("#btnWorkConfirm").prop('disabled', true); 
@@ -314,12 +313,111 @@ class Work
 
     finishWork()
     {
-        $("#workModal").modal('hide');
-        if(this.build.length==0 && this.sell.length==0 && this.redeem.length==0 && this.mortgage.length==0)
-        {
-            return;
-        }
+		try
+		{
+            $("#workModal").modal('hide');
+            if(this.build.length==0 && this.sell.length==0 && this.redeem.length==0 && this.mortgage.length==0)
+            {
+                return 0;
+            }
+            else
+            {
+                var changeAmount = 0;
+                
+                var i = 0;
+                while(i < this.mortgage.length)
+                {
+                    var cardNumber = this.mortgage[i];
+                    var property = board[cardNumber];
+                    changeAmount += property.mortgagePrice;
+                    property.isMortgaged = true;
+                    i += 1;
+                }
 
+                i = 0;
+                while(i < this.sell.length)
+                {
+                    var cardNumber = this.sell[i];
+                    var property = board[cardNumber];
+                    changeAmount += property.constructionPrice;
+
+                    if(property.hotel)
+                    {
+                        property.hotel = false;
+                        players[this.worker].hotelCount -= 1;
+                    }
+                    else
+                    {
+                        property.houses -= 1;
+                        players[this.worker].houseCount -= 1;
+                    }
+                    i += 1;
+                }
+
+                i = 0;
+                while(i < this.redeem.length)
+                {
+                    var cardNumber = this.redeem[i];
+                    var property = board[cardNumber];
+                    changeAmount -= property.mortgagePrice;
+                    property.isMortgaged = false;
+                    i += 1;
+                }
+                
+                i = 0;
+                while(i < this.build.length)
+                {
+                    var cardNumber = this.build[i];
+                    
+                    if(!this.sell.includes(cardNumber) && !this.sell.includes(cardNumber))
+                    {
+                        var property = board[cardNumber];
+                        if(property.isBuildable())
+                        {
+                            changeAmount -= property.constructionPrice;
+                            if(property.houses < 4)
+                            {
+                                property.houses += 1;
+                                players[this.worker].houseCount += 1;
+                            }
+                            else
+                            {
+                                property.hotel = true;
+                                players[this.worker].hotelCount += 1;
+                            }
+                        }
+                    }
+                    i += 1;
+                }
+
+
+                if(changeAmount > 0)
+                {
+                    var sender = -1;
+                    var reciever = this.worker;
+                }
+                else 
+                {
+                    var reciever = -1;
+                    var sender = this.worker;
+                    changeAmount *= -1;
+                }
+                
+                var log = new Log(sender, reciever, changeAmount,"Construction Work");
+                log.prependLogDiv();
+                log.performTransaction();
+                players[this.worker].refreshCityGroups();
+                refreshGameUI();
+
+            }
+            return 1;
+        }
+        catch(e)
+        {
+            console.log("Exception in WORK :" , e);
+            return -1;
+        }
+        
     }
 }
 
@@ -350,7 +448,23 @@ $(document).ready(function()
 
 	$("#btnWorkConfirm").click(function()
     { 
-        work.finishWork();
+        var workSuccess = work.finishWork();
+
+        if(workSuccess > 0)
+        {
+            Swal.fire(
+                "Construction Work complete!",'',
+                'success'
+            );
+            refreshGameUI();
+        }
+        else if(workSuccess < 0)
+        {
+            Swal.fire(
+                "Construction Work Fail!",'',
+                'error'
+            );
+        }
     });
 
 });
