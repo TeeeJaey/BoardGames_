@@ -8,6 +8,7 @@ function startGame()
 	$("#endControls").css("display","none");
 	$("#btnTrade").css("display","");
 	$("#btnLogs").css("display","");
+	$("#saveGame").prop('disabled', false); 
 
 	gameStarted = true;
 }
@@ -134,7 +135,6 @@ function moveCoin()
 		if(players[currPlayer].position == 40)
 		{
 			players[currPlayer].position = 0;
-			
 			var log = new Log(-1,currPlayer,200,"as salary");
 			log.prependLogDiv();
 			log.performTransaction();
@@ -220,6 +220,14 @@ function moveAheadWithGO(endPos)
 				players[currPlayer].position = 30;
 			else if(players[currPlayer].position < 40)
 				players[currPlayer].position = 0;
+		}
+		
+		if(players[currPlayer].position == 40 || players[currPlayer].position == 0)
+		{
+			players[currPlayer].position = 0;
+			var log = new Log(-1,currPlayer,200,"as salary");
+			log.prependLogDiv();
+			log.performTransaction();
 		}
 		
 		players[currPlayer].topVal = board[players[currPlayer].position].topVal;
@@ -373,6 +381,7 @@ $(document).ready(function()
     $("#endControls").css("display","none");
     $("#btnTrade").css("display","none");
     $("#btnLogs").css("display","none");
+	$("#saveGame").prop('disabled', true); 
 
 	//#endregion "Initial displays"
 

@@ -8,7 +8,9 @@ class Log
 		this.amount = amount;
 		this.reason = reason;
 		this.property = property;
-		this.logDiv = this.generateLogDiv();
+		
+		if(this.amount != undefined)
+			this.logDiv = this.generateLogDiv();
 	}
 
 	makeLogCoin(playerNumber)
@@ -115,7 +117,7 @@ class Log
 		this.amount = loadedLogObj.amount;
 		this.reason = loadedLogObj.reason;
 		this.property = loadedLogObj.property;
-		this.property = this.generateLogDiv();
+		this.logDiv = this.generateLogDiv();
 
 		this.prependLogDiv();
 		

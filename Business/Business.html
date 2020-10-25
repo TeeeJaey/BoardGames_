@@ -22,6 +22,7 @@
 		<script type="text/javascript" src="scripts/Menu.js"></script>
 		<script type="text/javascript" src="scripts/Setup.js"></script>
 		<script type="text/javascript" src="scripts/gameFunctions.js"></script>
+		<script type="text/javascript" src="scripts/Work.js"></script>
 		<script type="text/javascript" src="scripts/Trade.js"></script>
 		<script type="text/javascript" src="scripts\Auction.js"></script>
 
@@ -165,12 +166,33 @@
 
 		</div>
             
-		<button id="btnMenu"  class="btn btn-danger" > Menu <i class="fa fa-bars" ></i> </button>
+		<button id="btnMenu"  class="btn btn-danger menuBtns" > Menu <i class="fa fa-bars" ></i> </button>
 		
         <div id="menu" >
 			<button id="btnRules"  class="btn btn-danger menuBtns" > Rules ? </button>
 			<button id="saveGame"  class="btn btn-danger menuBtns" > Save game <i class="fa fa-download" ></i> </button>
 			<button id="loadGame"  class="btn btn-danger menuBtns" > Load game <i class="fa fa-upload" ></i></button>
+		</div>
+
+		<div id="allRules">
+            <div id="labelRules" class="row"> 
+                <div class="col-xs-10"> Rules </div>
+                <div class="col-xs-2" > <i  class="fa fa-times closeBox" id="closeRules" > </i> </div>
+            </div>   
+            <div id="rulesContainer">
+                <img class="imgRule" src="images/rules/rule1.PNG">
+                <img class="imgRule" src="images/rules/rule2.PNG">
+                <img class="imgRule" src="images/rules/rule3.PNG">
+                <img class="imgRule" src="images/rules/rule4.PNG">
+                <img class="imgRule" src="images/rules/rule5.PNG">
+                <img class="imgRule" src="images/rules/rule6.PNG">
+                <img class="imgRule" src="images/rules/rule7.PNG">
+                <img class="imgRule" src="images/rules/rule8.PNG">
+                <img class="imgRule" src="images/rules/rule9.PNG">
+                <img class="imgRule" src="images/rules/rule10.PNG">
+                <img class="imgRule" src="images/rules/rule11.PNG">
+                <img class="imgRule" src="images/rules/rule12.PNG">
+            </div>
 		</div>
 
 		<!-- Load game Modal -->
@@ -239,27 +261,6 @@
 			</div>
 		</div>
 
-		<div id="allRules">
-            <div id="labelRules" class="row"> 
-                <div class="col-xs-10"> Rules </div>
-                <div class="col-xs-2" > <i  class="fa fa-times closeBox" id="closeRules" > </i> </div>
-            </div>   
-            <div id="rulesContainer">
-                <img class="imgRule" src="images/rules/rule1.PNG">
-                <img class="imgRule" src="images/rules/rule2.PNG">
-                <img class="imgRule" src="images/rules/rule3.PNG">
-                <img class="imgRule" src="images/rules/rule4.PNG">
-                <img class="imgRule" src="images/rules/rule5.PNG">
-                <img class="imgRule" src="images/rules/rule6.PNG">
-                <img class="imgRule" src="images/rules/rule7.PNG">
-                <img class="imgRule" src="images/rules/rule8.PNG">
-                <img class="imgRule" src="images/rules/rule9.PNG">
-                <img class="imgRule" src="images/rules/rule10.PNG">
-                <img class="imgRule" src="images/rules/rule11.PNG">
-                <img class="imgRule" src="images/rules/rule12.PNG">
-            </div>
-		</div>
-
 		<button id="btnLogs"  class="btn btn-danger" > Logs <i class="fa fa-book" ></i> </button>
 		<div id="allLogs">
             <div id="labelLogs" class="row"> 
@@ -270,9 +271,52 @@
             </div>
 		</div>
 
+		<!-- Work Sale modal -->
+		<div class="modal fade " style="margin-top: 100px ; " id="workModal" tabindex="-1" role="dialog"  aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">Work on properties</h3>
+				</div>
+
+				<div class="modal-body">
+					<div class="btn-group" data-toggle="buttons">
+						<label class="btn btn-primary active" style= "width:120px; margin:10px">
+						  <input type="radio" name="workRadioBtns" id="btnWorkBuild" checked> Build
+						</label>
+						<label class="btn btn-danger" style= "width:120px; margin:10px">
+						  <input type="radio" name="workRadioBtns" id="btnWorkSell"> Sell
+						</label>
+						<label class="btn btn-primary" style= "width:120px; margin:10px ">
+						  <input type="radio" name="workRadioBtns" id="btnWorkRedeem"> Redeem
+						</label>
+						<label class="btn btn-danger" style= "width:120px; margin:10px ">
+						  <input type="radio" name="workRadioBtns" id="btnWorkMortgage"> Mortgage
+						</label>
+					</div>
+
+					<div id="workPropertyContainer" style="margin-left:25px; width:90%; height: 300px; overflow-y:scroll; background-color:rgb(247, 211, 164);" >
+						<img class="workProperty" style="width:30%; margin:5px; " src="images/properties/37.png">
+						<img class="workProperty" style="width:30%; margin:5px; " src="images/properties/39.png">
+						<hr>
+						<img class="workProperty" style="width:30%; margin:5px; " src="images/properties/11.png">
+						<img class="workProperty" style="width:30%; margin:5px; " src="images/properties/13.png">
+						<img class="workProperty" style="width:30%; margin:5px; " src="images/properties/14.png">
+						<hr>
+						<img class="workProperty" style="width:30%; " src="images/properties/19.png">
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success"  id="btnWorkConfirm" style="width:30%; height: 40px; font-size: 20px;">Confirm</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal"  style="width:30%; height: 40px; font-size: 20px;">Cancel</button>
+				</div>
+			</div>
+			</div>
+		</div>
+
+
         <button id="btnTrade"  class="btn btn-danger" > Trade <i class="fa fa-exchange" ></i> </button>
-		
-		
 		<div id="TradeTray">
             <div class="row"> 
                 <div class="col-xs-6" > 
