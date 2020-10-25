@@ -280,30 +280,34 @@
 				</div>
 
 				<div class="modal-body">
-					<div class="btn-group" data-toggle="buttons">
-						<label class="btn btn-primary active" style= "width:120px; margin:10px">
-						  <input type="radio" name="workRadioBtns" id="btnWorkBuild" checked> Build
+					<div style="font-size: 22px;">
+						<div style=" width:50%;float:left;"> <i class="fa fa-shopping-bag"></i> <span id="workWalletAmount" > 0 </span> </div>
+						<div  style=" width:50%;float:right;"> <i class="fa fa-exchange "></i> <span id="workChangeAmount" > 0 </span> </div>
+					</div>
+					<div class="btn-group" data-toggle="buttons" >
+						<label class="btn btn-info workRadioBtns active">
+						  <input type="radio" name="workRadioBtns" id="btnWorkBuild" value="build" checked> Build
 						</label>
-						<label class="btn btn-danger" style= "width:120px; margin:10px">
-						  <input type="radio" name="workRadioBtns" id="btnWorkSell"> Sell
+						<label class="btn btn-info workRadioBtns">
+						  <input type="radio" name="workRadioBtns" id="btnWorkSell" value="sell" > Sell
 						</label>
-						<label class="btn btn-primary" style= "width:120px; margin:10px ">
-						  <input type="radio" name="workRadioBtns" id="btnWorkRedeem"> Redeem
+						<label class="btn btn-info workRadioBtns">
+						  <input type="radio" name="workRadioBtns" id="btnWorkRedeem" value="redeem" > Redeem
 						</label>
-						<label class="btn btn-danger" style= "width:120px; margin:10px ">
-						  <input type="radio" name="workRadioBtns" id="btnWorkMortgage"> Mortgage
+						<label class="btn btn-info workRadioBtns">
+						  <input type="radio" name="workRadioBtns" id="btnWorkMortgage" value="mortgage" > Mortgage
 						</label>
 					</div>
 
 					<div id="workPropertyContainer" style="margin-left:25px; width:90%; height: 300px; overflow-y:scroll; background-color:rgb(247, 211, 164);" >
-						<img class="workProperty" style="width:30%; margin:5px; " src="images/properties/37.png">
-						<img class="workProperty" style="width:30%; margin:5px; " src="images/properties/39.png">
+						<img class="workProperty" src="images/properties/37.png">
+						<img class="workProperty" src="images/properties/39.png">
 						<hr>
-						<img class="workProperty" style="width:30%; margin:5px; " src="images/properties/11.png">
-						<img class="workProperty" style="width:30%; margin:5px; " src="images/properties/13.png">
-						<img class="workProperty" style="width:30%; margin:5px; " src="images/properties/14.png">
+						<img class="workProperty workPropertySelected" src="images/properties/11.png">
+						<img class="workProperty" src="images/properties/13.png">
+						<img class="workProperty" src="images/properties/14.png">
 						<hr>
-						<img class="workProperty" style="width:30%; " src="images/properties/19.png">
+						<img class="workProperty"  src="images/properties/19.png">
 					</div>
 				</div>
 

@@ -10,6 +10,8 @@ function startGame()
 	$("#btnLogs").css("display","");
 	$("#saveGame").prop('disabled', false); 
 
+	setupTrade();
+	setupChanceChest();
 	gameStarted = true;
 }
 
@@ -221,7 +223,7 @@ function moveAheadWithGO(endPos)
 			else if(players[currPlayer].position < 40)
 				players[currPlayer].position = 0;
 		}
-		
+
 		if(players[currPlayer].position == 40 || players[currPlayer].position == 0)
 		{
 			players[currPlayer].position = 0;
@@ -366,6 +368,13 @@ function refreshGameUI()
 		i += 1;
 	}
 	
+	var prevPlayer = currPlayer - 1;
+	if(prevPlayer == -1) prevPlayer = nmbrOfPlayers-1;
+	$("#"+players[prevPlayer].color+"Data").removeClass("currChanceData");
+	$("#"+players[currPlayer].color+"Data").addClass("currChanceData");
+	
+	$(".currentChanceBtns").appendTo("#"+players[currPlayer].color+"Data");
+	consecutiveDoubles = 0;
 }
 
 
@@ -392,9 +401,7 @@ $(document).ready(function()
 	$("#start").click(function()
 	{
 		setupPlayers();
-		setupTrade();
 		startGame();
-		setupChanceChest();
 	});
 
 

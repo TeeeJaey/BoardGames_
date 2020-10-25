@@ -72,7 +72,6 @@ $(document).ready(function()
 						if(gameLoaded)
 						{
 							console.log('Loaded game = ', loadedGame);
-							setupTrade();
 							startGame();
 
 							$("#loadGameModal").modal('hide');
