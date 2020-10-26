@@ -19,7 +19,8 @@ class Player
 	refreshCityGroups()
 	{
 		this.cityGroups = [];
-		this.properties.sort();
+		this.properties = removeDuplicates(this.properties);
+		this.properties.sort(function(a, b){return a - b});
 		var i = 1;
 		while(i < propertyColorGroups.length)
 		{

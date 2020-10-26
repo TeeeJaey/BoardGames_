@@ -34,6 +34,13 @@ class Work
         $("#workPropertyContainer").empty();
     }
     
+    appendHorizontalLine()
+    {
+        var hr = document.createElement('hr');
+        $("#workPropertyContainer").append(hr);
+        return;
+    }
+    
     getWorkCardImage(cardNumber)
     {
         var cardImg = document.createElement('img');
@@ -74,10 +81,10 @@ class Work
 
     addBuildCards()
     {
-        
         var i = 0;
         while(i < players[this.worker].cityGroups.length)
         {
+            var putHR = false;
             var grp = players[this.worker].cityGroups[i];
             
             var j = 0;
@@ -88,15 +95,14 @@ class Work
                 {
                     var cardImg = this.getWorkCardImage(propertyNumber);
                     $("#workPropertyContainer").append(cardImg);
+                    putHR = true;
                 }
                 j += 1;
             }
-
-            var hr = document.createElement('hr');
-            $("#workPropertyContainer").append(hr);
             i += 1;
+            if(putHR)
+                this.appendHorizontalLine();
         }
-
     }
     
     addSellCards()
@@ -104,6 +110,7 @@ class Work
         var i = 0;
         while(i < players[this.worker].cityGroups.length)
         {
+            var putHR = false;
             var grp = players[this.worker].cityGroups[i];
             
             var j = 0;
@@ -114,64 +121,97 @@ class Work
                 {
                     var cardImg = this.getWorkCardImage(propertyNumber);
                     $("#workPropertyContainer").append(cardImg);
+                    putHR = true;
                 }
                 
                 j += 1;
             }
-
-            var hr = document.createElement('hr');
-            $("#workPropertyContainer").append(hr);
             i += 1;
+            if(putHR)
+                this.appendHorizontalLine();
         }
     }
     
     addRedeemCards()
     {
-        var i = 0;
-        while(i < players[this.worker].cityGroups.length)
+        var i = 1;
+        while(i < propertyColorGroups.length)
         {
-            var grp = players[this.worker].cityGroups[i];
-            
+            var putHR = false;
+
             var j = 0;
-            while(j < propertyColorGroups[grp].length)
+            while(j < propertyColorGroups[i].length)
             {
-                var propertyNumber = propertyColorGroups[grp][j];
-                if(board[propertyNumber].isMortgaged)
+                var propertyNumber = propertyColorGroups[i][j];
+                if(players[this.worker].properties.includes(propertyNumber) && board[propertyNumber].isMortgaged)
                 {
                     var cardImg = this.getWorkCardImage(propertyNumber);
                     $("#workPropertyContainer").append(cardImg);
+                    putHR = true;
                 }
                 j += 1;
             }
-
-            var hr = document.createElement('hr');
-            $("#workPropertyContainer").append(hr);
             i += 1;
+            if(putHR)
+                this.appendHorizontalLine();
         }
     }
 
     addMortgageCards()
     {
-        var i = 0;
-        while(i < players[this.worker].cityGroups.length)
+        var i = 1;
+        while(i < propertyColorGroups.length)
         {
-            var grp = players[this.worker].cityGroups[i];
-            
+            var putHR = false;
+
             var j = 0;
-            while(j < propertyColorGroups[grp].length)
+            while(j < propertyColorGroups[i].length)
             {
-                var propertyNumber = propertyColorGroups[grp][j];
-                if(board[propertyNumber].isMortgageable())
+                var propertyNumber = propertyColorGroups[i][j];
+                if(players[this.worker].properties.includes(propertyNumber) && board[propertyNumber].isMortgageable())
                 {
                     var cardImg = this.getWorkCardImage(propertyNumber);
                     $("#workPropertyContainer").append(cardImg);
+                    putHR = true;
                 }
                 j += 1;
             }
-            var hr = document.createElement('hr');
-            $("#workPropertyContainer").append(hr);
             i += 1;
+            if(putHR)
+                this.appendHorizontalLine();
         }
+        
+        var putHR = false;
+        var i = 5;
+        while(i < 36)
+        {
+            if(board[i].owner == this.worker)
+            { 
+                var cardImg = this.getWorkCardImage(i);
+                $(cardImg).css("max-width","22%");
+                $("#workPropertyContainer").append(cardImg);
+                putHR = true;
+            }
+            i += 10;
+        }
+        if(putHR)
+            this.appendHorizontalLine();
+
+        var putHR = false;
+        if(board[12].owner == this.worker)
+        { 
+            var cardImg = this.getWorkCardImage(12);
+            $("#workPropertyContainer").append(cardImg);
+            putHR = true;
+        }
+        if(board[28].owner == this.worker)
+        { 
+            var cardImg = this.getWorkCardImage(28);
+            $("#workPropertyContainer").append(cardImg);
+            putHR = true;
+        }
+        if(putHR)
+            this.appendHorizontalLine();
     }
 
     refreshWorkContainer(task)
@@ -309,6 +349,8 @@ class Work
         {
             $("#workChangeAmount").css("color","green");
         }
+
+        return;
     }
 
     finishWork()
@@ -430,7 +472,6 @@ $(document).ready(function()
         work.startWork();
     });
 
-    
 	$('input[name=workRadioBtns]').change(function() {
         work.refreshWorkContainer( $("input[name='workRadioBtns']:checked").val() );
     });
@@ -444,7 +485,6 @@ $(document).ready(function()
         
         work.selectProperty();
     });
-
 
 	$("#btnWorkConfirm").click(function()
     { 
