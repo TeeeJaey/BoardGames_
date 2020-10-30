@@ -63,7 +63,6 @@
 			<img src="images/green.PNG" id="GreenCoin" class="coin" >
 			<img src="images/blue.PNG" id="BlueCoin" class="coin" >
 			<img src="images/yellow.PNG" id="YellowCoin" class="coin" >
-
 		</div>
 		
 		<div id="allControls">
@@ -94,74 +93,95 @@
 			<div id="gameControls">
 
 				<div class="playerData currChanceData" id="RedData"  >
-                    <img src="images/red.PNG" id="RedDataCoin" class="dataCoin" >
-                    <img src="images/city.png"  class="cityIcon" >
-                    <div class="cityValue" id="RedCityValue" > 0 </div>
-                    <img src="images/bldgs/red0.png"  class="houseIcon" >
-                    <div class="houseValue" id="RedHouseValue" > 0 </div>
-                    <img src="images/bldgs/redH.png"  class="hotelIcon" >
-                    <div class="hotelValue" id="RedHotelValue" > 0 </div>
-                    <img src="images/money.png"  class="moneyIcon" >
-					<div class="moneyValue" id="RedMoneyValue" > &#x20b9; 1000</div>
+					<div id="RedBankruptOverlay" >
+						<img src="images/red.PNG" id="RedDataCoin" class="dataCoin" >
+						<img src="images/city.png"  class="cityIcon" >
+						<div class="cityValue" id="RedCityValue" > 0 </div>
+						<img src="images/bldgs/red0.png"  class="houseIcon" >
+						<div class="houseValue" id="RedHouseValue" > 0 </div>
+						<img src="images/bldgs/redH.png"  class="hotelIcon" >
+						<div class="hotelValue" id="RedHotelValue" > 0 </div>
+						<img src="images/money.png"  class="moneyIcon" >
+						<div class="moneyValue" id="RedMoneyValue" > &#x20b9; 1000</div>
+					</div>
 					<div class="currentChanceBtns">
 						<button id="btnWork" class="btn btn-primary" > Work </button>
 						<button id="btnDone" class="btn btn-primary" > Done </button>
 					</div>
+					<div class="bankruptData" id="RedBankruptData" >
+						<div id="RedBankruptLabel" > B A N K R U P T </div> 
+						<div id="RedBankruptRank" > Rank : X </div> 
+					</div>
                 </div>
 
-				<div class="playerData" id="GreenData" >
-                    <img src="images/green.PNG" id="GreenDataCoin" class="dataCoin" >
-                    <img src="images/city.png"  class="cityIcon" >
-                    <div class="cityValue" id="GreenCityValue" > 0 </div>
-                    <img src="images/bldgs/green0.png"  class="houseIcon" >
-                    <div class="houseValue" id="GreenHouseValue" > 0 </div>
-                    <img src="images/bldgs/greenH.png"  class="hotelIcon" >
-                    <div class="hotelValue" id="GreenHotelValue" > 0 </div>
-                    <img src="images/money.png"  class="moneyIcon" >
-                    <div class="moneyValue" id="GreenMoneyValue" > &#x20b9; 1000</div>
-
-                </div>
+				<div class="playerData " id="GreenData" >
+					<div id="GreenBankruptOverlay"  >
+						<img src="images/green.PNG" id="GreenDataCoin" class="dataCoin" >
+						<img src="images/city.png"  class="cityIcon" >
+						<div class="cityValue" id="GreenCityValue" > 0 </div>
+						<img src="images/bldgs/green0.png"  class="houseIcon" >
+						<div class="houseValue" id="GreenHouseValue" > 0 </div>
+						<img src="images/bldgs/greenH.png"  class="hotelIcon" >
+						<div class="hotelValue" id="GreenHotelValue" > 0 </div>
+						<img src="images/money.png"  class="moneyIcon" >
+						<div class="moneyValue" id="GreenMoneyValue" > &#x20b9; 1000</div>
+					</div>
+					<div class="bankruptData" id="GreenBankruptData" >
+						<div id="GreenBankruptLabel" > B A N K R U P T </div> 
+						<div id="GreenBankruptRank" > Rank : X </div> 
+					</div>
+				</div>
 
 				<div class="playerData" id="BlueData" >
-                    <img src="images/blue.PNG" id="BlueDataCoin" class="dataCoin" >
-                    <img src="images/city.png"  class="cityIcon" >
-                    <div class="cityValue" id="BlueCityValue" > 0 </div>
-                    <img src="images/bldgs/blue0.png"  class="houseIcon" >
-                    <div class="houseValue" id="BlueHouseValue" > 0 </div>
-                    <img src="images/bldgs/blueH.png"  class="hotelIcon" >
-                    <div class="hotelValue" id="BlueHotelValue" > 0 </div>
-                    <img src="images/money.png"  class="moneyIcon" >
-                    <div class="moneyValue" id="BlueMoneyValue" > &#x20b9; 1000</div>
-
-                </div>
+					<div id="BlueBankruptOverlay"  >
+						<img src="images/blue.PNG" id="BlueDataCoin" class="dataCoin" >
+						<img src="images/city.png"  class="cityIcon" >
+						<div class="cityValue" id="BlueCityValue" > 0 </div>
+						<img src="images/bldgs/blue0.png"  class="houseIcon" >
+						<div class="houseValue" id="BlueHouseValue" > 0 </div>
+						<img src="images/bldgs/blueH.png"  class="hotelIcon" >
+						<div class="hotelValue" id="BlueHotelValue" > 0 </div>
+						<img src="images/money.png"  class="moneyIcon" >
+						<div class="moneyValue" id="BlueMoneyValue" > &#x20b9; 1000</div>
+					</div>
+					<div class="bankruptData" id="BlueBankruptData" >
+						<div id="BlueBankruptLabel" > B A N K R U P T </div> 
+						<div id="BlueBankruptRank" > Rank : X </div> 
+					</div>
+				</div>
 
 				<div class="playerData" id="YellowData" >
-                    <img src="images/yellow.PNG" id="YellowDataCoin" class="dataCoin" >
-                    <img src="images/city.png"  class="cityIcon" >
-                    <div class="cityValue" id="YellowCityValue" > 0 </div>
-                    <img src="images/bldgs/yellow0.png"  class="houseIcon" >
-                    <div class="houseValue" id="YellowHouseValue" > 0 </div>
-                    <img src="images/bldgs/yellowH.png"  class="hotelIcon" >
-                    <div class="hotelValue" id="YellowHotelValue" > 0 </div>
-                    <img src="images/money.png"  class="moneyIcon" >
-                    <div class="moneyValue" id="YellowMoneyValue" > &#x20b9; 1000</div>
-                </div>
-                
-                <hr>
+					<div id="YellowBankruptOverlay"  >
+						<img src="images/yellow.PNG" id="YellowDataCoin" class="dataCoin" >
+						<img src="images/city.png"  class="cityIcon" >
+						<div class="cityValue" id="YellowCityValue" > 0 </div>
+						<img src="images/bldgs/yellow0.png"  class="houseIcon" >
+						<div class="houseValue" id="YellowHouseValue" > 0 </div>
+						<img src="images/bldgs/yellowH.png"  class="hotelIcon" >
+						<div class="hotelValue" id="YellowHotelValue" > 0 </div>
+						<img src="images/money.png"  class="moneyIcon" >
+						<div class="moneyValue" id="YellowMoneyValue" > &#x20b9; 1000</div>
+					</div>
+					<div class="bankruptData" id="YellowBankruptData" >
+						<div id="YellowBankruptLabel" > B A N K R U P T </div> 
+						<div id="YellowBankruptRank" > Rank : X </div> 
+					</div>
+				</div>
+				
+				<hr>
                 
 				<div id="diceContainer">
 					<img src="images/dice/dice1.PNG" class="dice" id="dice1" >
 					<img src="images/dice/dice6.PNG" class="dice" id="dice2" >
-                </div>
+					
+					<button id="btnRestartGame" class="btn btn-primary" 
+						style="font-size: 30px;  display: none;" 
+						onclick="document.location.reload(true)" >
+							Start New Game 
+					</button>
+				
+				</div>
                 
-			</div>
-
-
-			<div id="endControls">
-				<h3 id="endInstruct">Red Wins !!!</h3>
-				<hr>
-				<br>
-				<button id="restart" class="btn btn-secondary" onclick="document.location.reload(true)"> Play again </button>
 			</div>
 
 		</div>

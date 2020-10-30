@@ -1,6 +1,7 @@
 body
 {	background-color : #fff5d7;
 	text-align:center;
+	padding:0px;
 }
 .board ,#theBoard
 {
@@ -41,7 +42,7 @@ body
 #btnMenu
 {
 	font-size: 26px;
-	width : 200px;
+	width : 180px;
 	position : absolute;
 	top: 50px;
 	right : 0%;
@@ -56,8 +57,9 @@ body
 }
 .menuBtns
 {
-	width : 200px;
+	width : 180px;
 	font-size: 26px;
+	margin-left:20px;
 }
 
 #restart, #start 
@@ -105,6 +107,7 @@ body
     margin: 15px;
     position: relative;
 }
+
 .dataCoin
 {
 	width : 40px;
@@ -275,6 +278,26 @@ body
 }
 
 
+.workProperty
+{   
+	max-width: 30%;
+    margin: 5px;
+    cursor: pointer;
+    max-height: 95%;
+}
+
+.workPropertySelected
+{
+	opacity:25%;
+    border: 5px solid black;
+}
+.workRadioBtns
+{
+    font-size: 15px;
+    width: 101px;
+    margin: 10px;
+    padding: 10px;
+}
 #btnTrade
 {
 	font-size: 30px;
@@ -324,7 +347,7 @@ body
 	cursor:pointer;
 	margin:10px;
 }
-.tradeImageSelected
+.tradeImageSelected 
 {
 	opacity:25%;
     border: 5px solid black;
@@ -335,6 +358,30 @@ body
 	width: 90%;
 	padding: 10px ;
 	margin-top: 10%;
+}
+
+
+.bankruptOverlay
+{
+	background-color: rgba(0,0,0);
+	opacity: 35%;
+	height: 100%;
+	width: 100%;
+}
+.bankruptData
+{
+	display: none;
+	background-color: #a22;
+	border-radius: 250px;
+	z-index: 12;
+	opacity: 100%;
+	color : white;
+	font-size: 32px;
+	font-weight: bold;
+	width: 70%;
+    margin: auto;
+	position : relative;
+	top : -95px;
 }
 
 @media (max-width: 1200px) {

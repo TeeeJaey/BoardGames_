@@ -23,7 +23,17 @@ class Auction
             this.auctionPlayers = [0,1,2];
         if(parseInt(nmbrOfPlayers) == 4)
             this.auctionPlayers = [0,1,2,3];
-            
+
+        var i = 0;
+        while(i < this.auctionPlayers.length)   // remove bankrupt players
+        {
+            var num = this.auctionPlayers[i];
+            if(players[num].bankrupt)
+                this.auctionPlayers.splice(i, 1);
+            else 
+                i+=1;
+        }
+
         $("#imagePropertyAuction").attr("src",auctionProperty.cardImage);
         $("#PropertySaleModal").modal('hide');
 

@@ -5,7 +5,6 @@ function startGame()
 	
 	$("#startcontrols").css("display","none");
 	$("#gameControls").css("display","");
-	$("#endControls").css("display","none");
 	$("#btnTrade").css("display","");
 	$("#btnLogs").css("display","");
 	$("#saveGame").prop('disabled', false); 
@@ -84,7 +83,7 @@ function play()
 			}
 			else
 				isChanceOn = false;
-		})
+		});
 
 	} 
 	else
@@ -110,7 +109,7 @@ function play()
 				confirmButtonColor: '#3085d6',
 				confirmButtonText: 'OK',
 				allowOutsideClick: false
-			})
+			});
 			consecutiveDoubles = 0;
 		}
 	}
@@ -310,6 +309,14 @@ function checkCell()
 					allowOutsideClick: false
 				});
 			}
+			if(cell.position == 4 || cell.position == 38)
+			{
+				var taxAmt = cell.position == 4 ? 200 : 100;
+				var log = new Log(currPlayer,-1,taxAmt,cell.cellName);
+				log.prependLogDiv();
+				log.performTransaction();
+				log.displayLog();
+			}
 			if(cell.position == 30)
 				moveBackWithoutGO(10);
 		}
@@ -322,7 +329,6 @@ function checkCell()
 
 function changePlayer()
 {
-	
 	$("#"+players[currPlayer].color+"Data").removeClass("currChanceData");
 
 	currPlayer+=1;
@@ -333,7 +339,11 @@ function changePlayer()
 	
 	$(".currentChanceBtns").appendTo("#"+players[currPlayer].color+"Data");
 	consecutiveDoubles = 0;
+
+	if(players[currPlayer].bankrupt)
+		changePlayer();
 }
+
 
 function refreshGameUI()
 {
@@ -375,6 +385,45 @@ function refreshGameUI()
 	consecutiveDoubles = 0;
 }
 
+function getRank()
+{
+	var rank = nmbrOfPlayers;
+	var i = 0
+	while(i < nmbrOfPlayers)
+	{
+		if(players[i].bankrupt) 
+			rank-=1;
+		i += 1;
+	}
+	return rank;
+}
+
+function endGame()
+{
+	$(".currentChanceBtns").remove();
+	$("#btnTrade").prop('disabled', true); 
+
+	$(".dice").remove();
+	$("#btnRestartGame").css("display", "");
+	$("#saveGame").prop('disabled', true); 
+
+	gameOver = true;
+	var i = 0;
+	while(i < nmbrOfPlayers)
+	{
+		if(!players[i].bankrupt)
+		{
+			$("#" + players[i].color + "BankruptLabel")[0].innerHTML = "W I N N E R"; 
+			$("#" + players[i].color + "BankruptData").css("background-color","#2a2")
+
+			players[i].bankruptPlayer(i, 1);
+		}
+		$("#"+players[i].color+"Data").removeClass("currChanceData");
+		i += 1;
+	}
+
+	return;
+}
 
 $(document).ready(function()
 {
@@ -391,7 +440,6 @@ $(document).ready(function()
 	$("#saveGame").prop('disabled', true); 
 
 	//#endregion "Initial displays"
-
 
 	setupBoard();
 	//#region "Game Functions"
@@ -414,6 +462,27 @@ $(document).ready(function()
 			return;
 		if(isChanceOn)
 			return;
+
+		if(players[currPlayer].money < 0)
+		{
+
+			Swal.fire({
+				title: "Low on Cash!",
+				text: "You can Mortgage, Sale or Trade out your properties to get cash",
+				confirmButtonColor: '#d33',
+				showCancelButton: true,
+				confirmButtonText: 'Declare Bankrupt',
+				cancelButtonColor: '#3085d6',
+				cancelButtonText: 'Get Cash',
+			}).then((result) => 
+			{
+				if (result.isConfirmed) 
+				{
+					players[currPlayer].bankruptPlayer(currPlayer, getRank());
+				}
+			});
+			return;
+		}
 
 		diceRolled = true;
 		rollDice();

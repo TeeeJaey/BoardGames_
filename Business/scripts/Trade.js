@@ -155,6 +155,8 @@ $(document).ready(function()
 
 	$("#btnTrade").click(function()
 	{
+		if(gameOver)
+			return;
 		$("#TradeTray").animate({"right":"0%"});
 		setupTrade();
 		refreshTradeCards(true);

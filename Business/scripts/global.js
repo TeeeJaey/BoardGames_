@@ -30,8 +30,3 @@ const propertyColorGroups = [[],[1,3],[6,8,9],[11,13,14],[16,18,19],[21,23,24],[
 
 //#endregion "Constants"
 
-
-function removeDuplicates(arr)
-{
-    return arr.filter((value,index)=> arr.indexOf(value) === index);
-}
