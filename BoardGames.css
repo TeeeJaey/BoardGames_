@@ -1,6 +1,6 @@
 body
 {
-    background-color: black;
+    background-color: #333;
     background-image: "images/boardGames.jpg";
 }
 
@@ -10,4 +10,25 @@ body
     margin-top:-20px;
     z-index: -5;
     width:100%
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding-bottom: 5px;
+    padding: 0px 10px; 
+    font-size: 20px
+}
+
+.footerLinks
+{
+    text-decoration: inherit !important;
+    color: inherit;
+    padding: 0px 10px; 
+    font-size: 22px
 }
