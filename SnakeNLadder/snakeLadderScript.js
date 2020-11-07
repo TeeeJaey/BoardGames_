@@ -55,7 +55,7 @@ $(document).ready(function()
 	{
 		var t = 535;
 		var l = -50;
-		var d = 59;
+		var d = 60;
 		board.push(new Cell(0, t, l, null));
 		var dirleft = false;
 		var i = 1;
@@ -245,6 +245,7 @@ $(document).ready(function()
 	
 	function moveCoin(currCoin)
 	{
+		
 		if(players[currPlayer].position + diceVal > 100)
 		{
 			changePlayer();

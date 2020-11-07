@@ -32,3 +32,32 @@ body
     padding: 0px 10px; 
     font-size: 22px
 }
+
+.searchLinks
+{
+    position: fixed;
+    width: 110%;
+    margin: 5%;
+    height: 500px;
+    overflow-y:auto;
+}
+
+.searchLink
+{
+    display: inline-block;
+    font-size: 22px;
+    height: 175px;
+    width: 200px;
+    margin: 20px;
+    text-align: center;
+    padding-top: 70px;
+    background-color: rgb(0,0,0,0.5);
+    border : 2px solid white;
+    color :  white;
+}
+.searchLink:hover
+{
+    color :  white;
+    background-color: rgb(0,0,0,0.8);
+    text-decoration: none;
+}

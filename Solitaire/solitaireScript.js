@@ -4,7 +4,8 @@ $(document).ready(function()
 	var gameOver = false;
 	var backImg = "back.PNG";
 	var reshowImg = "reshow.PNG";
-	
+	$('#gameUnderDev').css("display","");
+
 	var suits = ["s", "d", "c", "h"];
 	var values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 	

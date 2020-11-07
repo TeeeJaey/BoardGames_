@@ -20,6 +20,7 @@
 				<a class="navbar-brand" style="font-size: 22px;" href="BoardGames.html">Board Games</a>
 			  </div>
 
+
 			  <ul class="nav navbar-nav navbar-right"   >
 				<li class="dropdown">
 				  <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size: 22px;" > Choose Game
@@ -30,14 +31,46 @@
 					<li><a href="Solitaire/Solitaire.html" style="font-size: 22px;">Solitaire</a></li>
 					<li><a href="Connect4/Connect4.html" style="font-size: 22px;">Connect 4</a></li>
 					<li><a href="Business/Business.html" style="font-size: 22px;">Business</a></li>
+					<li><a href="Sudoku/sudoku.html" style="font-size: 22px;">Sudoku</a></li>
 				  </ul>
 				</li>
 			  </ul>
+
+			  
+				<div class="navbar-form navbar-right" style="font-size: 20px;"  >
+				  <input type="text"id="searchInput"   placeholder="Search game">
+				  <button id="searchSubmit" type="submit" class="btn btn-default">
+					  <i style="font-size: 20px;" class="fa fa-search"></i>
+				  </button>
+				</div>
+
 			</div>
 		  </nav>  
 
 		  <img class="backgroundImage" src="images/boardGames.jpg" />
 
+		<div class="searchLinks">
+			<div  id="gameList" style="width:80%">
+				<a href="Minesweeper/Minesweeper.html" class="searchLink">
+					Minesweeper 
+				</a>
+				<a href="SnakeNLadder/SnakeLadder.html" class="searchLink">
+					Snake & Ladder
+				</a>
+				<a href="Solitaire/Solitaire.html" class="searchLink">
+					Solitaire
+				</a>
+				<a href="Connect4/Connect4.html" class="searchLink">
+					Connect 4
+				</a>
+				<a href="Business/Business.html" class="searchLink">
+					Business 
+				</a>
+				<a href="Sudoku/sudoku.html" class="searchLink">
+					Sudoku 
+				</a> 
+			</div>
+		</div>
 		
 		<div class="footer" >
 			<div>Developed by - Tejas Jadhav</div>
@@ -56,4 +89,41 @@
 		</div>
 	</body>
 	
+
+		
+	<script>
+			
+		$(document).ready(function()
+		{
+			
+			$("#searchSubmit").click(function()
+			{
+				var a, i, txtValue;
+				var input = document.getElementById("searchInput");
+				var filter = input.value.toUpperCase();
+				var ul = document.getElementsById("gameList");
+				var varli = ul.getElementsByTagName("li");
+				var li = ul.getElementsByTagName("li");
+
+				for (i = 0; i < li.length; i++) 
+				{
+					a = li[i].getElementsByTagName("a")[0];
+					txtValue = a.textContent || a.innerText;
+
+					if (txtValue.toUpperCase().indexOf(filter) > -1) 
+					{
+						li[i].style.display = "";
+					}
+					else 
+					{
+						li[i].style.display = "none";
+					}
+				}
+
+			});
+		});
+
+	</script>
+
+
 </html>
