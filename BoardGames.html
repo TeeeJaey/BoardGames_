@@ -9,8 +9,8 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+		<script type="text/javascript" src="BoardGames.js"></script>
 		<link type="text/css" rel="stylesheet" href="BoardGames.css">
-		
 	</head>
 	
 	<body>		
@@ -36,37 +36,35 @@
 				</li>
 			  </ul>
 
-			  
-				<div class="navbar-form navbar-right" style="font-size: 20px;"  >
-				  <input type="text"id="searchInput"   placeholder="Search game">
+			   <div class="navbar-form navbar-right" id="searchForm" style="font-size: 20px;"  >
+				  <input type="text" id="searchInput" placeholder="Search game">
 				  <button id="searchSubmit" type="submit" class="btn btn-default">
 					  <i style="font-size: 20px;" class="fa fa-search"></i>
 				  </button>
 				</div>
-
 			</div>
-		  </nav>  
+		</nav>  
 
-		  <img class="backgroundImage" src="images/boardGames.jpg" />
+		<img class="backgroundImage" src="images/boardGames.jpg" />
 
 		<div class="searchLinks">
 			<div  id="gameList" style="width:80%">
-				<a href="Minesweeper/Minesweeper.html" class="searchLink">
+				<a id="Minesweeper" href="Minesweeper/Minesweeper.html" class="searchLink">
 					Minesweeper 
 				</a>
-				<a href="SnakeNLadder/SnakeLadder.html" class="searchLink">
+				<a id="SnakeLadder" href="SnakeNLadder/SnakeLadder.html" class="searchLink">
 					Snake & Ladder
 				</a>
-				<a href="Solitaire/Solitaire.html" class="searchLink">
+				<a id="Solitaire" href="Solitaire/Solitaire.html" class="searchLink">
 					Solitaire
 				</a>
-				<a href="Connect4/Connect4.html" class="searchLink">
+				<a id="Connect4" href="Connect4/Connect4.html" class="searchLink">
 					Connect 4
 				</a>
-				<a href="Business/Business.html" class="searchLink">
+				<a id="Business" href="Business/Business.html" class="searchLink">
 					Business 
 				</a>
-				<a href="Sudoku/sudoku.html" class="searchLink">
+				<a id="Sudoku" href="Sudoku/sudoku.html" class="searchLink">
 					Sudoku 
 				</a> 
 			</div>
@@ -85,45 +83,8 @@
 					<i class="fa fa-envelope" ></i>
 				</a>
 			</div>
-			
 		</div>
+
 	</body>
 	
-
-		
-	<script>
-			
-		$(document).ready(function()
-		{
-			
-			$("#searchSubmit").click(function()
-			{
-				var a, i, txtValue;
-				var input = document.getElementById("searchInput");
-				var filter = input.value.toUpperCase();
-				var ul = document.getElementsById("gameList");
-				var varli = ul.getElementsByTagName("li");
-				var li = ul.getElementsByTagName("li");
-
-				for (i = 0; i < li.length; i++) 
-				{
-					a = li[i].getElementsByTagName("a")[0];
-					txtValue = a.textContent || a.innerText;
-
-					if (txtValue.toUpperCase().indexOf(filter) > -1) 
-					{
-						li[i].style.display = "";
-					}
-					else 
-					{
-						li[i].style.display = "none";
-					}
-				}
-
-			});
-		});
-
-	</script>
-
-
 </html>
