@@ -97,7 +97,12 @@ class Player
 		this.money = parseInt(loadedPlayerObj.money);
 		this.properties = loadedPlayerObj.properties;
 		this.cityGroups = loadedPlayerObj.cityGroups;
+		this.houseCount = parseInt(loadedPlayerObj.houseCount);
+		this.hotelCount = parseInt(loadedPlayerObj.hotelCount);
 		this.inJail = loadedPlayerObj.inJail;
+		this.bankrupt = loadedPlayerObj.bankrupt;
+		this.finalRank = loadedPlayerObj.finalRank;
+
 		return;
 	}
 }
