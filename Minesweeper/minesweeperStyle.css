@@ -1,0 +1,78 @@
+body
+{	background-color : #fef6dd;
+	text-align:center;
+}
+table
+{
+	margin: auto;
+}
+td button
+{
+	font-size : 25px;
+	width: 60px;
+	height: 60px;
+	border-radius: 20%;
+	border: 1px solid black;
+	background-color : #aaa; 
+}
+
+#theBoard
+{
+	position : absolute;
+	left :10%;
+}
+
+#restart, #start 
+{
+	width:	150px;
+	height: 70px;
+	font-size: 20px;
+}
+button:active
+{
+	background-color: grey;
+}
+
+#controls
+{	background-color : #dea6af;
+	font-size: 22px;
+	border: 1px solid black;
+	width:	700px;
+	margin:auto;
+}
+#markMine
+{	
+	width:	22px;
+	height: 22px;
+	cursor: pointer;
+}
+
+#controls
+{
+	background-color : #ff5e6c;
+	font-size: 22px;
+	position : absolute;
+	top: 100px;
+	left : 55%;
+	width:	500px;
+	padding:20px;
+	margin:auto;
+}
+#instruct
+{
+	background-color : #fff5d7;
+	padding : 30px;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+
+@media (max-width: 1200px) {
+
+	#controls
+	{
+		position : absolute;
+		top: 800px;
+		left : 10%;
+	}
+  }

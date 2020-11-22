@@ -1,0 +1,422 @@
+<html>
+	<head>
+		<title>	Business </title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+		
+		<!-- Custom Scripts -->
+		<script type="text/javascript" src="scripts/global.js"></script>
+
+		<script type="text/javascript" src="scripts/DTOs/Game.js"></script>
+		<script type="text/javascript" src="scripts/DTOs/Cell.js"></script>
+		<script type="text/javascript" src="scripts/DTOs/Player.js"></script>
+		<script type="text/javascript" src="scripts/DTOs/Log.js"></script>
+		<script type="text/javascript" src="scripts/DTOs/ChanceChest.js"></script>
+
+		<script type="text/javascript" src="scripts/Menu.js"></script>
+		<script type="text/javascript" src="scripts/Setup.js"></script>
+		<script type="text/javascript" src="scripts/gameFunctions.js"></script>
+		<script type="text/javascript" src="scripts/Work.js"></script>
+		<script type="text/javascript" src="scripts/Trade.js"></script>
+		<script type="text/javascript" src="scripts\Auction.js"></script>
+
+		<!-- Custom Styles -->
+		<link type="text/css" rel="stylesheet" href="BusinessStyle.css">
+
+	</head>
+	
+	<body>
+		
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid" >
+			  <div class="navbar-header" >
+				<a class="navbar-brand" style="font-size: 22px;" href="https://teeejaey.github.io/">Home</a>
+				<i class="fa fa-angle-right navbar-brand"  style="font-size: 22px;"></i>
+				<a class="navbar-brand" style="font-size: 22px;" href="../BoardGames.html">Board Games</a>
+				<i class="fa fa-angle-right navbar-brand"  style="font-size: 22px;"></i>
+				<a class="navbar-brand" style="font-size: 22px;" href="Business.html">Business</a>
+			  </div>
+
+			  <ul class="nav navbar-nav navbar-right"   >
+				<li class="dropdown">
+				  <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size: 22px;" > Choose Game
+				  <span class="caret"></span></a>
+				  <ul class="dropdown-menu">
+					<li><a href="../Minesweeper/Minesweeper.html" style="font-size: 22px;" >MineSweeper</a></li>
+					<li><a href="../SnakeNLadder/SnakeLadder.html" style="font-size: 22px;">Snake & Ladder</a></li>
+					<li><a href="../Solitaire/Solitaire.html" style="font-size: 22px;">Solitaire</a></li>
+					<li><a href="../Connect4/Connect4.html" style="font-size: 22px;">Connect 4</a></li>
+					<li><a href="../Business/Business.html" style="font-size: 22px;">Business</a></li>
+					<li><a href="../Sudoku/sudoku.html" style="font-size: 22px;">Sudoku</a></li>
+				  </ul>
+				</li>
+			  </ul>
+			</div>
+		</nav>  
+
+		<div id="theBoard">
+			<img src="images/board.png" class="board" >
+			<img src="images/red.png" id="redCoin" class="coin" >
+			<img src="images/green.png" id="greenCoin" class="coin" >
+			<img src="images/blue.png" id="blueCoin" class="coin" >
+			<img src="images/yellow.png" id="yellowCoin" class="coin" >
+		</div>
+		
+		<div id="allControls">
+			
+			<div id="startcontrols"> Number Of Players
+				<br>
+
+				<div class="btn-group btn-group-toggle" data-toggle="buttons">
+					<label class="btn btn-info active">
+					<input type="radio" name="nmbrOfPlayers" autocomplete="off" value="2" checked > 2
+					</label>
+				 
+					<label class="btn btn-info">
+					<input type="radio" name="nmbrOfPlayers" value="3" autocomplete="off"> 3
+					</label>
+				 
+					<label class="btn btn-info">
+					<input type="radio" name="nmbrOfPlayers" value="4" autocomplete="off"> 4
+					</label>
+				 </div>
+
+				<hr>
+
+				<button id="start" class="btn btn-default" > Start game </button>
+			</div>
+			
+
+			<div id="gameControls">
+
+				<div class="playerData currChanceData" id="redData"  >
+					<div id="redBankruptOverlay" >
+						<img src="images/red.png" id="redDataCoin" class="dataCoin" >
+						<img src="images/city.png"  class="cityIcon" >
+						<div class="cityValue" id="redCityValue" > 0 </div>
+						<img src="images/bldgs/red0.png"  class="houseIcon" >
+						<div class="houseValue" id="redHouseValue" > 0 </div>
+						<img src="images/bldgs/redH.png"  class="hotelIcon" >
+						<div class="hotelValue" id="redHotelValue" > 0 </div>
+						<img src="images/money.png"  class="moneyIcon" >
+						<div class="moneyValue" id="redMoneyValue" > &#x20b9; 1000</div>
+					</div>
+					<div class="currentChanceBtns">
+						<button id="btnWork" class="btn btn-primary" > Work </button>
+						<button id="btnDone" class="btn btn-primary" > Done </button>
+					</div>
+					<div class="bankruptData" id="redBankruptData" >
+						<div id="redBankruptLabel" > B A N K R U P T </div> 
+						<div id="redBankruptRank" > Rank : X </div> 
+					</div>
+                </div>
+
+				<div class="playerData " id="greenData" >
+					<div id="greenBankruptOverlay"  >
+						<img src="images/green.png" id="greenDataCoin" class="dataCoin" >
+						<img src="images/city.png"  class="cityIcon" >
+						<div class="cityValue" id="greenCityValue" > 0 </div>
+						<img src="images/bldgs/green0.png"  class="houseIcon" >
+						<div class="houseValue" id="greenHouseValue" > 0 </div>
+						<img src="images/bldgs/greenH.png"  class="hotelIcon" >
+						<div class="hotelValue" id="greenHotelValue" > 0 </div>
+						<img src="images/money.png"  class="moneyIcon" >
+						<div class="moneyValue" id="greenMoneyValue" > &#x20b9; 1000</div>
+					</div>
+					<div class="bankruptData" id="greenBankruptData" >
+						<div id="greenBankruptLabel" > B A N K R U P T </div> 
+						<div id="greenBankruptRank" > Rank : X </div> 
+					</div>
+				</div>
+
+				<div class="playerData" id="blueData" >
+					<div id="blueBankruptOverlay"  >
+						<img src="images/blue.png" id="blueDataCoin" class="dataCoin" >
+						<img src="images/city.png"  class="cityIcon" >
+						<div class="cityValue" id="blueCityValue" > 0 </div>
+						<img src="images/bldgs/blue0.png"  class="houseIcon" >
+						<div class="houseValue" id="blueHouseValue" > 0 </div>
+						<img src="images/bldgs/blueH.png"  class="hotelIcon" >
+						<div class="hotelValue" id="blueHotelValue" > 0 </div>
+						<img src="images/money.png"  class="moneyIcon" >
+						<div class="moneyValue" id="blueMoneyValue" > &#x20b9; 1000</div>
+					</div>
+					<div class="bankruptData" id="blueBankruptData" >
+						<div id="blueBankruptLabel" > B A N K R U P T </div> 
+						<div id="blueBankruptRank" > Rank : X </div> 
+					</div>
+				</div>
+
+				<div class="playerData" id="yellowData" >
+					<div id="yellowBankruptOverlay"  >
+						<img src="images/yellow.png" id="yellowDataCoin" class="dataCoin" >
+						<img src="images/city.png"  class="cityIcon" >
+						<div class="cityValue" id="yellowCityValue" > 0 </div>
+						<img src="images/bldgs/yellow0.png"  class="houseIcon" >
+						<div class="houseValue" id="yellowHouseValue" > 0 </div>
+						<img src="images/bldgs/yellowH.png"  class="hotelIcon" >
+						<div class="hotelValue" id="yellowHotelValue" > 0 </div>
+						<img src="images/money.png"  class="moneyIcon" >
+						<div class="moneyValue" id="yellowMoneyValue" > &#x20b9; 1000</div>
+					</div>
+					<div class="bankruptData" id="yellowBankruptData" >
+						<div id="yellowBankruptLabel" > B A N K R U P T </div> 
+						<div id="yellowBankruptRank" > Rank : X </div> 
+					</div>
+				</div>
+				
+				<hr>
+                
+				<div id="diceContainer">
+					<img src="images/dice/dice1.png" class="dice" id="dice1" >
+					<img src="images/dice/dice6.png" class="dice" id="dice2" >
+					
+					<button id="btnRestartGame" class="btn btn-primary" 
+						style="font-size: 30px;  display: none;" 
+						onclick="document.location.reload(true)" >
+							Start New Game 
+					</button>
+				
+				</div>
+                
+			</div>
+
+		</div>
+            
+		<button id="btnMenu"  class="btn btn-danger menuBtns" > Menu <i class="fa fa-bars" ></i> </button>
+		
+        <div id="menu" >
+			<button id="btnRules"  class="btn btn-danger menuBtns" > Rules ? </button>
+			<button id="saveGame"  class="btn btn-danger menuBtns" > Save game <i class="fa fa-download" ></i> </button>
+			<button id="loadGame"  class="btn btn-danger menuBtns" > Load game <i class="fa fa-upload" ></i></button>
+		</div>
+
+		<div id="allRules">
+            <div id="labelRules" class="row"> 
+                <div class="col-xs-10"> Rules </div>
+                <div class="col-xs-2" > <i  class="fa fa-times closeBox" id="closeRules" > </i> </div>
+            </div>   
+            <div id="rulesContainer">
+                <img class="imgRule" src="images/rules/rule1.png">
+                <img class="imgRule" src="images/rules/rule2.png">
+                <img class="imgRule" src="images/rules/rule3.png">
+                <img class="imgRule" src="images/rules/rule4.png">
+                <img class="imgRule" src="images/rules/rule5.png">
+                <img class="imgRule" src="images/rules/rule6.png">
+                <img class="imgRule" src="images/rules/rule7.png">
+                <img class="imgRule" src="images/rules/rule8.png">
+                <img class="imgRule" src="images/rules/rule9.png">
+                <img class="imgRule" src="images/rules/rule10.png">
+                <img class="imgRule" src="images/rules/rule11.png">
+                <img class="imgRule" src="images/rules/rule12.png">
+            </div>
+		</div>
+
+		<!-- Load game Modal -->
+		<div class="modal fade " style="margin-top: 200px" id="loadGameModal" tabindex="-1" role="dialog"  aria-hidden="true">
+			<div class="modal-dialog " role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" >Load Game</h3>
+				</div>
+				<div class="modal-body">
+					<input type="file" id= "loadGameFile" class="btn" accept="application/JSON" >
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal" style="width:150px">Cancel</button>
+					<button type="button" class="btn btn-success" id="loadGameSubmit" style="width:150px">Load Game</button>
+				</div>
+			</div>
+			</div>
+		</div>
+
+		<!-- Property Sale modal -->
+		<div class="modal fade " style="margin-top: 100px" id="PropertySaleModal" tabindex="-1" role="dialog"  aria-hidden="true">
+			<div class="modal-dialog " role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">Property Sale</h3>
+				</div>
+
+				<div class="modal-body">
+					<img style="width: 45%;float:left"  id="imagePropertySale" src="images/properties/1.png" >
+					<h3> <i class="fa fa-shopping-bag"></i> <span id="pursePropertySale" > 0 </span> </h3>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success" style="width:45%; height: 50px; font-size: 25px;" id="btnBuyProperty" style="width:150px">Buy</button>
+					<hr>
+					<button type="button" class="btn btn-danger" style="width:45%; height: 50px; font-size: 25px;" id="btnAuction" style="width:150px">Auction</button>
+				</div>
+			</div>
+			</div>
+		</div>
+
+		<!-- Property Auction modal -->
+		<div id="PropertyAuctionModal" class="modal fade" style="margin-top: 100px"  tabindex="-1" role="dialog"  aria-hidden="true">
+			<div class="modal-dialog" >
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-title">Property Auction</h3>
+					</div>
+					<div class="modal-body">
+						<img style="width: 45%;float:left"  id="imagePropertyAuction" src="images/properties/1.png" >
+						<img style="width: 85px; margin-left:20px; float:left; display: none;"  id="imageHighestBidder" src="images/red.png" >
+						<h3> <i class="fa fa-gavel"></i> <span id="currentBidAmt" > 0 </span> </h3>
+					</div>
+					<div class="modal-footer">	
+						<div style="width:45%; margin:15px 25px; float:left;  font-size:25px;" class="d-flex justify-content-center my-4" >
+							<span class="font-weight-bold" id="auctionBidLabel" style="color: black;margin-right:100px;">0</span>
+							<input type="range" class="custom-range" id="auctionBidSlider" >
+						</div>
+						<img style="width: 85px; margin-left:20px; float:left"  id="imageCurrentBider" src="images/blue.png" >
+						<button type="button" class="btn btn-success" style="width:25%; height: 45px; font-size: 22px;" id="btnBidInAuction" style="width:150px">Bid</button>
+						<hr>
+						<button type="button" class="btn btn-danger" style="width:25%; height: 45px; font-size: 22px;" id="btnFoldInAuction" style="width:150px">Fold</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<button id="btnLogs"  class="btn btn-danger" > Logs <i class="fa fa-book" ></i> </button>
+		<div id="allLogs">
+            <div id="labelLogs" class="row"> 
+                <div class="col-xs-10"> Logs </div>
+                <div class="col-xs-2" > <i  class="fa fa-times closeBox" id="closeLogs" > </i> </div>
+            </div>   
+            <div id="logsContainer">
+            </div>
+		</div>
+
+		<!-- Work Sale modal -->
+		<div class="modal fade " style="margin-top: 65px ; " id="workModal" tabindex="-1" role="dialog"  aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">Work on properties</h3>
+				</div>
+
+				<div class="modal-body">
+					<div style="font-size: 22px;">
+						<div style=" width:50%;float:left;"> <i class="fa fa-shopping-bag"></i> <span id="workWalletAmount" > 0 </span> </div>
+						<div  style=" width:50%;float:right;"> <i class="fa fa-exchange "></i> <span id="workChangeAmount" > 0 </span> </div>
+					</div>
+					<div class="btn-group" data-toggle="buttons" >
+						<label class="btn btn-info workRadioBtns active">
+						  <input type="radio" name="workRadioBtns" id="btnWorkBuild" value="build" checked> Build
+						</label>
+						<label class="btn btn-info workRadioBtns">
+						  <input type="radio" name="workRadioBtns" id="btnWorkSell" value="sell" > Sell
+						</label>
+						<label class="btn btn-info workRadioBtns">
+						  <input type="radio" name="workRadioBtns" id="btnWorkRedeem" value="redeem" > Redeem
+						</label>
+						<label class="btn btn-info workRadioBtns">
+						  <input type="radio" name="workRadioBtns" id="btnWorkMortgage" value="mortgage" > Mortgage
+						</label>
+					</div>
+
+					<div id="workPropertyContainer" style="margin-left:25px; width:90%; height: 300px; overflow-y:scroll; background-color:rgb(247, 211, 164);" >
+						<img class="workProperty" src="images/properties/37.png">
+						<img class="workProperty" src="images/properties/39.png">
+						<hr>
+						<img class="workProperty workPropertySelected" src="images/properties/11.png">
+						<img class="workProperty" src="images/properties/13.png">
+						<img class="workProperty" src="images/properties/14.png">
+						<hr>
+						<img class="workProperty"  src="images/properties/19.png">
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success"  id="btnWorkConfirm" style="width:30%; height: 40px; font-size: 20px;">Confirm</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal"  style="width:30%; height: 40px; font-size: 20px;">Cancel</button>
+				</div>
+			</div>
+			</div>
+		</div>
+
+
+        <button id="btnTrade"  class="btn btn-danger" > Trade <i class="fa fa-exchange" ></i> </button>
+		<div id="TradeTray">
+            <div class="row"> 
+                <div class="col-xs-6" > 
+					<div class="btn-group btn-group-toggle" data-toggle="buttons">
+						<label class="btn btn-info tradeBtns redTradeSelector active">
+							<input type="radio" name="tradeLeftPlayerSelector" value="0" autocomplete="off" checked > 
+							<img src="images/red.png" id="redCoin" class="tradeCoin" >
+						</label>
+						<label class="btn btn-info tradeBtns greenTradeSelector">
+							<input type="radio" name="tradeLeftPlayerSelector" value="1" autocomplete="off"> 
+							<img src="images/green.png" id="greenCoin" class="tradeCoin" >
+						</label>
+						<label class="btn btn-info tradeBtns blueTradeSelector">
+							<input type="radio" name="tradeLeftPlayerSelector" value="2" autocomplete="off"> 
+							<img src="images/blue.png" id="blueCoin" class="tradeCoin" >
+						</label>
+						<label class="btn btn-info tradeBtns yellowTradeSelector">
+							<input type="radio" name="tradeLeftPlayerSelector" value="3" autocomplete="off"> 
+							<img src="images/yellow.png" id="yellowCoin" class="tradeCoin" >
+						</label>
+					</div>
+					<div id="tradeLeftPropertyContainer">
+					</div>
+
+					<div class="d-flex justify-content-center my-4" >
+						<span class="font-weight-bold text-primary ml-2" id="tradeLeftAmountLabel" style="color: rgb(55, 255, 55);"></span>
+						<div class="w-75">
+							<input type="range" class="custom-range" id="tradeLeftAmountSlider" >
+						</div>
+					</div>
+				</div>
+				
+                <div class="col-xs-6"> 
+					<div class="btn-group btn-group-toggle" data-toggle="buttons">
+						<label class="btn btn-info tradeBtns redTradeSelector active">
+							<input type="radio" name="tradeRightPlayerSelector" value="0" autocomplete="off"checked > 
+							<img src="images/red.png" id="redCoin" class="tradeCoin" >
+						</label>
+						<label class="btn btn-info tradeBtns greenTradeSelector">
+							<input type="radio" name="tradeRightPlayerSelector" value="1" autocomplete="off"> 
+							<img src="images/green.png" id="greenCoin" class="tradeCoin" >
+						</label>
+						<label class="btn btn-info tradeBtns blueTradeSelector">
+							<input type="radio" name="tradeRightPlayerSelector" value="2" autocomplete="off"> 
+							<img src="images/blue.png" id="blueCoin" class="tradeCoin" >
+						</label>
+						<label class="btn btn-info tradeBtns yellowTradeSelector">
+							<input type="radio" name="tradeRightPlayerSelector" value="3" autocomplete="off"> 
+							<img src="images/yellow.png" id="yellowCoin" class="tradeCoin" >
+						</label>
+					</div>
+					<div id="tradeRightPropertyContainer">
+					</div>
+
+					<div class="d-flex justify-content-center my-4" >
+						<span class="font-weight-bold text-primary ml-2" id="tradeRightAmountLabel" style="color: rgb(55, 255, 55);"></span>
+						<div class="w-75">
+							<input type="range" class="custom-range" id="tradeRightAmountSlider" >
+						</div>
+					</div>
+				</div>
+            </div>   
+            
+			<div class="row"> 
+				<div class="col-xs-6"> 
+					<button id="confirmTrade"  class="btn btn-success" > Confirm  </button>
+				</div>
+					<div class="col-xs-6"> 
+					<button id="closeTrade"  class="btn btn-danger" > Cancel  </button>
+				</div>
+			</div>
+		</div>
+
+	</body>
+	
+</html>

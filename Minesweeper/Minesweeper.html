@@ -1,0 +1,178 @@
+<html>
+	<head>
+		<title>	MineSweeper </title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+		<script type="text/javascript" src="minesweeperScript.js"></script>
+		<link type="text/css" rel="stylesheet" href="minesweeperStyle.css">
+	</head>
+	
+	<body>
+
+		
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid" >
+			  <div class="navbar-header" >
+				<a class="navbar-brand" style="font-size: 22px;" href="https://teeejaey.github.io/">Home</a>
+				<i class="fa fa-angle-right navbar-brand"  style="font-size: 22px;"></i>
+				<a class="navbar-brand" style="font-size: 22px;" href="../BoardGames.html">Board Games</a>
+				<i class="fa fa-angle-right navbar-brand"  style="font-size: 22px;"></i>
+				<a class="navbar-brand" style="font-size: 22px;" href="Minesweeper.html">Minesweeper</a>
+			  </div>
+
+			  <ul class="nav navbar-nav navbar-right"   >
+				<li class="dropdown">
+				  <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size: 22px;" > Choose Game
+				  <span class="caret"></span></a>
+				  <ul class="dropdown-menu">
+					<li><a href="../Minesweeper/Minesweeper.html" style="font-size: 22px;" >MineSweeper</a></li>
+					<li><a href="../SnakeNLadder/SnakeLadder.html" style="font-size: 22px;">Snake & Ladder</a></li>
+					<li><a href="../Solitaire/Solitaire.html" style="font-size: 22px;">Solitaire</a></li>
+					<li><a href="../Connect4/Connect4.html" style="font-size: 22px;">Connect 4</a></li>
+					<li><a href="../Business/Business.html" style="font-size: 22px;">Business</a></li>
+					<li><a href="../Sudoku/sudoku.html" style="font-size: 22px;">Sudoku</a></li>
+				  </ul>
+				</li>
+			  </ul>
+			</div>
+		  </nav>  
+		<table id="theBoard">
+			<tr>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>	
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>				
+			</tr>
+			<tr>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>	
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>				
+			</tr>
+			<tr>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>	
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>				
+			</tr>
+			<tr>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>	
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>				
+			</tr>
+			<tr>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>	
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>				
+			</tr>
+			<tr>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>	
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>				
+			</tr>
+			<tr>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>	
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>				
+			</tr>
+			<tr>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>	
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>				
+			</tr>
+			<tr>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>	
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>				
+			</tr>
+			<tr>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>	
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>
+				<td><button type="button"></button></td>				
+			</tr>
+		</table>
+		
+		<div id="controls">
+			<h3 id="instruct"  >Start sweeping ...</h3>
+			<hr>
+			<input id="markMine" type="checkbox" > </input> Mark your Mines 
+			<hr>
+			<button id="restart" class="btn btn-default" onclick="document.location.reload(true)"> Restart game</button>
+		</div>
+		
+	</body>
+	
+</html>
