@@ -155,6 +155,38 @@ class Work
             if(putHR)
                 this.appendHorizontalLine();
         }
+        
+        var putHR = false;
+        var i = 5;
+        while(i < 36)
+        {
+            if(board[i].owner == this.worker && board[i].isMortgaged)
+            { 
+                var cardImg = this.getWorkCardImage(i);
+                $(cardImg).css("max-width","22%");
+                $("#workPropertyContainer").append(cardImg);
+                putHR = true;
+            }
+            i += 10;
+        }
+        if(putHR)
+            this.appendHorizontalLine();
+
+        var putHR = false;
+        if(board[12].owner == this.worker  && board[12].isMortgaged)
+        { 
+            var cardImg = this.getWorkCardImage(12);
+            $("#workPropertyContainer").append(cardImg);
+            putHR = true;
+        }
+        if(board[28].owner == this.worker && board[28].isMortgaged)
+        { 
+            var cardImg = this.getWorkCardImage(28);
+            $("#workPropertyContainer").append(cardImg);
+            putHR = true;
+        }
+        if(putHR)
+            this.appendHorizontalLine();
     }
 
     addMortgageCards()
@@ -185,7 +217,7 @@ class Work
         var i = 5;
         while(i < 36)
         {
-            if(board[i].owner == this.worker)
+            if(board[i].owner == this.worker && board[i].isMortgageable())
             { 
                 var cardImg = this.getWorkCardImage(i);
                 $(cardImg).css("max-width","22%");
@@ -198,13 +230,13 @@ class Work
             this.appendHorizontalLine();
 
         var putHR = false;
-        if(board[12].owner == this.worker)
+        if(board[12].owner == this.worker  && board[12].isMortgageable())
         { 
             var cardImg = this.getWorkCardImage(12);
             $("#workPropertyContainer").append(cardImg);
             putHR = true;
         }
-        if(board[28].owner == this.worker)
+        if(board[28].owner == this.worker && board[28].isMortgageable())
         { 
             var cardImg = this.getWorkCardImage(28);
             $("#workPropertyContainer").append(cardImg);
