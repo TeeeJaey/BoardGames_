@@ -32,8 +32,8 @@ function rollDice()
 		diceVal1 = Math.floor(Math.random() * 6) + 1;
 		diceVal2 = Math.floor(Math.random() * 6) + 1;
 		diceValTotal = diceVal1 + diceVal2;
-		$('#dice1').attr("src","images/dice/diceRoll"+i.toString()+".PNG");
-		$('#dice2').attr("src","images/dice/diceRoll"+(2-i).toString()+".PNG");
+		$('#dice1').attr("src","images/dice/diceRoll"+i.toString()+".png");
+		$('#dice2').attr("src","images/dice/diceRoll"+(2-i).toString()+".png");
 
 	},200);
 }
@@ -42,8 +42,8 @@ function rollDice()
 
 function play()
 {
-	$('#dice1').attr("src","images/dice/dice"+diceVal1.toString()+".PNG");
-	$('#dice2').attr("src","images/dice/dice"+diceVal2.toString()+".PNG");
+	$('#dice1').attr("src","images/dice/dice"+diceVal1.toString()+".png");
+	$('#dice2').attr("src","images/dice/dice"+diceVal2.toString()+".png");
 	
 	
 	var currCoin = $("#"+players[currPlayer].color+"Coin");
@@ -55,7 +55,7 @@ function play()
 		Swal.fire({
 			title: "You are in Jail!",
 			text: jailQstn.innerHTML,
-			imageUrl: "images/"+players[currPlayer].color+"Jail.PNG",
+			imageUrl: "images/"+players[currPlayer].color+"Jail.png",
 			imageWidth: 200,
 			imageHeight: 200,
 			showCancelButton: true,
@@ -103,7 +103,7 @@ function play()
 					
 			Swal.fire({
 				title: "Going to Jail for OverSpeeding!",
-				imageUrl: "images/"+players[currPlayer].color+"Jail.PNG",
+				imageUrl: "images/"+players[currPlayer].color+"Jail.png",
 				imageWidth: 200,
 				imageHeight: 200,
 				confirmButtonColor: '#3085d6',
@@ -301,7 +301,7 @@ function checkCell()
 				players[currPlayer].inJail = true;
 				Swal.fire({
 					title: "In Jail!",
-					imageUrl: "images/"+players[currPlayer].color+"Jail.PNG",
+					imageUrl: "images/"+players[currPlayer].color+"Jail.png",
 					imageWidth: 200,
 					imageHeight: 200,
 					confirmButtonColor: '#3085d6',

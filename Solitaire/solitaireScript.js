@@ -2,8 +2,8 @@
 $(document).ready(function()
 {
 	var gameOver = false;
-	var backImg = "back.PNG";
-	var reshowImg = "reshow.PNG";
+	var backImg = "back.png";
+	var reshowImg = "reshow.png";
 	$('#gameUnderDev').css("display","");
 
 	var suits = ["s", "d", "c", "h"];
@@ -17,7 +17,7 @@ $(document).ready(function()
 			this.value = value;
 			this.position = position;
 			this.revealed = false;
-			this.imageSrc = suit+value+".PNG";
+			this.imageSrc = suit+value+".png";
 		}
 		
 	}	

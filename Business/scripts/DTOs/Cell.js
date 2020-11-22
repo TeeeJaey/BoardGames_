@@ -12,7 +12,7 @@ class Cell
 		this.isUtility = false;
 		this.isCity = false;
 
-		this.cardImage = "images/properties/" + pos.toString() + ".PNG";
+		this.cardImage = "images/properties/" + pos.toString() + ".png";
 		this.owner = -1;
 		this.isMortgaged = false;    
 		this.houses = 0;          
@@ -220,7 +220,7 @@ class Cell
 			case 2: color = "blue"; break;
 			case 3: color = "yellow"; break;
 		}
-		BldgCoin.src="images/bldgs/"+color+bldgStr+".PNG";
+		BldgCoin.src="images/bldgs/"+color+bldgStr+".png";
 
 		return BldgCoin;
 	}

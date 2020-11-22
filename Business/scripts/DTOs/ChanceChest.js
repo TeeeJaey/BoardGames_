@@ -160,7 +160,7 @@ class ChanceChest
 		Swal.fire({
             title: title,
             text: this.message,
-            imageUrl:  "images/" + this.name + ".PNG",
+            imageUrl:  "images/" + this.name + ".png",
             imageHeight : 150,
 			confirmButtonColor: '#3085d6',
 			confirmButtonText: 'OK'

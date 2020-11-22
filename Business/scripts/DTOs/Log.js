@@ -24,7 +24,7 @@ class Log
 			case 2: color = "blue"; break;
 			case 3: color = "yellow"; break;
 		}
-		logCoinImage.src="images/"+color+".PNG";
+		logCoinImage.src="images/"+color+".png";
 
 		$(logCoinImage).addClass("logCoin");
 		return logCoinImage;

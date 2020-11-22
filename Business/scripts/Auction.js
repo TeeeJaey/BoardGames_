@@ -41,7 +41,7 @@ class Auction
             backdrop: 'static',
             keyboard: false
         });
-        $("#imageCurrentBider")[0].src = "images/"+players[currPlayer].color+".PNG";
+        $("#imageCurrentBider")[0].src = "images/"+players[currPlayer].color+".png";
         this.refreshAuctionUI();
     }
 
@@ -77,7 +77,7 @@ class Auction
     {
         if(this.currentBidPlayer > -1 && this.currentBidAmt > 0)
         {
-            $("#imageHighestBidder")[0].src = "images/"+players[this.currentBidPlayer].color+".PNG";
+            $("#imageHighestBidder")[0].src = "images/"+players[this.currentBidPlayer].color+".png";
             $('#imageHighestBidder').css("display","");
         }
         else
@@ -93,7 +93,7 @@ class Auction
 
 
         var playerNumber =  parseInt(this.auctionPlayers[this.currentPlayer]);
-        $("#imageCurrentBider")[0].src = "images/"+players[playerNumber].color+".PNG";
+        $("#imageCurrentBider")[0].src = "images/"+players[playerNumber].color+".png";
 
         
         $('#auctionBidSlider')[0].min = this.currentBidAmt + 1;

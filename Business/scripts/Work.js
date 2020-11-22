@@ -44,7 +44,7 @@ class Work
     getWorkCardImage(cardNumber)
     {
         var cardImg = document.createElement('img');
-        cardImg.src = "images/properties/" + cardNumber.toString() + ".PNG";
+        cardImg.src = "images/properties/" + cardNumber.toString() + ".png";
         cardImg.id = this.currentTask +":"+ cardNumber.toString();
         $(cardImg).addClass("workProperty");
         

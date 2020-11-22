@@ -3,7 +3,7 @@
 function addTradeCardImage(cardNumber, left)
 {
 	var Image = document.createElement('img');
-	Image.src = "images/properties/" + cardNumber + ".PNG";
+	Image.src = "images/properties/" + cardNumber + ".png";
 	Image.id = "tradecard"+cardNumber.toString();
 
 	if(left)

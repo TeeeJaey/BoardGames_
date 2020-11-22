@@ -237,7 +237,7 @@ $(document).ready(function()
 			cnt+=1;
 			i = cnt%3;
 			diceVal = Math.floor(Math.random() * 6) + 1;
-			$('.dice').attr("src","images/diceRoll"+i.toString()+".PNG");
+			$('.dice').attr("src","images/diceRoll"+i.toString()+".png");
 
 		},200);
 	}
@@ -324,7 +324,7 @@ $(document).ready(function()
 	
 	function play()
 	{
-		$('.dice').attr("src","images/dice"+diceVal.toString()+".PNG");
+		$('.dice').attr("src","images/dice"+diceVal.toString()+".png");
 		
 		$("#instruct").css("color",players[currPlayer].color);
 		$("#instruct").text(players[currPlayer].color + " Played : "+ diceVal);
