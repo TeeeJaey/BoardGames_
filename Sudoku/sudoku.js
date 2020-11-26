@@ -11,7 +11,7 @@ class Game
 		else
 			this.difficulty  = difficulty;
 
-		this.board =  this.getNewBoard();
+		this.boardData =  this.getNewBoard();
 		this.fullBoard =  this.makeFullBoard();
 
 		return;
@@ -50,13 +50,31 @@ class Game
 		{
 			fullBoard.push([]);
 			for(var j = 0 ; j < 9 ; j += 1)
-				fullBoard[i].push(0);
+			{
+				var color = "white"; 
+				if(i < 3 || i > 5)
+				{
+					if(j < 3 || j > 5)
+						color = "powderblue";
+				}
+				else
+				{
+					if(i > 2 && i < 6 && j > 2 && j < 6)
+						color = "powderblue";
+				}
+
+				fullBoard[i].push({ initColor:color, currColor:color, init : false, value : 0 });
+			}
 		}
 
-		for(var i = 0 ; i < this.board.length ; i += 1)
+		for(var i = 0 ; i < this.boardData.length ; i += 1)
 		{
-			var cell = this.board[i];
-			fullBoard[cell.x][cell.y] = cell.value;
+			var cell = this.boardData[i];
+			if(cell.value > 0)
+			{
+				fullBoard[cell.x][cell.y].init = true;
+				fullBoard[cell.x][cell.y].value = cell.value ;
+			}
 		}
 		
 		return fullBoard;
@@ -79,20 +97,8 @@ $(document).ready(function()
 	
 	var game = new Game();
 	console.log(game);
-	var text = "";
-	var i = 0;
-	while(i < 9)
-	{
-		var j = 0;
-		while(j < 9)
-		{
-			text += " " + game.fullBoard[i][j];
-			j += 1;
-		}
-		text +=  "<br>";
-		i += 1;
-	}
+	mainContentVue.board = game.fullBoard;
 
-	document.getElementById("demo").innerHTML = text ;
+
 	
 });

@@ -45,7 +45,20 @@
           </nav>  
         
           <img id="gameUnderDev" src="../images/underDev.png" style="position:fixed; left:15%;  width:70%; z-index: 999; margin:auto; display:none " />
-        <p id="demo"></p>
+		
+		<div id="mainContent">
+				
+			<table id="theBoard" >
+				<tr v-for="row in board">
+					<td v-for="x in row">
+						<button class="cell initCells"  v-if="x.init" 					v-bind:style="{backgroundColor: x.currColor}" > {{x.value}} </button>
+						<button class="cell userCells"  v-if="!x.init && x.value > 0"  	v-bind:style="{backgroundColor: x.currColor}" > {{x.value}} </button>
+						<button class="cell userCells"  v-if="!x.init && x.value == 0"  	v-bind:style="{backgroundColor: x.currColor}" >  			 </button>
+					</td>
+				</tr>
+			</table>
+
+		</div>
 
 	</body>
 	

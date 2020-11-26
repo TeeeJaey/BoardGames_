@@ -1,20 +1,26 @@
 body
 {	background-color : #fef6dd;
 	text-align:center;
-}
-table
+} 
+
+.cell
 {
-	margin: auto;
-}
-td button
-{
-	font-size : 25px;
+	font-size : 30px;
 	width: 60px;
 	height: 60px;
-	border-radius: 20%;
 	border: 1px solid black;
-	background-color : #aaa; 
 }
+
+.initCells
+{
+	font-weight: 600;
+}
+
+.userCells:hover
+{
+	background-color: rgb(216, 216, 205);
+}
+
 
 #theBoard
 {
@@ -28,10 +34,6 @@ td button
 	height: 70px;
 	font-size: 20px;
 }
-button:active
-{
-	background-color: grey;
-}
 
 #controls
 {	background-color : #dea6af;
@@ -39,13 +41,7 @@ button:active
 	border: 1px solid black;
 	width:	700px;
 	margin:auto;
-}
-#markMine
-{	
-	width:	22px;
-	height: 22px;
-	cursor: pointer;
-}
+} 
 
 #controls
 {
@@ -67,8 +63,19 @@ button:active
 }
 
 
+@media (max-width: 768px) {
+
+	.cell
+	{
+		font-size : 20px;
+		width: 38px;
+		height: 38px;
+	}
+}
+
 @media (max-width: 1200px) {
 
+	
 	#controls
 	{
 		position : absolute;
