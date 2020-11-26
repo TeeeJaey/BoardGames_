@@ -10,8 +10,10 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 		
-		<script type="text/javascript" src="ProblemGetter.js"></script>
-		<script type="text/javascript" src="sudoku.js"></script>
+		<script type="text/javascript" src="scripts/ProblemGetter.js"></script>
+		<script type="text/javascript" src="scripts/Cell.js"></script>
+		<script type="text/javascript" src="scripts/Game.js"></script>
+		<script type="text/javascript" src="scripts/sudoku.js"></script>
 		<link type="text/css" rel="stylesheet" href="sudoku.css">
 	</head>
 	
@@ -51,9 +53,14 @@
 			<table id="theBoard" >
 				<tr v-for="row in board">
 					<td v-for="x in row">
-						<button class="cell initCells"  v-if="x.init" 					v-bind:style="{backgroundColor: x.currColor}" > {{x.value}} </button>
-						<button class="cell userCells"  v-if="!x.init && x.value > 0"  	v-bind:style="{backgroundColor: x.currColor}" > {{x.value}} </button>
-						<button class="cell userCells"  v-if="!x.init && x.value == 0"  	v-bind:style="{backgroundColor: x.currColor}" >  			 </button>
+						<button class="cell initCells" v-bind:id="x.id"  v-if="x.init"  v-bind:style="{backgroundColor: x.currColor}" > {{x.value}} </button>
+						
+						<button class="cell userCells" v-bind:id="x.id"  v-if="!x.init && !x.isSelected && x.value > 0"  	v-bind:style="{backgroundColor: x.currColor}" > {{x.value}} </button>
+						<button class="cell userCells" v-bind:id="x.id"  v-if="!x.init && !x.isSelected && x.value == 0" 	v-bind:style="{backgroundColor: x.currColor}" >  			 </button>
+						
+						<button class="cell userCells" v-bind:id="x.id"  v-if="!x.init && x.isSelected && x.value > 0"   > {{x.value}} </button>
+						<button class="cell userCells" v-bind:id="x.id"  v-if="!x.init && x.isSelected && x.value == 0"  >  			 </button>
+						
 					</td>
 				</tr>
 			</table>

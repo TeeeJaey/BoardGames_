@@ -11,16 +11,15 @@ body
 	border: 1px solid black;
 }
 
+.selectedCell
+{
+	background-color:darksalmon;
+}
+
 .initCells
 {
 	font-weight: 600;
-}
-
-.userCells:hover
-{
-	background-color: rgb(216, 216, 205);
-}
-
+} 
 
 #theBoard
 {

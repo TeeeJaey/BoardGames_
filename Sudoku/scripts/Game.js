@@ -1,6 +1,4 @@
-var gameOver = false;
 
-var mainContentVue = new Vue();       // to put data in HTML 
 
 class Game
 {
@@ -63,7 +61,7 @@ class Game
 						color = "powderblue";
 				}
 
-				fullBoard[i].push({ initColor:color, currColor:color, init : false, value : 0 });
+				fullBoard[i].push(new Cell(i,j,color));
 			}
 		}
 
@@ -80,25 +78,3 @@ class Game
 		return fullBoard;
 	}
 }
-
-$(document).ready(function()
-{
-
-	//$('#gameUnderDev').css("display","");
-	
-    mainContentVue = new Vue({
-        el: '#mainContent',
-        data: {
-            serverOnline : false,
-            board : [],
-            loading : true
-        }
-	}); 
-	
-	var game = new Game();
-	console.log(game);
-	mainContentVue.board = game.fullBoard;
-
-
-	
-});
