@@ -4,7 +4,8 @@ Set of Board / Card games made in HTML / JavaScript
 Games
 - Minesweeper :heavy_check_mark: 100% 
 - Snake & Ladder :heavy_check_mark: 100% 
-- Connect 4 :heavy_check_mark: 100% 
 - Solitaire :black_nib: 40% 
+- Connect 4 :heavy_check_mark: 100% 
 - Business :black_nib: 99% 
-- Sudoku :black_nib: 10% 
+- Sudoku :black_nib: 90% 
+

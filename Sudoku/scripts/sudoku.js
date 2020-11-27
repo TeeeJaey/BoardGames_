@@ -18,11 +18,13 @@ function checkKeyPress(btn)
 	if(!selectedCellID)
 		return;
 
-	  
-	
 	var cell = getBoardCellByID(selectedCellID);
-	console.log(cell);
+	
+	if(cell.init)
+		return;
 
+	cell.value = btn;
+	game.refreshUI();
 }
 
 $(document).ready(function()
@@ -32,7 +34,6 @@ $(document).ready(function()
     mainContentVue = new Vue({
         el: '#mainContent',
         data: {
-            serverOnline : false,
             game : game,
 			loading : true,
 			controls : -1
@@ -132,7 +133,18 @@ $(document).ready(function()
 		game.refreshUI();
 		mainContentVue.controls = 0;
 	});
-	
+	$(document.body).on('click',"#btnResetGame", function()
+    {
+		game.resetCurrGame();
+		
+		if(selectedCellID)
+		{
+			var prevCell = getBoardCellByID(selectedCellID);
+			prevCell.isSelected = false;
+			selectedCellID = null;
+		}
+
+	});
 
 	$(document.body).on('click',".cell", function()
     {
@@ -156,8 +168,7 @@ $(document).ready(function()
 			newCell.isSelected = true;
 			selectedCellID = this.id;
 		}
-
-		game.refreshUI();
+		mainContentVue.game = game;
 		return;
 	});
 });

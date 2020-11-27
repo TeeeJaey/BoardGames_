@@ -29,7 +29,7 @@ body
 
 .initCells
 {
-	font-weight: 750;
+	font-weight: 850;
 } 
 
 #theBoard
@@ -77,6 +77,11 @@ body
 	width: 100px;
 }
 
+#btnStartGame, #btnResetGame
+{
+	font-size: 22px;
+	width: 48%;
+}
 
 @media (max-width: 1200px) 
 {
@@ -117,5 +122,10 @@ body
 		left : 5%;
 		width: 400px;
 		font-size: 20px;
+	}
+	#btnStartGame, #btnResetGame
+	{
+		font-size: 15px;
+		width: 48%;
 	}
 }
