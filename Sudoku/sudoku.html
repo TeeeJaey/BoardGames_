@@ -51,19 +51,98 @@
 		<div id="mainContent">
 				
 			<table id="theBoard" >
-				<tr v-for="row in board">
+				<tr v-for="row in game.fullBoard">
 					<td v-for="x in row">
 						<button class="cell initCells" v-bind:id="x.id"  v-if="x.init"  v-bind:style="{backgroundColor: x.currColor}" > {{x.value}} </button>
 						
-						<button class="cell userCells" v-bind:id="x.id"  v-if="!x.init && !x.isSelected && x.value > 0"  	v-bind:style="{backgroundColor: x.currColor}" > {{x.value}} </button>
-						<button class="cell userCells" v-bind:id="x.id"  v-if="!x.init && !x.isSelected && x.value == 0" 	v-bind:style="{backgroundColor: x.currColor}" >  			 </button>
+						<div v-if="x.isSelected">
+							<button class="cell userCells selectedCell" v-bind:id="x.id"  v-if="!x.init && x.value > 0"   > {{x.value}} </button>
+							<button class="cell userCells selectedCell" v-bind:id="x.id"  v-if="!x.init && x.value == 0"  >  		   </button>
+						</div>
 						
-						<button class="cell userCells" v-bind:id="x.id"  v-if="!x.init && x.isSelected && x.value > 0"   > {{x.value}} </button>
-						<button class="cell userCells" v-bind:id="x.id"  v-if="!x.init && x.isSelected && x.value == 0"  >  			 </button>
-						
+						<div v-if="!x.isSelected">
+							<button class="cell userCells" v-bind:id="x.id"  v-if="!x.init && x.value > 0"  	v-bind:style="{backgroundColor: x.currColor}" > {{x.value}} </button>
+							<button class="cell userCells" v-bind:id="x.id"  v-if="!x.init && x.value == 0" 	v-bind:style="{backgroundColor: x.currColor}" >  			 </button>
+						</div>
+
 					</td>
 				</tr>
 			</table>
+
+			<div class="controls" id="startControls"  v-if="controls==-1" >
+				<h4 class="instruct" > Choose difficulty and start </h4>
+				<hr>
+				<div class="btn-group btn-group-toggle" data-toggle="buttons" > 
+					<label class="btn btn-default btnDiff" >
+						<input type="radio" name="difficulty" value="0"> Easy </input> 
+					</label> 
+					<label class="btn btn-default btnDiff"> 
+						<input type="radio" name="difficulty" value="1"> Medium </input> 
+					</label> 
+					<label class="btn btn-default btnDiff"> 
+						<input type="radio" name="difficulty" value="2"> Hard </input> 
+					</label> 
+					<label class="btn btn-default btnDiff active"> 
+						<input type="radio" name="difficulty" value="4" checked> Random </input> 
+					</label> 
+				</div>
+				<hr>
+				<button id="btnStartGame" class="btn btn-default" > Start game</button>
+			</div>
+			
+			<div class="controls" id="startControls"  v-if="controls==0" >
+				<h4 class="instruct" >Difficult : {{game.difficultyText}} </h4>
+				<hr>
+				<table id="numPad" style="margin:auto" >
+					<tr>
+						<td>
+							<button class="numPadCell" value="7"> 7 </button>
+						</td>
+						<td>
+							<button class="numPadCell" value="8"> 8 </button>
+						</td>
+						<td>
+							<button class="numPadCell" value="9"> 9 </button>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<button class="numPadCell" value="4"> 4 </button>
+						</td>
+						<td>
+							<button class="numPadCell" value="5"> 5 </button>
+						</td>
+						<td>
+							<button class="numPadCell" value="6"> 6 </button>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<button class="numPadCell" value="1">  1 </button>
+						</td>
+						<td>
+							<button class="numPadCell" value="2">  2 </button>
+						</td>
+						<td>
+							<button class="numPadCell" value="3">  3 </button>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<button class="numPadClearCell" value="0" >  Clear Cell </button>
+						</td>
+					</tr>
+				</table>
+				<hr>
+				<button id="btnStartGame" class="btn btn-default" onclick="document.location.reload(true)"> Get new game </button>
+			</div>
+		
+			<div class="controls" id="startControls"  v-if="controls==1" >
+				<h4 class="instruct" > Woah! You won </h4>
+				<hr>
+				<hr>
+				<button id="btnStartGame" class="btn btn-default" onclick="document.location.reload(true)"> Get new game </button>
+			</div>
 
 		</div>
 

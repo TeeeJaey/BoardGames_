@@ -3,11 +3,22 @@ body
 	text-align:center;
 } 
 
-.cell
+.cell , .numPadCell
 {
 	font-size : 30px;
 	width: 60px;
 	height: 60px;
+	border: 1px solid black;
+}
+.numPadCell:active , .numPadClearCell:active
+{
+	background-color:darksalmon;
+}
+.numPadClearCell
+{
+	font-size : 20px;
+	width: 100%; 
+	height: 50px;
 	border: 1px solid black;
 }
 
@@ -18,7 +29,7 @@ body
 
 .initCells
 {
-	font-weight: 600;
+	font-weight: 750;
 } 
 
 #theBoard
@@ -42,7 +53,7 @@ body
 	margin:auto;
 } 
 
-#controls
+.controls
 {
 	background-color : #ff5e6c;
 	font-size: 22px;
@@ -53,32 +64,58 @@ body
 	padding:20px;
 	margin:auto;
 }
-#instruct
+.instruct
 {
 	background-color : #fff5d7;
-	padding : 30px;
-	font-size: 30px;
+	padding : 15px;
+	font-size: 25px;
 	font-weight: bold;
 }
 
+.btnDiff
+{
+	width: 100px;
+}
 
-@media (max-width: 768px) {
 
-	.cell
+@media (max-width: 1200px) 
+{
+	.controls
 	{
-		font-size : 20px;
-		width: 38px;
-		height: 38px;
+		position : absolute;
+		top: 650px;
+		left : 10%;
+		width: 500px;
+		font-size: 20px;
+		margin-bottom: 20px;
+	}
+	.btnDiff
+	{
+		width: 80px;
+	}
+	.instruct
+	{
+		background-color : #fff5d7;
+		padding : 10px;
+		font-size: 20px;
+		font-weight: bold;
 	}
 }
 
-@media (max-width: 1200px) {
-
-	
-	#controls
+@media (max-width: 768px) 
+{
+	.cell , .numPadCell
+	{
+		font-size : 20px;
+		width: 40px;
+		height: 40px;
+	}
+	.controls
 	{
 		position : absolute;
-		top: 800px;
-		left : 10%;
+		top: 520px;
+		left : 5%;
+		width: 400px;
+		font-size: 20px;
 	}
-  }
+}

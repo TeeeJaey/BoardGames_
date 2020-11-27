@@ -1,43 +1,38 @@
 
 
 class Game
-{
-	constructor(difficulty=3)
+{ 
+	getNewBoard(difficulty = 3)
 	{
 		if(difficulty > 2)
 			this.difficulty = Math.floor(Math.random() * 3)
 		else
 			this.difficulty  = difficulty;
 
-		this.boardData =  this.getNewBoard();
-		this.fullBoard =  this.makeFullBoard();
-
-		return;
-	}
-	
-	getNewBoard()
-	{
 		switch(this.difficulty)
 		{
 			case 0:
 				this.difficultyText = "Easy";
 				var probGetter = new ProblemGetter();
-				return probGetter.getEasyProblem();
+				this.boardData = probGetter.getEasyProblem();
 				break;
 
 			case 1:
 				this.difficultyText = "Medium";
 				var probGetter = new ProblemGetter();
-				return probGetter.getMediumProblem();
+				this.boardData = probGetter.getMediumProblem();
 				break;
 
 			case 2:
 				this.difficultyText = "Hard";
 				var probGetter = new ProblemGetter();
-				return probGetter.getHardProblem();
+				this.boardData = probGetter.getHardProblem();
 				break;
 
 		}
+
+		this.fullBoard =  this.makeFullBoard();
+		return;
 	}
 
 	makeFullBoard()
@@ -76,5 +71,10 @@ class Game
 		}
 		
 		return fullBoard;
+	}
+
+	refreshUI()
+	{
+		mainContentVue.game = this;
 	}
 }
