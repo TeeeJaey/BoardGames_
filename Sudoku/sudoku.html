@@ -50,21 +50,22 @@
 		
 		<div id="mainContent">
 				
-			<table id="theBoard" >
+			<table id="theBoard" v-if="controls != -1" >
 				<tr v-for="row in game.fullBoard">
 					<td v-for="x in row">
-						<button class="cell initCells" v-bind:id="x.id"  v-if="x.init"  v-bind:style="{backgroundColor: x.currColor}" > {{x.value}} </button>
 						
-						<div v-if="x.isSelected">
-							<button class="cell userCells selectedCell" v-bind:id="x.id"  v-if="!x.init && x.value > 0"   > {{x.value}} </button>
-							<button class="cell userCells selectedCell" v-bind:id="x.id"  v-if="!x.init && x.value == 0"  >  		   </button>
-						</div>
+						<button class="cell initCells" v-bind:id="x.id"  v-if="x.init"  v-bind:style="{backgroundColor: x.currColor}" > {{x.value}} </button>
 						
 						<div v-if="!x.isSelected">
 							<button class="cell userCells" v-bind:id="x.id"  v-if="!x.init && x.value > 0"  	v-bind:style="{backgroundColor: x.currColor}" > {{x.value}} </button>
 							<button class="cell userCells" v-bind:id="x.id"  v-if="!x.init && x.value == 0" 	v-bind:style="{backgroundColor: x.currColor}" >  			 </button>
 						</div>
 
+						<div v-if="x.isSelected">
+							<button class="cell userCells selectedCell" v-bind:id="x.id"  v-if="!x.init && x.value > 0"   > {{x.value}} </button>
+							<button class="cell userCells selectedCell" v-bind:id="x.id"  v-if="!x.init && x.value == 0"  >  		   </button>
+						</div>
+						
 					</td>
 				</tr>
 			</table>

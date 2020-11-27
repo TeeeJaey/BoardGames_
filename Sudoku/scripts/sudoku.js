@@ -4,6 +4,7 @@ var mainContentVue = new Vue();       // to put data in HTML
 var selectedCellID = null;
 
 var game = new Game();
+game.getNewBoard();
 
 function getBoardCellByID(btnID)
 {
