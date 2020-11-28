@@ -46,7 +46,8 @@ body
 }
 
 #controls
-{	background-color : #dea6af;
+{	
+	background-color : #dea6af;
 	font-size: 22px;
 	border: 1px solid black;
 	width:	700px;
@@ -62,7 +63,6 @@ body
 	left : 55%;
 	width:	500px;
 	padding:20px;
-	margin:auto;
 }
 .startControls
 {
@@ -98,7 +98,6 @@ body
 		left : 10%;
 		width: 500px;
 		font-size: 20px;
-		margin-bottom: 20px;
 	}
 	.startControls
 	{
@@ -128,18 +127,30 @@ body
 	.controls , .startControls
 	{
 		position : absolute;
+		left :5%;
 		top: 520px;
-		left : 5%;
-		width: 400px;
-		font-size: 20px;
+		width: 360px;
 	}
 	.startControls
 	{
 		top: 200px;
+	}
+	#theBoard
+	{
+		left : 5%;
 	}
 	#btnStartGame, #btnResetGame
 	{
 		font-size: 15px;
 		width: 48%;
 	}
+}
+
+@media (max-width: 452px) 
+{
+	.controls 
+	{
+		top: 560px;
+	}
+	
 }
