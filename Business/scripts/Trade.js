@@ -126,7 +126,7 @@ function performTrade()
 }
 
 $(document).ready(function()
-{
+{ 
 
 	$(document).on('click', ".imageLeftPropertyTrade", function()
 	{

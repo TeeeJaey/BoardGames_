@@ -1,3 +1,7 @@
+html
+{
+	min-width:740px;
+}
 body
 {	background-color : #fff5d7;
 	text-align:center;
@@ -47,7 +51,6 @@ body
 	top: 50px;
 	right : 0%;
 }
-
 #menu
 {
 	width : 200px;

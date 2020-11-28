@@ -1,5 +1,16 @@
 $(document).ready(function()
 {
+	const minLeft = 540;
+
+	if( parseInt($('#btnMenu').css("left").slice(0,-2)) < minLeft )
+	{
+		$("#btnMenu").css({"left": minLeft , "right":""});
+		$("#menu").css({"left": minLeft , "right":""});
+
+		$("#btnLogs").css({"left": 610 , "right":""});
+		
+		$("#btnTrade").css({"left": 600 , "right":""});
+	}
 	
 	//#region "Logs"
 
