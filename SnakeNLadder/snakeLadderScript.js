@@ -280,6 +280,7 @@ $(document).ready(function()
 			players[currPlayer].leftVal = board[players[currPlayer].position].leftVal;
 			currCoin.animate(
 			{
+				"z-index":(players[currPlayer].topVal + 50).toString() ,
 				"top":(players[currPlayer].topVal).toString()+"px",
 				"left":(players[currPlayer].leftVal).toString()+"px"
 			},300);

@@ -131,18 +131,18 @@ body
 
 	.board ,#theBoard
 	{
-		width : 400px;
-		height : 400px;
+		width : 360px;
+		height : 360px;
 	}
 	#theBoard
 	{
 		position : relative;
-		left :10%;
+		left :5%;
 	}
 	#allControls
 	{
-		top: 600px;
-		width : 400px;
-		left : 10%;
+		top: 550px;
+		width : 360px;
+		left : 5%;
 	}
   }
