@@ -105,15 +105,15 @@ button:active
 	td button
 	{
 		font-size : 20px;
-		width: 40px;
-		height: 40px;
+		width: 36px;
+		height:36px;
 	}
 	#controls
 	{
 		position : absolute;
-		top: 600px;
+		top: 550px;
 		font-size: 22px;
-		width: 400px;
+		width: 360px;
 		left :5%;
 	}
 }
