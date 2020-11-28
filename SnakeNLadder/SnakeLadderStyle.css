@@ -20,8 +20,8 @@ body
 	position: absolute;
 	left: -50px;
 	top: 535px;
-	width : 38px;
-	height : 52px;
+	width : 35px;
+	height : 50px;
 } 
 
 #allControls
@@ -102,12 +102,47 @@ body
 	padding:10px 40px;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1220px) {
 
 	#allControls
 	{
 		position : absolute;
 		top: 750px;
+		left : 10%;
+	}
+	#instruct
+	{
+		background-color : #fff5d7;
+		padding : 10px;
+		font-size: 22px;
+		font-weight: bold;
+	}
+	
+	#theDice, .dice
+	{
+		margin:auto;
+		width : 150px;
+		height : 150px;
+		cursor: pointer;
+	}
+  }
+  
+@media (max-width: 768px) {
+
+	.board ,#theBoard
+	{
+		width : 400px;
+		height : 400px;
+	}
+	#theBoard
+	{
+		position : relative;
+		left :10%;
+	}
+	#allControls
+	{
+		top: 600px;
+		width : 400px;
 		left : 10%;
 	}
   }

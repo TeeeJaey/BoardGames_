@@ -7,7 +7,8 @@ $(document).ready(function()
 	$("#startcontrols").css("display","");
 	$("#gameControls").css("display","none");
 	$("#endControls").css("display","none");
-	
+	$('.coin').css({"display":"none"})
+
 	var gameStarted = false;
 	var isAnimationOn = false;
 	var gameOver = false;
@@ -53,16 +54,17 @@ $(document).ready(function()
 	var board = [];
 	function setupBoard()
 	{
-		var t = 535;
-		var l = -50;
-		var d = 60;
+		var boardWidth = $('#theBoard').width();
+		var t =  boardWidth - (boardWidth/10)
+		var l = -40;
+		var d = (boardWidth/10) ;
 		board.push(new Cell(0, t, l, null));
 		var dirleft = false;
 		var i = 1;
 		while(i<=100)
 		{	
 			
-			t = 535 - ((Math.ceil(i/10)-1) * d);
+			t = boardWidth - 65 - ((Math.ceil(i/10)-1) * d);
 	
 			if( ((i-1)/10) == (Math.round(i/10)) && (i!=1) )
 				dirleft = !dirleft;
@@ -178,6 +180,9 @@ $(document).ready(function()
 	{
 		nmbrOfPlayers = $("input[name='nmbrOfPlayers']:checked").val();
 		
+		var boardWidth = $('#theBoard').width();
+		$('.coin').css({"display":"" , "top":boardWidth - (boardWidth/10) });
+
 		var i = 0;
 		var color = "Red";
 		while(i<nmbrOfPlayers)
