@@ -504,6 +504,11 @@ class Game
 		{
 			gameOver = true;
 			mainContentVue.controls = 1;
+			if(selectedCellID)
+			{			
+				var prevCell = getBoardCellByID(selectedCellID);
+				prevCell.isSelected = false;
+			}
 		}
 	}
 	

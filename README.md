@@ -7,5 +7,6 @@ Games
 - Solitaire :black_nib: 40% 
 - Connect 4 :heavy_check_mark: 100% 
 - Business :black_nib: 99% 
-- Sudoku :black_nib: 90% 
+- Sudoku :black_nib: 100% 
+- Dots & Boxes :black_nib: 0% 
 
