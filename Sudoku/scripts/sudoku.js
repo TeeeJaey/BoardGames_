@@ -13,7 +13,7 @@ function getBoardCellByID(btnID)
 	return game.fullBoard[col][row];
 }
 
-function checkKeyPress(btn)
+function checkNumberKey(btn)
 {
 	if(!selectedCellID)
 		return;
@@ -26,6 +26,80 @@ function checkKeyPress(btn)
 	cell.value = btn;
 	game.refreshUI();
 }
+function checkArrowKey(btn)
+{
+	if(!selectedCellID)
+	{ 
+		const newID="0:0";
+		const newCell = getBoardCellByID(newID);
+
+		newCell.isSelected = true;
+		selectedCellID = newID;
+
+		return;
+	}
+	else
+	{
+		const prevCell = getBoardCellByID(selectedCellID);
+		
+		if(btn == 88) // up
+		{
+			if(prevCell.x == 0)
+				return;
+			else
+			{
+				prevCell.isSelected = false;
+				const newID = (prevCell.x-1).toString() + ":" + (prevCell.y).toString();
+				const newCell = getBoardCellByID(newID);
+				newCell.isSelected = true;
+				selectedCellID = newID;
+			}
+		}
+		if(btn == 22) // down
+		{
+			if(prevCell.x == 8)
+				return;
+			else
+			{
+				prevCell.isSelected = false;
+				const newID = (prevCell.x+1).toString() + ":" + (prevCell.y).toString();
+				const newCell = getBoardCellByID(newID);
+				newCell.isSelected = true;
+				selectedCellID = newID;
+			}
+		}
+		if(btn == 44) // left
+		{
+			if(prevCell.y == 0)
+				return;
+			else
+			{
+				prevCell.isSelected = false;
+				const newID = (prevCell.x).toString() + ":" + (prevCell.y-1).toString();
+				const newCell = getBoardCellByID(newID);
+				newCell.isSelected = true;
+				selectedCellID = newID;
+			}
+		}
+		if(btn == 66) // right
+		{
+			if(prevCell.y == 8)
+				return;
+			else
+			{
+				prevCell.isSelected = false;
+				const newID = (prevCell.x).toString() + ":" + (prevCell.y+1).toString();
+				const newCell = getBoardCellByID(newID);
+				newCell.isSelected = true;
+				selectedCellID = newID;
+			}
+		}
+
+	}
+	mainContentVue.game = game;
+
+}
+
 
 $(document).ready(function()
 {
@@ -100,27 +174,52 @@ $(document).ready(function()
 				btnClicked = 9;
 				break;
 			}
+			case 38 :
+			{
+				btnClicked = 88;
+				break;
+			}
+			case 40 :
+			{
+				btnClicked = 22;
+				break;
+			}
+			case 37 :
+			{
+				btnClicked = 44;
+				break;
+			}
+			case 39 :
+			{
+				btnClicked = 66;
+				break;
+			}
 			default:
 			{
 				break;
 			}
 		}
 		
-		if(btnClicked > -1)
-			checkKeyPress(btnClicked);
+		if(btnClicked < 0)
+			return;
+
+		if(btnClicked < 10)
+			checkNumberKey(btnClicked);
+		else
+			checkArrowKey(btnClicked);
 	});
 
     $(document.body).on('click',".numPadCell", function()
     {
 		if(gameOver)
 			return;
-		checkKeyPress(parseInt(this.value));
+		checkNumberKey(parseInt(this.value));
 	});
     $(document.body).on('click',".numPadClearCell", function()
     {
 		if(gameOver)
 			return;
-		checkKeyPress(parseInt(this.value));
+		checkNumberKey(parseInt(this.value));
 	});
 	
 
@@ -159,10 +258,8 @@ $(document).ready(function()
  
 		var newCell = getBoardCellByID(this.id);
 
-		if(newCell.init || this.id == selectedCellID)
-		{
+		if(this.id == selectedCellID)
 			selectedCellID = null;
-		}
 		else
 		{
 			newCell.isSelected = true;

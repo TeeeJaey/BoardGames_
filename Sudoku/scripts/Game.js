@@ -474,6 +474,19 @@ class Game
 		}
 		//#endregion
 	}
+	
+	checkZeros()
+	{
+		for(var i = 0 ; i < 9 ; i += 1)
+		{
+			for(var j = 0 ; j < 9 ; j += 1)
+			{
+				if(this.fullBoard[i][j].value == 0)
+					return true;
+			}
+		}
+		return false;
+	}
 
 	refreshUI()
 	{
@@ -486,6 +499,12 @@ class Game
 		this.colorInvalidSqrs(invalidSqrs);
 		
 		mainContentVue.game = this;
+
+		if(invalidRows.length == 0 && invalidCols.length == 0 && invalidSqrs.length == 0 && !this.checkZeros())
+		{
+			gameOver = true;
+			mainContentVue.controls = 1;
+		}
 	}
 	
 	resetCurrGame()

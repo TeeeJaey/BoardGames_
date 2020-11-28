@@ -53,7 +53,7 @@ body
 	margin:auto;
 } 
 
-.controls
+.controls ,.startControls
 {
 	background-color : #ff5e6c;
 	font-size: 22px;
@@ -64,6 +64,12 @@ body
 	padding:20px;
 	margin:auto;
 }
+.startControls
+{
+	left : 10%;
+	top: 200px;
+}
+
 .instruct
 {
 	background-color : #fff5d7;
@@ -85,7 +91,7 @@ body
 
 @media (max-width: 1200px) 
 {
-	.controls
+	.controls , .startControls
 	{
 		position : absolute;
 		top: 650px;
@@ -93,6 +99,10 @@ body
 		width: 500px;
 		font-size: 20px;
 		margin-bottom: 20px;
+	}
+	.startControls
+	{
+		top: 200px;
 	}
 	.btnDiff
 	{
@@ -115,13 +125,17 @@ body
 		width: 40px;
 		height: 40px;
 	}
-	.controls
+	.controls , .startControls
 	{
 		position : absolute;
 		top: 520px;
 		left : 5%;
 		width: 400px;
 		font-size: 20px;
+	}
+	.startControls
+	{
+		top: 200px;
 	}
 	#btnStartGame, #btnResetGame
 	{
