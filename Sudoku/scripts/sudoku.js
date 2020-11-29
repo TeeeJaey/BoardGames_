@@ -6,11 +6,11 @@ var selectedCellID = null;
 var game = new Game();
 game.getNewBoard();
 
-function getBoardCellByID(btnID)
+function getBoardCellByID(cellID)
 {
-	var col = btnID.split(':')[0];
-	var row = btnID.split(':')[1];
-	return game.fullBoard[col][row];
+	var i = cellID.split(':')[0];
+	var j = cellID.split(':')[1];
+	return game.fullBoard[i][j];
 }
 
 function checkNumberKey(btn)
@@ -26,6 +26,7 @@ function checkNumberKey(btn)
 	cell.value = btn;
 	game.refreshUI();
 }
+
 function checkArrowKey(btn)
 {
 	if(!selectedCellID)
@@ -99,8 +100,7 @@ function checkArrowKey(btn)
 	mainContentVue.game = game;
 
 }
-
-
+ 
 $(document).ready(function()
 {
 	importNavbar("sudoku", "Sudoku");
@@ -266,6 +266,7 @@ $(document).ready(function()
 			newCell.isSelected = true;
 			selectedCellID = this.id;
 		}
+		
 		mainContentVue.game = game;
 		return;
 	});

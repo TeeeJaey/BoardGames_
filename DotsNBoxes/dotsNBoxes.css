@@ -15,37 +15,6 @@ td
     width: 560px;
 }
 
-.vertex
-{    
-    width: 9px; 
-    height: 9px;
-}
-.horSide
-{    
-    width:56px; 
-    height: 9px;
-    cursor: pointer;
-}
-.verSide
-{    
-    width: 9px; 
-    height:56px;
-    cursor: pointer;
-}
-.box
-{    
-    width: 56px; 
-    height: 56px;
-}
-
-
-#restart, #start 
-{
-	width:	150px;
-	height: 70px;
-	font-size: 20px;
-}
-
 .controls
 {	
 	border: 1px solid black;
@@ -58,11 +27,6 @@ td
 	width:	500px;
 	padding:20px;
 }
-.startControls
-{
-	left : 10%;
-	top: 200px;
-}
 
 .instruct
 {
@@ -70,18 +34,62 @@ td
 	padding : 15px;
 	font-size: 25px;
 	font-weight: bold;
+    margin: 10px 0px;
 }
-
-.btnDiff
-{
-	width: 100px;
-}
-
+ 
 #btnStartGame 
 {
 	font-size: 22px;
 	width: 48%;
 } 
+
+.vertex
+{    
+    width: 9px; 
+    height: 9px;
+    background-color: black;
+}
+.horSide
+{    
+    width:56px; 
+    height: 9px;
+}
+.verSide
+{    
+    width: 9px; 
+    height:56px;
+}
+.box
+{    
+    width: 56px; 
+    height: 56px;
+}
+
+#restart, #start 
+{
+	width:	150px;
+	height: 70px;
+	font-size: 20px;
+}
+
+.redHover:hover
+{
+    cursor: pointer;
+    background-color: red;
+}
+.redHover:active
+{
+    background-color:  red;
+}
+.blueHover:hover
+{
+    cursor: pointer;
+    background-color: blue;
+}
+.blueHover:active
+{
+    background-color: blue;
+}
 
 @media (max-width: 1200px) 
 {
@@ -107,8 +115,8 @@ td
 	.controls
 	{
 		position : absolute;
-		left :5%;
-		top: 520px;
+		left : 5%;
+		top: 470px;
 		width: 360px;
 	}
     
@@ -149,11 +157,6 @@ td
 
 @media (max-width: 452px) 
 {
-	.controls 
-	{
-		top: 560px;
-    }
-    
     
 	#theBoard
 	{
