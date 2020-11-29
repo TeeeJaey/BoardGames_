@@ -8,8 +8,9 @@ body
 {
     position:fixed; 
     margin-top:-20px;
+    width:100%;
     z-index: -5;
-    width:100%
+    min-height: 80%;
 }
 
 .footer {
@@ -55,6 +56,7 @@ body
     border : 2px solid white;
     color :  white;
 }
+
 .searchLink:hover
 {
     color :  white;
