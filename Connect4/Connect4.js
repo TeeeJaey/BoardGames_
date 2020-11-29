@@ -6,10 +6,10 @@ $(document).ready(function()
     var playerColour = "yellow";
     var playerWon = false;
 
+    importNavbar("Connect4", "Connect4");
+    
     $('td').click(function(){
 
-                
-        
         if(playerWon)
             return;
         // Get Row ad Col

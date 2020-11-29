@@ -428,6 +428,7 @@ function endGame()
 $(document).ready(function()
 {
 
+    importNavbar("Business", "Business");
 	//#region "Initial displays"
 	
 	$("#menu").css("display","none");

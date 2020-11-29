@@ -100,7 +100,7 @@ body
 	margin : 10px;
 	font-size: 22px;
 	padding:10px 40px;
-}
+} 
 
 @media (max-width: 1220px) {
 
@@ -127,8 +127,9 @@ body
 	}
   }
   
-@media (max-width: 768px) {
 
+@media (max-width: 768px) 
+{ 
 	.board ,#theBoard
 	{
 		width : 360px;

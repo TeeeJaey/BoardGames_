@@ -1,5 +1,7 @@
 $(document).ready(function()
 {
+	importNavbar("Minesweeper", "Minesweeper");
+
 	var gameOver = false;
 	var board = new Array(10); 
 	var boardSize = 10;

@@ -87,7 +87,7 @@ body
 {
 	font-size: 22px;
 	width: 48%;
-}
+} 
 
 @media (max-width: 1200px) 
 {
@@ -117,7 +117,7 @@ body
 }
 
 @media (max-width: 768px) 
-{
+{ 
 	.cell , .numPadCell
 	{
 		font-size : 20px;
@@ -128,12 +128,12 @@ body
 	{
 		position : absolute;
 		left :5%;
-		top: 520px;
+		top: 480px;
 		width: 360px;
 	}
 	.startControls
 	{
-		top: 360px;
+		top: 300px;
 	}
 	#theBoard
 	{
@@ -144,13 +144,4 @@ body
 		font-size: 15px;
 		width: 48%;
 	}
-}
-
-@media (max-width: 452px) 
-{
-	.controls 
-	{
-		top: 560px;
-	}
-	
-}
+} 

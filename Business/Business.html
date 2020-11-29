@@ -9,8 +9,11 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+		<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+		 
 		
 		<!-- Custom Scripts -->
+		<script type="text/javascript" src="../scripts/importNavbar.js"></script>
 		<script type="text/javascript" src="scripts/global.js"></script>
 
 		<script type="text/javascript" src="scripts/DTOs/Game.js"></script>
@@ -31,35 +34,10 @@
 
 	</head>
 	
-	<body>
+	<body> 
 		
-		<nav class="navbar navbar-inverse">
-			<div class="container-fluid" >
-			  <div class="navbar-header" >
-				<a class="navbar-brand" style="font-size: 22px;" href="https://teeejaey.github.io/">Home</a>
-				<i class="fa fa-angle-right navbar-brand"  style="font-size: 22px;"></i>
-				<a class="navbar-brand" style="font-size: 22px;" href="../BoardGames.html">Board Games</a>
-				<i class="fa fa-angle-right navbar-brand"  style="font-size: 22px;"></i>
-				<a class="navbar-brand" style="font-size: 22px;" href="Business.html">Business</a>
-			  </div>
-
-			  <ul class="nav navbar-nav navbar-right"   >
-				<li class="dropdown">
-				  <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size: 22px;" > Choose Game
-				  <span class="caret"></span></a>
-				  <ul class="dropdown-menu">
-					<li><a href="../Minesweeper/Minesweeper.html" style="font-size: 22px;" >MineSweeper</a></li>
-					<li><a href="../SnakeNLadder/SnakeLadder.html" style="font-size: 22px;">Snake & Ladder</a></li>
-					<li><a href="../Solitaire/Solitaire.html" style="font-size: 22px;">Solitaire</a></li>
-					<li><a href="../Connect4/Connect4.html" style="font-size: 22px;">Connect 4</a></li>
-					<li><a href="../Business/Business.html" style="font-size: 22px;">Business</a></li>
-					<li><a href="../Sudoku/sudoku.html" style="font-size: 22px;">Sudoku</a></li>
-				  </ul>
-				</li>
-			  </ul>
-			</div>
-		</nav>  
-
+		<div id="navbar"></div>
+	
 		<div id="theBoard">
 			<img src="images/board.png" class="board" >
 			<img src="images/red.png" id="redCoin" class="coin" >

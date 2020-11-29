@@ -103,6 +103,7 @@ function checkArrowKey(btn)
 
 $(document).ready(function()
 {
+	importNavbar("sudoku", "Sudoku");
 	//$('#gameUnderDev').css("display","");
 	
     mainContentVue = new Vue({

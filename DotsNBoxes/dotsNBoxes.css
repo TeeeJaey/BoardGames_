@@ -5,36 +5,39 @@ body
 
 td
 {
-	border: 1px solid black;
+    border: 1px solid black;
 }
-
-.vertex
-{    
-    width:6px; 
-    height:6px;
-}
-.horSide
-{    
-    width:36px; 
-    height:6px;
-}
-.verSide
-{    
-    width:6px; 
-    height:36px;
-}
-.box
-{    
-    width:36px; 
-    height:36px;
-}
-
 
 #theBoard
 {
 	position : absolute;
-	left :10%;
+    left :10%;
+    width: 560px;
 }
+
+.vertex
+{    
+    width: 9px; 
+    height: 9px;
+}
+.horSide
+{    
+    width:56px; 
+    height: 9px;
+    cursor: pointer;
+}
+.verSide
+{    
+    width: 9px; 
+    height:56px;
+    cursor: pointer;
+}
+.box
+{    
+    width: 56px; 
+    height: 56px;
+}
+
 
 #restart, #start 
 {
@@ -78,7 +81,7 @@ td
 {
 	font-size: 22px;
 	width: 48%;
-}
+} 
 
 @media (max-width: 1200px) 
 {
@@ -100,7 +103,7 @@ td
 }
 
 @media (max-width: 768px) 
-{
+{ 
 	.controls
 	{
 		position : absolute;
@@ -108,15 +111,40 @@ td
 		top: 520px;
 		width: 360px;
 	}
+    
 	#theBoard
 	{
 		left : 5%;
-	}
+        width:360px;
+    }
+
+    .vertex
+    {    
+        width: 6px; 
+        height: 6px;
+    }
+    .horSide
+    {    
+        width: 36px; 
+        height:6px;
+        cursor: pointer;
+    }
+    .verSide
+    {    
+        width:6px; 
+        height:36px;
+        cursor: pointer;
+    }
+    .box
+    {    
+        width:36px; 
+        height:36px;
+    }
 	#btnStartGame, #btnResetGame
 	{
 		font-size: 15px;
 		width: 48%;
-	}
+    }
 }
 
 @media (max-width: 452px) 
@@ -124,5 +152,35 @@ td
 	.controls 
 	{
 		top: 560px;
-	}
+    }
+    
+    
+	#theBoard
+	{
+		left : 5%;
+        width:360px;
+    }
+
+    .vertex
+    {    
+        width:6px; 
+        height:6px;
+    }
+    .horSide
+    {    
+        width:36px; 
+        height:6px;
+        cursor: pointer;
+    }
+    .verSide
+    {    
+        width:6px; 
+        height:36px;
+        cursor: pointer;
+    }
+    .box
+    {    
+        width:36px; 
+        height:36px;
+    }
 }

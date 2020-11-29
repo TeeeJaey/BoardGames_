@@ -1,6 +1,8 @@
 
 $(document).ready(function()
 {
+	importNavbar("Solitaire", "Solitaire");
+	
 	var gameOver = false;
 	var backImg = "back.png";
 	var reshowImg = "reshow.png";

@@ -1,5 +1,7 @@
 $(document).ready(function()
 {
+	importNavbar("SnakeLadder", "Snake & Ladder");
+
 	var boardImgNmbr = 0;
 	var boardImgPath = "images/board" + boardImgNmbr +".jpg";
 	$(".board").attr("src",boardImgPath);
