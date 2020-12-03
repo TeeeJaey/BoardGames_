@@ -124,7 +124,7 @@ class Game
         var i = 1;
         while(i <= 24)
         {
-            var randomMoneyBarIndex = Math.ceil( Math.random() * 24); 
+            var randomMoneyBarIndex = Math.floor( Math.random() * 24) 
             
             if(!briefcases.some(x => x.moneybar == this.moneybars[randomMoneyBarIndex]))
             {
