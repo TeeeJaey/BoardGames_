@@ -39,6 +39,27 @@ class Briefcase
         this.opened = false;
         this.id = "case:"+i;
     }
+
+    openCase()
+    {
+
+        window.setTimeout( () =>
+        {
+            $(".caseOutside").slideUp();
+            okDisabled = false;
+            this.opened = true;
+            this.moneybar.lost = true;
+        }, 800);
+
+        game.chooseCase[game.chooseCaseIndex] -= 1;
+        if(game.chooseCase[game.chooseCaseIndex] == 0)
+        {
+            // Bank Offer
+            game.showBankOffer();
+            game.chooseCaseIndex += 1;
+        }
+
+    }
 }
 
 class Game
@@ -120,10 +141,15 @@ class Game
         this.currSelCase = parseInt(divID.split(':')[1] - 1);
         return this.briefcases[this.currSelCase];
     }
+
+    showBankOffer()
+    {
+
+    }
 }
 
 var game = new Game();
-
+var okDisabled = false;
 
 $(document).ready(function()
 {
@@ -136,7 +162,6 @@ $(document).ready(function()
         }
     }); 
     
-    var okDisabled = false;
     
     $(document.body).on('click',".case", function()
     {
@@ -149,18 +174,17 @@ $(document).ready(function()
         $("#CaseOpenModal").modal('show');
         
         var selCase = game.getSelectedCase(this.id);
-        //selCase.process();
-        window.setTimeout( () =>
-        {
-            $(".caseOutside").slideUp("slow")
-            okDisabled = false;
-        }, 800);
+        selCase.openCase();
         
     });
+
+
     $(document.body).on('click',"#ok", function()
     {
         if(okDisabled) return;
         $("#CaseOpenModal").modal('hide');
         $(".caseOutside").slideDown();
     });
+
+
 });

@@ -28,18 +28,20 @@
             </div>
 
 			<div class="col-xs-7 col-md-8" style="padding:10px; " >
-					<div v-for="x in game.briefcases" >
-						<button class="col-xs-3 col-md-4 case btn btn-success " v-bind:id="x.id" v-if="!x.opened"  >
-							{{ x.caseNumber }} 
-						</button>
-						<button class="col-xs-3 col-md-4 case btn btn-success " v-bind:id="x.id" v-if="x.opened" disabled >
-							{{ x.caseNumber }} 
-						</button>
+				
+				<div class="col-xs-12 instruct" >
+					Choose {{game.chooseCase[game.chooseCaseIndex]}} cases
+				</div>
 
-					</div>
-					<div class="col-xs-12 instruct" >
-						Choose {{game.chooseCase[game.chooseCaseIndex]}} cases
-					</div>
+				<div v-for="x in game.briefcases" >
+					<button class="col-xs-3 col-md-4 case btn btn-success " v-bind:id="x.id" v-if="!x.opened"  >
+						{{ x.caseNumber }} 
+					</button>
+					<button class="col-xs-3 col-md-4 case  caseLost" v-bind:id="x.id" v-if="x.opened" disabled >
+						{{ x.caseNumber }} 
+					</button>
+
+				</div>
             </div>
 
             <div class="col-xs-3 col-md-2" style="padding:0;" >
