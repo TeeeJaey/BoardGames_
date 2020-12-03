@@ -45,6 +45,7 @@ function importNavbar(htmlName, displayName)
 						<li><a href="../Business/Business.html" style="font-size: 22px;">Business</a></li>
 						<li><a href="../Sudoku/sudoku.html" style="font-size: 22px;">Sudoku</a></li>
 						<li><a href="../DotsNBoxes/dotsNBoxes.html" style="font-size: 22px;">Dots & Boxes</a></li>
+						<li><a href="../DealOrNoDeal/DealNoDeal.html" style="font-size: 22px;">Deal Or NoDeal</a></li>
 					</ul>
 					</li>
 				</ul>
@@ -75,6 +76,7 @@ function importNavbar(htmlName, displayName)
 							<li><a href="../Business/Business.html" style="font-size: 22px;">Business</a></li>
 							<li><a href="../Sudoku/sudoku.html" style="font-size: 22px;">Sudoku</a></li>
 							<li><a href="../DotsNBoxes/dotsNBoxes.html" style="font-size: 22px;">Dots & Boxes</a></li>
+							<li><a href="../DealOrNoDeal/DealNoDeal.html" style="font-size: 22px;">Deal Or NoDeal</a></li>
 						</ul>
 					</ul>
 				</div>
@@ -90,5 +92,5 @@ function importNavbar(htmlName, displayName)
 
 $(document).ready(function()
 {
-	importNavbar("sudoku", "Sudoku");
+	importNavbar("", "");
 });

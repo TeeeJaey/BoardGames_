@@ -1,0 +1,82 @@
+<html>
+	<head>
+		<title>	Deal Or NoDeal </title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+		<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+		 
+		<script type="text/javascript" src="../scripts/importNavbar.js"></script>
+		<script type="text/javascript" src="DealNoDeal.js"></script>
+		<link type="text/css" rel="stylesheet" href="DealNoDeal.css">
+	</head>
+
+	<body>
+		<div id="navbar"></div>
+		
+		<div id="mainContent">
+				
+			<div class="col-xs-2 col-md-2" style="padding:0;" >
+				<div class="lowerAmts amts" v-for="x in game.moneybars.slice(0,12)" v-bind:id="x.id" v-bind:class="{ lostAmt: x.lost }"> 
+					&#x20b9; {{ x.amtString }} 
+				</div>
+            </div>
+
+			<div class="col-xs-7 col-md-8" style="padding:10px; " >
+					<div v-for="x in game.briefcases" >
+						<button class="col-xs-3 col-md-4 case btn btn-success " v-bind:id="x.id" v-if="!x.opened"  >
+							{{ x.caseNumber }} 
+						</button>
+						<button class="col-xs-3 col-md-4 case btn btn-success " v-bind:id="x.id" v-if="x.opened" disabled >
+							{{ x.caseNumber }} 
+						</button>
+
+					</div>
+					<div class="col-xs-12 instruct" >
+						Choose {{game.chooseCase[game.chooseCaseIndex]}} cases
+					</div>
+            </div>
+
+            <div class="col-xs-3 col-md-2" style="padding:0;" >
+                <div class="higherAmts amts" v-for="x in game.moneybars.slice(12,24)" v-bind:id="x.id" v-bind:class="{ lostAmt: x.lost }"> 
+					&#x20b9; {{ x.amtString }} 
+				</div>
+			</div>
+			
+
+			<!-- Case open modal -->
+			<div class="modal fade " style="margin-top: 100px" id="CaseOpenModal" tabindex="-1" role="dialog"  aria-hidden="true">
+				<div class="modal-dialog " role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-title">Opening Case {{game.currSelCase + 1}} </h3>
+					</div>
+
+					<div class="modal-body" style="height: 300px;">
+						<div style="position:relative;">
+							<div class="caseOpening caseInside" >
+								 &#x20b9; {{game.briefcases[game.currSelCase].moneybar.amtString}}
+							</div>
+							<div class="caseOpening caseOutside" id="caseOpen" >
+								{{game.currSelCase + 1}}
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success"  style="width:90%; margin-right:5%;"   id="ok" style="width:150px">OK</button>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	
+</html>
+
+</body>
+</html>
