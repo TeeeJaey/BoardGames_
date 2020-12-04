@@ -9,5 +9,5 @@ Games
 - Business :black_nib: 99% 
 - Sudoku :black_nib: 100% 
 - Dots & Boxes :black_nib: 100% 
-- Deal or No Deal :black_nib: 50% 
+- Deal or No Deal :black_nib: 100% 
 

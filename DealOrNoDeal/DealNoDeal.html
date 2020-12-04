@@ -12,8 +12,10 @@
 		<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 		 
 		<script type="text/javascript" src="../scripts/importNavbar.js"></script>
-		<script type="text/javascript" src="DealNoDeal.js"></script>
-		<link type="text/css" rel="stylesheet" href="DealNoDeal.css">
+		<script type="text/javascript" src="scripts/Briefcase.js"></script>
+		<script type="text/javascript" src="scripts/Game.js"></script>
+		<script type="text/javascript" src="scripts/DealNoDealScript.js"></script>
+		<link type="text/css" rel="stylesheet" href="DealNoDealStyle.css">
 	</head>
 
 	<body>
@@ -29,18 +31,23 @@
 
 			<div class="col-xs-7 col-md-8" style="padding:10px; " >
 				
-				<div class="col-xs-12 instruct" >
+				<div class="col-xs-12 instruct" v-if="game.chooseCaseIndex == -1" >
+					Choose your case
+				</div>
+				<div class="col-xs-12 instruct" v-if="game.chooseCaseIndex != -1" >
 					Choose {{game.chooseCase[game.chooseCaseIndex]}} cases
 				</div>
 
 				<div v-for="x in game.briefcases" >
-					<button class="col-xs-3 col-md-4 case btn btn-success " v-bind:id="x.id" v-if="!x.opened"  >
+					<button class="col-xs-3 col-md-4 case btn btn-success " v-bind:id="x.id" v-if="!x.opened && !x.playerCase"  >
 						{{ x.caseNumber }} 
 					</button>
-					<button class="col-xs-3 col-md-4 case  caseLost" v-bind:id="x.id" v-if="x.opened" disabled >
+					<button class="col-xs-3 col-md-4 case  caseLost" v-bind:id="x.id" v-if="x.opened && !x.playerCase" disabled >
 						{{ x.caseNumber }} 
 					</button>
-
+					<button class="col-xs-3 col-md-4 case btn btn-warning " v-bind:id="x.id" v-if="x.playerCase" disabled >
+						{{ x.caseNumber }} 
+					</button>
 				</div>
             </div>
 
@@ -75,6 +82,101 @@
 				</div>
 				</div>
 			</div>
+
+			<!-- Bank Offer Modal -->
+			<div class="modal fade " style="margin-top: 100px" id="BankOfferModal" tabindex="-1" role="dialog"  aria-hidden="true">
+				<div class="modal-dialog " role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-title"> Bank Offer </h3>
+					</div>
+
+					<div class="modal-body" >
+						<img src="images/bank.png"  style="width:30%; " >
+						<div style="font-size: 30px;" >
+								&#x20b9; {{ game.currentBankOffer.amtString }}
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" id="btnDeal" style="width:40%; margin-right: 5%;"> Deal </button>
+						<button type="button" class="btn btn-danger"  id="btnNoDeal" style="width:40%; margin-right: 5%;"> No Deal </button>
+					</div>
+				</div>
+				</div>
+			</div>
+
+			<!-- Final Choice Modal -->
+			<div class="modal fade " style="margin-top: 100px ;" id="FinalChoiceModal" tabindex="-1" role="dialog"  aria-hidden="true">
+				<div class="modal-dialog " role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-title"> Final Choice </h3>
+					</div>
+
+					<div class="modal-body" style="margin-bottom: 30px ;" >
+						<h4> Which case do you want ? </h4><br>
+						<button class="btn btn-warning finalCase" v-bind:id="game.finalChoice[0].id" style="width: 40%; height:130px; font-size:40px;">
+							{{ game.finalChoice[0].caseNumber }} 
+						</button>
+						<button  class="btn btn-success finalCase" v-bind:id="game.finalChoice[1].id" style="width: 40%; height:130px; font-size:40px; ">
+							{{ game.finalChoice[1].caseNumber }} 
+						</button>
+					</div>
+				</div>
+				</div>
+			</div>
+
+			<!-- Final Case open modal -->
+			<div class="modal fade " style="margin-top: 100px" id="FinalCaseOpenModal" tabindex="-1" role="dialog"  aria-hidden="true">
+				<div class="modal-dialog " role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-title">Opening Case {{game.currSelCase + 1}} </h3>
+					</div>
+
+					<div class="modal-body" style="height: 300px;">
+						<div style="position:relative;">
+							<div class="caseOpening caseInside" >
+								 &#x20b9; {{game.finalCase.moneybar.amtString}}
+							</div>
+							<div v-if="!game.finalCase.playerCase" class="caseOpening caseOutside" id="caseOpen" >
+								{{game.finalCase.caseNumber}}
+							</div>
+							<div v-if="game.finalCase.playerCase" class="caseOpening caseOutside" id="caseOpen" style="background-color: #f0ad4e;" >
+								{{game.finalCase.caseNumber}}
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" style="width:90%; margin-right:5%;" id="finalOk" style="width:150px">OK</button>
+					</div>
+				</div>
+				</div>
+			</div>
+
+
+			<!-- Game End Modal -->
+			<div class="modal fade " style="margin-top: 100px" id="GameEndModal" tabindex="-1" role="dialog"  aria-hidden="true">
+				<div class="modal-dialog " role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-title"> Game Over </h3>
+					</div>
+
+					<div class="modal-body" >
+						<div style="font-size: 30px;" >
+							You won &#x20b9; {{ game.finalWinAmount.amtString }}
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" style="width:50%; margin-right: 25%;" onclick="document.location.reload(true)">  New game </button>
+					</div>
+				</div>
+				</div>
+			</div>
+
 		</div>
 	</body>
 	
