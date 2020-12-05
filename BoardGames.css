@@ -11,7 +11,15 @@ body
     width:100%;
     z-index: -5;
     min-height: 80%;
+}	
+#desktopNav
+{
+    display: block;
 }
+#mobileNav
+{
+    display: none;
+}	
 
 .footer {
     position: fixed;
@@ -38,7 +46,7 @@ body
 {
     position: fixed;
     width: 110%;
-    margin: 5%;
+    margin: 2%;
     height: 500px;
     overflow-y:auto;
 }
@@ -62,4 +70,31 @@ body
     color :  white;
     background-color: rgb(0,0,0,0.8);
     text-decoration: none;
+}
+
+	
+@media (max-width: 768px) 
+{
+    #desktopNav
+    {
+        display: none;
+    }
+    #mobileNav
+    {
+        display: block;
+    }
+}
+
+@media (max-width: 565px) 
+{
+            
+    .searchLinks
+    {
+        margin: 5%;
+    }
+    .searchLink
+    {
+        font-size: 25px;
+        width: 90%;
+    }
 }
