@@ -57,7 +57,7 @@ $(document).ready(function()
 	function setupBoard()
 	{
 		var boardWidth = $('#theBoard').width();
-		var t =  boardWidth - (boardWidth/10)
+		var t =  boardWidth - (boardWidth/10);
 		var l = -40;
 		var d = (boardWidth/10) ;
 		board.push(new Cell(0, t, l, null));

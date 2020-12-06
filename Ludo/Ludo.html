@@ -1,0 +1,93 @@
+<html>
+	<head>
+		<title>	Ludo </title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+		<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+		 
+		<script type="text/javascript" src="../scripts/importNavbar.js"></script>
+		<script type="text/javascript" src="scripts/Cell.js"></script>
+		<script type="text/javascript" src="scripts/Player.js"></script>
+		<script type="text/javascript" src="scripts/Game.js"></script>
+		<script type="text/javascript" src="scripts/LudoScript.js"></script>
+		<link type="text/css" rel="stylesheet" href="LudoStyle.css">
+	</head>
+	
+	<body>
+
+		<div id="navbar"></div>
+
+		<div id="mainContent">
+				
+			<div id="theBoard">
+				<img src="images/board.png" class="board" >
+				<div class="circle" v-for="x in game.board" v-bind:style="{top: x.mTopVal, left: x.mLeftVal}"  > {{ x.index }} </div>
+				<img src="images/red.png" id="redCoin0" class="coin" >
+				<img src="images/red.png" id="redCoin1" class="coin" >
+				<img src="images/red.png" id="redCoin2" class="coin" >
+				<img src="images/red.png" id="redCoin3" class="coin" >
+
+				<img src="images/green.png" id="greenCoin0" class="coin" >
+				<img src="images/green.png" id="greenCoin1" class="coin" >
+				<img src="images/green.png" id="greenCoin2" class="coin" >
+				<img src="images/green.png" id="greenCoin3" class="coin" >
+
+				<img src="images/blue.png" id="blueCoin0" class="coin" >
+				<img src="images/blue.png" id="blueCoin1" class="coin" >
+				<img src="images/blue.png" id="blueCoin2" class="coin" >
+				<img src="images/blue.png" id="blueCoin3" class="coin" >
+				
+				<img src="images/yellow.png" id="yellowCoin0" class="coin" >
+				<img src="images/yellow.png" id="yellowCoin1" class="coin" >
+				<img src="images/yellow.png" id="yellowCoin2" class="coin" >
+				<img src="images/yellow.png" id="yellowCoin3" class="coin" >
+			</div>
+			
+			<div id="allControls" >
+				
+				<div id="startcontrols"  v-if="game.gameStatus == -1"> Number Of Players
+					<br>
+					<div class="btn-group btn-group-toggle" data-toggle="buttons">
+						<label class="btn btn-info active">
+							<input type="radio" name="nmbrOfPlayers" autocomplete="off" value="2" checked > 2
+						</label>
+						<label class="btn btn-info">
+							<input type="radio" name="nmbrOfPlayers" value="3" autocomplete="off"> 3
+						</label>
+						<label class="btn btn-info">
+							<input type="radio" name="nmbrOfPlayers" value="4" autocomplete="off"> 4
+						</label>
+					</div>
+					<hr>
+					<button id="start" class="btn btn-default" > Start game </button>
+				</div>
+				
+				<div id="gameControls"  v-if="game.gameStatus == 0"> 
+					<h3 id="instruct" v-bind:style="{color: game.players[game.currPlayer].color}" > {{game.instruction}} </h3>
+					<hr>
+					<br>
+					<div id="theDice">
+						<img src="images/dice1.png" class="dice" >
+					</div>
+				</div>
+
+
+				<div id="endControls" v-if="game.gameStatus == 1"> 
+					<h3 id="endInstruct"> {{game.winner.text}} Wins !!!</h3>
+					<hr>
+					<br>
+					<button id="restart" class="btn btn-secondary" onclick="document.location.reload(true)"> Play again </button>
+				</div>
+
+			</div>
+			
+		</div>
+	</body>
+	
+</html>
