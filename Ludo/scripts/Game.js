@@ -1,5 +1,4 @@
 
-
 class Game 
 {
 	constructor()
@@ -27,46 +26,46 @@ class Game
 
         // House RED
 
-        board.push(new Cell(i,18,35));
+        board.push(new Cell(i,18,35, 37,60));
         i+=1;
-        board.push(new Cell(i,18,82));
+        board.push(new Cell(i,18,82, 37, 140));
         i+=1;
-        board.push(new Cell(i,66,35));
+        board.push(new Cell(i,66,35, 116, 60));
         i+=1;
-        board.push(new Cell(i,66,82));
+        board.push(new Cell(i,66,82, 116, 140));
         i+=1;
 
         // House GREEN
 
-        board.push(new Cell(i,18,249));
+        board.push(new Cell(i,18,249, 37,418));
         i+=1;
-        board.push(new Cell(i,18,297));
+        board.push(new Cell(i,18,297, 37,497));
         i+=1;
-        board.push(new Cell(i,66,249));
+        board.push(new Cell(i,66,249, 116,418));
         i+=1;
-        board.push(new Cell(i,66,297));
+        board.push(new Cell(i,66,297, 116,497));
         i+=1;
 
         // House BLUE
 
-        board.push(new Cell(i,233,35));
+        board.push(new Cell(i,233,35 , 395,60));
         i+=1;
-        board.push(new Cell(i,233,83));
+        board.push(new Cell(i,233,83 , 395,140));
         i+=1;
-        board.push(new Cell(i,281,35));
+        board.push(new Cell(i,281,35 ,  474,60));
         i+=1;
-        board.push(new Cell(i,281,83));
+        board.push(new Cell(i,281,83 , 474,140));
         i+=1;
 
         // House YELLOW
 
-        board.push(new Cell(i,233,249));
+        board.push(new Cell(i,233,249 , 395,418));
         i+=1;
-        board.push(new Cell(i,233,297));
+        board.push(new Cell(i,233,297 , 395,497));
         i+=1;
-        board.push(new Cell(i,281,249));
+        board.push(new Cell(i,281,249, 474,418));
         i+=1;
-        board.push(new Cell(i,281,297));
+        board.push(new Cell(i,281,297, 474,497));
         i+=1;
         
         //#endregion
@@ -76,140 +75,152 @@ class Game
         //---- Green Area
 		
         mConst = 142;
-        board.push(new Cell(i,102,mConst));
+		dConst = 239;
+        board.push(new Cell(i,102,mConst , 176,dConst));
         i+=1;
-        board.push(new Cell(i,77,mConst));
+        board.push(new Cell(i,77,mConst , 136,dConst));
         i+=1;
-        board.push(new Cell(i,54,mConst));
+        board.push(new Cell(i,54,mConst , 96,dConst));
         i+=1;
-        board.push(new Cell(i,30,mConst));
+        board.push(new Cell(i,30,mConst , 56,dConst));
         i+=1;
-        board.push(new Cell(i,5,mConst));
+        board.push(new Cell(i,5,mConst , 16,dConst));
         i+=1;
-		board.push(new Cell(i,-18,mConst));
+		board.push(new Cell(i,-18,mConst , -23,dConst));
         i+=1;
 		
-        mConst = 165;
-        board.push(new Cell(i,-18,mConst));
+        mConst = 165; 
+		dConst = 279;
+        board.push(new Cell(i,-18,mConst , -23,dConst));
         i+=1;
 
         mConst = 189;
-        board.push(new Cell(i,-18,mConst));
+		dConst = 319;
+        board.push(new Cell(i,-18,mConst , -23,dConst));
         i+=1;
-        board.push(new Cell(i,5,mConst));
+        board.push(new Cell(i,5,mConst , 16,dConst));
         i+=1;
-        board.push(new Cell(i,30,mConst));
+        board.push(new Cell(i,30,mConst , 56,dConst));
         i+=1;
-        board.push(new Cell(i,54,mConst));
+        board.push(new Cell(i,54,mConst , 96,dConst));
         i+=1;
-        board.push(new Cell(i,77,mConst));
+        board.push(new Cell(i,77,mConst , 136,dConst));
         i+=1;
-        board.push(new Cell(i,102,mConst));
+        board.push(new Cell(i,102,mConst , 176,dConst));
         i+=1;
 
 
         //---- Yellow Area
 		
         mConst = 126;
-        board.push(new Cell(i,mConst,213));
+		dConst = 215;
+        board.push(new Cell(i,mConst,213 , dConst,358));
         i+=1;
-        board.push(new Cell(i,mConst,237));
+        board.push(new Cell(i,mConst,237 , dConst,398));
         i+=1;
-        board.push(new Cell(i,mConst,261));
+        board.push(new Cell(i,mConst,261 , dConst,437));
         i+=1;
-        board.push(new Cell(i,mConst,285));
+        board.push(new Cell(i,mConst,285 , dConst,477));
         i+=1;
-        board.push(new Cell(i,mConst,309));
+        board.push(new Cell(i,mConst,309 , dConst,516));
         i+=1;
-        board.push(new Cell(i,mConst,332));
-        i+=1;
-	   
-        mConst = 150;
-        board.push(new Cell(i,mConst,332));
+        board.push(new Cell(i,mConst,332 , dConst,556));
+        i+=1; 
+
+		mConst = 150;
+		dConst = 255;
+        board.push(new Cell(i,mConst,332 , dConst,556));
         i+=1;
 	   
         mConst = 173;
-        board.push(new Cell(i,mConst,332));
+		dConst = 295;
+        board.push(new Cell(i,mConst,332 , dConst,556));
         i+=1;
-        board.push(new Cell(i,mConst,309));
+        board.push(new Cell(i,mConst,309 , dConst,516));
         i+=1;
-        board.push(new Cell(i,mConst,285));
+        board.push(new Cell(i,mConst,285 , dConst,477));
         i+=1;
-        board.push(new Cell(i,mConst,261));
+        board.push(new Cell(i,mConst,261 , dConst,437));
         i+=1;
-        board.push(new Cell(i,mConst,237));
+        board.push(new Cell(i,mConst,237 , dConst,398));
         i+=1;        
-        board.push(new Cell(i,mConst,213));
+        board.push(new Cell(i,mConst,213 , dConst,358));
         i+=1;
 		
 		
 		//---- Blue Area
 		
         mConst = 189;
-        board.push(new Cell(i,196,mConst));
+		dConst = 319;
+        board.push(new Cell(i,196,mConst , 333,dConst));
         i+=1;
-        board.push(new Cell(i,221,mConst));
+        board.push(new Cell(i,221,mConst , 373,dConst));
         i+=1;
-        board.push(new Cell(i,245,mConst));
+        board.push(new Cell(i,245,mConst , 413,dConst));
         i+=1;
-        board.push(new Cell(i,270,mConst));
+        board.push(new Cell(i,270,mConst , 453,dConst));
         i+=1;
-        board.push(new Cell(i,293,mConst));
+        board.push(new Cell(i,293,mConst , 493,dConst));
         i+=1;
-        board.push(new Cell(i,317,mConst));
+        board.push(new Cell(i,317,mConst , 533,dConst));
         i+=1;
 		
-        mConst = 165;
-        board.push(new Cell(i,317,mConst));
+        mConst = 165; 
+		dConst = 279;
+        board.push(new Cell(i,317,mConst , 533,dConst));
         i+=1;
 		
 		mConst = 142;
-        board.push(new Cell(i,317,mConst));
+		dConst = 239;
+        board.push(new Cell(i,317,mConst , 533,dConst));
         i+=1;
-        board.push(new Cell(i,293,mConst));
+        board.push(new Cell(i,293,mConst , 493,dConst));
         i+=1;
-        board.push(new Cell(i,270,mConst));
+        board.push(new Cell(i,270,mConst , 453,dConst));
         i+=1;
-        board.push(new Cell(i,245,mConst));
+        board.push(new Cell(i,245,mConst , 413,dConst));
         i+=1;
-        board.push(new Cell(i,221,mConst));
+        board.push(new Cell(i,221,mConst , 373,dConst));
         i+=1;        
-		board.push(new Cell(i,196,mConst));
+		board.push(new Cell(i,196,mConst , 333,dConst));
         i+=1;
 		
 		
 		//---- Red Area
 		
         mConst = 173;
-        board.push(new Cell(i,mConst,118));
+		dConst = 215;
+        board.push(new Cell(i,mConst,118 , dConst,200));
         i+=1;
-        board.push(new Cell(i,mConst,94));
+        board.push(new Cell(i,mConst,94 , dConst,160));
         i+=1;
-        board.push(new Cell(i,mConst,71));
+        board.push(new Cell(i,mConst,71 , dConst,121));
         i+=1;
-        board.push(new Cell(i,mConst,45));
+        board.push(new Cell(i,mConst,45 , dConst,81));
         i+=1;
-        board.push(new Cell(i,mConst,23));
+        board.push(new Cell(i,mConst,23 , dConst,41));
         i+=1;
-        board.push(new Cell(i,mConst,-1));
+        board.push(new Cell(i,mConst,-1 , dConst,1));
         i+=1;
 
         mConst = 150;
-        board.push(new Cell(i,mConst,-1));
+		dConst = 255;
+        board.push(new Cell(i,mConst,-1 , dConst,1));
         i+=1;
 
 		mConst = 126;
-        board.push(new Cell(i,mConst,-1));
+		dConst = 295;
+        board.push(new Cell(i,mConst,-1 , dConst,1));
         i+=1;
-        board.push(new Cell(i,mConst,23));
+        board.push(new Cell(i,mConst,23 , dConst,41));
         i+=1;
-        board.push(new Cell(i,mConst,45));
+        board.push(new Cell(i,mConst,45 , dConst,81));
         i+=1;
-        board.push(new Cell(i,mConst,71));
+        board.push(new Cell(i,mConst,71 , dConst,121));
         i+=1;
-        board.push(new Cell(i,mConst,94));
+        board.push(new Cell(i,mConst,94 , dConst,160));
         i+=1;
-        board.push(new Cell(i,mConst,118));
+        board.push(new Cell(i,mConst,118 , dConst,200));
         i+=1;
 		
         
@@ -220,68 +231,72 @@ class Game
 		//---- Red Ends
 		
 		mConst = 150;
-        board.push(new Cell(i,mConst,23));
+		dConst = 255;
+        board.push(new Cell(i,mConst,23 , dConst,40));
         i+=1;
-        board.push(new Cell(i,mConst,45));
+        board.push(new Cell(i,mConst,45 , dConst,80));
         i+=1;
-        board.push(new Cell(i,mConst,71));
+        board.push(new Cell(i,mConst,71 , dConst,120));
         i+=1;
-        board.push(new Cell(i,mConst,94));
+        board.push(new Cell(i,mConst,94 , dConst,160));
         i+=1;
-        board.push(new Cell(i,mConst,118));
+        board.push(new Cell(i,mConst,118 , dConst,200));
         i+=1;
-        board.push(new Cell(i,mConst,145));        // Red End
+        board.push(new Cell(i,mConst,145 , dConst,243));       // Red End
         i+=1;
 		
 	
 		//---- Green Ends
 		
         mConst = 165; 
-        board.push(new Cell(i,5,mConst));
+		dConst = 279;
+        board.push(new Cell(i,5,mConst , 15,dConst));
         i+=1;
-        board.push(new Cell(i,30,mConst));
+        board.push(new Cell(i,30,mConst , 55,dConst));
         i+=1;
-        board.push(new Cell(i,54,mConst));
+        board.push(new Cell(i,54,mConst , 95,dConst));
         i+=1;
-        board.push(new Cell(i,77,mConst));
+        board.push(new Cell(i,77,mConst , 135,dConst));
         i+=1;
-        board.push(new Cell(i,102,mConst));
+        board.push(new Cell(i,102,mConst , 175,dConst));
         i+=1;
-        board.push(new Cell(i,126,mConst));        // Green End
+        board.push(new Cell(i,126,mConst , 220,dConst));       // Green End
         i+=1;
 		
 		
 		//---- Yellow Ends
 		
         mConst = 150;
-        board.push(new Cell(i,mConst,309));
+		dConst = 255;
+        board.push(new Cell(i,mConst,309 , dConst,518));
         i+=1;
-        board.push(new Cell(i,mConst,285));
+        board.push(new Cell(i,mConst,285 , dConst,478));
         i+=1;
-        board.push(new Cell(i,mConst,261));
+        board.push(new Cell(i,mConst,261 , dConst,438));
         i+=1;
-        board.push(new Cell(i,mConst,237));
+        board.push(new Cell(i,mConst,237 , dConst,398));
         i+=1;
-        board.push(new Cell(i,mConst,213));
+        board.push(new Cell(i,mConst,213 , dConst,358));
         i+=1;
-        board.push(new Cell(i,mConst,187));        // Yellow End
+        board.push(new Cell(i,mConst,187 , dConst,315));        // Yellow End
         i+=1;
 		
 		
 		//---- Blue Ends
 		
         mConst = 165;
-        board.push(new Cell(i,293,mConst));
+		dConst = 279;
+        board.push(new Cell(i,293,mConst , 495,dConst));
         i+=1;
-        board.push(new Cell(i,270,mConst));
+        board.push(new Cell(i,270,mConst , 455,dConst));
         i+=1;
-        board.push(new Cell(i,245,mConst));
+        board.push(new Cell(i,245,mConst , 415,dConst));
         i+=1;
-        board.push(new Cell(i,221,mConst));
+        board.push(new Cell(i,221,mConst , 375,dConst));
         i+=1;
-        board.push(new Cell(i,196,mConst));
+        board.push(new Cell(i,196,mConst , 335,dConst));
         i+=1;
-        board.push(new Cell(i,170,mConst));        // Yellow End
+        board.push(new Cell(i,170,mConst , 290,dConst));        // Blue End
         i+=1;
 		
 
@@ -334,6 +349,7 @@ class Game
 
     ResizeUI()
     {
+
         for(var i = 0 ; i < this.nmbrOfPlayers ; i +=1)
         {
             var player = this.players[i];
@@ -342,5 +358,6 @@ class Game
                 player.coins[j].displayCoin();
             }
         }
+        
     }
 }

@@ -13,6 +13,7 @@
 		 
 		<script type="text/javascript" src="../scripts/importNavbar.js"></script>
 		<script type="text/javascript" src="scripts/Cell.js"></script>
+		<script type="text/javascript" src="scripts/PlayerCoin.js"></script>
 		<script type="text/javascript" src="scripts/Player.js"></script>
 		<script type="text/javascript" src="scripts/Game.js"></script>
 		<script type="text/javascript" src="scripts/LudoScript.js"></script>
@@ -27,7 +28,8 @@
 				
 			<div id="theBoard">
 				<img src="images/board.png" class="board" >
-				<div class="circle" v-for="x in game.board" v-bind:style="{top: x.mTopVal, left: x.mLeftVal}"  > {{ x.index }} </div>
+			<!--	<div class="circle" v-for="x in game.board" v-bind:style="{top: x.dTopVal, left: x.dLeftVal}"  > {{ x.index }} </div>
+			-->
 				<img src="images/red.png" id="redCoin0" class="coin" >
 				<img src="images/red.png" id="redCoin1" class="coin" >
 				<img src="images/red.png" id="redCoin2" class="coin" >

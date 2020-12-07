@@ -150,7 +150,7 @@ $(document).ready(function()
 	
 	$(".dice").click(function()
 	{
-		if(!gameStarted)
+		if(game.gameStatus != 0)
 			return;
 		if(gameOver)
 			return;
