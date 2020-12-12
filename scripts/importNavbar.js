@@ -46,6 +46,7 @@ function importNavbar(htmlName, displayName)
 						<li><a href="../Sudoku/sudoku.html" style="font-size: 22px;">Sudoku</a></li>
 						<li><a href="../DotsNBoxes/dotsNBoxes.html" style="font-size: 22px;">Dots & Boxes</a></li>
 						<li><a href="../DealOrNoDeal/DealNoDeal.html" style="font-size: 22px;">Deal Or NoDeal</a></li>
+						<li><a href="../Ludo/Ludo.html" style="font-size: 22px;">Ludo</a></li>
 					</ul>
 					</li>
 				</ul>
@@ -77,6 +78,7 @@ function importNavbar(htmlName, displayName)
 							<li><a href="../Sudoku/sudoku.html" style="font-size: 22px;">Sudoku</a></li>
 							<li><a href="../DotsNBoxes/dotsNBoxes.html" style="font-size: 22px;">Dots & Boxes</a></li>
 							<li><a href="../DealOrNoDeal/DealNoDeal.html" style="font-size: 22px;">Deal Or NoDeal</a></li>
+							<li><a href="../Ludo/Ludo.html" style="font-size: 22px;">Ludo</a></li>
 						</ul>
 					</ul>
 				</div>

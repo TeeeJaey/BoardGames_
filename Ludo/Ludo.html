@@ -30,25 +30,25 @@
 				<img src="images/board.png" class="board" >
 			<!--	<div class="circle" v-for="x in game.board" v-bind:style="{top: x.dTopVal, left: x.dLeftVal}"  > {{ x.index }} </div>
 			-->
-				<img src="images/red.png" id="redCoin0" class="coin" >
-				<img src="images/red.png" id="redCoin1" class="coin" >
-				<img src="images/red.png" id="redCoin2" class="coin" >
-				<img src="images/red.png" id="redCoin3" class="coin" >
+				<img src="images/red.png" id="red_0" class="coin" >
+				<img src="images/red.png" id="red_1" class="coin" >
+				<img src="images/red.png" id="red_2" class="coin" >
+				<img src="images/red.png" id="red_3" class="coin" >
 
-				<img src="images/green.png" id="greenCoin0" class="coin" >
-				<img src="images/green.png" id="greenCoin1" class="coin" >
-				<img src="images/green.png" id="greenCoin2" class="coin" >
-				<img src="images/green.png" id="greenCoin3" class="coin" >
+				<img src="images/green.png" id="green_0" class="coin" >
+				<img src="images/green.png" id="green_1" class="coin" >
+				<img src="images/green.png" id="green_2" class="coin" >
+				<img src="images/green.png" id="green_3" class="coin" >
 
-				<img src="images/blue.png" id="blueCoin0" class="coin" >
-				<img src="images/blue.png" id="blueCoin1" class="coin" >
-				<img src="images/blue.png" id="blueCoin2" class="coin" >
-				<img src="images/blue.png" id="blueCoin3" class="coin" >
+				<img src="images/blue.png" id="blue_0" class="coin" >
+				<img src="images/blue.png" id="blue_1" class="coin" >
+				<img src="images/blue.png" id="blue_2" class="coin" >
+				<img src="images/blue.png" id="blue_3" class="coin" >
 				
-				<img src="images/yellow.png" id="yellowCoin0" class="coin" >
-				<img src="images/yellow.png" id="yellowCoin1" class="coin" >
-				<img src="images/yellow.png" id="yellowCoin2" class="coin" >
-				<img src="images/yellow.png" id="yellowCoin3" class="coin" >
+				<img src="images/yellow.png" id="yellow_0" class="coin" >
+				<img src="images/yellow.png" id="yellow_1" class="coin" >
+				<img src="images/yellow.png" id="yellow_2" class="coin" >
+				<img src="images/yellow.png" id="yellow_3" class="coin" >
 			</div>
 			
 			<div id="allControls" >
@@ -72,8 +72,7 @@
 				
 				<div id="gameControls"  v-if="game.gameStatus == 0"> 
 					<h3 id="instruct" v-bind:style="{color: game.players[game.currPlayer].color}" > {{game.instruction}} </h3>
-					<hr>
-					<br>
+					<hr> 
 					<div id="theDice">
 						<img src="images/dice1.png" class="dice" >
 					</div>

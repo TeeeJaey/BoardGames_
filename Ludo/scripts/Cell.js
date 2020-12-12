@@ -11,5 +11,73 @@ class Cell
 
         this.dTopVal = dtopVal;
         this.dLeftVal = dleftVal;
+
+        this.isSafe = false;
+        this.isBlockedBy = -1;
+
+        this.playerCoins = [];
     }
+
+    isBlocked(x)
+    {  
+        if(this.isSafe) return false;
+        return (this.isBlockedBy > -1 && this.isBlockedBy != x);
+    }
+
+    checkCoin()
+    {
+        return (this.playerCoins.length > 0);
+    }
+
+    addCoin(coinID,x)
+    {
+        
+        if(this.playerCoins.length > 0)
+        {
+            if(this.playerCoins[0].split('_')[0] == coinID.split('_')[0])
+            {   
+                if(!this.isSafe)
+                    this.block(coinID,x);
+            }
+            else
+            {
+                if(!this.isSafe)
+                    this.knockoutCoin(this.playerCoins[0]);
+            }
+        }
+
+        this.playerCoins.push(coinID);     
+    }
+
+    block(coinID,x)
+    {
+        const bgColor = "#777";
+        $("#"+coinID).css({"background":bgColor});
+        this.isBlockedBy = x;
+    }
+    unBlock(coinID)
+    {
+        $("#"+coinID).css({"background":""});
+        this.isBlockedBy = -1; 
+    }
+
+    removeCoin(coinID)
+    {
+        if(!this.playerCoins.includes(coinID)) 
+            return;
+        
+        this.playerCoins.splice(this.playerCoins.indexOf(coinID), 1);
+        if(this.playerCoins.length < 2)
+            this.unBlock(coinID);
+        return;
+    }
+
+    knockoutCoin(coinID)
+    {
+        this.removeCoin(coinID)
+        var selectedPlayer = game.players.find(x => x.color == coinID.split('_')[0]);
+        var selectedCoin = selectedPlayer.coins.find(x => x.id == coinID);
+        selectedCoin.moveCoin(selectedCoin.homePos);
+    }
+
 }

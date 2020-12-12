@@ -1,3 +1,4 @@
+
 function performSearch()
 {
     var input = document.getElementById("searchInput");

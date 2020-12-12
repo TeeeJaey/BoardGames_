@@ -1,14 +1,15 @@
 
 class Player 
 {
-    constructor(color) 
+    constructor(number,color) 
     {
+        this.number = number;
         this.color = color.toLowerCase();
-        this.coins = this.getCoins();
-        this.path = this.getPath(color);				// array of numbers - each representing cell index from game.board
+        this.path = this.setupPath(color);				// array of numbers - each representing cell index from game.board
+        this.coins = this.setupCoins();
     }
 
-    getCoins()
+    setupCoins()
     {
         var coins = [];
 
@@ -22,12 +23,12 @@ class Player
             diff = 12;
 
         for(var i = 0; i < 4 ; i+=1)
-            coins.push(new PlayerCoin(this.color + "Coin"+i.toString() , this.color , i + diff));
+            coins.push(new PlayerCoin(this.color + "_" + i.toString(), this.number, this.color , i + diff , this.path));
         
         return coins;
     }
 
-    getPath()
+    setupPath()
     {
         var path = [];
             
@@ -144,4 +145,43 @@ class Player
 
     }
 
+    checkPlay()
+    { 
+        var moveableCoinsCount = 0;
+        var moveableCoin = null;
+        for(var i = 0 ; i < this.coins.length ; i += 1)
+        {
+            if(this.coins[i].checkIfMoveable())
+            {
+                moveableCoinsCount += 1;
+                moveableCoin = this.coins[i];   
+            }
+        }
+        
+        if(moveableCoinsCount > 0)
+        {
+            if(moveableCoinsCount == 1)
+                moveableCoin.coinMoveLoop();
+            else
+            {
+                game.waitCoinSelection = true;
+                isAnimationOn = false;
+            }
+        }
+        else
+        {
+            this.removeAllHighlights();
+            game.changePlayer();
+            isAnimationOn = false;
+        }
+
+    }
+
+    removeAllHighlights()
+    {
+        for(var i = 0 ; i < this.coins.length ; i += 1)
+        {
+            this.coins[i].remHighlight();
+        }
+    }
 }

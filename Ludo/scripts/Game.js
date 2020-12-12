@@ -3,16 +3,19 @@ class Game
 {
 	constructor()
 	{
-        this.gameStatus = -1;
-        this.gameOver = false;
+        this.gameStatus = -1; 
         
 		this.nmbrOfPlayers = 2;
         this.players = [];
         this.currPlayer = 0;
-        
+        this.selectedCoin = null;
+
         this.board = this.setupBoard();
         
         this.diceVal = 0;
+        this.waitCoinSelection = false;
+        this.instruction = "";
+
     }
     
     setupBoard()
@@ -189,7 +192,7 @@ class Game
 		//---- Red Area
 		
         mConst = 173;
-		dConst = 215;
+		dConst = 295;
         board.push(new Cell(i,mConst,118 , dConst,200));
         i+=1;
         board.push(new Cell(i,mConst,94 , dConst,160));
@@ -209,7 +212,7 @@ class Game
         i+=1;
 
 		mConst = 126;
-		dConst = 295;
+		dConst = 215;
         board.push(new Cell(i,mConst,-1 , dConst,1));
         i+=1;
         board.push(new Cell(i,mConst,23 , dConst,41));
@@ -301,7 +304,19 @@ class Game
 		
 
         //#endregion
-        
+
+        board[20].isSafe = true;
+        board[24].isSafe = true;
+        board[33].isSafe = true;
+        board[37].isSafe = true;
+        board[46].isSafe = true;
+        board[50].isSafe = true;
+        board[59].isSafe = true;
+        board[63].isSafe = true;
+
+        for(var i = 68; i < board.length ; i += 1)
+            board[i].isSafe = true;
+
         return board;
     }
 
@@ -321,30 +336,48 @@ class Game
                 color = "blue";
             if(i == 3)
                 color = "yellow";
-            this.players.push(new Player(color));
+            this.players.push(new Player(i,color));
             i+=1;
         }
 
         if(this.nmbrOfPlayers < 4)
         {
-            $("#yellowCoin0").remove();
-            $("#yellowCoin1").remove();
-            $("#yellowCoin2").remove();
-            $("#yellowCoin3").remove();
+            $("#yellow_0").remove();
+            $("#yellow_1").remove();
+            $("#yellow_2").remove();
+            $("#yellow_3").remove();
 
             if(this.nmbrOfPlayers < 3)
             {
-                $("#blueCoin0").remove();
-                $("#blueCoin1").remove();
-                $("#blueCoin2").remove();
-                $("#blueCoin3").remove();
+                $("#blue_0").remove();
+                $("#blue_1").remove();
+                $("#blue_2").remove();
+                $("#blue_3").remove();
             }
         }
 
-        this.instruction = this.players[this.currPlayer].color + " play";
+        this.instruction = this.players[this.currPlayer].color.toUpperCase()  + " play";
 
         $('.coin').css({"display":"" });
 
+    }
+      
+    changePlayer()
+    {  
+        this.currPlayer+=1;
+        if(this.currPlayer == this.nmbrOfPlayers)
+            this.currPlayer=0;
+            
+        this.instruction = this.players[this.currPlayer].color.toUpperCase() + " Play";
+        isAnimationOn = false;
+        return;
+    }
+
+    selectCoinById(coinID)
+    {
+        var selectedPlayer = game.players.find(x => x.color == coinID.split('_')[0]);
+        this.selectedCoin = selectedPlayer.coins.find(x => x.id == coinID);
+        return this.selectedCoin;
     }
 
     ResizeUI()
@@ -359,5 +392,15 @@ class Game
             }
         }
         
+        return;
+    }
+    
+    
+    removeAllHighlights()
+    {
+        for(var i = 0 ; i < this.players.length ; i += 1)
+        {
+            this.players[i].removeAllHighlights();
+        }
     }
 }
