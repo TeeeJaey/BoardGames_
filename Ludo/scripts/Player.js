@@ -7,6 +7,8 @@ class Player
         this.color = color.toLowerCase();
         this.path = this.setupPath(color);				// array of numbers - each representing cell index from game.board
         this.coins = this.setupCoins();
+
+        this.ended = false;
     }
 
     setupCoins()
@@ -183,5 +185,23 @@ class Player
         {
             this.coins[i].remHighlight();
         }
+    }
+
+    checkEnded()
+    {
+        var endCoinCount = 0;
+        for(var i = 0 ; i < this.coins.length ; i += 1)
+        {
+            if(this.coins[i].ended)
+                endCoinCount += 1;
+        }
+
+        if(endCoinCount == 4)
+        {
+            this.ended = true;
+            game.endList.push(this);
+            game.checkEnded();
+        }   
+
     }
 }

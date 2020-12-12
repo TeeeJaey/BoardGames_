@@ -34,6 +34,11 @@ class PlayerCoin
         $("#"+this.id).css({"top":startTop , "left":startLeft});
     }
 
+    getPlayerByCoinID(coinID)
+    {
+        return game.players.find(x => x.color == coinID.split('_')[0]);
+    }
+
     checkIfMoveable()
     {  
         if(!this.started)
@@ -67,13 +72,23 @@ class PlayerCoin
     addHighlight()
     {
         const bgColor = "#ff6347";
-        $("#"+this.id).css({"background":bgColor});
+        $("#"+this.id).css(
+        {
+            "background": bgColor , 
+            "z-index": (this.location.mTopVal + 1000).toString()
+        });
+
         this.highlighted = true;
     }
 
     remHighlight()
     {
-        $("#"+this.id).css({"background":""});
+        $("#"+this.id).css(
+        {
+            "background":"", 
+            "z-index": (this.location.mTopVal + 50).toString()
+        });
+        
         this.highlighted = false;
 
         if(this.location.isBlocked())
@@ -88,8 +103,10 @@ class PlayerCoin
         var currCoinDiv =  $("#"+this.id);
 
         this.currPos  = targetPosition;
-        this.location = game.board[this.path[this.currPos]];
-        
+        if(targetPosition > -1)
+            this.location = game.board[this.path[this.currPos]];
+        else
+            this.location = game.board[this.homePos];
         if(mobileUI)
         {
             currCoinDiv.animate(
@@ -142,7 +159,10 @@ class PlayerCoin
                     game.changePlayer();
                 
                 if(coin.currPos == coin.path.length - 1)
+                {
                     coin.ended = true;
+                    this.getPlayerByCoinID(this.id).checkEnded();
+                }
                 else
                     coin.location.addCoin(coin.id,coin.number);
                     

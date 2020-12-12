@@ -94,8 +94,6 @@ $(document).ready(function()
 
 	$(window).on('resize', function()
 	{
-		if(game.gameStatus < 0)
-			return;
 
 		if (window.innerWidth <= 768) 
 		{

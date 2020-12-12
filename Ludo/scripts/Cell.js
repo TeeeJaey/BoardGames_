@@ -55,9 +55,11 @@ class Cell
         $("#"+coinID).css({"background":bgColor});
         this.isBlockedBy = x;
     }
-    unBlock(coinID)
+    unBlock()
     {
-        $("#"+coinID).css({"background":""});
+        this.playerCoins.forEach(coinID => {
+            $("#"+coinID).css({"background":""}); 
+        });
         this.isBlockedBy = -1; 
     }
 
@@ -65,10 +67,9 @@ class Cell
     {
         if(!this.playerCoins.includes(coinID)) 
             return;
-        
+        if(this.playerCoins.length == 2)
+            this.unBlock();
         this.playerCoins.splice(this.playerCoins.indexOf(coinID), 1);
-        if(this.playerCoins.length < 2)
-            this.unBlock(coinID);
         return;
     }
 
@@ -77,7 +78,9 @@ class Cell
         this.removeCoin(coinID)
         var selectedPlayer = game.players.find(x => x.color == coinID.split('_')[0]);
         var selectedCoin = selectedPlayer.coins.find(x => x.id == coinID);
-        selectedCoin.moveCoin(selectedCoin.homePos);
+        selectedCoin.started = false;
+        selectedCoin.ended = false;
+        selectedCoin.moveCoin(-1);
     }
 
 }

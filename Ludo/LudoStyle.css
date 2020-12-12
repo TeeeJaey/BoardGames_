@@ -44,7 +44,7 @@ body
 	padding:20px;
 	margin:auto;
 }
-#instruct
+#instruct , #endInstruct
 {
 	background-color : #fff5d7;
 	padding : 30px;
@@ -53,6 +53,12 @@ body
 
 	-webkit-text-stroke-width: 0.75px;
     -webkit-text-stroke-color: black;
+}
+
+#endInstruct
+{
+	padding : 10px;
+	font-size: 22px;
 }
 
 #theDice, .dice
@@ -122,7 +128,7 @@ body
 		top: 750px;
 		left : 10%;
 	}
-	#instruct
+	#instruct, #endInstruct
 	{
 		background-color : #fff5d7;
 		padding : 10px;

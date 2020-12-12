@@ -16,6 +16,7 @@ class Game
         this.waitCoinSelection = false;
         this.instruction = "";
 
+        this.endList = [];
     }
     
     setupBoard()
@@ -383,12 +384,11 @@ class Game
     ResizeUI()
     {
 
-        for(var i = 0 ; i < this.nmbrOfPlayers ; i +=1)
-        {
-            var player = this.players[i];
+        for(var i = 0 ; i < this.players.length ; i +=1)
+        { 
             for(var j = 0 ; j < 4 ; j +=1)
             {
-                player.coins[j].displayCoin();
+                this.players[i].coins[j].displayCoin();
             }
         }
         
@@ -402,5 +402,20 @@ class Game
         {
             this.players[i].removeAllHighlights();
         }
+    }
+
+    checkEnded()
+    { 
+
+        if(this.endList.length == this.nmbrOfPlayers-1)
+        {
+            this.players.forEach(player => {
+                if(!player.ended)
+                    this.endList.push(player);
+            });
+            
+            game.gameStatus = 1;
+        }
+            
     }
 }
