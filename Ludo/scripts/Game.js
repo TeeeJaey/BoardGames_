@@ -411,7 +411,7 @@ class Game
         {
             this.players.forEach(player => {
                 if(!player.ended)
-                    this.endList.push(player);
+                    this.endList.push(player.color);
             });
             
             game.gameStatus = 1;

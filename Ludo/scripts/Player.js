@@ -199,7 +199,7 @@ class Player
         if(endCoinCount == 4)
         {
             this.ended = true;
-            game.endList.push(this);
+            game.endList.push(this.color);
             game.checkEnded();
         }   
 

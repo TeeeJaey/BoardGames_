@@ -161,7 +161,7 @@ class PlayerCoin
                 if(coin.currPos == coin.path.length - 1)
                 {
                     coin.ended = true;
-                    this.getPlayerByCoinID(this.id).checkEnded();
+                    coin.getPlayerByCoinID(coin.id).checkEnded();
                 }
                 else
                     coin.location.addCoin(coin.id,coin.number);
