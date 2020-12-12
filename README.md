@@ -10,4 +10,5 @@ Games
 - Sudoku :black_nib: 100% 
 - Dots & Boxes :black_nib: 100% 
 - Deal or No Deal :black_nib: 100% 
+- Ludo :black_nib: 80% 
 
