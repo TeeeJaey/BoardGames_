@@ -155,17 +155,20 @@ class PlayerCoin
             if(cnt == game.diceVal)
             {
                 clearInterval(coinMoveAnim); 
-                if(diceVal != 6)
-                    game.changePlayer();
                 
                 if(coin.currPos == coin.path.length - 1)
                 {
                     coin.ended = true;
                     coin.getPlayerByCoinID(coin.id).checkEnded();
+                    game.changePlayer();
                 }
                 else
+                {
                     coin.location.addCoin(coin.id,coin.number);
-                    
+                    if(diceVal != 6)
+                        game.changePlayer();
+                }
+                
                 isAnimationOn = false;
                 game.waitCoinSelection = false;
                 return;

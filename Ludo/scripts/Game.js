@@ -368,7 +368,8 @@ class Game
         this.currPlayer+=1;
         if(this.currPlayer == this.nmbrOfPlayers)
             this.currPlayer=0;
-            
+        if(this.players[this.currPlayer].ended)   
+            this.changePlayer();
         this.instruction = this.players[this.currPlayer].color.toUpperCase() + " Play";
         isAnimationOn = false;
         return;
