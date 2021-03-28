@@ -42,10 +42,22 @@
 
 			<div class="controls" v-if="game.status==0">
 				<button class="btn btn-info ctrlBtns" type="button" id="btnLeft" > <i class="fa fa-angle-left"  ></i>  </button> 
+				<button class="btn btn-info ctrlBtns" type="button" id="btnRotate" > <i class="fa fa-rotate-right"></i> </button> 
+				<button class="btn btn-info ctrlBtns" type="button" id="btnDown" > <i class="fa fa-angle-down"  ></i> </button>
 				<button class="btn btn-info ctrlBtns" type="button" id="btnRight" > <i class="fa fa-angle-right"  ></i> </button>
 				<hr>
-				<button id="restart" class="btn btn-default" onclic
-			k="document.location.reload(true)"> New game </button>
+				
+				<div id="instruct" class="row" > 
+					<span class="col-3">Next block</span>
+					<table class="col-3" style="padding: 20px; margin: auto;" >
+						<tr v-for="row in game.nextBlock.shape">
+							<td v-for="x in row" v-if="x" class="cell" v-bind:style="{backgroundColor: game.nextBlock.color}"> </td>
+						</tr>
+					</table>
+				</div>
+
+				<hr>
+				<button id="restart" class="btn btn-default" onclick="document.location.reload(true)"> New game </button>
 			</div>
 			<div class="controls" v-if="game.status==1" style=" font-weight:bold" >
 				GAME OVER

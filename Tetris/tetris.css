@@ -52,14 +52,14 @@ body
 #instruct
 {
 	background-color : #fff5d7;
-	padding : 30px;
-	font-size: 30px;
+	padding : 10px;
+	font-size: 20px;
 	font-weight: bold;
 }
 .ctrlBtns
 {
 	font-size: 30px;
-	width: 40%;
+	width: 20%;
 }
  
 
@@ -75,11 +75,6 @@ body
 		position : absolute;
 		top: 650px;
 		left :10%;
-	}
-	#instruct
-	{
-		padding : 10px;
-		font-size: 22px;
 	}
 	#restart, #start 
 	{

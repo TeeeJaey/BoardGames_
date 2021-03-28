@@ -18,7 +18,6 @@ $(document).ready(function()
 	$(document).on('keydown' , function(e) 
 	{ 
 		var key = e.keyCode || e.which;
-		var btnClicked = -1;
 		switch(key)
 		{ 
 			case 37 :
@@ -31,8 +30,14 @@ $(document).ready(function()
 				game.moveRight();
 				break;
 			}
-			default:
+			case 38 :
 			{
+				game.rotateBlock();
+				break;
+			}
+			case 40 :
+			{
+				game.moveDown();
 				break;
 			}
 		}
@@ -44,7 +49,6 @@ $(document).ready(function()
     {
 		game.status = 0;
 		game.startBlock();
-
 	});
 	 
 	$(document.body).on('click',"#btnLeft", function()
@@ -55,5 +59,13 @@ $(document).ready(function()
     {
 		game.moveRight();
 	});
- 
+	$(document.body).on('click',"#btnRotate", function()
+    {
+		game.rotateBlock();
+	});
+	$(document.body).on('click',"#btnDown", function()
+    {
+		game.moveDown();
+	});
+	
 });
