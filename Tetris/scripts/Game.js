@@ -16,7 +16,8 @@ class Game
 
 	rotateBlock()
 	{
-		this.currBlock.rotate();
+		if(!this.currBlock.isSet)
+			this.currBlock.rotate();
 	}
 
 	moveDown()
@@ -145,7 +146,7 @@ class Game
 	setAsSet(block)
 	{
 		block.currentY -= 1;
-
+		block.isSet = true;
 		let x = 0;
 		for(var i = block.currentY; i < (block.currentY + block.shape.length); i++)
 		{
@@ -160,6 +161,7 @@ class Game
 				if(block.shape[x][y])
 				{
 					this.board[i][j].isSet = true;
+					this.board[i][j].blockColor = block.color;
 				}
 				y += 1;
 			}
@@ -177,6 +179,9 @@ class Game
 			{
 				if (!this.board[i][j].isSet)
 					this.board[i][j].currColor = this.board[i][j].initColor;
+				else
+					this.board[i][j].currColor = this.board[i][j].blockColor;
+
 			}
 		} 
 			
@@ -239,6 +244,7 @@ class Game
 
 	endGame()
 	{
+		clearInterval(this.blockMover);
 		this.gameOver = true;
 		this.status = 1;
 	}

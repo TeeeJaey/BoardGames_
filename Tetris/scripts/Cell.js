@@ -11,6 +11,7 @@ class Cell
         
         this.initColor = "#bbb";
         this.currColor = "#bbb";
+        this.blockColor = "#bbb";
         
         return;
     }

@@ -3,6 +3,7 @@ class Block
 {
     constructor()
     {
+        this.isSet = false;
         this.shape = this.getShape();
         this.color = this.getColor();
         
@@ -100,6 +101,11 @@ class Block
 
     rotate()
     {
+        
+		const cols = 12;
+        if(game.currBlock.currentX + this.shape.length >= cols)
+            this.currentX -= 1;
+
         let newShape = [];
 
         for (let i = 0; i < 3; i++) 
@@ -126,11 +132,7 @@ class Block
 
         this.shape = newShape;
 
-		const cols = 12;
-        if(game.currBlock.currentX + this.shape[0].length >= cols)
-            this.currentX -= 1;
         
         return;
-        
     }
 }
