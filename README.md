@@ -1,5 +1,6 @@
 # BoardGames
 Set of Board / Card games made in HTML / JavaScript
+Play here : https://teeejaey.github.io/Projects/BoardGames/BoardGames.html
 
 Games
 - :heavy_check_mark: Minesweeper  100% 
