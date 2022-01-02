@@ -14,4 +14,5 @@ Games
 - :heavy_check_mark: Deal or No Deal  100% 
 - :heavy_check_mark: Ludo 100% 
 - :black_nib: Tetris  90% 
+- :heavy_check_mark: Snake 100% 
 
