@@ -1,11 +1,10 @@
 
 var mainContentVue = new Vue();       // to put data in HTML x
 var game = new Game(); 
-
  
 $(document).ready(function()
 {
-	importNavbar("tetris", "Tetris");
+	importNavbar("snake", "Snake");
 	//$('#gameUnderDev').css("display","");
 	
     mainContentVue = new Vue({
@@ -20,23 +19,27 @@ $(document).ready(function()
 		var key = e.keyCode || e.which;
 		switch(key)
 		{ 
-			case 37 :
+			case 37: case 65 : // a and left
 			{
+				e.preventDefault();
 				game.moveLeft();
 				break;
 			}
-			case 39 :
+			case 39:  case 68: // d and right
 			{
+				e.preventDefault();
 				game.moveRight();
 				break;
 			}
-			case 38 :
+			case 38: case 87: // w and up
 			{
-				game.rotateBlock();
+				e.preventDefault();
+				game.moveUp();
 				break;
 			}
-			case 40 :
+			case 40: case 83: // s and down
 			{
+				e.preventDefault();
 				game.moveDown();
 				break;
 			}
@@ -44,28 +47,15 @@ $(document).ready(function()
 		
 	}); 
 	
-
 	$(document.body).on('click',"#start", function()
     {
 		game.status = 0;
-		game.startBlock();
+		game.resetTimer();
 	});
 	 
-	$(document.body).on('click',"#btnLeft", function()
-    {
-		game.moveLeft();
-	});
-	$(document.body).on('click',"#btnRight", function()
-    {
-		game.moveRight();
-	});
-	$(document.body).on('click',"#btnRotate", function()
-    {
-		game.rotateBlock();
-	});
-	$(document.body).on('click',"#btnDown", function()
-    {
-		game.moveDown();
-	});
+	$(document.body).on('click',"#btnLeft", () => game.moveLeft() );
+	$(document.body).on('click',"#btnRight", () => game.moveRight() );
+	$(document.body).on('click',"#btnUp", () => game.moveUp() );
+	$(document.body).on('click',"#btnDown", () => game.moveDown() );
 	
 });

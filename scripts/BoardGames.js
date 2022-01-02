@@ -2,7 +2,7 @@
 function performSearch()
 {
     var input = document.getElementById("searchInput");
-    if(input.value != undefined && input.value != null  && input.value != "")
+    if(input.value && input.value != null  && input.value != "")
     {
         var filter = document.getElementById("searchInput").value.toUpperCase();
         var gameList = document.getElementById("gameList");
@@ -15,7 +15,7 @@ function performSearch()
 
             if (txtValue.toUpperCase().indexOf(filter) > -1) 
             {
-                game.style.display = "inline-block";
+                game.style.display = "";
             }
             else 
             {
@@ -25,14 +25,11 @@ function performSearch()
     }
     else
     {
-        var filter = document.getElementById("searchInput").value.toUpperCase();
-        var gameList = document.getElementById("gameList");
-        var a = gameList.getElementsByTagName("a");
+        var a =  document.getElementById("gameList").getElementsByTagName("a");
         for (i = 0; i < a.length; i++) 
         {
             var game = a[i];
-            var txtValue = game.id || game.innerText;
-            game.style.display = "inline-block";
+            game.style.display = "";
         }
     }
 }
