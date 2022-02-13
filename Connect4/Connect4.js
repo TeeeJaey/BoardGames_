@@ -58,8 +58,8 @@ $(document).ready(function()
                     if(count == 4)
                     {
                         playerWon = true;
-                        $('h3')[0].style.color = playerColour
-                        $('h3')[0].innerText = "Player " + player + " won!";
+                        $('#instruct')[0].style.color = playerColour
+                        $('#instruct')[0].innerText = "Player " + player + " won!";
                         return;
                     }
                     
@@ -83,8 +83,8 @@ $(document).ready(function()
                     if(count == 4)
                     {
                         playerWon = true;
-                        $('h3')[0].style.color = playerColour
-                        $('h3')[0].innerText = "Player " + player + " won!";
+                        $('#instruct')[0].style.color = playerColour
+                        $('#instruct')[0].innerText = "Player " + player + " won!";
                         return;
                     }
                     
@@ -112,8 +112,8 @@ $(document).ready(function()
                     if(count == 4)
                     {
                         playerWon = true;
-                        $('h3')[0].style.color = playerColour
-                        $('h3')[0].innerText = "Player " + player + " won!";
+                        $('#instruct')[0].style.color = playerColour
+                        $('#instruct')[0].innerText = "Player " + player + " won!";
                         return;
                     }
                     
@@ -137,8 +137,8 @@ $(document).ready(function()
                     if(count == 4)
                     {
                         playerWon = true;
-                        $('h3')[0].style.color = playerColour
-                        $('h3')[0].innerText = "Player " + player + " won!";
+                        $('#instruct')[0].style.color = playerColour
+                        $('#instruct')[0].innerText = "Player " + player + " won!";
                         return;
                     }
                     
@@ -166,8 +166,8 @@ $(document).ready(function()
                     if(count == 4)
                     {
                         playerWon = true;
-                        $('h3')[0].style.color = playerColour
-                        $('h3')[0].innerText = "Player " + player + " won!";
+                        $('#instruct')[0].style.color = playerColour
+                        $('#instruct')[0].innerText = "Player " + player + " won!";
                         return;
                     }
                     
@@ -191,8 +191,8 @@ $(document).ready(function()
                     if(count == 4)
                     {
                         playerWon = true;
-                        $('h3')[0].style.color = playerColour
-                        $('h3')[0].innerText = "Player " + player + " won!";
+                        $('#instruct')[0].style.color = playerColour
+                        $('#instruct')[0].innerText = "Player " + player + " won!";
                         return;
                     }
                     
@@ -218,8 +218,8 @@ $(document).ready(function()
                     if(count == 4)
                     {
                         playerWon = true;
-                        $('h3')[0].style.color = playerColour
-                        $('h3')[0].innerText = "Player " + player + " won!";
+                        $('#instruct')[0].style.color = playerColour
+                        $('#instruct')[0].innerText = "Player " + player + " won!";
                         return;
                     }
                     
@@ -238,15 +238,15 @@ $(document).ready(function()
             {
                 player = 2
                 playerColour = "red";
-                $('h3')[0].style.color = playerColour
-                $('h3')[0].innerText = "Player " + player + " play ...";
+                $('#instruct')[0].style.color = playerColour
+                $('#instruct')[0].innerText = "Player " + player + " play ...";
             }
             else
             {
                 player = 1
                 playerColour = "yellow";
-                $('h3')[0].style.color = playerColour
-                $('h3')[0].innerText = "Player " + player + " play ...";
+                $('#instruct')[0].style.color = playerColour
+                $('#instruct')[0].innerText = "Player " + player + " play ...";
             }
         }
                     

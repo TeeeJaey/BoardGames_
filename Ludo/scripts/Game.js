@@ -1,8 +1,10 @@
 
 class Game 
 {
-	constructor()
+	constructor(loadedGame)
 	{
+        if(loadedGame && loadedGame != null)
+            return;
         this.gameStatus = -1; 
         
 		this.nmbrOfPlayers = 2;
@@ -419,4 +421,81 @@ class Game
         }
             
     }
+
+	autoSaveGame() {
+		localStorage.boardgame_ludo = JSON.stringify(this);
+	}
+    
+	autoLoadGame() 
+	{
+		try
+		{
+			if(!localStorage.boardgame_ludo || localStorage.boardgame_ludo == null) 
+				return false;
+	
+			let loadedGame = JSON.parse(localStorage.boardgame_ludo);
+			game = new Game(loadedGame);
+
+            game.gameStatus = loadedGame.gameStatus; 
+            game.nmbrOfPlayers = loadedGame.nmbrOfPlayers; 
+            game.currPlayer = loadedGame.currPlayer; 
+            game.diceVal = loadedGame.diceVal; 
+            game.waitCoinSelection = loadedGame.waitCoinSelection; 
+            game.instruction = loadedGame.instruction; 
+            game.endList = loadedGame.endList; 
+            
+            game.board = loadedGame.board;
+            for(let i=0; i<loadedGame.board.length; i++) {
+                const loadCell = loadedGame.board[i];
+                game.board[i] = new Cell(loadCell.index, loadCell.mTopVal, loadCell.mLeftVal, loadCell.dTopVal, loadCell.dLeftVal);
+                game.board[i].isSafe = loadCell.isSafe;
+                game.board[i].isBlockedBy = loadCell.isBlockedBy;
+                game.board[i].playerCoins = loadCell.playerCoins;;
+            }
+            
+    
+            game.players = loadedGame.players;
+            for(let i=0; i<loadedGame.players.length; i++) {
+                const loadedPlayer = loadedGame.players[i];
+                game.players[i] = new Player(loadedPlayer.number, loadedPlayer.color, loadedPlayer);
+            }
+            
+    
+            if(loadedGame.selectedCoin && loadedGame.selectedCoin != null) {
+                const loadPlayerCoin = loadedGame.selectedCoin;
+                game.selectedCoin = new PlayerCoin(loadPlayerCoin.id, loadPlayerCoin.number, 
+                            loadPlayerCoin.color, loadPlayerCoin.homePos, loadPlayerCoin.path, loadPlayerCoin);
+            }
+
+            if(game.nmbrOfPlayers < 4)
+            {
+                $("#yellow_0").remove();
+                $("#yellow_1").remove();
+                $("#yellow_2").remove();
+                $("#yellow_3").remove();
+
+                if(game.nmbrOfPlayers < 3)
+                {
+                    $("#blue_0").remove();
+                    $("#blue_1").remove();
+                    $("#blue_2").remove();
+                    $("#blue_3").remove();
+                }
+            }
+
+            $('.coin').css({"display":"" });
+            $('.board').css({"display":""});
+
+            game.removeAllHighlights();
+            if(game.waitCoinSelection)
+                game.players[game.currPlayer].checkPlay()
+                
+			return true;
+		}
+		catch(e)
+		{
+			console.log("Exception" , e);
+			return false;
+		}
+	}
 }

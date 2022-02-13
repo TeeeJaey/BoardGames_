@@ -9,7 +9,8 @@ $(document).ready(function()
 	$("#startcontrols").css("display","");
 	$("#gameControls").css("display","none");
 	$("#endControls").css("display","none");
-	$('.coin').css({"display":"none"})
+	$('.coin').css({"display":"none"});
+	$('.board').css({"display":"none"});
 
 	var gameStarted = false;
 	var isAnimationOn = false;
@@ -221,6 +222,7 @@ $(document).ready(function()
 		
 	$("#start").click(function()
 	{
+		$('.board').css({"display":""});
 		setupBoard();
 		setupPlayers();
 		$("#startcontrols").css("display","none");

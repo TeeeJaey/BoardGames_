@@ -1,0 +1,144 @@
+::-webkit-scrollbar {
+    width: 5px;
+    background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.3);
+    background-color: #1f0303;
+}
+
+body {
+    background-color: #fef6dd;
+    text-align: center;
+}
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: left;
+    align-items: center;
+}
+
+.game {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.game > .controls,
+.game > #theBoard {
+    margin: 20px;
+}
+#theBoard {
+    display: flex;
+    flex-direction: column;
+}
+#theBoard > .row {
+    display: flex;
+    flex-direction: row;
+}
+.toaster {
+    padding: 20px 30px;
+    font-size: 18px;
+    z-index: 1000;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    pointer-events: none;
+    width: fit-content;
+    background: #222;
+    color: white;
+    transition: 0.2s ease;
+    opacity: 0;
+}
+.toaster.active {
+    opacity: 1;
+}
+
+.cell {
+    margin: 1px;
+    font-size: 30px;
+    width: 60px;
+    height: 60px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.keyboardRow {
+    display: flex;
+    justify-content: space-evenly;
+}
+.keyboardCell {
+    font-family: inherit;
+    font-weight: bold;
+    border: 1px solid black;
+    padding: 0;
+    margin: 5px 1px;
+    height: 50px;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: white;
+    font-size: 15px;
+
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+}
+.nonKeyCell {
+    padding: 0px 5px;
+    font-size: small;
+}
+.keyboardCell:active {
+    background: darksalmon;
+}
+
+.controls {
+    background-color: #ff5e6c;
+    font-size: 22px;
+    width: 500px;
+    padding: 20px;
+}
+.instruct {
+    background-color: #fff5d7;
+    padding: 15px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.game-btns {
+    margin: 20px;
+    font-size: 22px;
+    width: 48%;
+}
+
+.howto img {
+    width: 50px;
+    margin-right: 15px;
+}
+.howto div {
+    text-align: left;
+    font-size: 14px;
+}
+
+@media (max-width: 950px) {
+    .game > .controls,
+    .game > #theBoard {
+        margin: 5px;
+    }
+    .controls {
+        width: 500px;
+        font-size: 20px;
+        padding: 5px;
+    }
+    .game-btns {
+        font-size: 18px;
+    }
+}

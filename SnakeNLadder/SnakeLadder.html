@@ -29,27 +29,24 @@
 		</div>
 		
 		<div id="allControls">
-			
-			<div id="startcontrols"> Number Of Players
-				<br>
 
-				<div class="btn-group btn-group-toggle" data-toggle="buttons">
-					<label class="btn btn-info active">
-					<input type="radio" name="nmbrOfPlayers" autocomplete="off" value="2" checked > 2
-					</label>
-				 
-					<label class="btn btn-info">
-					<input type="radio" name="nmbrOfPlayers" value="3" autocomplete="off"> 3
-					</label>
-				 
-					<label class="btn btn-info">
-					<input type="radio" name="nmbrOfPlayers" value="4" autocomplete="off"> 4
-					</label>
-				 </div>
-
+			<div class="startControls" id="startcontrols"> 
+				<h4 class="instruct" > Number Of Players </h4>
+				<hr>
+				<div class="btn-group btn-group-toggle" data-toggle="buttons" > 
+					<label class="btn btn-default btnDiff active" >
+						<input type="radio" name="nmbrOfPlayers" value="2" checked > 2 </input> 
+					</label> 
+					<label class="btn btn-default btnDiff"> 
+						<input type="radio" name="nmbrOfPlayers" value="3" > 3 </input> 
+					</label> 
+					<label class="btn btn-default btnDiff"> 
+						<input type="radio" name="nmbrOfPlayers" value="4"> 4 </input> 
+					</label> 
+				</div>
 				<hr>
 
-				<div class="dropdown">
+				<div class="dropdown board-chooser">
 					Choose a Board
 					<i class="fa fa-angle-down" style="font-size: 36px;"></i>
 					<div class="dropdown-content">
@@ -68,24 +65,28 @@
 					</div>
 				</div>
 				<hr>
-				<button id="start" class="btn btn-default" > Start game </button>
+				<button id="start" class="btn btn-default game-btns" > Start game </button>
 			</div>
 			
-			<div id="gameControls">
-				<h3 id="instruct"  >Red play</h3>
+			<div class="controls" id="gameControls">
+				<h3 id="instruct">Red play</h3>
 				<hr>
-				<br>
 				<div id="theDice">
 					<img src="images/dice1.png" class="dice" >
 				</div>
+				<hr>
+				<button id="start" class="btn btn-default game-btns" onclick="document.location.reload(true)" > 
+					Start game
+				</button>
 			</div>
 
 
-			<div id="endControls">
+			<div class="controls" id="endControls">
 				<h3 id="endInstruct">Red Wins !!!</h3>
 				<hr>
-				<br>
-				<button id="restart" class="btn btn-secondary" onclick="document.location.reload(true)"> Play again </button>
+				<button id="restart" class="btn btn-secondary game-btns" onclick="document.location.reload(true)"> 
+					Play again 
+				</button>
 			</div>
 
 		</div>

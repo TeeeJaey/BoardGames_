@@ -1,8 +1,32 @@
 
 class PlayerCoin 
 {
-    constructor(id,number,color,pos,path)
+    constructor(id,number,color,pos,path,loadedPlayerCoin)
     {
+        if(loadedPlayerCoin) {      // retrived from auto loaded game
+                this.id = loadedPlayerCoin.id;
+                this.number = loadedPlayerCoin.number;
+                this.color = loadedPlayerCoin.color;
+
+                this.homePos = loadedPlayerCoin.homePos;
+                this.currPos = loadedPlayerCoin.currPos;
+                
+                this.started = loadedPlayerCoin.started;
+                this.ended = loadedPlayerCoin.ended;
+
+                this.highlighted = loadedPlayerCoin.highlighted;
+
+                this.path = loadedPlayerCoin.path;
+
+                if(this.currPos < 0)
+                    this.location = game.board[this.homePos];
+                else
+                    this.location = game.board[this.path[this.currPos]];
+                    
+                this.displayCoin();
+            return;
+        }
+
         this.id = id;
         this.number = number;
         this.color = color;
@@ -140,6 +164,7 @@ class PlayerCoin
         if(!this.started)
         {
             game.waitCoinSelection = false;
+            game.autoSaveGame();
             this.moveCoin(0);
             isAnimationOn = false;
             this.started = true;
@@ -165,12 +190,13 @@ class PlayerCoin
                 else
                 {
                     coin.location.addCoin(coin.id,coin.number);
-                    if(diceVal != 6)
+                    if(game.diceVal != 6)
                         game.changePlayer();
                 }
                 
                 isAnimationOn = false;
                 game.waitCoinSelection = false;
+                game.autoSaveGame();
                 return;
             }
 

@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <title>Wordle</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+        <script type="text/javascript" src="../scripts/importNavbar.js"></script>
+        <script type="text/javascript" src="scripts/WordLibrary.js"></script>
+        <script type="text/javascript" src="scripts/Cell.js"></script>
+        <script type="text/javascript" src="scripts/Game.js"></script>
+        <script type="text/javascript" src="scripts/wordle.js"></script>
+        <link type="text/css" rel="stylesheet" href="wordle.css" />
+    </head>
+
+    <body>
+        <div id="navbar"></div>
+
+        <div id="mainContent">
+            <div class="toaster">toaster</div>
+            <div class="game">
+                <div id="theBoard">
+                    <div v-for="row in game.board" class="row">
+                        <div v-for="x in row" class="cell" v-bind:style="{backgroundColor: x.background, color: x.color}">{{x.value}}</div>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <div v-if="!gameOver">
+                        <div v-for="row in game.keyboard" class="keyboardRow">
+                            <button v-for="x in row" class="keyboardCell" v-bind:value="x">
+                                <span v-if="x.length == 1">{{x}}</span>
+                                <span v-if="x.length != 1" class="nonKeyCell">{{x}}</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div v-if="gameOver">
+                        <h4 class="instruct">Correct Word: {{game.correctWord.toUpperCase()}}</h4>
+                    </div>
+                    <hr />
+                    <button id="btnNewGame" class="btn btn-default game-btns">Get New game</button>
+                    <hr />
+
+                    <div>
+                        <h4 class="instruct howto">
+                            <div class="flex-row">
+                                <img src="./images/yes.PNG" />
+                                <div>Letter is in correct spot</div>
+                            </div>
+                            <div class="flex-row">
+                                <img src="./images/no.PNG" />
+                                <div>Letter is not in the Word</div>
+                            </div>
+                            <div class="flex-row">
+                                <img src="./images/maybe.PNG" />
+                                <div>Letter is in the Word but not in correct spot</div>
+                            </div>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

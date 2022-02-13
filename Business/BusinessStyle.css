@@ -1,3 +1,17 @@
+
+::-webkit-scrollbar
+{
+	width: 5px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	box-shadow: inset 0 0 4px rgba(0,0,0,0.3);
+	background-color: #1f0303;
+}
+
 html
 {
 	min-width:740px;
@@ -28,7 +42,37 @@ body
 	height : 45px;
 } 
 
- 
+.instruct
+{
+	background-color : #fff5d7;
+	padding : 15px;
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.game-btns
+{
+	margin-top:20px;
+	font-size: 22px;
+	width: 48%;
+}
+
+.btn-group {
+	width:100%;
+	display: flex;
+	justify-content: space-evenly;
+}
+.btnDiff
+{
+	font-size: 20px;;
+	width:30%;
+}
+.btnDiff.active {
+	pointer-events:none;
+	background-color: rgba(255,245,215, 0.8);
+	border:3px solid Green;
+}
+
 .swal2-popup {
     font-size: 1.6rem !important;
 }
@@ -72,14 +116,6 @@ body
 	font-size: 20px;
 }
 
-.btn-info
-{
-	background-color: #f9c5bd;
-	color : black;
-	margin : 10px;
-	font-size: 22px;
-	padding:10px 40px;
-}
 
 #allControls
 {
@@ -239,7 +275,7 @@ body
 {
 	font-size: 30px;
 	position : absolute;
-	top: 420px;
+	top: 80vh;
 	right : 0%;
     border-radius: 10%;
 }
@@ -305,7 +341,7 @@ body
 {
 	font-size: 30px;
 	position : absolute;
-	top: 300px;
+	top: 70vh;
 	right : 0%;
     border-radius: 10%;
 }
@@ -387,7 +423,7 @@ body
 	top : -95px;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1285px) {
 
 	#allControls
 	{
@@ -396,21 +432,24 @@ body
 		left : 10%;
 	}
 
+	#btnMenu
+	{
+		top: 700px;
+	}
 	
+	#menu
+	{
+		top: 750px;
+	}
+
 	#btnTrade
 	{
-		top: 850px;
-		right : 0%;
+		top: 950px;
 	}
 
 	#btnLogs
 	{
-	
-		font-size: 30px;
-		position : absolute;
-		top: 760px;
-		right : 0%;
-		border-radius: 10%;
+		top: 1050px;
 	}
 
 }

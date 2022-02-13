@@ -12,12 +12,12 @@ const cellTypes = {
 
 class Cell
 { 
-    constructor(i,j,type)
+    constructor(x,y,type)
     {
         this.type = type;
-        this.id = i+':'+j;
-        this.x = i;
-        this.y = j;
+        this.id = x+':'+y;
+        this.x = x;
+        this.y = y;
         this.marked = false;
         this.color = -1;
     }
@@ -134,7 +134,6 @@ class Game
     makeBoard()
     {
         var board = [];
-        board.push([]);
 
 		for(var i = 0 ; i <  17  ; i += 1)
 		{
@@ -208,9 +207,49 @@ class Game
         }   
 
     }
+
+    autoSaveGame() {
+        localStorage.boardgame_dotsNboxes = JSON.stringify(this);
+    }
+    
+    autoLoadGame() {
+		try
+		{
+			if(!localStorage.boardgame_dotsNboxes || localStorage.boardgame_dotsNboxes == null) 
+				return false;
+	
+			let loadedGame = JSON.parse(localStorage.boardgame_dotsNboxes);
+			game = new Game();
+
+            game.players = loadedGame.players;
+            game.currPlayer = loadedGame.currPlayer;
+            game.control = loadedGame.control;
+            game.winner = loadedGame.winner;
+            game.coloredBoxes = loadedGame.coloredBoxes;
+            game.totalBoxes = loadedGame.totalBoxes;
+
+            game.board = loadedGame.board;
+            for(let i=0; i<loadedGame.board.length; i++) {
+                for(let j=0; j<loadedGame.board[i].length; j++) {
+                    const loadCell = loadedGame.board[i][j];
+                    game.board[i][j] = new Cell(loadCell.x, loadCell.y, loadCell.type);
+                    game.board[i][j].marked = loadCell.marked;
+                    game.board[i][j].color = loadCell.color;
+                }
+            }
+			
+			return true;
+		}
+		catch(e)
+		{
+			console.log("Exception" , e);
+			return false;
+		}
+	}
 }
 
 var game = new Game();
+game.autoLoadGame();
 
 function getBoardCellByID(cellID)
 {
@@ -219,8 +258,7 @@ function getBoardCellByID(cellID)
 	return game.board[i][j];
 }
 
-$(document).ready(function()
-{
+$(document).ready(function() {
     importNavbar("dotsNBoxes", "Dots & Boxes");
 
     mainContentVue = new Vue({
@@ -229,21 +267,25 @@ $(document).ready(function()
             game : game
         }
 	}); 
+	
 
-    $(document.body).on("click", ".unmarkedSide", function()
-    {  
+    $(document.body).on("click", ".unmarkedSide", function() {  
 		if(gameOver)
 			return;
 
         var cell = getBoardCellByID(this.id);
         cell.markCell();
-
         
-        
-        
+        game.autoSaveGame();
         mainContentVue.game = game;
         return;
     });
 
+    $(document.body).on("click", "#btnStartGame", function() {  
+		localStorage.boardgame_dotsNboxes = undefined;
+		document.location.reload(true);
+        return;
+    });
+    
 });
 

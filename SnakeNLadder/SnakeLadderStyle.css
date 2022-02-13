@@ -1,3 +1,17 @@
+
+::-webkit-scrollbar
+{
+	width: 5px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	box-shadow: inset 0 0 4px rgba(0,0,0,0.3);
+	background-color: #1f0303;
+}
+
 body
 {	background-color : #fff5d7;
 	text-align:center;
@@ -24,42 +38,52 @@ body
 	height : 50px;
 } 
 
-#allControls
+.controls ,.startControls
 {
 	background-color : #ff5e6c;
 	font-size: 22px;
 	position : absolute;
 	top: 100px;
-	left : 55%;
-	width:	500px;
-	padding:20px;
-	margin:auto;
+	left : 60%;
+	width:	400px;
+	padding: 20px;
 }
-#instruct
+.startControls
+{
+	left : 10%;
+	top: 100px;
+}
+
+.instruct
+{
+	background-color : #fff5d7;
+	padding : 15px;
+	font-size: 25px;
+	font-weight: bold;
+}
+#instruct , #endInstruct
 {
 	background-color : #fff5d7;
 	padding : 30px;
 	font-size: 36px;
 	font-weight: bold;
+
+	-webkit-text-stroke-width: 0.75px;
+    -webkit-text-stroke-color: black;
 }
 
 #theDice, .dice
 {
 	margin:auto;
-	width : 200px;
-	height : 200px;
+	width : 150px;
+	height : 150px;
 	cursor: pointer;
 }
 
-#restart, #start 
-{
-	width:	150px;
-	height: 70px;
-	font-size: 20px;
-}
 
-
-.dropdown {
+.board-chooser {
+	background-color : #fff5d7;
+	width: 100%;
 	position: relative;
 	display: inline-block;
 	cursor: pointer;
@@ -68,7 +92,7 @@ body
 .dropdown-content {
 	display: none;
 	position: absolute;
-	margin-left: -100px;
+	margin-left: 50px;
 	background-color: #f9c5bd;
 	width: 360px;
 	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -76,7 +100,7 @@ body
 	cursor: pointer;
 }
 
-.dropdown:hover .dropdown-content {
+.board-chooser:hover .dropdown-content {
 	display: block;
 }
 .dropdownImages
@@ -85,10 +109,7 @@ body
 	width : 180px;
 	height : 180px;
 }
-.dropdownImages:hover
-{
-	background-color: green;
-}
+.dropdownImages:hover,
 .boardSelected
 {
 	background-color: green;
@@ -102,15 +123,52 @@ body
 	padding:10px 40px;
 } 
 
+.game-btns
+{
+	margin-top:20px;
+	font-size: 22px;
+	width: 48%;
+}
+
+.btn-group {
+	width:100%;
+	display: flex;
+	justify-content: space-evenly;
+}
+.btnDiff
+{
+	font-size: 20px;;
+	width:30%;
+}
+.btnDiff.active {
+	pointer-events:none;
+	background-color: rgba(255,245,215, 0.8);
+	border:3px solid Green;
+}
+
 @media (max-width: 1220px) {
 
-	#allControls
+	.controls , .startControls
 	{
 		position : absolute;
-		top: 750px;
+		top: 720px;
 		left : 10%;
+		width: 500px;
+		font-size: 20px;
 	}
-	#instruct
+	.startControls
+	{
+		top: 100px;
+	}
+
+	.instruct
+	{
+		background-color : #fff5d7;
+		padding : 10px;
+		font-size: 20px;
+		font-weight: bold;
+	}
+	#instruct, #endInstruct
 	{
 		background-color : #fff5d7;
 		padding : 10px;
@@ -121,8 +179,8 @@ body
 	#theDice, .dice
 	{
 		margin:auto;
-		width : 150px;
-		height : 150px;
+		width : 100px;
+		height : 100px;
 		cursor: pointer;
 	}
   }
@@ -140,10 +198,27 @@ body
 		position : relative;
 		left :5%;
 	}
-	#allControls
+
+	.controls , .startControls
 	{
-		top: 550px;
-		width : 360px;
-		left : 5%;
+		position : absolute;
+		left :5%;
+		top: 480px;
+		width: 360px;
+	}
+	
+	.startControls
+	{
+		width: 90%;
+		top: 100px;
+	}
+	
+	.game-btns
+	{
+		font-size: 15px;
+		width: 48%;
+	}
+	.dropdown-content {
+		margin-left:-20px;
 	}
   }

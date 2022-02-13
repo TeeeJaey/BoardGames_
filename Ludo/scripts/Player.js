@@ -1,8 +1,22 @@
 
 class Player 
 {
-    constructor(number,color) 
+    constructor(number,color,loadedPlayer) 
     {
+        if(loadedPlayer) {          // retrived from auto loaded game
+            this.number = loadedPlayer.number;
+            this.color = loadedPlayer.color;
+            this.path = loadedPlayer.path;
+            this.coins = loadedPlayer.coins;
+            for(let i=0; i<loadedPlayer.coins.length; i++) {
+                const loadPlayerCoin = loadedPlayer.coins[i];
+                this.coins[i] = new PlayerCoin(loadPlayerCoin.id, loadPlayerCoin.number, 
+                            loadPlayerCoin.color, loadPlayerCoin.homePos, loadPlayerCoin.path, loadPlayerCoin);
+            }
+            this.ended = loadedPlayer.ended;
+            return;
+        }
+
         this.number = number;
         this.color = color.toLowerCase();
         this.path = this.setupPath(color);				// array of numbers - each representing cell index from game.board
@@ -176,7 +190,6 @@ class Player
             game.changePlayer();
             isAnimationOn = false;
         }
-
     }
 
     removeAllHighlights()

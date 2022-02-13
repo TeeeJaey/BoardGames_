@@ -21,6 +21,7 @@ function rollDice()
 			var currentPlayer = game.players[game.currPlayer];
 			game.instruction = currentPlayer.color.toUpperCase() + " Played : "+ game.diceVal.toString();
 			currentPlayer.checkPlay();
+			game.autoSaveGame();
 			return;
 		}
 
@@ -28,7 +29,6 @@ function rollDice()
 		i = cnt%3;
 		diceVal = Math.ceil(Math.random() * 6);
 		$('.dice').attr("src","images/diceRoll"+i.toString()+".png");
-
 	},150);
 }
 
@@ -44,7 +44,12 @@ $(document).ready(function()
         }
 	}); 
 
+	$('.board').css({"display":"none"});
 	$('.coin').css({"display":"none"});
+
+	if(game.autoLoadGame())
+		mainContentVue.game = game;
+
 	
 	$(".boardSelector").click(function()
 	{
@@ -56,11 +61,22 @@ $(document).ready(function()
 	});
 
 		
-	$("#start").click(function()
-	{
+    $(document.body).on('click',"#btnStartGame", function() {
+		delete localStorage.boardgame_ludo;
+		$('.board').css({"display":""});
 		game.setupPlayers();
 		game.gameStatus=0;
 	}); 
+	
+	const startNewGame = function()
+    {
+		delete localStorage.boardgame_ludo;
+		document.location.reload(true)
+	};
+
+	$(document.body).on('click',"#btnGetNewGame", startNewGame);
+	$(document.body).on('click',"#btnPlayAgain", startNewGame);
+	
 	
     $(document.body).on('click',".coin", function()
 	{
@@ -75,7 +91,7 @@ $(document).ready(function()
 		if(game.selectedCoin.highlighted)
 			game.selectedCoin.coinMoveLoop();
 		
-			return;
+		return;
 	});
 
     $(document.body).on('click',".dice", function()

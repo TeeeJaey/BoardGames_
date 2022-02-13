@@ -72,7 +72,6 @@ class Game
 	
 	loadGame(loadedGame)
 	{
-
 		var currentGame = this.getCurrentGame();
 
 		try

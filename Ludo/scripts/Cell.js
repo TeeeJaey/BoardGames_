@@ -32,17 +32,15 @@ class Cell
     addCoin(coinID,x)
     {
         
-        if(this.playerCoins.length > 0)
+        if(this.playerCoins.length > 0 && !this.isSafe)
         {
             if(this.playerCoins[0].split('_')[0] == coinID.split('_')[0])
             {   
-                if(!this.isSafe)
-                    this.block(coinID,x);
+                this.block(coinID,x);
             }
             else
             {
-                if(!this.isSafe)
-                    this.knockoutCoin(this.playerCoins[0]);
+                this.knockoutCoin(this.playerCoins[0]);
             }
         }
 

@@ -1,7 +1,7 @@
 
 class ProblemGetter
 {
-    getEasyProblem()
+    static getEasyProblem()
     {
         var allEasyProblems = [];
         
@@ -176,7 +176,7 @@ class ProblemGetter
         return allEasyProblems[problemNumber].squares;
     }
     
-    getMediumProblem()
+    static getMediumProblem()
     {
         var allMediumProblems = [];
 
@@ -291,7 +291,7 @@ class ProblemGetter
 
     }
 
-    getHardProblem()
+    static getHardProblem()
     {
         var allHardProblems = [];
 

@@ -63,7 +63,7 @@
 					</label> 
 				</div>
 				<hr>
-				<button id="btnStartGame" class="btn btn-default" > Start game</button>
+				<button id="btnStartGame" class="btn btn-default game-btns" > Start game</button>
 			</div>
 			
 			<div class="controls"   v-if="controls==0" >
@@ -110,15 +110,15 @@
 					</tr>
 				</table>
 				<hr>
-				<button id="btnStartGame" class="btn btn-default" onclick="document.location.reload(true)"> Get New game </button>
-				<button id="btnResetGame" class="btn btn-default" > Reset Current game </button>
+				<button id="btnNewGame" class="btn btn-default game-btns" > Get New game </button>
+				<button id="btnResetGame" class="btn btn-default game-btns" > Reset Current game </button>
 			</div>
 		
-			<div class="controls"   v-if="controls==1" >
+			<div class="controls" v-if="controls==1" >
 				<h4 class="instruct" > Woah! You won </h4>
 				<hr>
 				<hr>
-				<button id="btnStartGame" class="btn btn-default" onclick="document.location.reload(true)"> Get new game </button>
+				<button id="btStartAgain" class="btn btn-default game-btns" > Get new game </button>
 			</div>
 
 		</div>

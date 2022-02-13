@@ -1,7 +1,7 @@
-
-function importNavbar(htmlName, displayName)
-{
-	var navHTML =  `
+function importNavbar(htmlName, displayName) {
+    var navHTML =
+        `
+			<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 			<style>	
 				#navbar {
 					position: relative;
@@ -57,7 +57,11 @@ function importNavbar(htmlName, displayName)
 					<i class="fa fa-angle-right" style="padding-top:2px" ></i>
 					<a href="../BoardGames.html">Board Games</a>
 					<i class="fa fa-angle-right" style="padding-top:2px"  ></i>
-					<a href="`+htmlName+ `.html">`+displayName+`</a>
+					<a href="` +
+        htmlName +
+        `.html">` +
+        displayName +
+        `</a>
 				</div>
 				
 				<div class="dropdown">
@@ -76,6 +80,7 @@ function importNavbar(htmlName, displayName)
 						<li><a href="../Ludo/Ludo.html" style="font-size: 22px;">Ludo</a></li>
 						<li><a href="../Tetris/tetris.html" style="font-size: 22px;">Tetris</a></li>
 						<li><a href="../Snake/snake.html" style="font-size: 22px;">Snake</a></li>
+						<li><a href="../Wordle/wordle.html" style="font-size: 22px;">Wordle</a></li>
 					</ul>
 				</div>
 			</div>
@@ -83,18 +88,20 @@ function importNavbar(htmlName, displayName)
 			<div class="flex-navigation hidden-lg hidden-md">
 				<div class="flex-center" >
 					<a href="https://teeejaey.github.io/" > 
-						<i class="fas fa-home"></i>
+						<i class="fa fa-home"></i>
 					</a>
 					<i class="fa fa-angle-right"  ></i>
 					<a  href="../BoardGames.html">
-						<i class="fas fa-dice"></i>
+						<i class="fa fa-dice"></i>
 					</a>
 					<i class="fa fa-angle-right"  ></i>
 				</div>
 				
 				<div class="dropdown" style="margin:10px; position:unset;">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#"> 
-						`+displayName+` <span class="caret"></span>
+						` +
+        displayName +
+        ` <span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu" style="left:10%; top:50px; width:80vw">
 						<li><a href="../Minesweeper/Minesweeper.html"  >MineSweeper</a></li>
@@ -108,19 +115,17 @@ function importNavbar(htmlName, displayName)
 						<li><a href="../Ludo/Ludo.html" >Ludo</a></li>
 						<li><a href="../Tetris/tetris.html" >Tetris</a></li>
 						<li><a href="../Snake/snake.html" >Snake</a></li>
+						<li><a href="../Wordle/wordle.html" >Wordle</a></li>
 					</ul>
 				</div>
 			</div>
 			`;
-	
-	
-	$("#navbar").html(navHTML);
 
-	return;
+    $("#navbar").html(navHTML);
+
+    return;
 }
 
-
-$(document).ready(function()
-{
-	importNavbar("", "");
+$(document).ready(function () {
+    importNavbar("", "");
 });
