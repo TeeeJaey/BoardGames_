@@ -12,6 +12,7 @@
 
         <script type="text/javascript" src="../scripts/importNavbar.js"></script>
         <script type="text/javascript" src="scripts/WordLibrary.js"></script>
+        <script type="text/javascript" src="scripts/Key.js"></script>
         <script type="text/javascript" src="scripts/Cell.js"></script>
         <script type="text/javascript" src="scripts/Game.js"></script>
         <script type="text/javascript" src="scripts/wordle.js"></script>
@@ -33,9 +34,14 @@
                 <div class="controls">
                     <div v-if="!gameOver">
                         <div v-for="row in game.keyboard" class="keyboardRow">
-                            <button v-for="x in row" class="keyboardCell" v-bind:value="x">
-                                <span v-if="x.length == 1">{{x}}</span>
-                                <span v-if="x.length != 1" class="nonKeyCell">{{x}}</span>
+                            <button
+                                v-for="x in row"
+                                class="keyboardCell"
+                                v-bind:value="x.value"
+                                v-bind:style="{backgroundColor: x.background, color: x.color}"
+                            >
+                                <span v-if="x.length == 1">{{x.value}}</span>
+                                <span v-if="x.length != 1" class="nonKeyCell">{{x.value}}</span>
                             </button>
                         </div>
                     </div>

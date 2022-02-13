@@ -43,7 +43,7 @@ $(document).ready(function () {
         const keyValue = e.key;
         let validKey = false;
         game.keyboard.forEach(row => {
-            if (row.includes(keyValue)) validKey = true;
+            if (row.find(k => k.value === keyValue)) validKey = true;
         });
 
         if (validKey) {

@@ -21,8 +21,43 @@ class Game {
 
         this.board = fullBoard;
 
-        this.keyboard = ["qwertyuiop".split(""), "asdfghjkl".split(""), "zxcvbnm".split("")];
-        this.keyboard[2] = ["bksp", ...this.keyboard[2], "enter"];
+        const keys = ["qwertyuiop".split(""), "asdfghjkl".split(""), "zxcvbnm".split("")];
+        keys[2] = ["bksp", ...keys[2], "enter"];
+
+        this.keyboard = [[], [], []];
+        let k = 0;
+        keys.forEach(row => {
+            row.forEach(key => {
+                this.keyboard[k].push(new Key(key));
+            });
+            k++;
+        });
+    }
+
+    colorKeyboard() {
+        const maybes = [];
+        const nos = [];
+        for (let i = 0; i < this.attempt; i += 1) {
+            for (let j = 0; j < 5; j += 1) {
+                if (this.board[i][j].background == ColorConstant.yes) {
+                    maybes.push(this.board[i][j].value);
+                } else if (this.board[i][j].background == ColorConstant.maybe) {
+                    maybes.push(this.board[i][j].value);
+                } else if (this.board[i][j].background == ColorConstant.no) {
+                    nos.push(this.board[i][j].value);
+                }
+            }
+        }
+
+        this.keyboard.forEach(row => {
+            row.forEach(key => {
+                if (maybes.includes(key.value)) {
+                    key.setKey(key.value, ColorConstant.maybe);
+                } else if (nos.includes(key.value)) {
+                    key.setKey(key.value, ColorConstant.no);
+                }
+            });
+        });
     }
 
     hitLetter(input) {
@@ -38,7 +73,6 @@ class Game {
 
                 if (isWordValid) {
                     this.colorCurrentRow();
-
                     if (this.currentWord === this.correctWord) {
                         gameOver = true;
                         setToaster("You won in : " + (this.attempt + 1) + " attempts.");
@@ -58,6 +92,7 @@ class Game {
 
                 this.currentWord = "";
                 this.attempt++;
+                this.colorKeyboard();
 
                 return;
             } else {
