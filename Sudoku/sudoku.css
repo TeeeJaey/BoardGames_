@@ -40,9 +40,15 @@ body {
     font-weight: 850;
 }
 
-#theBoard {
-    position: absolute;
-    left: 10%;
+.game {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.game > #allControls,
+.game > #theBoard {
+    margin: 10px 5px;
 }
 
 #restart,
@@ -52,29 +58,13 @@ body {
     font-size: 20px;
 }
 
-#controls {
-    background-color: #dea6af;
-    font-size: 22px;
-    border: 1px solid black;
-    width: 700px;
-    margin: auto;
-}
-
 .controls,
 .startControls {
     background-color: #ff5e6c;
     font-size: 22px;
-    position: absolute;
-    top: 100px;
-    left: 55%;
     width: 500px;
     padding: 20px;
 }
-.startControls {
-    left: 10%;
-    top: 100px;
-}
-
 .instruct {
     background-color: #fff5d7;
     padding: 15px;
@@ -105,14 +95,8 @@ body {
 @media (max-width: 1200px) {
     .controls,
     .startControls {
-        position: absolute;
-        top: 650px;
-        left: 10%;
         width: 500px;
         font-size: 20px;
-    }
-    .startControls {
-        top: 100px;
     }
     .instruct {
         background-color: #fff5d7;
@@ -132,18 +116,7 @@ body {
 
     .controls,
     .startControls {
-        position: absolute;
-        left: 5%;
-        top: 480px;
         width: 360px;
-    }
-
-    .startControls {
-        top: 150px;
-    }
-
-    #theBoard {
-        left: 5%;
     }
 
     .game-btns {

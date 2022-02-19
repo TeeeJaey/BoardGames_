@@ -23,76 +23,75 @@
 		<img id="gameUnderDev" src="../images/underDev.png" style="position:fixed; left:15%;  width:70%; z-index: 999; margin:auto; display:none " />
 		
 		<div id="mainContent">
+            <div class="game">
+				<table id="theBoard" >
+					<tr  v-for="row in game.board" >
+						<td v-for="x in row">
 
+							<div class="vertex" v-bind:id="x.id"  v-if="x.type==1"> </div>
 
-			<table id="theBoard" >
-				<tr  v-for="row in game.board" >
-					<td v-for="x in row">
+							<div v-if="!x.marked" >
 
-						<div class="vertex" v-bind:id="x.id"  v-if="x.type==1"> </div>
+								<div v-if="game.currPlayer == 0">
+									<div class="verSide redHover unmarkedSide" v-bind:id="x.id" v-if="x.type==2"> </div>
+									<div class="horSide redHover unmarkedSide" v-bind:id="x.id"  v-if="x.type==3"> </div>
+								</div>
 
-						<div v-if="!x.marked" >
+								<div v-if="game.currPlayer == 1" >
+									<div class="verSide blueHover unmarkedSide" v-bind:id="x.id"  v-if="x.type==2"> </div>
+									<div class="horSide blueHover unmarkedSide" v-bind:id="x.id"  v-if="x.type==3"> </div> 
+								</div>
 
-							<div v-if="game.currPlayer == 0">
-								<div class="verSide redHover unmarkedSide" v-bind:id="x.id" v-if="x.type==2"> </div>
-								<div class="horSide redHover unmarkedSide" v-bind:id="x.id"  v-if="x.type==3"> </div>
+								<div class="box"  v-bind:id="x.id" 	 v-if="x.type==4"> </div>
 							</div>
 
-							<div v-if="game.currPlayer == 1" >
-								<div class="verSide blueHover unmarkedSide" v-bind:id="x.id"  v-if="x.type==2"> </div>
-								<div class="horSide blueHover unmarkedSide" v-bind:id="x.id"  v-if="x.type==3"> </div> 
+							<div v-if="x.marked" >
+								<div v-if="x.color == 0">
+									<div class="box" 	  v-bind:id="x.id" 	v-if="x.type==4"  style="background-color: rgb(226, 81, 81);" > </div>
+									<div class="verSide"  v-bind:id="x.id" 	v-if="x.type==2"  style="background-color: darkred" > </div>
+									<div class="horSide"  v-bind:id="x.id" 	v-if="x.type==3"  style="background-color: darkred" > </div>
+								</div>
+								<div v-if="x.color == 1" >
+									<div class="box" 	  v-bind:id="x.id" 	v-if="x.type==4" style="background-color: rgb(101, 101, 248);" ></div>
+									<div class="verSide"  v-bind:id="x.id" 	v-if="x.type==2" style="background-color: darkblue" > </div>
+									<div class="horSide"  v-bind:id="x.id" 	v-if="x.type==3" style="background-color: darkblue" > </div>
+								</div>
 							</div>
 
-							<div class="box"  v-bind:id="x.id" 	 v-if="x.type==4"> </div>
+						</td>
+					</tr>
+				</table>
+
+				<div class="controls">
+					<h4 class="instruct"  v-if="game.control==0" v-bind:style="{ color: game.players[game.currPlayer].color }" > 
+						{{ game.players[game.currPlayer].name }} play 
+					</h4>
+					
+					<h4 class="instruct"  v-if="game.control==1 && game.winner==-1" style="color: purple" >
+						It's a TIE !
+					</h4>
+					<h4 class="instruct"  v-if="game.control==1 && game.winner==0" v-bind:style="{ color: game.players[0].color }" >
+						{{ game.players[0].name }} Won 
+					</h4>
+					<h4 class="instruct"  v-if="game.control==1 && game.winner==1" v-bind:style="{ color: game.players[1].color }" >
+						{{ game.players[1].name }}  Won 
+					</h4>
+
+					<div class="instruct row" >  
+						<div class="col-xs-5" v-bind:style="{ color: game.players[0].color }" >
+							{{ game.players[0].name }} - {{ game.players[0].score }} 
+						</div> 
+						<div class="col-xs-2" >  v </div>
+						<div class="col-xs-5" v-bind:style="{ color: game.players[1].color }" >
+							{{ game.players[1].score }} - {{ game.players[1].name }} 
 						</div>
-
-						<div v-if="x.marked" >
-							<div v-if="x.color == 0">
-								<div class="box" 	  v-bind:id="x.id" 	v-if="x.type==4"  style="background-color: rgb(226, 81, 81);" > </div>
-								<div class="verSide"  v-bind:id="x.id" 	v-if="x.type==2"  style="background-color: darkred" > </div>
-								<div class="horSide"  v-bind:id="x.id" 	v-if="x.type==3"  style="background-color: darkred" > </div>
-							</div>
-							<div v-if="x.color == 1" >
-								<div class="box" 	  v-bind:id="x.id" 	v-if="x.type==4" style="background-color: rgb(101, 101, 248);" ></div>
-								<div class="verSide"  v-bind:id="x.id" 	v-if="x.type==2" style="background-color: darkblue" > </div>
-								<div class="horSide"  v-bind:id="x.id" 	v-if="x.type==3" style="background-color: darkblue" > </div>
-							</div>
-						</div>
-
-					</td>
-				</tr>
-			</table>
-
-			<div class="controls"  >
-				<h4 class="instruct"  v-if="game.control==0" v-bind:style="{ color: game.players[game.currPlayer].color }" > 
-					{{ game.players[game.currPlayer].name }} play 
-				</h4>
-				
-				<h4 class="instruct"  v-if="game.control==1 && game.winner==-1" style="color: purple" >
-					It's a TIE !
-				</h4>
-				<h4 class="instruct"  v-if="game.control==1 && game.winner==0" v-bind:style="{ color: game.players[0].color }" >
-					{{ game.players[0].name }} Won 
-				</h4>
-				<h4 class="instruct"  v-if="game.control==1 && game.winner==1" v-bind:style="{ color: game.players[1].color }" >
-					{{ game.players[1].name }}  Won 
-				</h4>
-
-				<div class="instruct row" >  
-					<div class="col-xs-5" v-bind:style="{ color: game.players[0].color }" >
-						 {{ game.players[0].name }} - {{ game.players[0].score }} 
-					</div> 
-					<div class="col-xs-2" >  v </div>
-					<div class="col-xs-5" v-bind:style="{ color: game.players[1].color }" >
-						{{ game.players[1].score }} - {{ game.players[1].name }} 
 					</div>
-				</div>
 
-				<hr>
+					<hr>
 
-				<button id="btnStartGame" class="btn btn-default" > Start New game </button>
-			</div> 
-
+					<button id="btnStartGame" class="btn btn-default" > Start New game </button>
+				</div> 
+			</div>
 		</div>
 
 	</body>

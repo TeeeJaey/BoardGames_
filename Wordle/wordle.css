@@ -23,12 +23,13 @@ body {
 
 .game {
     display: flex;
+    flex-direction: row;
     justify-content: space-evenly;
     flex-wrap: wrap;
 }
 .game > .controls,
 .game > #theBoard {
-    margin: 20px;
+    margin: 10px 5px;
 }
 #theBoard {
     display: flex;
