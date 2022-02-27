@@ -11,8 +11,25 @@ function setToaster(msg) {
     setTimeout(() => (toaster.style.opacity = 0), 2000);
 }
 
+function setTheme() {
+    const theme = window.localStorage.getItem("boardgame_theme");
+    if (theme && theme == "dark") {
+        $("body").addClass("dark");
+    } else {
+        $("body").removeClass("dark");
+    }
+}
+
 $(document).ready(function () {
     importNavbar("wordle", "Wordle");
+    setTheme();
+    $(document.body).on("click", "#changeTheme", () => {
+        if (window.localStorage.boardgame_theme && window.localStorage.boardgame_theme == "dark") {
+            window.localStorage.boardgame_theme = "light";
+        } else window.localStorage.boardgame_theme = "dark";
+
+        setTheme();
+    });
 
     mainContentVue = new Vue({
         el: "#mainContent",

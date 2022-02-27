@@ -63,6 +63,34 @@ button:active {
     font-weight: bold;
 }
 
+/* DARK THEME -- START */
+body.dark {
+    background-color: #22272e;
+}
+body.dark td button {
+    background-color: #45484d;
+}
+body.dark #controls {
+    background: #30363c;
+    color: white;
+}
+
+body.dark .btn-default {
+    color: #adbac7;
+    background: #373e47;
+    border-color: #ccc;
+}
+body.dark .btn-default:hover {
+    color: white;
+    background: #444c56;
+    border-color: white;
+}
+body.dark #instruct {
+    color: white;
+    background: #22272e;
+}
+/* DARK THEME -- END */
+
 @media (max-width: 1100px) {
     td button {
         font-size: 22px;

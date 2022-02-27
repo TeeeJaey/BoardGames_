@@ -34,10 +34,12 @@ body {
 #theBoard {
     display: flex;
     flex-direction: column;
+    width: 310px;
 }
 #theBoard > .row {
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 .toaster {
     padding: 20px 30px;
@@ -129,10 +131,34 @@ body {
     font-size: 14px;
 }
 
+/* DARK THEME -- START */
+body.dark {
+    background-color: #22272e;
+}
+body.dark .controls {
+    background: #30363c;
+}
+
+body.dark .btn-default {
+    color: #adbac7;
+    background: #373e47;
+    border-color: #ccc;
+}
+body.dark .btn-default:hover {
+    color: white;
+    background: #444c56;
+    border-color: white;
+}
+body.dark .instruct {
+    color: white;
+    background: #22272e;
+}
+/* DARK THEME -- END */
+
 @media (max-width: 950px) {
     .game > .controls,
     .game > #theBoard {
-        margin: 5px;
+        margin: 15px;
     }
     .controls {
         width: 500px;

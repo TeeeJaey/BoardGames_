@@ -68,8 +68,6 @@
 					</div>
 					
 					<div class="controls"   v-if="controls==0" >
-						<h4 class="instruct" >Difficult : {{game.difficultyText}} </h4>
-						<hr>
 						<table id="numPad" style="margin:auto" >
 							<tr>
 								<td>
@@ -110,6 +108,8 @@
 								</td>
 							</tr>
 						</table>
+						<hr>
+						<h4 class="instruct" >Difficult : {{game.difficultyText}} </h4>
 						<hr>
 						<button id="btnNewGame" class="btn btn-default game-btns" > Get New game </button>
 						<button id="btnResetGame" class="btn btn-default game-btns" > Reset Current game </button>

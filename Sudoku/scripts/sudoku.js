@@ -82,9 +82,25 @@ function checkArrowKey(btn) {
     mainContentVue.game = game;
 }
 
+function setTheme() {
+    const theme = window.localStorage.getItem("boardgame_theme");
+    if (theme && theme == "dark") {
+        $("body").addClass("dark");
+    } else {
+        $("body").removeClass("dark");
+    }
+}
+
 $(document).ready(function () {
     importNavbar("sudoku", "Sudoku");
-    //$('#gameUnderDev').css("display","");
+    setTheme();
+    $(document.body).on("click", "#changeTheme", () => {
+        if (window.localStorage.boardgame_theme && window.localStorage.boardgame_theme == "dark") {
+            window.localStorage.boardgame_theme = "light";
+        } else window.localStorage.boardgame_theme = "dark";
+
+        setTheme();
+    });
 
     mainContentVue = new Vue({
         el: "#mainContent",

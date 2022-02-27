@@ -92,6 +92,31 @@ body {
     border: 3px solid Green;
 }
 
+/* DARK THEME -- START */
+body.dark {
+    background-color: #22272e;
+}
+body.dark .controls,
+body.dark .startControls {
+    background: #30363c;
+}
+
+body.dark .btn-default {
+    color: #adbac7;
+    background: #373e47;
+    border-color: #ccc;
+}
+body.dark .btn-default:hover {
+    color: white;
+    background: #444c56;
+    border-color: white;
+}
+body.dark .instruct {
+    color: white;
+    background: #22272e;
+}
+/* DARK THEME -- END */
+
 @media (max-width: 1200px) {
     .controls,
     .startControls {
