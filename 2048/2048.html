@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>2048</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+        <script type="text/javascript" src="../scripts/importNavbar.js"></script>
+        <script type="text/javascript" src="scripts/Tile.js"></script>
+        <script type="text/javascript" src="scripts/Cell.js"></script>
+        <script type="text/javascript" src="scripts/Grid.js"></script>
+        <script type="text/javascript" src="scripts/Game.js"></script>
+        <script type="text/javascript" src="scripts/2048.js"></script>
+        <link rel="stylesheet" href="2048.css" />
+    </head>
+    <body>
+        <div id="navbar"></div>
+
+        <div id="mainContent">
+            <div class="game">
+                <div id="theBoard"></div>
+
+                <div id="allControls">
+                    <div class="controls" id="gameControls">
+                        <div class="flex-row">
+                            <button class="btn btn-default ctrlBtn" type="button" id="btnLeft"><i class="fa fa-angle-left"></i></button>
+                            <div class="flex-column">
+                                <button class="btn btn-default ctrlBtn" type="button" id="btnUp"><i class="fa fa-angle-up"></i></button>
+                                <button class="btn btn-default ctrlBtn" type="button" id="btnDown"><i class="fa fa-angle-down"></i></button>
+                            </div>
+                            <button class="btn btn-default ctrlBtn" type="button" id="btnRight"><i class="fa fa-angle-right"></i></button>
+                        </div>
+
+                        <hr />
+
+                        <div id="instruct" class="row">
+                            <span class="col-3"> Combine the same numbers </span>
+                            <table class="col-3" style="padding: 20px; margin: auto">
+                                <tr v-for="row in game.nextBlock.shape">
+                                    <td v-for="x in row" v-if="x" class="cell" v-bind:style="{backgroundColor: game.nextBlock.color}"></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <hr />
+                        <button id="restart" class="btn btn-default" onclick="document.location.reload(true)">New game</button>
+                    </div>
+                    <div class="controls" id="endControls" style="font-weight: bold">
+                        <div id="instruct" class="row">
+                            GAME OVER
+                            <hr />
+                            <div style="color: white">Your Score : <span id="score">0</span></div>
+                        </div>
+                        <hr />
+                        <button id="restart" class="btn btn-default" onclick="document.location.reload(true)">New game</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -122,6 +122,7 @@ function importNavbar(htmlName, displayName) {
 				<li><a href="../Tetris/tetris.html">Tetris</a></li>
 				<li><a href="../Snake/snake.html">Snake</a></li>
 				<li><a href="../Wordle/wordle.html">Wordle</a></li>
+				<li><a href="../Wordle/wordle.html">2048</a></li>
 			</ul>
 		</div>
 	</div>
@@ -163,6 +164,7 @@ function importNavbar(htmlName, displayName) {
 	<a href="../Tetris/tetris.html" >Tetris</a>
 	<a href="../Snake/snake.html" >Snake</a>
 	<a href="../Wordle/wordle.html" >Wordle</a>
+	<a href="../Wordle/wordle.html" >2048</a>
 </div>
 
 
@@ -201,6 +203,7 @@ function importNavbar(htmlName, displayName) {
 				<li><a href="../Tetris/tetris.html" >Tetris</a></li>
 				<li><a href="../Snake/snake.html" >Snake</a></li>
 				<li><a href="../Wordle/wordle.html" >Wordle</a></li>
+				<li><a href="../Wordle/wordle.html" >2048</a></li>
 			</ul>
 		</div>
 	</div>
