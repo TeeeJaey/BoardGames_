@@ -91,9 +91,7 @@ function importNavbar(htmlName, displayName) {
 <div class="flex-navigation hidden-xs">
 
 	<div class="flex-center" >
-		<a href="https://teeejaey.github.io/">Home</a>
-		<i class="fa fa-angle-right" style="padding-top:2px" ></i>
-		<a href="../BoardGames.html">Board Games</a>
+		<a href="../index.html">Board Games</a>
 		<i class="fa fa-angle-right" style="padding-top:2px"  ></i>
 		<a href="` +
         htmlName +
@@ -142,10 +140,8 @@ function importNavbar(htmlName, displayName) {
 </div>
 
 <div id="sidemenu" class="sidemenu hidden-lg hidden-md hidden-sm">
-	<a href="https://teeejaey.github.io/">Home <i class="fa fa-home"></i></a>
-	<hr style="width: 100%; margin: 10px 0px"/>
 	
-	<a href="../BoardGames.html">Board Games <i class="fa fa-dice"></i></a>
+	<a href="../index.html">Board Games <i class="fa fa-dice"></i></a>
 	<hr style="width: 100%; margin: 10px 0px"/>
 	
 	<a id="changeTheme"> Change Theme <i class="fa fa-moon-o"></i></a>
