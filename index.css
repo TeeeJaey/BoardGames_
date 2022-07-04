@@ -59,8 +59,8 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
     width: 90%;
-    justify-content: space-evenly;
-    margin-bottom: 100px;
+    justify-content: center;
+    margin: 50px 0px;
 }
 
 .footer {
@@ -95,12 +95,12 @@ body {
     font-size: 22px;
     height: 175px;
     width: 200px;
-    margin: 20px;
     align-items: center;
     justify-content: center;
     background-color: rgb(0, 0, 0, 0.8);
-    border: 5px solid white;
+    border: 2px solid black;
     color: white;
+    transition: color 0.3s, background 0.3s, font 0.3s;
 }
 
 .searchLink:hover,
