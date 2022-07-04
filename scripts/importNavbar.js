@@ -112,7 +112,6 @@ function importNavbar(htmlName, displayName) {
 			<ul class="dropdown-menu">
 				<li><a href="../Minesweeper/Minesweeper.html" >MineSweeper</a></li>
 				<li><a href="../SnakeNLadder/SnakeLadder.html">Snake & Ladder</a></li>
-				<li><a href="../Solitaire/Solitaire.html">Solitaire</a></li>
 				<li><a href="../Connect4/Connect4.html">Connect 4</a></li>
 				<li><a href="../Business/Business.html">Business</a></li>
 				<li><a href="../Sudoku/sudoku.html">Sudoku</a></li>
@@ -122,7 +121,7 @@ function importNavbar(htmlName, displayName) {
 				<li><a href="../Tetris/tetris.html">Tetris</a></li>
 				<li><a href="../Snake/snake.html">Snake</a></li>
 				<li><a href="../Wordle/wordle.html">Wordle</a></li>
-				<li><a href="../Wordle/wordle.html">2048</a></li>
+				<li><a href="../2048/2048.html">2048</a></li>
 			</ul>
 		</div>
 	</div>
@@ -154,7 +153,6 @@ function importNavbar(htmlName, displayName) {
 
 	<a href="../Minesweeper/Minesweeper.html"  >MineSweeper</a>
 	<a href="../SnakeNLadder/SnakeLadder.html" >Snake & Ladder</a>
-	<a href="../Solitaire/Solitaire.html" >Solitaire</a>
 	<a href="../Connect4/Connect4.html" >Connect 4</a>
 	<a href="../Business/Business.html" >Business</a>
 	<a href="../Sudoku/sudoku.html" >Sudoku</a>
@@ -164,49 +162,7 @@ function importNavbar(htmlName, displayName) {
 	<a href="../Tetris/tetris.html" >Tetris</a>
 	<a href="../Snake/snake.html" >Snake</a>
 	<a href="../Wordle/wordle.html" >Wordle</a>
-	<a href="../Wordle/wordle.html" >2048</a>
-</div>
-
-
-<div class="flex-navigation hidden-lg hidden-md hidden-sm hidden-xs">
-	<div class="flex-center" >
-		<a href="https://teeejaey.github.io/" > 
-			<i class="fa fa-home"></i>
-		</a>
-		<i class="fa fa-angle-right"  ></i>
-		<a  href="../BoardGames.html">
-			<i class="fa fa-dice"></i>
-		</a>
-		<i class="fa fa-angle-right"  ></i>
-	</div>
-	
-	<div class="flex-center" >
-		<a id="themeIcon">
-			<i class="fa fa-moon-o"></i>
-		</a>
-		|
-		<div class="dropdown" style="margin:10px; position:unset;">
-			<a class="dropdown-toggle" data-toggle="dropdown" href="#">  ` +
-        displayName +
-        ` <span class="caret"></span>
-			</a>
-			<ul class="dropdown-menu" style="left:10%; top:50px; width:80vw">
-				<li><a href="../Minesweeper/Minesweeper.html"  >MineSweeper</a></li>
-				<li><a href="../SnakeNLadder/SnakeLadder.html" >Snake & Ladder</a></li>
-				<li><a href="../Solitaire/Solitaire.html" >Solitaire</a></li>
-				<li><a href="../Connect4/Connect4.html" >Connect 4</a></li>
-				<li><a href="../Business/Business.html" >Business</a></li>
-				<li><a href="../Sudoku/sudoku.html" >Sudoku</a></li>
-				<li><a href="../DotsNBoxes/dotsNBoxes.html" >Dots & Boxes</a></li>
-				<li><a href="../DealOrNoDeal/DealNoDeal.html" >Deal Or NoDeal</a></li>
-				<li><a href="../Ludo/Ludo.html" >Ludo</a></li>
-				<li><a href="../Tetris/tetris.html" >Tetris</a></li>
-				<li><a href="../Snake/snake.html" >Snake</a></li>
-				<li><a href="../Wordle/wordle.html" >Wordle</a></li>
-				<li><a href="../Wordle/wordle.html" >2048</a></li>
-			</ul>
-		</div>
-	</div>
+	<a href="../2048/2048.html" >2048</a>
 </div>
 			`;
 
